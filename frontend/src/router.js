@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import OfferApp from './views/OfferApp.vue'
 import OfferDetails from './views/OfferDetails.vue'
 import OfferEdit from './views/OfferEdit.vue'
+import SignIn from './views/SignIn.vue'
 
 Vue.use(Router)
 
@@ -22,7 +23,7 @@ export default new Router({
       component: OfferApp
     },
     {
-      path: '/explore/:_id?',
+      path: '/explore/edit/:_id?',
       name: 'OfferEdit',
       component: OfferEdit
     },
@@ -30,6 +31,11 @@ export default new Router({
       path: '/explore/:_id',
       name: 'OfferDetails',
       component: OfferDetails
+    },
+    {
+      path: '/sign-in',
+      name: 'SignIn',
+      component: SignIn
     },
     {
       path: '/about',

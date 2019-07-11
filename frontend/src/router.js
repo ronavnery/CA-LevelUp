@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import OfferApp from './views/OfferApp.vue'
+import OfferDetails from './views/OfferDetails.vue'
+import OfferEdit from './views/OfferEdit.vue'
 
 Vue.use(Router)
 
@@ -10,8 +13,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: Home
+    },
+    {
+      path: '/explore',
+      name: 'Explore',
+      component: OfferApp
+    },
+    {
+      path: '/explore/:_id?',
+      name: 'OfferEdit',
+      component: OfferEdit
+    },
+    {
+      path: '/explore/:_id',
+      name: 'OfferDetails',
+      component: OfferDetails
     },
     {
       path: '/about',

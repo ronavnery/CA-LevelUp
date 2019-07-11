@@ -1,0 +1,25 @@
+@mixin flexCenter($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction
+}
+
+@mixin flexCustom($justify, $align ,$direction) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction
+}
+
+@mixin grid($columns, $columns-size, $gap) {
+    display: grid;
+    grid-template-columns: repeat($columns, $columns-size);
+    grid-gap: $gap;
+}
+
+@mixin gridMinmax($columns, $columns-size, $gap, $auto-fit-fill ,$minmax) {
+    display: grid;
+    grid-template-columns: repeat($auto-fit-fill, minmax($minmax));
+    grid-gap: $gap;
+}

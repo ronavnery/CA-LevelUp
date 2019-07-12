@@ -7,9 +7,9 @@ const router = express.Router()
 // router.use(requireAuth)
 
 router.get('/', getOffers)
-// router.post('/', addOffer)
+router.post('/', addOffer)
 router.get('/:id', getOffer)
-// router.put('/:id', updateOffer)
+router.put('/:id', updateOffer)
 router.delete('/:id', deleteOffer)
 
 module.exports = router

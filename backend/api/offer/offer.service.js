@@ -7,8 +7,8 @@ module.exports = {
     getById,
     getByEmail,
     remove,
-    // update,
-    // add
+    update,
+    add
 }
 
 async function query(filterBy = {}) {
@@ -63,26 +63,28 @@ async function remove(offerId) {
     }
 }
 
-// async function update(offer) {
-//     const collection = await dbService.getCollection('offer')
-//     try {
-//         await collection.replaceOne({"_id":ObjectId(offer._id)}, {$set : offer})
-//         return offer
-//     } catch (err) {
-//         console.log(`ERROR: cannot update offer ${offer._id}`)
-//         throw err;
-//     }
-// }
+async function update(offer) {
+    const collection = await dbService.getCollection('offer')
+    const offerId = offer._id
+    delete offer._id
+    try {
+        await collection.replaceOne({"_id":ObjectId(offerId)}, {$set : offer})
+        return offer
+    } catch (err) {
+        console.log(`ERROR: cannot update offer ${offer._id}`)
+        throw err;
+    }
+}
 
-// async function add(offer) {
-//     const collection = await dbService.getCollection('offer')
-//     try {
-//         await collection.insertOne(offer);
-//         return offer;
-//     } catch (err) {
-//         console.log(`ERROR: cannot insert offer`)
-//         throw err;
-//     }
-// }
+async function add(offer) {
+    const collection = await dbService.getCollection('offer')
+    try {
+        await collection.insertOne(offer);
+        return offer;
+    } catch (err) {
+        console.log(`ERROR: cannot insert offer`)
+        throw err;
+    }
+}
 
 

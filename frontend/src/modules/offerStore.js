@@ -60,20 +60,20 @@ export default {
             }
         },
 
-        async addOffer(context, { offer }) {
+        async addOffer(context, { newOffer }) {
             try {
-                await offerService.add(offer)
-                context.commit({ type: 'addOffer', offer })
+                await offerService.add(newOffer)
+                context.commit({ type: 'addOffer', newOffer })
             }
             catch (err) {
                 console.log(err)
             }
         },
 
-        async updateOffer(context, { offer }) {
+        async updateOffer(context, { newOffer }) {
             try {
-                await offerService.update(offer)
-                context.commit({ type: 'updateOffer', offer })
+                await offerService.update(newOffer)
+                context.commit({ type: 'updateOffer', newOffer })
             }
             catch (err) {
                 console.log(err)
@@ -83,7 +83,8 @@ export default {
         async getOfferById(context, { offerId }) {
             try {
                 const offer = await offerService.getById(offerId)
-                return context.commit({ type: 'setCurrOffer', offer })
+                context.commit({ type: 'setCurrOffer', offer })
+                return offer
             } catch (err) {
                 console.log(err)
             }

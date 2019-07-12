@@ -15,20 +15,21 @@ async function deleteOffer(req, res) {
     res.send({})
 }
 
-// async function updateOffer(req, res) {
-//     const offer = await offerService.remove(req.params.id)
-//     res.send({offer})
-// }
+async function updateOffer(req, res) {
+    const offer = await offerService.update(req.body)
+    res.send({offer})
+}
 
-// async function addOffer(req, res) {
-//     const offer = await offerService.remove(req.params.id)
-//     res.send({offer})
-// }
+async function addOffer(req, res) {
+    console.log(req.body)
+    const offer = await offerService.add(req.body)
+    res.send({offer})
+}
 
 module.exports = {
     getOffer,
     getOffers,
     deleteOffer,
-    // addOffer,
-    // updateOffer
+    addOffer,
+    updateOffer
 }

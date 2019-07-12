@@ -1,8 +1,8 @@
 <template>
   <section class="explore-main-container">
     <!-- <offer-filter @set-filter="setFilter"></offer-filter>
-    <v-btn color="success" @click="addTodo">Add offer</v-btn>
     <img v-if="!offers" src="../img/loading.svg" width="100" alt="">-->
+    <button @click="addTodo">Add offer</button>
     <OfferList :offers="offers" @removeOffer="removeOffer"></OfferList>
     <!-- {{offers}} -->
   </section>
@@ -31,6 +31,9 @@ export default {
   methods: {
         removeOffer(offerId) {
         this.$store.dispatch({ type: "removeOffer", offerId})
+        },
+        addTodo() {
+          this.$router.push('/explore/edit')
         }
   },
 

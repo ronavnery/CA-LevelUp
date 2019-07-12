@@ -39,11 +39,11 @@ function createRoom(member){
     return newRoom;
 }
 
-function makeId(size = 5) {
-    var txt = "";
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    for (var i = 0; i < size; i++) {
-        txt += letters.charAt(Math.floor(Math.random() * letters.length));
-    }
-    return txt;
-}
+// function makeId(size = 5) {
+//     var txt = "";
+//     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+//     for (var i = 0; i < size; i++) {
+//         txt += letters.charAt(Math.floor(Math.random() * letters.length));
+//     }
+//     return txt;
+// }

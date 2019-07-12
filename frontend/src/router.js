@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import OfferApp from './views/OfferApp.vue'
+import Explore from './views/Explore.vue'
 import OfferDetails from './views/OfferDetails.vue'
 import OfferEdit from './views/OfferEdit.vue'
 import SignIn from './views/SignIn.vue'
@@ -20,7 +20,7 @@ export default new Router({
     {
       path: '/explore',
       name: 'Explore',
-      component: OfferApp
+      component: Explore
     },
     {
       path: '/explore/edit/:_id?',

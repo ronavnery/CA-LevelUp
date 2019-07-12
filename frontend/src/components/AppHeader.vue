@@ -2,7 +2,7 @@
   <section class="app-header">
     <div class="logo-container">
       <img class="logo" src="../assets/logo.png" />
-      <span class="logo-title fs14">LevelUp</span>
+      <span class="logo-title fs14 strong">LevelUp</span>
     </div>
     <div class="nav-container fs14">
       <router-link exact to="/">Home</router-link>
@@ -40,6 +40,7 @@ a {
 
 .logo-title {
   margin-left: rem(5px);
+  color: white;
 }
 
 .logo {
@@ -47,8 +48,11 @@ a {
 }
 
 .nav-container {
-  margin-right: rem(40px);
   text-transform: uppercase;
+}
+
+.nav-container > * {
+  padding: rem(30px) rem(30px) rem(10px) rem(30px);
 }
 
 .btn-register {

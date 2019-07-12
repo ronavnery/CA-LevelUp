@@ -1,7 +1,21 @@
 a {
-    color: $link;
-    text-decoration: none;
-    &.router-link-active {
-        color: $link-active;
-    }
+  color: $link;
+  text-decoration: none;
+  &.router-link-active {
+    // color: $link-active;
+    height: 250px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-image: linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%),
+      linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%),
+      linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%),
+      linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%);
+    background-origin: border-box;
+    background-size: 100% 0px, 0px 100%, 100% 2px, 0px 100%;
+    background-position: top left, top right, bottom right, bottom left;
+    background-repeat: no-repeat;
+    padding-top: 20px;
+  }
 }
+
+// linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%);

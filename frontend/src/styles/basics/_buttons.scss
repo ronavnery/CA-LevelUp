@@ -1,0 +1,46 @@
+@mixin btnActionColor() {
+  cursor: pointer;
+  height: rem(40px);
+  padding: 0px rem(20px) 0px rem(20px);
+  background: linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%);
+  border-radius: rem(20px);
+  border: 0px;
+  font-family: "$Montserrat-Bold";
+  font-weight: bold;
+}
+
+@mixin btnActionColorSm() {
+  cursor: pointer;
+  height: rem(30px);
+  padding: 0px rem(20px) 0px rem(20px);
+  background: linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%);
+  border-radius: rem(20px);
+  border: 0px;
+  color: $tpGray;
+  font-family: $Montserrat-Bold;
+  font-weight: bold;
+}
+
+@mixin btnActionClean() {
+  cursor: pointer;
+  height: rem(40px);
+  padding: 0px rem(20px) 0px rem(20px);
+  background: None;
+  border-radius: rem(20px);
+  border: 1px solid white;
+  color: $tpGray;
+  font-family: $Montserrat-Bold;
+  font-weight: bold;
+}
+
+@mixin btnActionCleanSm() {
+  cursor: pointer;
+  padding: 0px rem(20px) 0px rem(20px);
+  height: rem(30px);
+  background: None;
+  border-radius: rem(20px);
+  border: 1px solid white;
+  color: $tpGray;
+  font-family: $Montserrat-Bold;
+  font-weight: bold;
+}

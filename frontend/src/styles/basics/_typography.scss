@@ -9,6 +9,20 @@
 }
 
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'Lato';
     src: url('/styles/fonts/Lato/Lato-Regular.ttf');
 }
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('/styles/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('/styles/fonts/Montserrat/Montserrat-Bold.ttf') format("truetype");
+    font-weight: bold
+}
+
+$Montserrat-Regular: 'Montserrat-Regular', sans-serif;
+$Montserrat-Bold: 'Montserrat-Bold', sans-serif

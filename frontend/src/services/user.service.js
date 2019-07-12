@@ -15,9 +15,9 @@ export default {
 // }
 
 
-async function login(user) {
+async function login(credentials) {
     try {
-        const registeredUser = await httpService.post(_getUrl('signin'), user)
+        const registeredUser = await httpService.post(_getUrl('signin'), credentials)
         console.log(registeredUser)
         // return _handleSuccessfulRegister(registeredUser)
     }

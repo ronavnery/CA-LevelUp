@@ -3,12 +3,34 @@ const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
 
 module.exports = {
+    checkCredentials,
     query,
     getById,
     getByEmail,
     remove,
     update,
     add
+}
+
+async function checkCredentials(credentials) {
+    const {username, password} = credentials 
+    const collection = await dbService.getCollection('user')
+    try {
+        const dbUser = await collection.findOne(
+            {
+                $and: [
+                    { username },
+                    { password }
+                ]
+            }
+        )
+        console.log(dbUser)
+        if(dbUser) return {_id: dbUser._id, username: dbUser.username}
+        else return 'username or password wrong'
+    }
+    catch (err) {
+        console.log(err)
+    }
 }
 
 async function query(filterBy = {}) {

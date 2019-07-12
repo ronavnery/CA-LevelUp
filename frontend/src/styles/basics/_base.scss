@@ -3,7 +3,7 @@
 }
 
 html {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato';
     font-size: 14px;
     @include for-normal-layout {
         font-size: 16px;
@@ -12,8 +12,8 @@ html {
 
 body {
     margin: 0;
-    background-color: $clr5;
-    color: $clr2;
+    background-color: $tpGray;
+    color: $tpBlack1;
 }
 
 img {

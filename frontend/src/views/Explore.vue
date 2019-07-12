@@ -1,7 +1,7 @@
 <template>
   <section class="explore-main-container">
     <!-- <offer-filter @set-filter="setFilter"></offer-filter>
-    <img v-if="!offers" src="../img/loading.svg" width="100" alt="">-->
+    <img v-if="!offers" src="../img/loading.svg" width="100" alt=""> -->
     <button @click="addTodo">Add offer</button>
     <OfferList :offers="offers" @removeOffer="removeOffer"></OfferList>
     <!-- {{offers}} -->

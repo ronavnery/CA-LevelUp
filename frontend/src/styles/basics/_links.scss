@@ -1,6 +1,7 @@
 a {
-    color: $clr1;
+    color: $link;
+    text-decoration: none;
     &.router-link-active {
-        color: $clr3;
+        color: $link-active;
     }
 }

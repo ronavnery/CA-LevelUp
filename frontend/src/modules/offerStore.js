@@ -36,12 +36,7 @@ export default {
 
         //currently server does not provide offer back 'cause there is no server
         setCurrOffer(state, { offer }) {
-            const offerId = offer
-            const nOffer = state.offers.find(offer => offer._id === offerId)
-            return state.currOffer = nOffer
-
-            // Real mutattion
-            // state.currOffer = offer
+            state.currOffer = offer
         }
     },
 

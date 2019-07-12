@@ -3,7 +3,7 @@
     <form>
       <input type="text" v-model="credentials.username" placeholder="username" />
       <input type="password" v-model="credentials.password" placeholder="password" />
-      <input @click.prevent="connectUser" type="submit" />
+      <input @click.prevent="loginUser" type="submit" />
     </form>
   </div>
 </template>
@@ -23,9 +23,9 @@ export default {
   },
 
   methods: {
-    connectUser() {
+    loginUser() {
       this.$store.dispatch({
-        type: 'connectUser',
+        type: 'loginUser',
         credentials: this.credentials
       });
     }

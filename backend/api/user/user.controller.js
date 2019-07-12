@@ -1,5 +1,11 @@
 const userService = require('./user.service')
 
+async function login(req, res) {
+    console.log('hallo',req.body)
+    const user = await userService.checkCredentials(req.body)
+    res.send(user)
+}
+
 async function getUser(req, res) {
     const user = await userService.getById(req.params.id)
     res.send(user)
@@ -18,5 +24,6 @@ async function deleteUser(req, res) {
 module.exports = {
     getUser,
     getUsers,
-    deleteUser
+    deleteUser,
+    login
 }

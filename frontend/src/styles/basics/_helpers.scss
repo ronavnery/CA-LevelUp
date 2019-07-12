@@ -7,3 +7,29 @@
 .fs24 { font-size: rem(24px); }
 .fs28 { font-size: rem(28px); }
 .fs30 { font-size: rem(30px); }
+
+// Flex:
+
+.flex {
+    display: flex
+}
+
+.column {
+    flex-direction: column
+}
+
+.align-center {
+    align-content: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.space-between {
+    justify-content: space-between
+}
+
+.space-around {
+    justify-content: space-around
+}

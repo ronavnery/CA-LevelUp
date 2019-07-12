@@ -14,9 +14,8 @@ module.exports = {
             @import "@/styles/basics/_links.scss";
             @import "@/styles/basics/_typography.scss";
 
-            
-            @import "@/styles//global.scss";
-
+    
+            @import "@/styles/global.scss";
             
             `
             }

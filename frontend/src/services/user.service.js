@@ -18,7 +18,8 @@ export default {
 async function login(user) {
     try {
         const registeredUser = await httpService.post(_getUrl('signin'), user)
-        return _handleSuccessfulRegister(registeredUser)
+        console.log(registeredUser)
+        // return _handleSuccessfulRegister(registeredUser)
     }
     catch (err) {
         throw err
@@ -59,6 +60,6 @@ async function login(user) {
 //     return user;
 // }
 
-// function _getUrl(method = '') {
-//     return `user/${method}`
-// }
+function _getUrl(method = '') {
+    return `user/${method}`
+}

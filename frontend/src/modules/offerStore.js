@@ -34,7 +34,6 @@ export default {
             state.offers.splice(idx, 1, newOffer)
         },
 
-        //currently server does not provide offer back 'cause there is no server
         setCurrOffer(state, { offer }) {
             state.currOffer = offer
         }

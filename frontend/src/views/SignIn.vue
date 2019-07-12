@@ -25,7 +25,7 @@ export default {
   methods: {
     connectUser() {
       this.$store.dispatch({
-        type: connectUser,
+        type: 'connectUser',
         credentials: this.credentials
       });
     }

@@ -1,10 +1,10 @@
 <template>
-  <section class="app-header flex">
+  <section class="app-header">
     <div class="logo-container">
       <img class="logo" src="../assets/logo.png" />
     </div>
-    <div class="nav-container">
-    <router-link to="/">Home</router-link>
+    <div class="nav-container fs14">
+    <router-link exact to="/">Home</router-link>
     <router-link to="/about">About</router-link>
     <router-link to="/explore">Explore</router-link>
     <router-link to="/sign-in">Sign-in</router-link>
@@ -18,17 +18,23 @@ export default {};
 
 <style scoped lang="scss">
 a {
-  color: $headerNavTxt;
-  text-decoration: none;
+  padding: rem(10px);
 }
 
 .app-header {
-  @include flexCustom(center, center, row);
+  @include flexCustom(space-between, center, row);
   background: $tpPurple;
-  height: rem(60px);
+  height: rem(50px);
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .logo {
-  width: 50px;
+  width: rem(30px);
+  margin-left: rem(40px);
+}
+
+.nav-container {
+  margin-right: rem(40px)
 }
 </style>

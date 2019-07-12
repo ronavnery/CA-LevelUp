@@ -1,5 +1,6 @@
 a {
     color: $link;
+    text-decoration: none;
     &.router-link-active {
         color: $link-active;
     }

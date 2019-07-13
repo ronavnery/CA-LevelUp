@@ -63,7 +63,7 @@ a {
 }
 
 .btn-login {
-  @include btnActionCleanSm;
+  @include btnActionSm;
   margin-right: rem(10px)
 }
 </style>

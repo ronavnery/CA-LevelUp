@@ -50,7 +50,7 @@
 
       <div class="details">
         <p class="title">{{offer.title}}</p>
-        <p class="desc">{{offer.description}}</p>
+        <p class="desc">{{shortDesc}}</p>
         <p v-for="tag in offer.tags" :key="tag" class="tags">{{tag}}</p>
       </div>
     </main>
@@ -136,7 +136,7 @@ export default {
         _id: "5d288a98c37bfbab12cd70b4",
         createdAt: 1562122365726.0,
         title: "Learn Photography",
-        description: "Will teach you Photography in no time.",
+        description: "Will teach you photography in no time.",
         imgs: ["https://picsum.photos/200", "https://picsum.photos/200"],
         tags: ["Photography", "Music", "Dancing"],
         requirements: ["Positive Attitude"],
@@ -193,6 +193,12 @@ export default {
       else if (this.offer.stars < 4 && this.offer.stars >= 3) return "#ffcf40";
       else if (this.offer.stars < 3 && this.offer.stars >= 2) return "#ffdc73";
       return "#8e8b80";
+    },
+    shortDesc() {
+      if (this.offer.description.length > 60) {
+        return this.offer.description.substring(0, 60) + '...';
+      }
+      return this.offer.description;
     }
   }
 };
@@ -223,8 +229,8 @@ header {
   }
 
   button {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin: 3px;
   }
 

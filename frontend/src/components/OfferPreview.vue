@@ -16,7 +16,10 @@ export default {
   },
   methods: {
     goToDetails() {
-      this.$router.push(`explore/${this.offer._id}`)
+      this.$router.push(`profile/${this.offer.createdBy.userName}/${this.offer._id}`)
+      this.$store.commit({type: 'setCurrProfile', userId: this.offer.createdBy._id})
+      
+      this.$store.dispatch({type: 'getOfferById', userId: this.offer.createdBy._id})
     },
     goToEdit() {
       this.$router.push(`explore/edit/${this.offer._id}`)

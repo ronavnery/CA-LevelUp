@@ -20,7 +20,7 @@
       <br />Reviews:
       <span v-for="(review,idx) in offer.reviews" :key="idx">{{review}}</span>
       <br />
-      <button class="btn-book">Book to LevelUp!</button>
+      <button class="btn-book">LevelUp!</button>
     </div>
   </section>
 </template>
@@ -64,9 +64,7 @@ export default {
 }
 
 .btn-book {
-  @include btnActionSm;
-  color: $tpGray3;
-  border: 1px solid $tpGray3;
+  @include btnActionGreySm;
 }
 </style>
 

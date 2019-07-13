@@ -2,6 +2,7 @@
   <section class="explore-main-container">
     <!-- <offer-filter @set-filter="setFilter"></offer-filter>
     <img v-if="!offers" src="../img/loading.svg" width="100" alt=""> -->
+    <OfferFilter />
     <OfferPreviewProto />
     <button @click="addOffer">Add offer</button>
     <OfferList :offers="offers" @removeOffer="removeOffer"></OfferList>
@@ -12,6 +13,8 @@
 
 import OfferList from "../components/OfferList";
 import OfferPreviewProto from '@/components/OfferPreviewProto.vue';
+import OfferFilter from '@/components/OfferFilter.vue';
+
 export default {
   name: "Explore",
   
@@ -40,7 +43,8 @@ export default {
 
   components: {
     OfferList,
-    OfferPreviewProto
+    OfferPreviewProto,
+    OfferFilter
   }
 };
 </script>

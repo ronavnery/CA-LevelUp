@@ -8,7 +8,7 @@ export default {
     remove,
     getById,
 }
-
+ 
 function query() {
     return httpService.get(_getUrl())
 }
@@ -26,6 +26,7 @@ function remove(_id) {
 }
 
 function getById(_id) {
+    console.log('get by id url:', _getUrl(_id));
     return httpService.get(_getUrl(_id))
 }
 

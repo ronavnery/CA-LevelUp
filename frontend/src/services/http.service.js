@@ -2,7 +2,7 @@ import router from '@/router'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
-    : '//localhost:3000/api/'
+    : 'http://localhost:3000/api/'
 
 
 import Axios from 'axios';
@@ -18,6 +18,7 @@ async function ajax(endpoint, method='get', data=null,params=null) {
             data,
             params
         })
+        console.log('res is:', res)
         return res.data;
     } catch (err) {
         // if (err.response.status === 401) {
@@ -29,6 +30,7 @@ async function ajax(endpoint, method='get', data=null,params=null) {
 
 export default {
     get(endpoint, data){
+        console.log('get endpoint is:',endpoint );
         return ajax(endpoint, 'GET', null ,data)
     },
     post(endpoint, data){

@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Explore from './views/Explore.vue'
-import OfferDetails from './views/OfferDetails.vue'
 import OfferEdit from './views/OfferEdit.vue'
 import SignIn from './views/SignIn.vue'
-
+import Profile from './views/Profile.vue'
+ 
 Vue.use(Router)
 
 export default new Router({
@@ -28,9 +28,9 @@ export default new Router({
       component: OfferEdit
     },
     {
-      path: '/explore/:_id',
-      name: 'OfferDetails',
-      component: OfferDetails
+      path: '/profile/:userName/:_id?',
+      name: 'Profile',
+      component: Profile
     },
     {
       path: '/sign-in',

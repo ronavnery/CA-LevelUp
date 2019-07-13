@@ -7,6 +7,7 @@
   border: 0px;
   font-family: "$Montserrat-Bold";
   font-weight: bold;
+  outline: none;
 }
 
 @mixin btnActionColorSm() {
@@ -19,9 +20,11 @@
   color: $tpGray;
   font-family: $Montserrat-Bold;
   font-weight: bold;
+  font-size: rem(12px);
+  outline: none;
 }
 
-@mixin btnActionClean() {
+@mixin btnAction() {
   cursor: pointer;
   height: rem(40px);
   padding: 0px rem(20px) 0px rem(20px);
@@ -31,9 +34,10 @@
   color: $tpGray;
   font-family: $Montserrat-Bold;
   font-weight: bold;
+  outline: none;
 }
 
-@mixin btnActionCleanSm() {
+@mixin btnActionSm() {
   cursor: pointer;
   padding: 0px rem(20px) 0px rem(20px);
   height: rem(30px);
@@ -43,4 +47,36 @@
   color: $tpGray;
   font-family: $Montserrat-Bold;
   font-weight: bold;
+  font-size: rem(12px);
+  outline: none;
+}
+
+
+@mixin btnActionGrey() {
+  cursor: pointer;
+  height: rem(40px);
+  padding: 0px rem(20px) 0px rem(20px);
+  background: None;
+  border-radius: rem(20px);
+  color: $tpGray;
+  font-family: $Montserrat-Bold;
+  font-weight: bold;
+  outline: none;
+  color: $tpGray3;
+  border: 1px solid $tpGray3;
+}
+
+@mixin btnActionGreySm() {
+  cursor: pointer;
+  padding: 0px rem(20px) 0px rem(20px);
+  height: rem(30px);
+  background: None;
+  border-radius: rem(20px);
+  color: $tpGray;
+  font-family: $Montserrat-Bold;
+  font-weight: bold;
+  font-size: rem(12px);
+  outline: none;
+  color: $tpGray3;
+  border: 1px solid $tpGray3;
 }

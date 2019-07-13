@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="flex column">
     <AppHeader />
     <router-view />
   </div>
@@ -17,6 +17,9 @@ export default {
 
 
 <style lang="scss">
+#app {
+  height: 100%;
+}
 body{}
 html{}
 </style>

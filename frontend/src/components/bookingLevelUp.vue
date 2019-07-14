@@ -1,7 +1,8 @@
 <template>
-  <section class="levelup-confirm">
+  <section class="levelup-booking">
     <form>
-      <p>Aweome! Before you level up, please add some info about you so the person gets to know you better!</p>
+      <h4 class="text-center">Contact to levelup!</h4>
+      <p>Before you level up, please add some info about you so the person gets to know you better!</p>
       <label for="reason">What makes you want to get this skill?</label>
       <textarea v-model="bookingReq.reason" id="reason" type="text" />
       <label for="availability">Hows your availability?</label>
@@ -28,28 +29,34 @@ export default {
     sendBookingReq() {
       this.$emit("booking-set", this.bookingReq)
     } 
+  },
+  computed: {
+    offer() {
+      return this.$store.getters.getCurrOffer
+    }
   }
 };
 </script>
 
 <style scoped lang="scss">
-.levelup-confirm {
-  max-width: 300px;
-  background: $tpGray2;
+.levelup-booking {
+  max-width: 400px;
+  background: $tpWhite;
   position: fixed;
   height: 100%;
   right: 0;
-}
-.levelup-confirm form {
-  display: flex;
-  flex-direction: column;
+  border-left: 0.1px solid $tpGray3;
 }
 
-.levelup-confirm form > label ,p {
+.levelup-booking form {
+  @include flexCustom(center, left, column)
+}
+
+.levelup-booking form > label ,p {
   padding: 0 10px
 }
 
-.levelup-confirm form > input ,textarea{
+.levelup-booking form > input ,textarea{
   margin: 10px;
 }
 

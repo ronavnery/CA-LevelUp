@@ -18,6 +18,10 @@ export default {
       isBooking: false
     };
   },
+  created() {
+    console.log('params:', this.$route.params);
+    // this.$store.dispatch({type: 'getProfile', })
+  },
   computed: {
     getCurrProfile() {
       return this.$store.getters.getCurrProfile;

@@ -10,7 +10,7 @@
       <router-link to="/about">About</router-link>
     </div>
     <div class="user-action-container">
-      <button class="btn-login">Login</button>
+      <button class="btn-login" @click="goLogin">Login</button>
       <button class="btn-register">Register</button>
     </div>
   </section>
@@ -19,8 +19,8 @@
 <script>
 export default {
   methods: {
-    goHome() {
-      this.$router.push('/')
+    goLogin() {
+      this.$router.push('/sign-in')
     }
   }
 };

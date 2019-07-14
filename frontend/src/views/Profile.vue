@@ -29,21 +29,12 @@ export default {
     catch(err) {
       console.log('Error!', err);
     }
-    try {
-
-      const currOffer = await this.$store.dispatch({type: 'loadOffers', userName: this.$route.params.userName })
-      this.currOffer = currOffer
-    }
-    catch(err) {
-      console.log('Error!', err);
-    }
 
     },
   methods: {
     sendBookingReq(bookingReq) {
       this.isBooking = false;
       bookingReq.offerId = this.$store.getters.getCurrOffer._id;
-      // bookingReq.reqUserId = this.$store.getters.
       this.$store.dispatch({ type: "sendBookingReq", bookingReq });
     },
     toggleBooking() {

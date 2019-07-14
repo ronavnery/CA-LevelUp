@@ -24,7 +24,6 @@ async function checkCredentials(credentials) {
                 ]
             }
         )
-        console.log(dbUser)
         if(dbUser) return {_id: dbUser._id, username: dbUser.username}
         else return 'username or password wrong'
     }

@@ -35,7 +35,6 @@ export default {
     };
   },
   async created() {
-    console.log(this.$route.params);
     this.$route.params.offerId
       ? (this.isShowingOneOffer = true)
       : (this.isShowingOneOffer = false);
@@ -46,7 +45,6 @@ export default {
         type: "loadOffers",
         filter: this.filter
       });
-      console.log(userOffers)
       this.userOffers = userOffers;
       this.filter = null;
     } catch (err) {

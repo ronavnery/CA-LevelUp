@@ -30,7 +30,7 @@ export default {
 .app-header {
   @include flexCustom(space-between, center, row);
   background: $tpPurple;
-  height: rem(50px);
+  line-height: rem(50px);
   font-family: $Montserrat-Regular;
   padding: 0 rem(10px) 0 rem(10px);
   box-shadow: 2px 15px 26px -10px rgba(0,0,0,0.59);

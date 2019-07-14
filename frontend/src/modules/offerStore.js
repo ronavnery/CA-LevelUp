@@ -83,7 +83,7 @@ export default {
         async getOfferById(context, { offerId }) {
             try {
                 const offer = await offerService.getById(offerId)
-                console.log('got offer:', offer)
+                // console.log('got offer:', offer)
                 context.commit({ type: 'setCurrOffer', offer })
                 return offer
             } catch (err) {

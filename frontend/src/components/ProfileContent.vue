@@ -2,7 +2,7 @@
   <section class="profile-content-container">
       <button @click="showAll" class="btn-show-all">←Show all offers from this person</button>
   <div class="profile-content">
-    <offer-details :currOffer="getCurrOffer" v-if="isShowingOneOffer"/>
+    <offer-details @toggle-booking="toggleBooking" :currOffer="getCurrOffer" v-if="isShowingOneOffer"/>
 
   </div>
   </section>
@@ -32,7 +32,10 @@ export default {
       showAll() {
           this.isShowingOneOffer = false;
           this.$router.push(`/profile/${this.currUserName}`)
-      }
+      },
+      toggleBooking() {
+      this.$emit('toggle-booking')
+    }
   },
   components: {
     OfferDetails
@@ -41,10 +44,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.profile-content-container {
+  flex: 1;
+
+}
 .profile-content {
   flex: 1;
   padding: rem(80px);
   overflow: hidden;
+
 }
 
 .btn-show-all {

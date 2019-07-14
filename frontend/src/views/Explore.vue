@@ -3,7 +3,7 @@
     <!-- <offer-filter @set-filter="setFilter"></offer-filter>
     <img v-if="!offers" src="../img/loading.svg" width="100" alt=""> -->
     <OfferFilter />
-    <OfferPreviewProto />
+    <OfferPreview />
     <button @click="addOffer">Add offer</button>
     <OfferList :offers="offers" @removeOffer="removeOffer"></OfferList>
     <!-- {{offers}} -->
@@ -12,7 +12,7 @@
 <script>
 
 import OfferList from "../components/OfferList";
-import OfferPreviewProto from '@/components/OfferPreviewProto.vue';
+import OfferPreview from '@/components/OfferPreview.vue';
 import OfferFilter from '@/components/OfferFilter.vue';
 
 export default {
@@ -43,7 +43,7 @@ export default {
 
   components: {
     OfferList,
-    OfferPreviewProto,
+    OfferPreview,
     OfferFilter
   }
 };

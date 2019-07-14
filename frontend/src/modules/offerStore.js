@@ -14,7 +14,7 @@ export default {
             return state.currOffer
         }
     },
-
+    
     mutations: {
         setOffers(state, { offers }) {
             state.offers = offers

@@ -24,7 +24,7 @@ function createOffers() {
      "usrId1",
     "Harding Holden",
     "HardingH11",
-    "https://picsum.photos/id/1005/50",
+    "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg",
     "059-284-3326",
     ["FaceToFace"]
      ),
@@ -46,7 +46,7 @@ function createOffers() {
      ), ]
 }
 
-function createOffer(_id, title, description,imgs,tags, requirements, whatsIncluded, category, stars,comments,user_id, name,userName, userImg,phone,type) {
+function createOffer(_id, title, description,imgs,tags, requirements, whatsIncluded, category, stars,comments,userId, name,userName, userImg,phone,type) {
     return {
         _id,
         createdAt: Date.now(),
@@ -60,7 +60,7 @@ function createOffer(_id, title, description,imgs,tags, requirements, whatsInclu
         stars,
         comments,
         createdBy: {
-          user_id,
+          userId,
           name,
           userName,
           userImg,

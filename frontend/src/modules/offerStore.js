@@ -14,7 +14,7 @@ export default {
             return state.currOffer
         }
     },
-    
+
     mutations: {
         setOffers(state, { offers }) {
             state.offers = offers
@@ -83,11 +83,10 @@ export default {
         async getOfferById(context, { offerId }) {
             try {
                 const offer = await offerService.getById(offerId)
-                // console.log('got offer:', offer)
                 context.commit({ type: 'setCurrOffer', offer })
                 return offer
             } catch (err) {
-                console.log('ive got an error', err)
+                console.log(err)
             }
         }
     }

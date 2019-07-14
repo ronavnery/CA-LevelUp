@@ -130,6 +130,7 @@ export default {
             try {
                 const user = await userService.getUserByUserName(userName)
                 commit({type: 'setCurrProfile', user})
+                return user
             }
             catch(err) {
                 throw err

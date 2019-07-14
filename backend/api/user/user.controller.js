@@ -1,7 +1,6 @@
 const userService = require('./user.service')
 
 async function login(req, res) {
-    console.log('hallo',req.body)
     const user = await userService.checkCredentials(req.body)
     res.send(user)
 }

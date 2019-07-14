@@ -126,15 +126,15 @@ export default {
                 throw err
             }
         },
-        async getProfile({commit}, {_id}) {
+        async getProfile({commit}, {userName}) {
             try {
-                const user = await userService.getUserById(_id)
+                const user = await userService.getUserByUserName(userName)
                 commit({type: 'setCurrProfile', user})
             }
             catch(err) {
                 throw err
             }
-        }
+        },
 
     }
 }

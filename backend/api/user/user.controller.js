@@ -15,6 +15,12 @@ const getUsers = async (req, res) => {
     res.send(users)
 }
 
+async function addUser(req, res) {
+    const newUser = req.body
+    const addedUser = await userService.add(newUser)
+    res.json(addedUser);
+}
+
 async function deleteUser(req, res) {
     await userService.remove(req.params.id)
     res.send({})
@@ -24,5 +30,6 @@ module.exports = {
     getUser,
     getUsers,
     deleteUser,
-    login
+    login,
+    addUser
 }

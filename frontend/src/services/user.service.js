@@ -134,13 +134,23 @@ async function login(credentials) {
     }
 }
 
-async function getProfile(userId) {
+async function getProfile(userName) {
     try {
-        const user = await httpService.get(_getUrl(userId))
+        const user = await httpService.get(_getUrl(userName))
         return user;
     } 
     catch (err) {
         throw err;
+    }
+}
+
+async function addUser(newUser) {
+    try {
+        const addedUser = await httpService.post(_getUrl('adduser'), newUser)
+        return addedUser;
+    }
+    catch (err) {
+        throw err
     }
 }
 
@@ -153,5 +163,6 @@ export default {
     // getLoggedinUser,
     // logOut,
     // deleteUser,
+    addUser
 }
 */

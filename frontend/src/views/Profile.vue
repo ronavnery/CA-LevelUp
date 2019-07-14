@@ -36,7 +36,6 @@ export default {
     sendBookingReq(bookingReq) {
       this.isBooking = false;
       bookingReq.offerId = this.$store.getters.getCurrOffer._id;
-      // bookingReq.reqUserId = this.$store.getters.
       this.$store.dispatch({ type: "sendBookingReq", bookingReq });
     },
     toggleBooking() {

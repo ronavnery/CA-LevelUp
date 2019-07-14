@@ -12,41 +12,41 @@ export default {
 
 
 var users = [{
-    "_id" : 'usrId1',
-    "name" : "Harding Holden",
-    "userName": "HardingH11",
-    "dateJoined" : 1545835345590.0,
-    "email" : "pughthomas@retrack.com",
-    "password" : "aliquip89",
-    "userImg": "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg",
-    "skillTags" : [ 
-        "Web Development", 
-        "Spiritualism"
-    ],
-    "offers" : ['ofrId1'],
-    "wishlist" : [],
-    "leveledUpIn" : []
-},
-{
-    "_id" : "usrId2",
-    "name" : "Jay Mirchaet",
-    "userName": "Jay4life",
-    "dateJoined" : 1524501205222.0,
-    "email" : "kelliherman@retrack.com",
-    "password" : "ipsum83",
-    "userImg": "https://www.picmonkey.com/blog/wp-content/uploads/2016/11/1-intro-photo-final.jpg",
-    "skillTags" : [ 
-        "Dj", 
-        "Web Development", 
-        "Drawing"
-    ],
-    "offers" : ['ofrId2'],
-    "wishlist" : [],
-    "leveledUpIn" : []
-},
-{
-    
-}
+        "_id": 'usrId1',
+        "name": "Harding Holden",
+        "userName": "HardingH11",
+        "dateJoined": 1545835345590.0,
+        "email": "pughthomas@retrack.com",
+        "password": "aliquip89",
+        "userImg": "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg",
+        "skillTags": [
+            "Web Development",
+            "Spiritualism"
+        ],
+        "offers": ['ofrId1'],
+        "wishlist": [],
+        "leveledUpIn": []
+    },
+    {
+        "_id": "usrId2",
+        "name": "Jay Mirchaet",
+        "userName": "Jay4life",
+        "dateJoined": 1524501205222.0,
+        "email": "kelliherman@retrack.com",
+        "password": "ipsum83",
+        "userImg": "https://www.picmonkey.com/blog/wp-content/uploads/2016/11/1-intro-photo-final.jpg",
+        "skillTags": [
+            "Dj",
+            "Web Development",
+            "Drawing"
+        ],
+        "offers": ['ofrId2'],
+        "wishlist": [],
+        "leveledUpIn": []
+    },
+    {
+
+    }
 ]
 
 function getUsers() {
@@ -88,9 +88,8 @@ function update(updatedUser) {
 
 
 // async function login(user) {
-//     const returnedUser = await httpService.post(_getUrl('login'), user)
 //     try {
-//         if (returnedUser) return _handleSuccessfulRegister(returnedUser)
+//         const returnedUser = await httpService.post(_getUrl('login'), user)
 //         return returnedUser
 //     }
 //     catch (err) {
@@ -99,8 +98,8 @@ function update(updatedUser) {
 // }
 
 // async function logOut() {
-//     await httpService.post(_getUrl('logout'))
 //     try {
+//          await httpService.post(_getUrl('logout'))
 //         sessionStorage.clear()
 //     }
 //     catch (err) {
@@ -113,24 +112,20 @@ function update(updatedUser) {
 //         .then(res => res.data)
 // }
 
-// function _handleSuccessfulRegister(user) {
-//     // loggedInUser = user
-
-//     sessionStorage.setItem('loggedInUser', JSON.stringify(user));
-//     // eventBus.$emit(USER_LOGIN)
-//     return user;
-// }
 
 function _getUrl(route = '') {
     return `user/${route}`
 }
 
+function _getAuthUrl(route = '') {
+    return `auth/${route}`
+}
+
 /* Database User Service Functions:
 async function login(credentials) {
     try {
-        const registeredUser = await httpService.post(_getUrl('signin'), credentials)
+        const registeredUser = await httpService.post(_getAuthUrl('login'), credentials)
         console.log(registeredUser)
-        // return _handleSuccessfulRegister(registeredUser)
         return registeredUser
     }
     catch (err) {
@@ -150,7 +145,7 @@ async function getProfile(userName) {
 
 async function addUser(newUser) {
     try {
-        const addedUser = await httpService.post(_getUrl('adduser'), newUser)
+        const addedUser = await httpService.post(_getAuthUrl('signup'), newUser)
         return addedUser;
     }
     catch (err) {

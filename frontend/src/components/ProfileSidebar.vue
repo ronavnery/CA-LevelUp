@@ -67,11 +67,10 @@ export default {
 }
 
 .btn-container {
-  position: absolute;
+  position: relative;
   width: 150px;
   @include flexCustom(space-between, center, row);
-  top: 135px;
-  left: 75px;
+  top: -35px;
 
   button {
     background-color: $tpPink;

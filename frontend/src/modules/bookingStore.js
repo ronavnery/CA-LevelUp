@@ -3,15 +3,20 @@ import bookingService from '../services/booking.service.js'
 export default {
     state: {
         offers: [],
-        currOffer: {}
+        currOffer: {},
+        isBooking: false
     },
 
     getters: {
-       
+       getIsBooking(state) {
+           return state.isBooking
+       }
     },
 
     mutations: {
-        
+        setIsBooked(state) {
+            state.isBooking = false
+        }
     },
 
     actions: {

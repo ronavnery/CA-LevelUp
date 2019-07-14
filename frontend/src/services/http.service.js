@@ -21,10 +21,9 @@ async function ajax(endpoint, method='get', data=null,params=null) {
         console.log('res is:', res)
         return res.data;
     } catch (err) {
-        // if (err.response.status === 401) {
-        //     router.push('/');
-        // }
-
+        if (err.response.status === 401) {
+            router.push('/sign-up');
+        }
     }
 }
 

@@ -2,12 +2,69 @@
 import httpService from './http.service';
 
 export default {
-    login,
-    // getLoggedinUser,
-    // logOut,
-    // deleteUser,
+    getUsers,
+    getUserById,
+    add,
+    remove,
+    update
 }
 
+
+var users = [{
+    "_id" : 'usrId1',
+    "name" : "Pugh Thomas",
+    "dateJoined" : 1545835345590.0,
+    "email" : "pughthomas@retrack.com",
+    "password" : "aliquip89",
+    "skillTags" : [ 
+        "Web Development", 
+        "Spiritualism"
+    ],
+    "offers" : ['ofrId1'],
+    "wishlist" : [],
+    "leveledUpIn" : []
+},
+{
+    "_id" : "usrId2",
+    "name" : "Kelli Herman",
+    "dateJoined" : 1524501205222.0,
+    "email" : "kelliherman@retrack.com",
+    "password" : "ipsum83",
+    "skillTags" : [ 
+        "Dj", 
+        "Web Development", 
+        "Drawing"
+    ],
+    "offers" : ['ofrId2'],
+    "wishlist" : [],
+    "leveledUpIn" : []
+}]
+
+function getUsers() {
+    return Promise.resolve(users)
+}
+
+function getUserById(_id) {
+    const user = users.find(user => user._id === _id)
+    return Promise.resolve(user)
+}
+
+function add(newUser) {
+    users.push(newUser)
+    return Promise.resolve(newUser)
+}
+
+function remove(_id) {
+    const idx = users.findIndex(user => user._id === _id)
+    users.splice(idx, 1);
+    return Promise.resolve(idx)
+}
+
+function update(updatedUser) {
+    const idx = users.findIndex(user => user._id === updatedUser._id)
+    users.splice(idx, 1, updatedUser);
+    return Promise.resolve(updatedUser)
+}
 // var loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
 
 // function getLoggedinUser() {
@@ -15,16 +72,6 @@ export default {
 // }
 
 
-async function login(credentials) {
-    try {
-        const registeredUser = await httpService.post(_getUrl('signin'), credentials)
-        console.log(registeredUser)
-        // return _handleSuccessfulRegister(registeredUser)
-    }
-    catch (err) {
-        throw err
-    }
-}
 
 // async function login(user) {
 //     const returnedUser = await httpService.post(_getUrl('login'), user)
@@ -60,6 +107,41 @@ async function login(credentials) {
 //     return user;
 // }
 
-function _getUrl(method = '') {
-    return `user/${method}`
+function _getUrl(route = '') {
+    return `user/${route}`
 }
+
+/* Database User Service Functions:
+async function login(credentials) {
+    try {
+        const registeredUser = await httpService.post(_getUrl('signin'), credentials)
+        console.log(registeredUser)
+        // return _handleSuccessfulRegister(registeredUser)
+        return registeredUser
+    }
+    catch (err) {
+        throw err
+    }
+}
+
+async function getProfile(userId) {
+    try {
+        const user = await httpService.get(_getUrl(userId))
+        return user;
+    } 
+    catch (err) {
+        throw err;
+    }
+}
+
+
+
+
+export default {
+    login,
+    getProfile
+    // getLoggedinUser,
+    // logOut,
+    // deleteUser,
+}
+*/

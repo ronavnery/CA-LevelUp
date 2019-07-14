@@ -23,22 +23,15 @@ export default {
   },
   async created() {
     try {
-      const profile = await this.$store.dispatch({type: 'getProfile', userName: this.$route.params.userName})
-      this.currProfile = profile
+      const profile = await this.$store.dispatch({
+        type: "getProfile",
+        userName: this.$route.params.userName
+      });
+      this.currProfile = profile;
+    } catch (err) {
+      console.log("Error!", err);
     }
-    catch(err) {
-      console.log('Error!', err);
-    }
-    try {
-
-      const currOffer = await this.$store.dispatch({type: 'loadOffers', userName: this.$route.params.userName })
-      this.currOffer = currOffer
-    }
-    catch(err) {
-      console.log('Error!', err);
-    }
-
-    },
+  },
   methods: {
     sendBookingReq(bookingReq) {
       this.isBooking = false;

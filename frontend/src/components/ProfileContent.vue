@@ -85,9 +85,15 @@ export default {
 }
 .profile-content {
   flex: 1;
-  padding: rem(80px);
+  display: flex;
+  padding: rem(40px);
   overflow: hidden;
 }
+
+.profile-content > :first-child {
+  margin-right: rem(30px)
+}
+
 
 .btn-show-all {
   margin: rem(30px) 0 0 rem(30px);

@@ -6,29 +6,41 @@ module.exports = {
     checkCredentials,
     query,
     getById,
-    getByEmail,
+    getByUsername,
     remove,
     update,
-    add
+    add,
+    verifyUnique
 }
 
 async function checkCredentials(credentials) {
-    const {username, password} = credentials 
+    const {userName, password} = credentials 
     const collection = await dbService.getCollection('user')
     try {
         const dbUser = await collection.findOne(
             {
-                $and: [
-                    { username },
-                    { password }
-                ]
+                    userName,
+                    password
             }
         )
-        if(dbUser) return {_id: dbUser._id, username: dbUser.username}
+        if(dbUser) return dbUser
         else return 'username or password wrong'
     }
     catch (err) {
         console.log(err)
+    }
+}
+
+async function verifyUnique({email, userName}) {
+    const credentials = {email, userName}
+    const collection = await dbService.getCollection('user')
+    try {
+        const dbUser = await collection.findOne(credentials)
+        if (!dbUser) return true
+        else return false;
+    }
+    catch (err) {
+
     }
 }
 
@@ -63,13 +75,13 @@ async function getById(userId) {
         throw err;
     }
 }
-async function getByEmail(email) {
+async function getByUsername(userName) {
     const collection = await dbService.getCollection('user')
     try {
-        const user = await collection.findOne({email})
+        const user = await collection.findOne({userName})
         return user
     } catch (err) {
-        console.log(`ERROR: while finding user ${email}`)
+        console.log(`ERROR: while finding user ${userName}`)
         throw err;
     }
 }
@@ -95,11 +107,11 @@ async function update(user) {
     }
 }
 
-async function add(user) {
+async function add(newUser) {
     const collection = await dbService.getCollection('user')
     try {
-        await collection.insertOne(user);
-        return user;
+        const registeredUser = await collection.insertOne(newUser);
+        return registeredUser;
     } catch (err) {
         console.log(`ERROR: cannot insert user`)
         throw err;

@@ -2,7 +2,7 @@ const userService = require('./user.service')
 
 async function login(req, res) {
     const user = await userService.checkCredentials(req.body)
-    res.send(user)
+    res.json(user)
 }
 
 async function getUser(req, res) {

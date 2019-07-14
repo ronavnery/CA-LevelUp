@@ -256,6 +256,7 @@ main {
       margin: 0;
       font-weight: bold;
       color: #383838;
+      overflow-wrap: break-word;
     }
 
     p.tags {

@@ -43,7 +43,11 @@ var users = [{
     "offers" : ['ofrId2'],
     "wishlist" : [],
     "leveledUpIn" : []
-}]
+},
+{
+    
+}
+]
 
 function getUsers() {
     return Promise.resolve(users)

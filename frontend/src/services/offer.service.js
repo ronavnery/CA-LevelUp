@@ -17,6 +17,7 @@ function createOffers() {
      ["https://picsum.photos/200", "https://picsum.photos/200"],
      ["Photography", "Art"],
      ["Positive Attitude"],
+     'Five Hours',
      ["Handling a DSLR Camera", "Shutter", "Aperture"],
      "Arts",
      4,
@@ -33,6 +34,7 @@ function createOffers() {
      ["http://www.powerthoughtsmeditationclub.com/wp-content/uploads/2010/09/bigstock-Meditating-47886218-1024x683.jpg"],
      ["Mindfulness", "Wellness"],
      ["Positive Attitude"],
+     'Six Hours',
      ["Short explanation of meditation", "Teaching of technique"],
      "Personal Development",
      4,
@@ -43,10 +45,27 @@ function createOffers() {
     "https://www.picmonkey.com/blog/wp-content/uploads/2016/11/1-intro-photo-final.jpg",
     "049-24-3316",
     ["FaceToFace", "Phone"]
-     ), ]
+     ), 
+    createOffer("ofrId3", "Guide you through creating a fb ad adsfnlkwqerjklqwlkernaskldfnkqwklerhqwlker",
+    "It looks complicated but i'll make it simple for you and you'll have an up and running ad in 15m.",
+    ['https://scontent.ftlv1-1.fna.fbcdn.net/v/t1.0-9/61795832_2289081734470980_1220615154174001152_n.jpg?_nc_cat=1&_nc_oc=AQmQKn-Wz5pXFElvkRY-nSwLsF30JKilUAqTAZQLiRQracF29YvbX64NDcKVzG-Ghjo&_nc_ht=scontent.ftlv1-1.fna&oh=f9a3d22cfd17128507ddbf9a293f2f6e&oe=5DB10145'],
+    ['marketing', 'facebook', 'social', 'ad'],
+    ['Laptop'],
+    '30 mins',
+    ['Facebook Marketing Intro', 'SEO optimization', 'Keyword selection technique'],
+    'Business and Marketing',
+    2.8,
+    ['Was Very Good', 'Meh', 'Amazing'],
+    'usrId2',
+    "Jay Mirchaet",
+    "Jay4life",
+    "https://www.picmonkey.com/blog/wp-content/uploads/2016/11/1-intro-photo-final.jpg",
+    "049-24-3316",
+    ["Skype", "Phone"]
+    )]
 }
 
-function createOffer(_id, title, description,imgs,tags, requirements, whatsIncluded, category, stars,comments,userId, name,userName, userImg,phone,type) {
+function createOffer(_id, title, description,imgs,tags, requirements,duration, whatsIncluded, category, stars,comments,userId, name,userName, userImg,phone,type) {
     return {
         _id,
         createdAt: Date.now(),
@@ -55,6 +74,7 @@ function createOffer(_id, title, description,imgs,tags, requirements, whatsInclu
         imgs,
         tags,
         requirements,
+        duration,
         whatsIncluded,
         category,
         stars,
@@ -87,7 +107,8 @@ function createOffer(_id, title, description,imgs,tags, requirements, whatsInclu
             lat: 33.7731,
             lng: 32.2582
           }
-        }
+        },
+
     }
 }
 

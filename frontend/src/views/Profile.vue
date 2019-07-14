@@ -1,7 +1,7 @@
 <template>
   <div class="profile-container flex">
     <profile-sidebar :profile="currProfile" v-if="currProfile" />
-    <profile-content @toggle-booking="toggleBooking" :currOffer="currOffer" v-if="currOffer" />
+    <profile-content @toggle-booking="toggleBooking" :currOffer="currOffer" />
     <bookingLevelUp v-if="isBooking" @booking-set="sendBookingReq" />
   </div>
 </template>
@@ -21,7 +21,6 @@ export default {
     };
   },
   created() {
-    // console.log('params:', this.$route.params);
     this.$store.dispatch({type: 'getProfile', userName: this.$route.params.userName})
       .then((profile) => {
         this.currProfile = profile

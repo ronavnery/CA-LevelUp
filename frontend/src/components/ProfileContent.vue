@@ -7,9 +7,9 @@
         :currOffer="getCurrOffer"
         v-if="isShowingOneOffer"
       />
-      <!-- <div  v-for="(offer,idx) in userOffers" :key="idx">
-        <OfferPreview v-if="!isShowingOneOffer" :offer="offer" />
-      </div> -->
+      <div v-else v-for="(offer,idx) in userOffers" :key="idx" @click="previewClicked">
+        <OfferPreview :offer="offer" />
+      </div>
     </div>
   </section>
 </template>
@@ -19,9 +19,14 @@ import OfferDetails from "../components/OfferDetails";
 import OfferPreview from "../components/OfferPreview";
 export default {
   name: "ProfileContent",
+  props: {
+    currOffer: {
+      type: Object
+    }
+  },
   data() {
     return {
-      isShowingOneOffer: true,
+      isShowingOneOffer: null,
       currUserName: "",
       userOffers: [],
       filter: {
@@ -30,7 +35,10 @@ export default {
     };
   },
   async created() {
-    console.log(this.$route.params.userName);
+    console.log(this.$route.params);
+    this.$route.params.offerId
+      ? (this.isShowingOneOffer = true)
+      : (this.isShowingOneOffer = false);
     this.currUserName = this.$route.params.userName;
     this.filter.userName = this.currUserName;
     try {
@@ -38,12 +46,13 @@ export default {
         type: "loadOffers",
         filter: this.filter
       });
+      console.log(userOffers)
       this.userOffers = userOffers;
       this.filter = null;
     } catch (err) {
       console.log(err);
     }
-    const offerId = this.$route.params._id;
+    const offerId = this.$route.params.offerId;
     if (!offerId) this.isShowingOneOffer = false;
   },
   computed: {
@@ -55,6 +64,9 @@ export default {
     showAll() {
       this.isShowingOneOffer = false;
       this.$router.push(`/profile/${this.currUserName}`);
+    },
+    previewClicked() {
+      this.isShowingOneOffer = true;
     },
     toggleBooking() {
       this.$emit("toggle-booking");

@@ -36,7 +36,7 @@ function createOffers() {
      ["Short explanation of meditation", "Teaching of technique"],
      "Personal Development",
      4,
-     [, , , , , , , , , , , , , , , ,],
+     [, , , , , ,  , , ,],
      "usrId2",
     "Jay Mirchaet",
     "Jay4life",

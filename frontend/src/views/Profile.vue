@@ -21,7 +21,6 @@ export default {
     };
   },
   created() {
-    // console.log('params:', this.$route.params);
     this.$store.dispatch({type: 'getProfile', userName: this.$route.params.userName})
       .then((profile) => {
         this.currProfile = profile

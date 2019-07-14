@@ -1,10 +1,13 @@
 <template>
   <section class="profile-content-container">
-      <button @click="showAll" class="btn-show-all">←Show all offers from this person</button>
-  <div class="profile-content">
-    <offer-details @toggle-booking="toggleBooking" :currOffer="getCurrOffer" v-if="isShowingOneOffer"/>
-
-  </div>
+    <button @click="showAll" class="btn-show-all">←Show all offers from this person</button>
+    <div class="profile-content">
+      <offer-details
+        @toggle-booking="toggleBooking"
+        :currOffer="currOffer"
+        v-if="isShowingOneOffer"
+      />
+    </div>
   </section>
 </template>
 
@@ -12,29 +15,33 @@
 import OfferDetails from "../components/OfferDetails";
 export default {
   name: "ProfileContent",
+  props: {
+    currOffer: {
+      type: Object
+    }
+  },
   data() {
-      return {
-          isShowingOneOffer: true,
-          currUserName: ''
-      }
+    return {
+      isShowingOneOffer: true,
+    };
   },
   created() {
-          this.currUserName = this.$route.params.userName
-          const offerId = this.$route.params._id;
-          if (!offerId) this.isShowingOneOffer = false
+    this.currUserName = this.$route.params.userName;
+    const offerId = this.$route.params.offerId;
+    if (!offerId) this.isShowingOneOffer = false;
   },
   computed: {
     getCurrOffer() {
-      return this.$store.getters.getCurrOffer
+      return this.$store.getters.getCurrOffer;
     }
   },
   methods: {
-      showAll() {
-          this.isShowingOneOffer = false;
-          this.$router.push(`/profile/${this.currUserName}`)
-      },
-      toggleBooking() {
-      this.$emit('toggle-booking')
+    showAll() {
+      this.isShowingOneOffer = false;
+      this.$router.push(`/profile/${this.currUserName}`);
+    },
+    toggleBooking() {
+      this.$emit("toggle-booking");
     }
   },
   components: {
@@ -46,17 +53,15 @@ export default {
 <style scoped lang="scss">
 .profile-content-container {
   flex: 1;
-
 }
 .profile-content {
   flex: 1;
   padding: rem(80px);
   overflow: hidden;
-
 }
 
 .btn-show-all {
-    margin: rem(30px) 0 0 rem(30px);
-    @include btnActionGreySm
+  margin: rem(30px) 0 0 rem(30px);
+  @include btnActionGreySm;
 }
 </style>

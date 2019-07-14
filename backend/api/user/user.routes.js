@@ -8,6 +8,8 @@ const router = express.Router()
 
 router.get('/', requireAuth, getUsers)
 router.post('/signin', login)
+router.post('/adduser', addUser)
+
 
 router.get('/:id', getUser)
 router.delete('/:id',  requireAuth, deleteUser)

@@ -87,7 +87,7 @@ form {
   }
 }
 
-
+// Todos: use button mixin instead
 .search-btn {
     width: 200px;
     padding: 8px 0;

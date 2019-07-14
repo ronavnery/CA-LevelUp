@@ -1,6 +1,6 @@
 <template>
   <section class="app-header">
-    <div class="logo-container">
+    <div @click="goHome()" class="logo-container">
       <img class="logo" src="../assets/logo.png" />
       <span class="logo-title fs14 strong">LevelUp</span>
     </div>
@@ -17,14 +17,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goHome() {
+      this.$router.push('/')
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
 .app-header {
   @include flexCustom(space-between, center, row);
   background: $tpPurple;
-  height: rem(50px);
+  line-height: rem(50px);
   font-family: $Montserrat-Regular;
   padding: 0 rem(10px) 0 rem(10px);
   box-shadow: 2px 15px 26px -10px rgba(0,0,0,0.59);
@@ -39,6 +45,7 @@ a {
 
 .logo-container {
   @include flexCenter(center);
+  cursor: pointer;
 }
 
 .logo-title {

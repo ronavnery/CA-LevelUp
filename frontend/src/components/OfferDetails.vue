@@ -20,7 +20,7 @@
       <br />Reviews:
       <span v-for="(review,idx) in offer.reviews" :key="idx">{{review}}</span>
       <br />
-      <button class="btn-book">LevelUp!</button>
+      <button class="btn-book" @click="toggleBooking">LevelUp!</button>
     </div>
   </section>
 </template>
@@ -50,6 +50,11 @@ export default {
   computed: {
     getCurrOffer() {
       this.offer = this.$store.getters.getCurrOffer;
+    }
+  },
+  methods: {
+    toggleBooking() {
+      this.$emit('toggle-booking')
     }
   }
 };

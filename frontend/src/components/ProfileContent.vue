@@ -1,6 +1,9 @@
 <template>
   <section class="profile-content-container">
-    <button @click="showAll" class="btn-show-all">←Show all offers from this person</button>
+    <div class="content-header" v-if="isShowingOneOffer">
+      <button @click="showAll" class="btn-show-all" >←Show all offers from this person</button>
+    </div>
+
     <div class="profile-content">
       <offer-details
         @toggle-booking="toggleBooking"
@@ -81,20 +84,27 @@ export default {
 .profile-content-container {
   flex: 1;
 }
+
+.content-header {
+  z-index: 1;
+  position: absolute;
+  right:0;
+}
 .profile-content {
   flex: 1;
   display: flex;
-  padding: rem(40px);
+  // padding: rem(20px);
   overflow: hidden;
 }
 
 .profile-content > :first-child {
-  margin-right: rem(30px)
+  // margin-right: rem(30px);
 }
-
 
 .btn-show-all {
-  margin: rem(30px) 0 0 rem(30px);
+  margin: rem(10px);
   @include btnActionGreySm;
 }
+
+
 </style>

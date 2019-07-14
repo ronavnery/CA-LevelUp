@@ -76,16 +76,16 @@ export default {
     },
 
     actions: {
-        // async loginUser(context, { credentials }) {
-        //     try {
-        //         const loggedInUser = await userService.login(credentials)
-        //         console.log('store', loggedInUser)
-        //         context.commit({ type: 'setCurrUser', loggedInUser })
-        //     }
-        //     catch (err) {
-        //         console.log(err)
-        //     }
-        // },
+        async loginUser(context, { credentials }) {
+            try {
+                const loggedInUser = await userService.login(credentials)
+                console.log('store', loggedInUser)
+                context.commit({ type: 'setCurrUser', loggedInUser })
+            }
+            catch (err) {
+                throw err
+            }
+        },
         // async getCurrProfile(context, { _id }) {
         //     try {
         //         const currProfile = await userService.getProfile(_id)

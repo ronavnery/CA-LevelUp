@@ -46,7 +46,7 @@ function createOffers() {
     "049-24-3316",
     ["FaceToFace", "Phone"]
      ), 
-    createOffer("ofrId3", "Guide you through creating a fb ad adsfnlkwqerjklqwlkernaskldfnkqwklerhqwlker",
+    createOffer("ofrId3", "Guide you through creating a fb ad",
     "It looks complicated but i'll make it simple for you and you'll have an up and running ad in 15m.",
     ['https://scontent.ftlv1-1.fna.fbcdn.net/v/t1.0-9/61795832_2289081734470980_1220615154174001152_n.jpg?_nc_cat=1&_nc_oc=AQmQKn-Wz5pXFElvkRY-nSwLsF30JKilUAqTAZQLiRQracF29YvbX64NDcKVzG-Ghjo&_nc_ht=scontent.ftlv1-1.fna&oh=f9a3d22cfd17128507ddbf9a293f2f6e&oe=5DB10145'],
     ['marketing', 'facebook', 'social', 'ad'],

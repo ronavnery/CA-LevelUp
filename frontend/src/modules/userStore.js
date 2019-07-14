@@ -26,13 +26,13 @@ export default {
     },
 
     getters: {
-        getConnectedUser(state) {
+        connectedUser(state) {
             return state.connectedUser
         },
-        getCurrProfile(state)  {
+        currProfile(state)  {
             return state.currProfile
         },
-        getUsers(state) {
+        users(state) {
             return state.users
         }
     },
@@ -136,6 +136,6 @@ export default {
                 throw err
             }
         },
-        
+
     }
 }

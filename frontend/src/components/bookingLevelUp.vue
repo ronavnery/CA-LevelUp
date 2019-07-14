@@ -1,5 +1,5 @@
 <template>
-  <section class="levelup-booking">
+  <section class="levelup-booking fs14">
     <form>
       <h4 class="text-center">Contact to levelup!</h4>
       <p>Before you level up, please add some info about you so the person gets to know you better!</p>

@@ -35,7 +35,7 @@
       <div class="user-date-starred-container">
         <div class="wrapper">
           <img :src="offer.createdBy.userImg" alt />
-          <span>{{offer.createdBy.name}}</span>
+          <span>{{offer.createdBy.userName}}</span>
         </div>
         <svg viewBox="-1 -1 108.99999999999991 109.04511627906979" width="20" height="20">
           <defs>
@@ -94,7 +94,7 @@
             />
           </svg>
         </button>
-        <span>{{this.offer.comments.length}}</span>
+        <!-- <span>{{this.offer.comments.length}}</span> -->
       </div>
 
       <!-- <button class="details">

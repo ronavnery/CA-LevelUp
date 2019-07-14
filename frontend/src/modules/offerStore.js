@@ -82,6 +82,17 @@ export default {
             }
         },
 
+        async searchRelatedPhotos(context, {searchTerm}){
+            try{
+                const imgUrls = await offerService.getRelatedPhotos(searchTerm)
+                console.log(imgUrls)
+                return imgUrls
+            }catch (err) {
+                console.log(err)
+            }
+
+        },
+
         async getOfferById(context, { offerId }) {
             try {
                 const offer = await offerService.getById(offerId)

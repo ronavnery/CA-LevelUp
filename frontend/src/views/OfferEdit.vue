@@ -2,30 +2,58 @@
   <div class="offer-edit">
     <form class="flex column">
       <h2>Add lesson</h2>
-      <input type="text" id="title" v-model="edittedOffer.title" placeholder="Title" />
-      <input type="text" v-model="edittedOffer.description" placeholder="Description" />
-      <input type="text" v-model="edittedOffer.imgs" />
-      <select name="meeting-type" id>
-        <option value>Face to Face</option>
-        <option value>Skype</option>
-        <option value>ICQ</option>
+      <input
+        type="text"
+        id="title"
+        v-model="editedOffer.title"
+        @change="searchPhotos"
+        placeholder="Title"
+      />
+      <input type="text" v-model="editedOffer.description" placeholder="Description" />
+      <input type="text" v-model="editedOffer.imgs" placeholder="Image URL" />
+      <select v-model="editedOffer.location.type" name="meeting-type">
+        <option value="faceToFace">Face to Face</option>
+        <option value="skype">Skype</option>
+      </select>
+      <input v-model="editedOffer.duration" placeholder="Duration in minuets" type="number" />
+      <input v-model="editedOffer.whatsIncluded" type="text" placeholder="whats included" />
+      <select v-model="editedOffer.category" name="category">
+        <option value="sport">Sport</option>
+        <option value="music">Music</option>
+        <option value="art">Art</option>
+        <option value="programing">Programing</option>
       </select>
       <input type="text" placeholder="Add requirment" />
-      <input type="text" v-model="edittedOffer.address" placeholder="Address" />
+      <input type="text" v-model="editedOffer.location.address" placeholder="Address" />
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
-    {{ edittedOffer }}
+    <div v-if="isAvailablePhotos" >
+      <div v-for="(photo,idx) in optionalPhotos" :key="idx">
+        <img :src="photo" alt=""></div></div>
+    {{ editedOffer }}
   </div>
 </template>
 
 <script>
+// duration
+// whats included
+// category
+// loction, if in person show possible location
+
 // @ is an alias to /src
 
 export default {
   name: "offer-edit",
   data() {
     return {
-      edittedOffer: {}
+      editedOffer: {
+        location: {
+          type: "",
+          address: ""
+        }
+      },
+        optionalPhotos:[],
+        isAvailablePhotos : false
     };
   },
 
@@ -37,7 +65,7 @@ export default {
           type: "getOfferById",
           offerId
         });
-        this.edittedOffer = offerToEdit;
+        this.editedOffer = offerToEdit;
       } catch (err) {
         console.log(err);
       }
@@ -46,11 +74,21 @@ export default {
 
   methods: {
     save() {
-      const newOffer = this.edittedOffer;
+      const newOffer = this.editedOffer;
       if (newOffer._id) {
         this.$store.dispatch({ type: "updateOffer", newOffer });
       } else {
         this.$store.dispatch({ type: "addOffer", newOffer });
+      }
+    },
+    async searchPhotos() {
+      const searchTerm = this.editedOffer.title
+      try {
+        const imgUrls = await this.$store.dispatch({ type: "searchRelatedPhotos", searchTerm})
+        if(imgUrls) this.isAvailablePhotos = true
+        this.optionalPhotos = imgUrls
+      } catch (err) {
+        console.log(err)
       }
     }
   },

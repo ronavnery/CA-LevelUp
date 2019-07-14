@@ -12,7 +12,7 @@
       </select>
       <input type="text" placeholder="Add requirment" />
       <input type="text" v-model="edittedOffer.address" placeholder="Address" />
-      <input @click.prevent="save" type="submit" />
+      <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
     {{ edittedOffer }}
   </div>
@@ -46,11 +46,11 @@ export default {
 
   methods: {
     save() {
-      const newOffer = this.edittedOffer
-      if(newOffer._id){
-        this.$store.dispatch({type: "updateOffer", newOffer});
-      }else {
-        this.$store.dispatch({type: "addOffer", newOffer});
+      const newOffer = this.edittedOffer;
+      if (newOffer._id) {
+        this.$store.dispatch({ type: "updateOffer", newOffer });
+      } else {
+        this.$store.dispatch({ type: "addOffer", newOffer });
       }
     }
   },
@@ -68,10 +68,17 @@ export default {
     width: 400px;
     & > * {
       margin: 6px;
-      line-height: rem(40px);
-      border: 1px;
-      border-radius: 3px
+      height: rem(48px);
+      padding: 0.75em;
+      border: 1px solid #dfe0e6;
+      background-color: #f2f2f2;
+      border-radius: 2px;
     }
+  }
+  .add-offer-btn {
+    width: 50%;
+    place-self: center;
+    @include btnActionColorSm;
   }
 }
 </style>

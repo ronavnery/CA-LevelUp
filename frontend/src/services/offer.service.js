@@ -91,7 +91,9 @@ function createOffer(_id, title, description,imgs,tags, requirements, whatsInclu
     }
 }
 
-function query() {
+function query(filter) {
+  console.log(filter)
+    if (filter.userName) return offers.filter(offer => offer.createdBy.userName === filter.userName)
     return offers
 }
 

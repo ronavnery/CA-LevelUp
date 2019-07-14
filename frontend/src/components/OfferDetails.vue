@@ -1,7 +1,8 @@
 <template>
   <section class="offer-details-container">
     <div class="offer-details-card" v-if="offer">
-      <img :src="offer.imgs[0]" />
+      
+      <img class="img-main" :src="offer.imgs[0]" />
       <br />
       <span>{{offer.title}}</span>
       <br />
@@ -34,16 +35,18 @@ export default {
     };
   },
   async created() {
-    const offerId = this.$route.params._id;
+    const offerId = this.$route.params.offerId;
     if (offerId) {
       try {
         const offerToShow = await this.$store.dispatch({
           type: "getOfferById",
           offerId
         });
+        console.log(offerToShow)
         this.getCurrOffer;
+        console.log('curr offer is', this.offer)
       } catch (err) {
-        console.log(err);
+        console.log('theres an error',err);
       }
     }
   },
@@ -61,15 +64,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.offer-details-card {
-  height: 700px;
-  // background: $tpWhite;
-  // box-shadow: 0px 2px 5px 0px rgba(107,107,107,1);
-  // border-radius: 3px;
-}
+
 
 .btn-book {
   @include btnActionGreySm;
+}
+
+.img-main {
+  max-width: 300px;
 }
 </style>
 

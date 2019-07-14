@@ -38,7 +38,7 @@ function createOffers() {
      ["Short explanation of meditation", "Teaching of technique"],
      "Personal Development",
      4,
-     [, , , , , , , , , , , , , , , ,],
+     [, , , , , ,  , , ,],
      "usrId2",
     "Jay Mirchaet",
     "Jay4life",
@@ -112,7 +112,9 @@ function createOffer(_id, title, description,imgs,tags, requirements,duration, w
     }
 }
 
-function query() {
+function query(filter) {
+  console.log(filter)
+    if (filter.userName) return offers.filter(offer => offer.createdBy.userName === filter.userName)
     return offers
 }
 

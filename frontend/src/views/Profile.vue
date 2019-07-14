@@ -1,7 +1,7 @@
 <template>
   <div class="profile-container flex">
-    <profile-sidebar :profile="getCurrProfile" />
-    <profile-content @toggle-booking="toggleBooking" />
+    <profile-sidebar :profile="currProfile" v-if="currProfile" />
+    <profile-content @toggle-booking="toggleBooking" :currOffer="currOffer" v-if="currOffer" />
     <bookingLevelUp v-if="isBooking" @booking-set="sendBookingReq" />
   </div>
 </template>
@@ -15,17 +15,25 @@ export default {
   name: "Profile",
   data() {
     return {
-      isBooking: false
+      isBooking: false,
+      currProfile: null,
+      currOffer: null
     };
   },
   created() {
-    console.log('params:', this.$route.params);
-    // this.$store.dispatch({type: 'getProfile', })
-  },
-  computed: {
-    getCurrProfile() {
-      return this.$store.getters.getCurrProfile;
-    }
+    // console.log('params:', this.$route.params);
+    console.log('params userId',this.$route.params)
+    this.$store.dispatch({type: 'getProfile', userId: this.$route.params.userId})
+      .then((profile) => {
+        console.log('got profile!', profile)
+        this.currProfile = profile
+        this.$store.dispatch({type: 'getOfferById',offerId: this.$route.params.offerId })
+          .then((currOffer) => {
+        console.log('got offer!', currOffer)
+            this.currOffer = currOffer
+            console.log('done!!!')
+          })
+      })
   },
   methods: {
     sendBookingReq(bookingReq) {

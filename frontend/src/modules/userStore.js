@@ -126,9 +126,10 @@ export default {
                 throw err
             }
         },
-        async getProfile({commit}, {_id}) {
+        async getProfile({commit}, {userId}) {
             try {
-                const user = await userService.getUserById(_id)
+                console.log('trying to get profile,', userId);
+                const user = await userService.getUserById(userId)
                 commit({type: 'setCurrProfile', user})
             }
             catch(err) {

@@ -145,7 +145,8 @@ export default {
   },
   methods: {
     goToDetails() {
-        this.$router.push(`profile/${this.offer.createdBy.userName}/${this.offer._id}`);
+        this.$router.push({ name: 'Profile', params: { userName: this.offer.createdBy.userName, offerId: this.offer._id}});
+        // this.$router.push(`profile/${this.offer.createdBy.userName}/${this.offer._id}`);
     },
     goToEdit() {
       this.$router.push(`explore/edit/${this.offer._id}`);

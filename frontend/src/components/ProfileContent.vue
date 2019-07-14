@@ -4,15 +4,19 @@
     <div class="profile-content">
       <offer-details
         @toggle-booking="toggleBooking"
-        :currOffer="currOffer"
+        :currOffer="getCurrOffer"
         v-if="isShowingOneOffer"
       />
+      <div v-else v-for="(offer,idx) in userOffers" :key="idx" @click="previewClicked">
+        <OfferPreview :offer="offer" />
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import OfferDetails from "../components/OfferDetails";
+import OfferPreview from "../components/OfferPreview";
 export default {
   name: "ProfileContent",
   props: {
@@ -22,11 +26,32 @@ export default {
   },
   data() {
     return {
-      isShowingOneOffer: true,
+      isShowingOneOffer: null,
+      currUserName: "",
+      userOffers: [],
+      filter: {
+        userName: ""
+      }
     };
   },
-  created() {
+  async created() {
+    console.log(this.$route.params);
+    this.$route.params.offerId
+      ? (this.isShowingOneOffer = true)
+      : (this.isShowingOneOffer = false);
     this.currUserName = this.$route.params.userName;
+    this.filter.userName = this.currUserName;
+    try {
+      const userOffers = await this.$store.dispatch({
+        type: "loadOffers",
+        filter: this.filter
+      });
+      console.log(userOffers)
+      this.userOffers = userOffers;
+      this.filter = null;
+    } catch (err) {
+      console.log(err);
+    }
     const offerId = this.$route.params.offerId;
     if (!offerId) this.isShowingOneOffer = false;
   },
@@ -40,12 +65,16 @@ export default {
       this.isShowingOneOffer = false;
       this.$router.push(`/profile/${this.currUserName}`);
     },
+    previewClicked() {
+      this.isShowingOneOffer = true;
+    },
     toggleBooking() {
       this.$emit("toggle-booking");
     }
   },
   components: {
-    OfferDetails
+    OfferDetails,
+    OfferPreview
   }
 };
 </script>

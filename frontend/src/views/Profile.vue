@@ -22,16 +22,12 @@ export default {
   },
   created() {
     // console.log('params:', this.$route.params);
-    console.log('params userId',this.$route.params)
-    this.$store.dispatch({type: 'getProfile', userId: this.$route.params.userId})
+    this.$store.dispatch({type: 'getProfile', userName: this.$route.params.userName})
       .then((profile) => {
-        console.log('got profile!', profile)
         this.currProfile = profile
         this.$store.dispatch({type: 'getOfferById',offerId: this.$route.params.offerId })
           .then((currOffer) => {
-        console.log('got offer!', currOffer)
             this.currOffer = currOffer
-            console.log('done!!!')
           })
       })
   },

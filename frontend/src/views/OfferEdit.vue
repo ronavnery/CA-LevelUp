@@ -35,7 +35,6 @@ export default {
 
   methods: {
     save() {
-      console.log(this.edittedOffer)
       const newOffer = this.edittedOffer
       if(newOffer._id){
         this.$store.dispatch({type: "updateOffer", newOffer});

@@ -18,6 +18,7 @@ var users = [{
     "dateJoined" : 1545835345590.0,
     "email" : "pughthomas@retrack.com",
     "password" : "aliquip89",
+    "userImg": "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg",
     "skillTags" : [ 
         "Web Development", 
         "Spiritualism"
@@ -33,6 +34,7 @@ var users = [{
     "dateJoined" : 1524501205222.0,
     "email" : "kelliherman@retrack.com",
     "password" : "ipsum83",
+    "userImg": "https://www.picmonkey.com/blog/wp-content/uploads/2016/11/1-intro-photo-final.jpg",
     "skillTags" : [ 
         "Dj", 
         "Web Development", 

@@ -1,10 +1,10 @@
 <template>
   <section class="sidebar-container">
       <section class="sidebar-content">
-      <img class="profile-img" :src="profile.img" />
+      <img class="profile-img" :src="profile.userImg" />
       <span class="name fs20">{{profile.name}}</span>
-      <span class="city fs14">{{profile.city}}</span><br><br>
-      <span class="city fs12">{{profile.intro}}</span>
+      <span class="city fs14">{{profile.city}}add city here</span><br><br>
+      <span class="city fs12">{{profile.intro}}add intro here</span>
       </section>
   </section>
 </template>

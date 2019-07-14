@@ -58,8 +58,8 @@ export default {
         setCurrUser(state, { loggedInUser }) {
             state.currUser = loggedInUser
         },
-        setCurrProfile(state, {currProfile}) {
-            state.currProfile = currProfile
+        setCurrProfile(state, {user}) {
+            state.currProfile = user
         },
 
 
@@ -123,6 +123,15 @@ export default {
                 commit({type: 'addUserToStore', addedUser})
             }
             catch (err) {
+                throw err
+            }
+        },
+        async getProfile({commit}, {_id}) {
+            try {
+                const user = await userService.getUserById(_id)
+                commit({type: 'setCurrProfile', user})
+            }
+            catch(err) {
                 throw err
             }
         }

@@ -57,7 +57,7 @@
     <hr />
     <footer>
       <div class="wrapper">
-        <button class="like" @click.stop="">
+        <button class="like" @click.stop>
           <svg viewBox="0 0 478.2 478.2" width="16px" height="16px">
             <path
               d="M457.575,325.1c9.8-12.5,14.5-25.9,13.9-39.7c-0.6-15.2-7.4-27.1-13-34.4c6.5-16.2,9-41.7-12.7-61.5
@@ -81,7 +81,7 @@
         <span>{{this.offer.wishers.length}}</span>
       </div>
       <div class="wrapper">
-        <button class="comment" @click.stop="">
+        <button class="comment" @click.stop>
           <svg width="16" height="16" viewBox="0 0 612 612">
             <path
               d="M401.625,325.125h-191.25c-10.557,0-19.125,8.568-19.125,19.125s8.568,19.125,19.125,19.125h191.25
@@ -108,7 +108,7 @@
           />
         </svg>
       </button>-->
-      <button class="share" @click.stop="">
+      <button class="share" @click.stop>
         <svg viewBox="0 0 481.6 481.6" height="16" width="16">
           <g>
             <path
@@ -145,7 +145,11 @@ export default {
   },
   methods: {
     goToDetails() {
-        this.$router.push(`profile/${this.offer.createdBy.userName}/${this.offer._id}`);
+      this.$router.push({
+        name: 'Profile',
+        params: { userId: this.offer.createdBy.user_id, userName: this.offer.createdBy.userName,
+               offerId: this.offer._id}
+      });
     },
     goToEdit() {
       this.$router.push(`explore/edit/${this.offer._id}`);
@@ -163,7 +167,7 @@ export default {
     },
     shortDesc() {
       if (this.offer.description.length > 60) {
-        return this.offer.description.substring(0, 60) + '...';
+        return this.offer.description.substring(0, 60) + "...";
       }
       return this.offer.description;
     }

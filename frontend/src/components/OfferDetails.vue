@@ -64,8 +64,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.offer-details-card {
-}
+
 
 .btn-book {
   @include btnActionGreySm;

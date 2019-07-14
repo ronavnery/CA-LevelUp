@@ -17,19 +17,28 @@ export default {
     return {
       isBooking: false,
       currProfile: null,
-      currOffer: null
+      currOffer: null,
+      currProfileAllOffers: null
     };
   },
-  created() {
-    this.$store.dispatch({type: 'getProfile', userName: this.$route.params.userName})
-      .then((profile) => {
-        this.currProfile = profile
-        this.$store.dispatch({type: 'getOfferById',offerId: this.$route.params.offerId })
-          .then((currOffer) => {
-            this.currOffer = currOffer
-          })
-      })
-  },
+  async created() {
+    try {
+      const profile = await this.$store.dispatch({type: 'getProfile', userName: this.$route.params.userName})
+      this.currProfile = profile
+    }
+    catch(err) {
+      console.log('Error!', err);
+    }
+    try {
+
+      const currOffer = await this.$store.dispatch({type: 'loadOffers', userName: this.$route.params.userName })
+      this.currOffer = currOffer
+    }
+    catch(err) {
+      console.log('Error!', err);
+    }
+
+    },
   methods: {
     sendBookingReq(bookingReq) {
       this.isBooking = false;

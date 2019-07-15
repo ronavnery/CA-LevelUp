@@ -56,7 +56,7 @@ async function getByEmail(email) {
 async function remove(offerId) {
     const collection = await dbService.getCollection('offer')
     try {
-        await collection.remove({ "_id": ObjectId(offerId) })
+        await collection.deleteOne({ "_id": ObjectId(offerId) })
     } catch (err) {
         console.log(`ERROR: cannot remove offer ${offerId}`)
         throw err;
@@ -85,7 +85,7 @@ async function add(offer) {
     offer.createdBy = {
         "_id": 'usrId1',
         "name": "Harding Holden",
-        "userName": "HardingH11",
+        "nickName": "HardingH11",
         "dateJoined": 1545835345590.0,
         "email": "pughthomas@retrack.com",
         "password": "aliquip89",

@@ -35,7 +35,7 @@
       <div class="user-date-starred-container">
         <div class="wrapper">
           <img :src="offer.createdBy.userImg" alt />
-          <span>{{offer.createdBy.userName}}</span>
+          <span>{{offer.createdBy.nickName}}</span>
         </div>
         <svg viewBox="-1 -1 108.99999999999991 109.04511627906979" width="20" height="20">
           <defs>
@@ -145,8 +145,8 @@ export default {
   },
   methods: {
     goToDetails() {
-        this.$router.push({ name: 'Profile', params: { userName: this.offer.createdBy.userName, offerId: this.offer._id}});
-        // this.$router.push(`profile/${this.offer.createdBy.userName}/${this.offer._id}`);
+        this.$router.push({ name: 'Profile', params: { nickName: this.offer.createdBy.nickName, offerId: this.offer._id}});
+        // this.$router.push(`profile/${this.offer.createdBy.nickName}/${this.offer._id}`);
     },
     goToEdit() {
       this.$router.push(`explore/edit/${this.offer._id}`);

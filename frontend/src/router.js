@@ -28,7 +28,7 @@ export default new Router({
       component: OfferEdit
     },
     {
-      path: '/profile/:userName/:offerId?',
+      path: '/profile/:nickName/:offerId?',
       name: 'Profile',
       component: Profile
     },

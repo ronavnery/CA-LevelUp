@@ -30,10 +30,10 @@ export default {
   data() {
     return {
       isShowingOneOffer: null,
-      currUserName: "",
+      currNickName: "",
       userOffers: [],
       filter: {
-        userName: ""
+        nickName: ""
       }
     };
   },
@@ -41,8 +41,8 @@ export default {
     this.$route.params.offerId
       ? (this.isShowingOneOffer = true)
       : (this.isShowingOneOffer = false);
-    this.currUserName = this.$route.params.userName;
-    this.filter.userName = this.currUserName;
+    this.currNickName = this.$route.params.nickName;
+    this.filter.nickName = this.currNickName;
     try {
       const userOffers = await this.$store.dispatch({
         type: "loadOffers",
@@ -64,7 +64,7 @@ export default {
   methods: {
     showAll() {
       this.isShowingOneOffer = false;
-      this.$router.push(`/profile/${this.currUserName}`);
+      this.$router.push(`/profile/${this.currNickName}`);
     },
     previewClicked() {
       this.isShowingOneOffer = true;

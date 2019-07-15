@@ -1,7 +1,7 @@
 <template>
   <div class="sign-in">
     <form>
-      <input type="text" v-model="credentials.username" placeholder="username" />
+      <input type="text" v-model="credentials.nickName" placeholder="nickname" />
       <input type="password" v-model="credentials.password" placeholder="password" />
       <input @click.prevent="loginUser" type="submit" />
     </form>
@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       credentials: {
-        userName: "",
+        nickName: "",
         password: ""
       }
     };

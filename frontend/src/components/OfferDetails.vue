@@ -62,7 +62,6 @@ export default {
     };
   },
   async created() {
-    console.log(moment.duration(60, 'minutes')._data.hours)
     const offerId = this.$route.params.offerId;
     if (offerId) {
       try {
@@ -70,11 +69,9 @@ export default {
           type: "getOfferById",
           offerId
         });
-        console.log(offerToShow);
         this.getCurrOffer;
-        console.log("curr offer is", this.offer);
       } catch (err) {
-        console.log("theres an error", err);
+        console.log(err);
       }
     }
   },

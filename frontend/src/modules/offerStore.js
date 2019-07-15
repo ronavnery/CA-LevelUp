@@ -1,4 +1,5 @@
 import offerService from '../services/offer.service.js'
+import apiService from '../services/api.service.js'
 
 export default {
     state: {
@@ -42,7 +43,7 @@ export default {
     actions: {
         async loadOffers(context, { filter = '' }) {
             try {
-                
+
                 const offers = await offerService.query(filter)
                 context.commit({ type: 'setOffers', offers })
                 return offers
@@ -82,17 +83,6 @@ export default {
             }
         },
 
-        async searchRelatedPhotos(context, {searchTerm}){
-            try{
-                const imgUrls = await offerService.getRelatedPhotos(searchTerm)
-                console.log(imgUrls)
-                return imgUrls
-            }catch (err) {
-                console.log(err)
-            }
-
-        },
-
         async getOfferById(context, { offerId }) {
             try {
                 const offer = await offerService.getById(offerId)
@@ -101,6 +91,15 @@ export default {
             } catch (err) {
                 console.log(err)
             }
-        }
+        },
+
+        async searchRelatedPhotos(context, { searchTerm }) {
+            try {
+                const imgUrls = await apiService.getRelatedPhotos(searchTerm)
+                return imgUrls
+            } catch (err) {
+                console.log(err)
+            }
+        },
     }
 }

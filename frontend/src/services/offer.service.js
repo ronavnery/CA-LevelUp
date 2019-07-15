@@ -1,6 +1,5 @@
 'use strict';
 import httpService from './http.service';
-import axios from 'axios';
 
 export default {
     query,
@@ -8,7 +7,6 @@ export default {
     update,
     remove,
     getById,
-    getRelatedPhotos
 }
 
 function query() {
@@ -28,7 +26,6 @@ function remove(_id) {
 }
 
 function getById(_id) {
-    console.log('get by id url:', _getUrl(_id));
     return httpService.get(_getUrl(_id))
 }
 
@@ -36,15 +33,9 @@ function _getUrl(id = '') {
     return `offer/${id}`
 }
 
-async function getRelatedPhotos(searchTerm) {
-    try {
-        const res = await axios.get(`https://api.unsplash.com/search/photos?per_page=3&query=${searchTerm}&client_id=288fe127f571edeade19b623a9f4984d9341ea0fc8106452b64347c9203243f4`)
-        console.log(res.data.results[0].urls.small)
-        return res.data.results.map(img => img.urls.small)
-    } catch (err) {
-        console.log(err)
-    }
-}
+
+
+
 
 // var offers = createOffers()
 

@@ -6,11 +6,11 @@
         type="text"
         id="title"
         v-model="editedOffer.title"
-        @change="searchPhotos"
+        
         placeholder="Title"
       />
+      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
       <input type="text" v-model="editedOffer.description" placeholder="Description" />
-      <input type="text" v-model="editedOffer.imgs" placeholder="Image URL" />
       <select v-model="editedOffer.location.type" name="meeting-type">
         <option value="faceToFace">Face to Face</option>
         <option value="skype">Skype</option>
@@ -27,9 +27,11 @@
       <input type="text" v-model="editedOffer.location.address" placeholder="Address" />
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
-    <div v-if="isAvailablePhotos" >
-      <div v-for="(photo,idx) in optionalPhotos" :key="idx">
-        <img :src="photo" alt=""></div></div>
+
+    <div v-for="(photo,idx) in optionalPhotos" :key="idx">
+      <img :src="photo" alt @click="addPhoto(photo)" />
+    </div>
+    {{ tags }}
     {{ editedOffer }}
   </div>
 </template>
@@ -42,18 +44,23 @@
 
 // @ is an alias to /src
 
+import VueTagsInput from "@johmun/vue-tags-input";
+
 export default {
   name: "offer-edit",
   data() {
     return {
+      tag: "",
+      tags: [],
       editedOffer: {
+        tags: [],
+        imgs: [],
         location: {
           type: "",
           address: ""
         }
       },
-        optionalPhotos:[],
-        isAvailablePhotos : false
+      optionalPhotos: []
     };
   },
 
@@ -66,6 +73,7 @@ export default {
           offerId
         });
         this.editedOffer = offerToEdit;
+        this.tags = offerToEdit.tags;
       } catch (err) {
         console.log(err);
       }
@@ -82,26 +90,41 @@ export default {
       }
     },
     async searchPhotos() {
-      const searchTerm = this.editedOffer.title
+      const searchTerm = this.editedOffer.tags.join();
       try {
-        const imgUrls = await this.$store.dispatch({ type: "searchRelatedPhotos", searchTerm})
-        if(imgUrls) this.isAvailablePhotos = true
-        this.optionalPhotos = imgUrls
+        const imgUrls = await this.$store.dispatch({
+          type: "searchRelatedPhotos",
+          searchTerm
+        });
+        this.optionalPhotos = imgUrls;
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
+    },
+    addPhoto(imgUrl) {
+      const idx = this.editedOffer.imgs.findIndex(url => url === imgUrl);
+      if (idx === -1) {
+        this.editedOffer.imgs.push(imgUrl);
+      } else {
+        this.editedOffer.imgs.splice(idx, 1);
+      }
+    },
+    tagChanged(newTags) {
+      this.tags = newTags;
+      this.editedOffer.tags = newTags.map(tag => tag.text);
+      this.searchPhotos()
     }
   },
 
-  components: {}
+  components: {
+    VueTagsInput
+  }
 };
 </script>
 
 <style lang="scss">
 .offer-edit {
-  text-align: center;
-  display: flex;
-  justify-content: center;
+  @include flexCustom(center, center, column);
   form {
     width: 400px;
     & > * {

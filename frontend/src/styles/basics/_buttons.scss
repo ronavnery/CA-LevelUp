@@ -80,3 +80,10 @@
   color: $tpGray3;
   border: 1px solid $tpGray3;
 }
+
+@mixin btnRound($size) {
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+  border: 0;
+}

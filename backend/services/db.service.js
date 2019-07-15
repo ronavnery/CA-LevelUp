@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const config  =  require('../config')
 
 // Database Name
-const dbName = 'offer_db';
+const dbName = 'local';
 
 var dbConn = null;
 

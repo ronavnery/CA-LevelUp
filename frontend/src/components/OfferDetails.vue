@@ -1,6 +1,6 @@
 <template>
   <!-- <section class="offer-details-container" v-if="offer"> -->
-    <div class="offer-card">
+    <div class="offer-card" v-if="offer">
       <aside>
         <img
           :src="offer.imgs[0]"
@@ -29,10 +29,6 @@
             <span class="icon icon-level"></span>
             <span>Beginner level</span>
           </li>
-          <li>
-            <span class="icon icon-calories"></span>
-            <span>{{offer.reviews.length}}</span>
-          </li>
         </ul>
 
         <p>{{offer.description}}</p>
@@ -42,6 +38,11 @@
         </p>
       </article>
     </div>
+
+          <!-- <li>
+            <span class="icon icon-calories"></span>
+            <span>{{offer.reviews.length}}</span>
+          </li> -->
 
     <!-- <div class="details-main-info">
       <div class="main-info-top">

@@ -2,27 +2,36 @@
   <div class="offer-edit">
     <form class="flex column">
       <h2>Add lesson</h2>
-      <input
-        type="text"
-        id="title"
-        v-model="editedOffer.title"
-        
-        placeholder="Title"
-      />
-      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
+      <input type="text" v-model="editedOffer.title" placeholder="Title"/>
+      <select v-model="editedOffer.category" name="category">
+        <option>Development</option>
+        <option>Business</option>
+        <option>Finance & Accounting</option>
+        <option>IT & Software</option>
+        <option>Office Productivity</option>
+        <option>Personal Development</option>
+        <option>Design</option>
+        <option>Marketing</option>
+        <option>Lifestyle</option>
+        <option>Photography</option>
+        <option>Health & Fitness</option>
+        <option>Music</option>
+        <option>Teaching & Academics</option>
+      </select>
+      <input v-model="editedOffer.duration" placeholder="Duration in minuets" type="number" />
       <input type="text" v-model="editedOffer.description" placeholder="Description" />
+      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
       <select v-model="editedOffer.location.type" name="meeting-type">
         <option value="faceToFace">Face to Face</option>
         <option value="skype">Skype</option>
       </select>
-      <input v-model="editedOffer.duration" placeholder="Duration in minuets" type="number" />
       <input v-model="editedOffer.whatsIncluded" type="text" placeholder="whats included" />
-      <select v-model="editedOffer.category" name="category">
-        <option value="sport">Sport</option>
-        <option value="music">Music</option>
-        <option value="art">Art</option>
-        <option value="programing">Programing</option>
+      <select v-model="editedOffer.difficulty" name="difficulty">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
       </select>
+        
       <input type="text" placeholder="Add requirment" />
       <input type="text" v-model="editedOffer.location.address" placeholder="Address" />
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
@@ -37,12 +46,6 @@
 </template>
 
 <script>
-// duration
-// whats included
-// category
-// loction, if in person show possible location
-
-// @ is an alias to /src
 
 import VueTagsInput from "@johmun/vue-tags-input";
 
@@ -53,8 +56,11 @@ export default {
       tag: "",
       tags: [],
       editedOffer: {
+        title: '',
         tags: [],
         imgs: [],
+        category: 'Development',
+        difficulty: 1,
         location: {
           type: "",
           address: ""
@@ -90,7 +96,7 @@ export default {
       }
     },
     async searchPhotos() {
-      const searchTerm = this.editedOffer.tags.join();
+      const searchTerm = this.editedOffer.tags.join(' ');
       try {
         const imgUrls = await this.$store.dispatch({
           type: "searchRelatedPhotos",

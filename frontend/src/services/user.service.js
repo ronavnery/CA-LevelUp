@@ -153,6 +153,16 @@ async function addUser(newUser) {
     }
 }
 
+async function removeUser(userId) {
+    try {
+        const idx = await httpService.delete(_getUrl(`${userId}`))
+        return idx
+    }
+    catch(err) {
+        throw err
+    }
+}
+
 
 
 

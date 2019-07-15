@@ -22,7 +22,10 @@ async function signup(req, res) {
         res.status(200).send(user)
     } catch (err) {
         logger.error('[SIGNUP] ' + err)
-        res.status(500).send({ error: 'could not signup, please try later' })
+        console.log("X" + err.name + "X")
+        console.log("0" + err.message + "0")
+        if (err.message === 'Username or Email already registered') res.status(409).send({error: 'Username or Email already registered'})
+        // res.status(500).send({ error: 'could not signup, please try later' })
     }
 }
 

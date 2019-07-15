@@ -74,10 +74,7 @@ export default {
 
   button {
     background-color: $tpPink;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    @include btnRound(40px);
     font-size: rem(16px);
     color: white;
     font-weight: 300;

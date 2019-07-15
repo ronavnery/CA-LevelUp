@@ -11,7 +11,8 @@ async function getUser(req, res) {
 }
   
 const getUsers = async (req, res) => {
-    const users = await userService.query()
+    const filterBy = req.query
+    const users = await userService.query(filterBy)
     res.send(users)
 }
 
@@ -26,10 +27,21 @@ async function deleteUser(req, res) {
     res.send({})
 }
 
+async function updateUser(req, res) {
+    try {
+        const updatedUser = await userService.update(req.body)
+        res.send(updatedUser)
+    }
+    catch(err) {
+        throw err
+    }
+}
+
 module.exports = {
     getUser,
     getUsers,
     deleteUser,
     login,
-    addUser
+    addUser,
+    updateUser
 }

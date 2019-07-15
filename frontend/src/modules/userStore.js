@@ -62,7 +62,13 @@ export default {
             state.currProfile = user
         },
 
-
+        updateUserInStore(state, {updatedUser}) {
+            const idx = state.users.findIndex(user => user._id === updatedUser._id)
+            state.users.splice(idx, 1, updatedUser)
+            if (state.connectedUser._id === updatedUser._id) {
+                state.connectedUser = updatedUser
+            }
+        },
         //Front-end Only Mutations
         setUsers(state, { users }) {
             state.users = users
@@ -76,41 +82,19 @@ export default {
     },
 
     actions: {
-        async loginUser(context, { credentials }) {
-            try {
-                const loggedInUser = await userService.login(credentials)
-                console.log('store', loggedInUser)
-                context.commit({ type: 'setCurrUser', loggedInUser })
-            }
-            catch (err) {
-                throw err
-            }
-        },
-        // async getCurrProfile(context, { _id }) {
-        //     try {
-        //         const currProfile = await userService.getProfile(_id)
-        //         console.log('store currprofile:', currProfile)
-        //         context.commit({ type: 'setCurrProfile', currProfile })
-        //     }
-        //     catch (err) {
-        //         console.log(err)
-        //     }
-        // },
 
-
-        //Front-end ONly Actions
-        async loadUsers(context) {
+        async loadUsers(context, filterBy) {
             try {
-                const users = await userService.getUsers()
+                const users = await userService.getUsers(filterBy)
                 context.commit({type: 'setUsers', users})
             }
             catch(err) {
                 throw err
             }
         },
-        async doLogin({commit}, {_id}) {
+        async doLogin({commit}, {credentials}) {
             try {
-                const user = await userService.getUserById(_id)
+                const user = await userService.login(credentials)
                 commit({type: 'setConnectedUser', user})
             }
             catch (err) {
@@ -136,6 +120,14 @@ export default {
                 throw err
             }
         },
-
+        async updateUser({commit}, {userToUpdate}) {
+            try {
+                const updatedUser = await userService.update(userToUpdate)
+                commit({type: 'updateUserInStore', updatedUser})
+            }
+            catch(err) {
+                throw err
+            }
+        }
     }
 }

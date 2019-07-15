@@ -27,9 +27,11 @@
       <input type="text" v-model="editedOffer.location.address" placeholder="Address" />
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
-    <div v-if="isAvailablePhotos" >
+    <div v-if="isAvailablePhotos">
       <div v-for="(photo,idx) in optionalPhotos" :key="idx">
-        <img :src="photo" alt=""></div></div>
+        <img :src="photo" alt />
+      </div>
+    </div>
     {{ editedOffer }}
   </div>
 </template>
@@ -52,8 +54,8 @@ export default {
           address: ""
         }
       },
-        optionalPhotos:[],
-        isAvailablePhotos : false
+      optionalPhotos: [],
+      isAvailablePhotos: false
     };
   },
 
@@ -82,13 +84,16 @@ export default {
       }
     },
     async searchPhotos() {
-      const searchTerm = this.editedOffer.title
+      const searchTerm = this.editedOffer.title;
       try {
-        const imgUrls = await this.$store.dispatch({ type: "searchRelatedPhotos", searchTerm})
-        if(imgUrls) this.isAvailablePhotos = true
-        this.optionalPhotos = imgUrls
+        const imgUrls = await this.$store.dispatch({
+          type: "searchRelatedPhotos",
+          searchTerm
+        });
+        if (imgUrls) this.isAvailablePhotos = true;
+        this.optionalPhotos = imgUrls;
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
   },
@@ -99,9 +104,7 @@ export default {
 
 <style lang="scss">
 .offer-edit {
-  text-align: center;
-  display: flex;
-  justify-content: center;
+  @include flexCustom(center, center, column)
   form {
     width: 400px;
     & > * {

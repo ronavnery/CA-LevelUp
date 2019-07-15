@@ -81,6 +81,7 @@ async function add(offer) {
     offer.createdAt = Date.now()
     offer.wishers = []
     offer.leveledUp = []
+    stars = 0
     offer.createdBy = {
         "_id": 'usrId1',
         "name": "Harding Holden",

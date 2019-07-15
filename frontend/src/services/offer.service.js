@@ -17,7 +17,7 @@ function createOffers() {
      ["https://picsum.photos/200", "https://picsum.photos/200"],
      ["Photography", "Art"],
      ["Positive Attitude"],
-     'Five Hours',
+     '150',
      ["Handling a DSLR Camera", "Shutter", "Aperture"],
      "Arts",
      4,
@@ -30,11 +30,16 @@ function createOffers() {
     ["FaceToFace"]
      ),
      createOffer("ofrId2","Meditation Technique",
-     "Learned it in india, how to become more aware of yourself and other people. it changed my life and i want to pass it on...",
+     `Learned it in india, how to become more aware of yourself and other people. it changed my life and i want to pass it on...
+     Meditation should be a practice that anyone can benefit from. Unfortunately, there is a lot of confusion and complication around this simple practice. This course will make it clear, simple and easy for you to meditate.
+
+Meditation techniques are often taught in a very rigid way.  These leads people to believe that the only way to meditation is through a Buddhist meditation practice, zen or somatic meditation.
+
+This course will teach you simple, effective meditation practices that transcend a specific discipline, giving you a clear way to understand and utilize any meditation practice you come across.`,
      ["http://www.powerthoughtsmeditationclub.com/wp-content/uploads/2010/09/bigstock-Meditating-47886218-1024x683.jpg"],
      ["Mindfulness", "Wellness"],
      ["Positive Attitude"],
-     'Six Hours',
+     '15',
      ["Short explanation of meditation", "Teaching of technique"],
      "Personal Development",
      4,
@@ -51,7 +56,7 @@ function createOffers() {
     ['https://scontent.ftlv1-1.fna.fbcdn.net/v/t1.0-9/61795832_2289081734470980_1220615154174001152_n.jpg?_nc_cat=1&_nc_oc=AQmQKn-Wz5pXFElvkRY-nSwLsF30JKilUAqTAZQLiRQracF29YvbX64NDcKVzG-Ghjo&_nc_ht=scontent.ftlv1-1.fna&oh=f9a3d22cfd17128507ddbf9a293f2f6e&oe=5DB10145'],
     ['marketing', 'facebook', 'social', 'ad'],
     ['Laptop'],
-    '30 mins',
+    '30',
     ['Facebook Marketing Intro', 'SEO optimization', 'Keyword selection technique'],
     'Business and Marketing',
     2.8,

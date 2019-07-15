@@ -1,7 +1,7 @@
 <template>
   <section class="profile-content-container">
     <div class="content-header" v-if="isShowingOneOffer">
-      <button @click="showAll" class="btn-show-all" >←Show all offers from this person</button>
+      <button @click="showAll" class="btn-show-all" >Show all offers from this person</button>
     </div>
 
     <div class="profile-content">
@@ -103,7 +103,8 @@ export default {
 
 .btn-show-all {
   margin: rem(10px);
-  @include btnActionGreySm;
+  @include btnActionWhiteSm;
+   font-weight: normal;
 }
 
 

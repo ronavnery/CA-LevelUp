@@ -2,7 +2,7 @@
   <div class="offer-edit">
     <form class="flex column">
       <h2>Add lesson</h2>
-      <input type="text" v-model="editedOffer.title" placeholder="Title"/>
+      <input type="text" v-model="editedOffer.title" placeholder="Title" />
       <select v-model="editedOffer.category" name="category">
         <option>Development</option>
         <option>Business</option>
@@ -31,7 +31,7 @@
         <option value="2">2</option>
         <option value="3">3</option>
       </select>
-        
+
       <input type="text" placeholder="Add requirment" />
       <input type="text" v-model="editedOffer.location.address" placeholder="Address" />
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
@@ -42,11 +42,12 @@
     </div>
     {{ tags }}
     {{ editedOffer }}
+    <RequirmentList @new-requirements="changeRequirments" />
   </div>
 </template>
 
 <script>
-
+import RequirmentList from "../components/RequirementList";
 import VueTagsInput from "@johmun/vue-tags-input";
 
 export default {
@@ -56,10 +57,10 @@ export default {
       tag: "",
       tags: [],
       editedOffer: {
-        title: '',
+        title: "",
         tags: [],
         imgs: [],
-        category: 'Development',
+        category: "Development",
         difficulty: 1,
         location: {
           type: "",
@@ -96,7 +97,7 @@ export default {
       }
     },
     async searchPhotos() {
-      const searchTerm = this.editedOffer.tags.join(' ');
+      const searchTerm = this.editedOffer.tags.join(" ");
       try {
         const imgUrls = await this.$store.dispatch({
           type: "searchRelatedPhotos",
@@ -106,6 +107,10 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    changeRequirments(newRequirments) {
+      this.editedOffer.requirments = newRequirments;
+      console.log(this.editedOffer.requirments)
     },
     addPhoto(imgUrl) {
       const idx = this.editedOffer.imgs.findIndex(url => url === imgUrl);
@@ -118,12 +123,13 @@ export default {
     tagChanged(newTags) {
       this.tags = newTags;
       this.editedOffer.tags = newTags.map(tag => tag.text);
-      this.searchPhotos()
+      this.searchPhotos();
     }
   },
 
   components: {
-    VueTagsInput
+    VueTagsInput,
+    RequirmentList
   }
 };
 </script>

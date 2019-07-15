@@ -4,11 +4,11 @@ const logger = require('../../services/logger.service')
 
 const saltRounds = 10
 
-async function login(userName, password) {
-    logger.debug(`auth.service - login with username: ${userName}`)
-    if (!userName || !password) return Promise.reject('email and password are required!')
+async function login(nickName, password) {
+    logger.debug(`auth.service - login with nickName: ${nickName}`)
+    if (!nickName || !password) return Promise.reject('email and password are required!')
 
-    const user = await userService.getByUsername(userName)
+    const user = await userService.getByNickname(nickName)
     if (!user) return Promise.reject('Invalid email or password')
     const match = await bcrypt.compare(password, user.password)
     if (!match) return Promise.reject('Invalid email or password')
@@ -17,11 +17,11 @@ async function login(userName, password) {
 }
 
 async function signup(newUser) {
-    const {email, password, userName} = newUser
-    logger.debug(`auth.service - signup with email: ${email}, username: ${userName}`)
-    if (!email || !password || !userName) return Promise.reject('email, username and password are required!')
-    const checkIfUniqueUser = await userService.verifyUnique(email, userName)
-    if (!checkIfUniqueUser) throw new Error('Username or Email already registered')
+    const {email, password, nickName} = newUser
+    logger.debug(`auth.service - signup with email: ${email}, nickName: ${nickName}`)
+    if (!email || !password || !nickName) return Promise.reject('email, Nickname and password are required!')
+    const checkIfUniqueUser = await userService.verifyUnique(email, nickName)
+    if (!checkIfUniqueUser) throw new Error('Nickname or Email already registered')
     const hash = await bcrypt.hash(password, saltRounds)
     newUser.password = hash;
     const user = await userService.add(newUser)

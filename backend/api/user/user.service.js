@@ -6,7 +6,7 @@ module.exports = {
     checkCredentials,
     query,
     getById,
-    getByUsername,
+    getByNickname,
     remove,
     update,
     add,
@@ -14,32 +14,32 @@ module.exports = {
 }
 
 async function checkCredentials(credentials) {
-    const {userName, password} = credentials 
+    const {nickName, password} = credentials 
     const collection = await dbService.getCollection('user')
     try {
         const dbUser = await collection.findOne(
             {
-                    userName,
+                    nickName,
                     password
             }
         )
         if(dbUser) return dbUser
-        else return 'username or password wrong'
+        else return 'nickname or password wrong'
     }
     catch (err) {
         console.log(err)
     }
 }
 
-async function verifyUnique(email, userName) {
+async function verifyUnique(email, nickName) {
     console.log('got email:', email)
-    console.log('got userName', userName)
+    console.log('got nickName', nickName)
     const collection = await dbService.getCollection('user')
     try {
         const dbUser = await collection.findOne({
             $or: [
                 {email},
-                {userName} 
+                {nickName} 
             ]
         })
         if (!dbUser) return true
@@ -81,13 +81,13 @@ async function getById(userId) {
         throw err;
     }
 }
-async function getByUsername(userName) {
+async function getByNickname(nickName) {
     const collection = await dbService.getCollection('user')
     try {
-        const user = await collection.findOne({userName})
+        const user = await collection.findOne({nickName})
         return user
     } catch (err) {
-        console.log(`ERROR: while finding user ${userName}`)
+        console.log(`ERROR: while finding user ${nickName}`)
         throw err;
     }
 }

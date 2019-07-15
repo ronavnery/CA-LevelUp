@@ -20,8 +20,8 @@ async function signup(newUser) {
     const {email, password, userName} = newUser
     logger.debug(`auth.service - signup with email: ${email}, username: ${userName}`)
     if (!email || !password || !userName) return Promise.reject('email, username and password are required!')
-    const checkIfUniqueUser = userService.verifyUnique({email, userName})
-    if (!checkIfUniqueUser) return Promise.reject('Username or Email already registered') 
+    const checkIfUniqueUser = await userService.verifyUnique(email, userName)
+    if (!checkIfUniqueUser) throw new Error('Username or Email already registered')
     const hash = await bcrypt.hash(password, saltRounds)
     newUser.password = hash;
     const user = await userService.add(newUser)

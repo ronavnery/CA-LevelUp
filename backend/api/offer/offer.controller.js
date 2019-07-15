@@ -21,7 +21,6 @@ async function updateOffer(req, res) {
 }
 
 async function addOffer(req, res) {
-    console.log(req.body)
     const offer = await offerService.add(req.body)
     res.send({offer})
 }

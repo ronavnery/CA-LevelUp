@@ -28,7 +28,6 @@ async function ajax(endpoint, method='get', data=null,params=null) {
 
 export default {
     get(endpoint, data){
-        console.log('get endpoint is:',endpoint );
         return ajax(endpoint, 'GET', null ,data)
     },
     post(endpoint, data){

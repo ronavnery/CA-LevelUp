@@ -31,16 +31,22 @@ async function checkCredentials(credentials) {
     }
 }
 
-async function verifyUnique({email, userName}) {
-    const credentials = {email, userName}
+async function verifyUnique(email, userName) {
+    console.log('got email:', email)
+    console.log('got userName', userName)
     const collection = await dbService.getCollection('user')
     try {
-        const dbUser = await collection.findOne(credentials)
+        const dbUser = await collection.findOne({
+            $or: [
+                {email},
+                {userName} 
+            ]
+        })
         if (!dbUser) return true
         else return false;
     }
     catch (err) {
-
+        throw err
     }
 }
 

@@ -18,7 +18,7 @@ const getUsers = async (req, res) => {
 async function addUser(req, res) {
     const newUser = req.body
     const addedUser = await userService.add(newUser)
-    res.json(addedUser);
+    res.send(addedUser);
 }
 
 async function deleteUser(req, res) {

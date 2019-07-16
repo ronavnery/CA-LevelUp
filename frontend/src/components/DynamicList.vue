@@ -4,7 +4,7 @@
       type="text"
       v-model="newRequirementText"
       placeholder="New Requirement"
-      @keydown.enter="addRequirement"
+      @keydown.enter.prevent="addRequirement"
     />
     <ul v-if="requirements.length">
       <li v-for="(requirement,idx) in requirements" :key="idx">
@@ -24,7 +24,11 @@ export default {
       requirements: []
     };
   },
-
+  watch: {
+    requirements(old, newVal) {
+      console.log('i was updated')
+    }
+  },
 
   methods: {
     addRequirement() {
@@ -32,9 +36,9 @@ export default {
       if (trimmedText) {
         this.requirements.push(trimmedText);
         this.newRequirementText = "";
-      }
       this.$emit("requirements-updated", this.requirements);
       this.$emit("whatIncluded-updated", this.requirements);
+      }
     },
     removeRequirement(idx) {
       this.requirements.splice(idx, 1);

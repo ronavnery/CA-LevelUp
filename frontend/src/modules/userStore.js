@@ -2,25 +2,6 @@ import userService from '../services/user.service.js'
 
 export default {
     state: {
-        // currProfile: {
-        //     "_id": "5d29beb3cc6e115acc5822de",
-        //     "name": "Justice Kerr",
-        //     "userName": "JustK",
-        //     "city": "Tel-Aviv, Israel",
-        //     "intro": "Man.. Wikipedia me, theres just not enough room in here :D",
-        //     "dateJoined": 1559629377494.0,
-        //     "email": "justicekerr@retrack.com",
-        //     "img": "https://connectcoworking.com/wp-content/uploads/img_1307.jpg",
-        //     "password": "culpa89",
-        //     "skillTags": [
-        //         "Surfing",
-        //         "Carpentry",
-        //         "Acting"
-        //     ],
-        //     "offers": [{ "_id": "5d29a61ccc6e115acc5822dd" }],
-        //     "wishlist": [],
-        //     "leveledUpIn": []
-        // }
         connectedUser: '',
         users: []
     },
@@ -110,9 +91,9 @@ export default {
                 throw err
             }
         },
-        async getProfile({commit}, {userName}) {
+        async getProfile({commit}, {nickName}) {
             try {
-                const user = await userService.getUserByUserName(userName)
+                const user = await userService.getProfileByNickname(nickName)
                 commit({type: 'setCurrProfile', user})
                 return user
             }

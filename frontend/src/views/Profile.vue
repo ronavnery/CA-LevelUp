@@ -25,7 +25,7 @@ export default {
     try {
       const profile = await this.$store.dispatch({
         type: "getProfile",
-        userName: this.$route.params.userName
+        nickName: this.$route.params.nickName
       });
       this.currProfile = profile;
     } catch (err) {

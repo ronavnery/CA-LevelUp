@@ -2,9 +2,9 @@ const authService = require('./auth.service')
 const logger = require('../../services/logger.service')
 
 async function login(req, res) {
-    const { userName , password } = req.body
+    const { nickName , password } = req.body
     try {
-        const user = await authService.login(userName, password)
+        const user = await authService.login(nickName, password)
         req.session.user = user;
         res.json(user)
     } catch (err) {
@@ -15,7 +15,7 @@ async function login(req, res) {
 async function signup(req, res) {
     try {
         const newUser = req.body
-        logger.debug(newUser.email + ", " + newUser.userName)
+        logger.debug(newUser.email + ", " + newUser.nickName)
         const user = await authService.signup(newUser)
         logger.debug(`auth.route - new user created: ` + JSON.stringify(user))
         req.session.user = user
@@ -24,7 +24,7 @@ async function signup(req, res) {
         logger.error('[SIGNUP] ' + err)
         console.log("X" + err.name + "X")
         console.log("0" + err.message + "0")
-        if (err.message === 'Username or Email already registered') res.status(409).send({error: 'Username or Email already registered'})
+        if (err.message === 'Nickname or Email already registered') res.status(409).send({error: 'Nickname or Email already registered'})
         // res.status(500).send({ error: 'could not signup, please try later' })
     }
 }

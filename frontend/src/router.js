@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Explore from './views/Explore.vue'
 import OfferEdit from './views/OfferEdit.vue'
-import SignIn from './views/SignIn.vue'
+import Login from './views/Login.vue'
 import Profile from './views/Profile.vue'
+import SignUp from './views/SignUp.vue'
  
 Vue.use(Router)
 
@@ -28,14 +29,19 @@ export default new Router({
       component: OfferEdit
     },
     {
-      path: '/profile/:userName/:offerId?',
+      path: '/profile/:nickName/:offerId?',
       name: 'Profile',
       component: Profile
     },
     {
-      path: '/sign-in',
-      name: 'SignIn',
-      component: SignIn
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/sign-up',
+      name: 'SignUp',
+      component: SignUp
     },
     {
       path: '/about',

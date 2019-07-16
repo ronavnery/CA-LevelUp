@@ -4,6 +4,7 @@ import userStore from './modules/userStore.js'
 import offerStore from './modules/offerStore.js'
 import bookingStore from './modules/bookingStore.js'
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({

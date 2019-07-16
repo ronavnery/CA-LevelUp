@@ -40,6 +40,7 @@ export default {
 
 <style scoped lang="scss">
 .levelup-booking {
+  z-index: 1;
   max-width: 400px;
   background: $tpWhite;
   position: fixed;

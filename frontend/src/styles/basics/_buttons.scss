@@ -81,6 +81,33 @@
   border: 1px solid $tpGray3;
 }
 
+@mixin btnActionWhite() {
+  cursor: pointer;
+  height: rem(40px);
+  padding: 0px rem(20px) 0px rem(20px);
+  background: None;
+  border-radius: rem(20px);
+  color: $tpGray;
+  font-family: $Montserrat-Bold;
+  font-weight: bold;
+  outline: none;
+  color: $tpWhite;
+  border: 1px solid $tpWhite;
+}
+
+@mixin btnActionWhiteSm() {
+  cursor: pointer;
+  height: rem(30px);
+  padding: 0px rem(20px) 0px rem(20px);
+  background: None;
+  border-radius: rem(20px);
+  color: $tpWhite;
+  font-family: $Montserrat-Bold;
+  font-weight: bold;
+  outline: none;
+  color: $tpWhite;
+  border: 1px solid $tpWhite;
+}
 @mixin btnRound($size) {
   border-radius: 50%;
   width: $size;

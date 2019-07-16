@@ -1,7 +1,7 @@
 <template>
-  <div class="sign-in">
+  <div class="login">
     <form>
-      <input type="text" v-model="credentials.username" placeholder="username" />
+      <input type="text" v-model="credentials.nickName" placeholder="nickname" />
       <input type="password" v-model="credentials.password" placeholder="password" />
       <input @click.prevent="loginUser" type="submit" />
     </form>
@@ -12,11 +12,11 @@
 // @ is an alias to /src
 
 export default {
-  name: "sign-in",
+  name: "login",
   data() {
     return {
       credentials: {
-        userName: "",
+        nickName: "",
         password: ""
       }
     };

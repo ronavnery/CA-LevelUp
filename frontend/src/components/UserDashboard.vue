@@ -53,7 +53,6 @@ export default {
 .user-dashboard-header {
   position: relative;
   display: flex;
-  height: 100%;
 }
 
 .icon-container {

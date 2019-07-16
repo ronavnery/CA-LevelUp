@@ -307,7 +307,7 @@ footer {
 
 button {
   @include flexCenter(row);
-  @include btnRound(32);
+  @include btnRound(32px);
   border: 0;
   background: #f5f5f6;
   cursor: pointer;

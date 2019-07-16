@@ -24,6 +24,7 @@ async function signup(newUser) {
     if (!checkIfUniqueUser) throw new Error('Nickname or Email already registered')
     const hash = await bcrypt.hash(password, saltRounds)
     newUser.password = hash;
+    newUser.createdAt = Date.now();
     const user = await userService.add(newUser)
     delete user.password;
     return user;

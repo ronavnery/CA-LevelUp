@@ -3,37 +3,27 @@
     <form class="flex column">
       <h2>Add lesson</h2>
       <input type="text" v-model="editedOffer.title" placeholder="Title" />
-      <select v-model="editedOffer.category" name="category">
-        <option>Development</option>
-        <option>Business</option>
-        <option>Finance & Accounting</option>
-        <option>IT & Software</option>
-        <option>Office Productivity</option>
-        <option>Personal Development</option>
-        <option>Design</option>
-        <option>Marketing</option>
-        <option>Lifestyle</option>
-        <option>Photography</option>
-        <option>Health & Fitness</option>
-        <option>Music</option>
-        <option>Teaching & Academics</option>
-      </select>
-      <input v-model="editedOffer.duration" placeholder="Duration in minuets" type="number" />
       <input type="text" v-model="editedOffer.description" placeholder="Description" />
       <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
-      <select v-model="editedOffer.location.type" name="meeting-type">
-        <option value="faceToFace">Face to Face</option>
-        <option value="skype">Skype</option>
+      <DynamicList @requirements-updated="changeRequirments" />
+      <select v-model="editedOffer.category" name="category">
+        <option v-for="(category,idx) in optionalCategorys" :key="idx">{{category}}</option>
       </select>
-      <input v-model="editedOffer.whatsIncluded" type="text" placeholder="whats included" />
-      <select v-model="editedOffer.difficulty" name="difficulty">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
+      <select v-model.number="editedOffer.difficulty" name="difficulty">
+        <option v-for="(difficult,idx) in 3" :key="idx">{{difficult}}</option>
       </select>
-
-      <input type="text" placeholder="Add requirment" />
+      <DynamicList @whatIncluded-updated="changeWhatsIncluded" />
+      <input v-model.number="editedOffer.duration" placeholder="Duration in minuets" type="number" />
+      <input
+        v-model.number="editedOffer.minPeople"
+        placeholder="Min participate peoples"
+        type="number"
+      />
       <input type="text" v-model="editedOffer.location.address" placeholder="Address" />
+      <select v-model="editedOffer.location.type">
+        <option>Skype</option>
+        <option>In Person</option>
+      </select>
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
 
@@ -42,32 +32,60 @@
     </div>
     {{ tags }}
     {{ editedOffer }}
-    <RequirmentList @new-requirements="changeRequirments" />
   </div>
 </template>
 
 <script>
-import RequirmentList from "../components/RequirementList";
+import DynamicList from "../components/DynamicList";
 import VueTagsInput from "@johmun/vue-tags-input";
+import Slick from "vue-slick";
 
 export default {
   name: "offer-edit",
   data() {
     return {
+      slickOptions: {
+        slidesToShow: 3
+        // Any other options that can be got from plugin documentation
+      },
       tag: "",
       tags: [],
+      optionalPhotos: [],
+      optionalCategorys: [
+        "Development",
+        "Business",
+        "Finance & Accounting",
+        "IT & Software",
+        "Office Productivity",
+        "Personal Development",
+        "Design",
+        "Marketing",
+        "Lifestyle",
+        "Photography",
+        "Health & Fitness",
+        "Music",
+        "Teaching & Academics"
+      ],
       editedOffer: {
         title: "",
-        tags: [],
+        description: "",
         imgs: [],
+        tags: [],
+        requirements: [],
+        duration: "",
         category: "Development",
         difficulty: 1,
+        minPeople: "",
+        ratingAvg: 0,
+        whatsIncluded: [],
+        interested: [],
+        reviews: [],
+        leveledUp: [],
         location: {
-          type: "",
+          type: "In Person",
           address: ""
         }
-      },
-      optionalPhotos: []
+      }
     };
   },
 
@@ -88,6 +106,7 @@ export default {
   },
 
   methods: {
+
     save() {
       const newOffer = this.editedOffer;
       if (newOffer._id) {
@@ -108,10 +127,14 @@ export default {
         console.log(err);
       }
     },
+
     changeRequirments(newRequirments) {
-      this.editedOffer.requirments = newRequirments;
-      console.log(this.editedOffer.requirments)
+      this.editedOffer.requirements = newRequirments;
     },
+    changeWhatsIncluded(newIncludes) {
+      this.editedOffer.whatsIncluded = newIncludes;
+    },
+
     addPhoto(imgUrl) {
       const idx = this.editedOffer.imgs.findIndex(url => url === imgUrl);
       if (idx === -1) {
@@ -129,7 +152,7 @@ export default {
 
   components: {
     VueTagsInput,
-    RequirmentList
+    DynamicList,
   }
 };
 </script>
@@ -148,6 +171,7 @@ export default {
       border-radius: 2px;
     }
   }
+
   .add-offer-btn {
     width: 50%;
     place-self: center;

@@ -1,10 +1,7 @@
 <template>
   <!-- <section class="offer-details-container" v-if="offer"> -->
   <div class="offer-card">
-    <aside>
-      <img
-        src="https://image.freepik.com/free-photo/desk-with-laptop-cup-coffee-calendar_1112-145.jpg"
-      />
+    <aside :class="offer.category.substring(0,2)">
       <a href="#" class="button">
         <span class="icon icon-play" @click="toggleBooking"></span>
       </a>
@@ -41,19 +38,16 @@
     <main v-if="offer">
       <h4>Requirements:</h4>
       <ul>
-        <li
-        v-for="requirement in offer.requirements"
-        :key="requirement">{{requirement}}</li>
+        <li v-for="requirement in offer.requirements" :key="requirement">{{requirement}}</li>
       </ul>
       <h4>Description:</h4>
       <p>{{offer.description}}</p>
-
     </main>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
+import moment from "moment";
 export default {
   name: "OfferDetails",
   data() {
@@ -80,9 +74,9 @@ export default {
       this.offer = this.$store.getters.getCurrOffer;
     },
     difficulty() {
-      if (offer.difficulty === 1) return 'Beginner level'
-      else if (offer.difficulty === 2) return 'Intermediate level'
-      else return 'Advanced level'
+      if (offer.difficulty === 1) return "Beginner level";
+      else if (offer.difficulty === 2) return "Intermediate level";
+      else return "Advanced level";
     }
   },
   methods: {
@@ -122,9 +116,27 @@ article {
   // border-bottom-left-radius: 5px;
   // border-bottom-right-radius: 5px;
 }
+
 .offer-card aside {
+  height: 220px;
   position: relative;
+  &.De {
+    background-image: url("../assets/categories_covers/development.jpg");
+    background-size: cover;
+    background-position-y: center;
+  }
+  &.Bu {
+    background-image: url("../assets/categories_covers/business.jpg");
+    background-size: cover;
+    background-position-y: -138px;
+  }
+  &.Mu {
+    background-image: url("../assets/categories_covers/music.jpg");
+    background-size: cover;
+    background-position-y: center;
+  }
 }
+
 .offer-card aside img {
   // border-top-left-radius: 5px;
   // border-top-right-radius: 5px;

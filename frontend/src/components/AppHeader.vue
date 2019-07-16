@@ -20,10 +20,10 @@
 export default {
   methods: {
     goLogin() {
-      this.$router.push('/sign-in')
+      this.$router.push('/login')
     },
     goSignUp() {
-      this.$router.push('/sign-up')
+      this.$router.push('/login')
     }
   }
 };

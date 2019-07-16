@@ -20,6 +20,7 @@ export default {
       currOffer: null,
       currProfileAllOffers: null
     };
+    
   },
   async created() {
     try {

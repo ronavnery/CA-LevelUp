@@ -40,7 +40,7 @@
                 </h3>
               </div>
               <mdb-input label="Name" type="text"  v-model="newUser.name" @input="buildNickname()" required />
-              <mdb-input label="Email Address" type="email"  v-model="newUser.email" />
+              <mdb-input label="Email Address" type="email"  v-model="newUser.email" class="form-control validate" />
               <mdb-input label="Nickname" type="text"  v-model="newUser.nickName" required />
               <mdb-input label="Password" type="password" containerClass="mb-0" v-model="newUser.password" :class="passwordsMatch" />
               <mdb-input label="Repeat Password" type="password" containerClass="mb-0" v-model="confirmPassword" :class="passwordsMatch" />
@@ -129,7 +129,7 @@ export default {
           // this.newUser.profileUrl = '/'
 
           const user = await this.$store.dispatch({type: 'addUser', newUser: this.newUser})
-          this.$router.back();
+          this.$router.push('/');
         },
         goToLogin() {
           this.$router.push('/login')

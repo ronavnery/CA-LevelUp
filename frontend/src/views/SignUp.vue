@@ -110,7 +110,6 @@ export default {
                 interestedIn: [],
                 leveledUpIn: [],
                 ratingAvg: 0,
-                showModal: false
             },
             confirmPassword: ''
         }

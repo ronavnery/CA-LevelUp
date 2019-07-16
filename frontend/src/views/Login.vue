@@ -7,7 +7,7 @@
             <mdb-card-body class="mx-3">
               <div class="text-center">
                 <h3 class="dark-grey-text mb-4">
-                  <strong>Sign in</strong>
+                  <strong>Login</strong>
                 </h3>
               </div>
               <mdb-input label="Your Nickname" type="text"  v-model="credentials.nickName" />
@@ -17,11 +17,11 @@
                 <a href="#" class="blue-text ml-1">Password?</a>
               </p>
               <div class="text-center mb-2">
-                <mdb-btn type="submit" gradient="blue" rounded class="btn-block z-depth-1a" @click="loginUser">Sign in</mdb-btn>
+                <mdb-btn gradient="blue" rounded class="btn-block z-depth-1a" @click="loginUser">Login</mdb-btn>
               </div>
               <p
                 class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-1"
-              >or Sign in with:</p>
+              >or Login with:</p>
               <div class="row my-1 d-flex justify-content-center">
                 <mdb-btn type="button" color="white" rounded class="mr-md-1 z-depth-1a">
                   <mdb-icon fab icon="facebook" class="blue-text text-center" />
@@ -77,6 +77,7 @@ export default {
         credentials: this.credentials
       });
       if (!res) console.log('no user found')
+      else this.$router.push('/explore')
     }
   },
 

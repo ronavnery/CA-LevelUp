@@ -5,6 +5,7 @@ async function requireAuth(req, res, next) {
     res.status(401).end('Unauthorized, you must be logged in.');
     return;
   }
+  console.log('in middleware session user is:', req.session.user)
   next();
 }
 

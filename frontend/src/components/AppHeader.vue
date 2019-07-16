@@ -1,6 +1,6 @@
 <template>
   <section class="app-header">
-    <div @click="goHome()" class="logo-container">
+    <div @click="goHome" class="logo-container">
       <img class="logo" src="../assets/logo.png" />
       <span class="logo-title fs14 strong">LevelUp</span>
     </div>
@@ -9,7 +9,8 @@
       <router-link to="/explore">Explore</router-link>
       <router-link to="/about">About</router-link>
     </div>
-    <div class="user-action-container">
+    <UserDashboard :currUser="connectedUser" v-if="connectedUser"/>
+    <div class="user-action-container" v-else>
       <button class="btn-login" @click="goLogin">Login</button>
       <button class="btn-signup" @click="goSignUp">Sign-Up</button>
     </div>
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+import UserDashboard from '@/components/UserDashboard.vue';
+
 export default {
   methods: {
     goLogin() {
@@ -24,7 +27,18 @@ export default {
     },
     goSignUp() {
       this.$router.push('/sign-up')
+    },
+    goHome() {
+      this.$router.push('/')
     }
+  },
+  computed: {
+    connectedUser() {
+      return this.$store.getters.connectedUser
+    }
+  },
+  components: {
+    UserDashboard
   }
 };
 </script>

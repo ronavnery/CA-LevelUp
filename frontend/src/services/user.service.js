@@ -85,7 +85,15 @@ async function update(updatedUser) {
     }
 }
 
-
+async function checkIfLoggedIn() {
+    try {
+        const user = await httpService.get(_getUrl('loggedin'))
+        return  user
+    }
+    catch (err) {
+        throw err
+    }
+}
 
 export default {
     login,
@@ -94,5 +102,6 @@ export default {
     remove,
     update,
     getUsers,
-    logout
+    logout,
+    checkIfLoggedIn
 }

@@ -78,7 +78,7 @@
             />
           </svg>
         </button>
-        <span>{{this.offer.wishers.length}}</span>
+        <span>{{this.offer.createdBy.interestedIn.length}}</span>
       </div>
       <div class="wrapper">
         <button class="comment" @click.stop="">

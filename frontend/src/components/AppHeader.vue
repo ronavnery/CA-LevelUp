@@ -32,6 +32,7 @@ export default {
 <style scoped lang="scss">
 .app-header {
   @include flexCustom(space-between, center, row);
+  position: relative;
   background: $tpPurple;
   line-height: rem(50px);
   font-family: $Montserrat-Regular;
@@ -62,6 +63,10 @@ a {
 
 .nav-container {
   text-transform: uppercase;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .nav-container > *:not(:last-child) {

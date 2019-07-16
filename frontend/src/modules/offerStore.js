@@ -45,7 +45,6 @@ export default {
             try {
 
                 const offers = await offerService.query(filter)
-                console.log(offers)
                 context.commit({ type: 'setOffers', offers })
                 return offers
             }

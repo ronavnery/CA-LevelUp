@@ -43,6 +43,7 @@ async function getById(offerId) {
         throw err;
     }
 }
+
 async function getByEmail(email) {
     const collection = await dbService.getCollection('offer')
     try {
@@ -77,12 +78,10 @@ async function update(offer) {
     }
 }
 
-async function add(offer) {
+async function add(offer, creator) {
     const collection = await dbService.getCollection('offer')
     offer.createdAt = Date.now()
-    offer.wishers = []
-    offer.leveledUp = []
-    stars = 0
+    offer.createdBy = creator
     try {
         await collection.insertOne(offer);
         return offer;

@@ -32,8 +32,6 @@ async function checkCredentials(credentials) {
 }
 
 async function verifyUnique(email, nickName) {
-    console.log('got email:', email)
-    console.log('got nickName', nickName)
     const collection = await dbService.getCollection('user')
     try {
         const dbUser = await collection.findOne({

@@ -2,17 +2,16 @@
   <div>
     <input
       type="text"
-      v-model="newRequirementText"
-      placeholder="New Requirement"
-      @keydown.enter.prevent="addRequirement"
-    />
-    <ul v-if="requirements.length">
-      <li v-for="(requirement,idx) in requirements" :key="idx">
-        {{requirement}}
-        <button @click="removeRequirement(idx)">X</button>
+      v-model="newText"
+      placeholder="New Text List"
+      @keydown.enter.prevent="addText"/>
+    <ul v-if="list.length">
+      <li v-for="(text,idx) in list" :key="idx">
+        {{text}}
+        <button @click="removeText(idx)">X</button>
       </li>
     </ul>
-    <p v-else>Nothing left in the list. Add a new Requirement in the input above.</p>
+    <p v-else>Nothing left in the list. Add a new text in the input above.</p>
   </div>
 </template>
 
@@ -20,30 +19,25 @@
 export default {
   data() {
     return {
-      newRequirementText: "",
-      requirements: []
+      newText: "",
+      list: []
     };
-  },
-  watch: {
-    requirements(old, newVal) {
-      console.log('i was updated')
-    }
   },
 
   methods: {
-    addRequirement() {
-      const trimmedText = this.newRequirementText.trim();
+    addText() {
+      const trimmedText = this.newText.trim();
       if (trimmedText) {
-        this.requirements.push(trimmedText);
-        this.newRequirementText = "";
-      this.$emit("requirements-updated", this.requirements);
-      this.$emit("whatIncluded-updated", this.requirements);
+        this.list.push(trimmedText);
+        this.newText = "";
+      this.$emit("requirements-updated", this.list);
+      this.$emit("whatIncluded-updated", this.list);
       }
     },
-    removeRequirement(idx) {
-      this.requirements.splice(idx, 1);
-      this.$emit("requirements-updated", this.requirements);
-      this.$emit("whatIncluded-updated", this.requirements);
+    removeText(idx) {
+      this.list.splice(idx, 1);
+      this.$emit("requirements-updated", this.list);
+      this.$emit("whatIncluded-updated", this.list);
     }
   }
 };

@@ -78,7 +78,6 @@
             />
           </svg>
         </button>
-        <span>{{this.offer.wishers.length}}</span>
       </div>
       <div class="wrapper">
         <button class="comment" @click.stop="">

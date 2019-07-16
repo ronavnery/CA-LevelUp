@@ -5,7 +5,6 @@
       <img
         src="https://image.freepik.com/free-photo/desk-with-laptop-cup-coffee-calendar_1112-145.jpg"
       />
-
       <a href="#" class="button">
         <span class="icon icon-play" @click="toggleBooking"></span>
       </a>
@@ -35,7 +34,7 @@
         </li>
         <li>
           <span class="icon icon-calories"></span>
-          <span>{{offer.reviews.length}}</span>
+          <!-- <span>{{offer.reviews.length}}</span> -->
         </li>
       </ul>
     </article>
@@ -51,33 +50,6 @@
 
     </main>
   </div>
-
-  <!-- <div class="details-main-info">
-      <div class="main-info-top">
-      <span class="fs32 strong">{{offer.title}}</span>
-      <br />
-      <span class="fs16">{{offer.description}}</span><br>
-      <img class="img-main" :src="offer.imgs[0]" />
-      </div>
-    </div>
-    <div class="details-secondary-info">
-      <br />Requirements:
-      <span
-        v-for="requirement in offer.requirements"
-        :key="requirement"
-      >{{requirement}}</span>
-      <br />
-      <span>Stars:{{offer.stars}}</span>
-      <br />Meeting Type:
-      <span>{{offer.location.type}}</span>
-      <br />Address:
-      <span>{{offer.location.address}}</span>
-      <br />Reviews:
-      <span v-for="(review,idx) in offer.reviews" :key="idx">{{review}}</span>
-      <br />
-      <button class="btn-book" @click="toggleBooking">LevelUp!</button>
-  </div>-->
-  <!-- </section> -->
 </template>
 
 <script>
@@ -90,7 +62,6 @@ export default {
     };
   },
   async created() {
-    console.log(moment.duration(60, 'minutes')._data.hours)
     const offerId = this.$route.params.offerId;
     if (offerId) {
       try {
@@ -98,11 +69,9 @@ export default {
           type: "getOfferById",
           offerId
         });
-        console.log(offerToShow);
         this.getCurrOffer;
-        console.log("curr offer is", this.offer);
       } catch (err) {
-        console.log("theres an error", err);
+        console.log(err);
       }
     }
   },

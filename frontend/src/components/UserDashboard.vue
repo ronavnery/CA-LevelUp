@@ -5,16 +5,16 @@
       <i class="fas fa-bell"></i>
       <i class="fas fa-user" @click="toggleNav"></i>
     </div>
-    <nav>
-      <ul class="user-commands clean-list">
-        <li>
-          <router-link :to="'/profile/' + currUser.nickName">My Profile</router-link>
-        </li>
-        <li>
-          <button @click.stop="doLogout">Logout</button>
-        </li>
-      </ul>
-    </nav>
+      <nav v-if="showNav">
+        <ul class="user-commands clean-list">
+          <li>
+            <router-link :to="'/profile/' + currUser.nickName">My Profile</router-link>
+          </li>
+          <li>
+            <button @click.stop="doLogout">Logout</button>
+          </li>
+        </ul>
+      </nav>
   </section>
 </template>
 
@@ -26,6 +26,11 @@ export default {
       type: Object
     }
   },
+  data() {
+    return {
+      showNav: false
+    };
+  },
   methods: {
     async doLogout() {
       try {
@@ -35,6 +40,9 @@ export default {
       } catch (err) {
         console.log("Couldnt log out, got err:", err);
       }
+    },
+    toggleNav() {
+      this.showNav = !this.showNav;
     }
   }
 };
@@ -54,6 +62,7 @@ export default {
 
   i {
     color: #d0c9d6;
+    cursor: pointer;
   }
 }
 
@@ -63,4 +72,7 @@ ul {
   right: calc(0px - 10px);
   width: calc(100% + 10px);
 }
+
+
+
 </style>

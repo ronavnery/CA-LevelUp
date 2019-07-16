@@ -1,5 +1,5 @@
 const express = require('express')
-const requireMiddleware = require('../../middlewares/requireAuth.middleware')
+const requireAuth = require('../../middlewares/requireAuth.middleware')
 const {getUser, getUsers, deleteUser, updateUser,getUserByNickname} = require('./user.controller')
 const router = express.Router()
 
@@ -11,7 +11,7 @@ router.get('/', getUsers)
 
 router.get('/user/:nick', getUserByNickname)
 router.get('/:id', getUser)
-router.put('/', requireMiddleware.requireAuth, updateUser)
-router.delete('/:id',  requireMiddleware.requireAdmin , deleteUser)
+router.put('/', requireAuth, updateUser)
+router.delete('/:id', requireAuth, deleteUser)
 
 module.exports = router

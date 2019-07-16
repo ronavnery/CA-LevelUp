@@ -16,7 +16,4 @@ async function requireAdmin(req, res, next) {
   next();
 }
 
-module.exports = {
-  requireAuth,
-  requireAdmin
-}
+module.exports = requireAuth

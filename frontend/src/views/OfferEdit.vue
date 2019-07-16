@@ -86,6 +86,7 @@ export default {
   },
 
   async created() {
+    if (!this.$store.getters.connectedUser) this.$router.push('/')
     const offerId = this.$route.params._id;
     if (offerId) {
       try {

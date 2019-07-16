@@ -1,33 +1,4 @@
 <template>
-  <!-- <section class="signup-container">
-    <form @submit.prevent="registerNewUser">
-      <input
-        type="text"
-        v-model="newUser.name"
-        @input="buildNickname()"
-        placeholder="Enter Name"
-        required
-      />
-      <input type="text" v-model="newUser.nickName" placeholder="Enter Nickname" required />
-      <input type="email" v-model="newUser.email" placeholder="Enter Email" required />
-      <input
-        type="password"
-        v-model="newUser.password"
-        placeholder="Enter Password"
-        required
-        :class="passwordsMatch"
-      />
-      <input
-        type="password"
-        v-model="confirmPassword"
-        placeholder="Confirm Password"
-        required
-        :class="passwordsMatch"
-      />
-      <button type="submit">Submit</button>
-    </form>
-  </section> -->
-
     <main class="signup-container">
     <section class="form-elegant w-auto p-3">
       <mdb-row class="form-container">
@@ -40,14 +11,10 @@
                 </h3>
               </div>
               <mdb-input label="Name" type="text"  v-model="newUser.name" @input="buildNickname()" required />
-              <mdb-input label="Email Address" type="email"  v-model="newUser.email" class="form-control validate" />
+              <mdb-input label="Email Address" type="email" v-model="newUser.email" />
               <mdb-input label="Nickname" type="text"  v-model="newUser.nickName" required />
               <mdb-input label="Password" type="password" containerClass="mb-0" v-model="newUser.password" :class="passwordsMatch" />
               <mdb-input label="Repeat Password" type="password" containerClass="mb-0" v-model="confirmPassword" :class="passwordsMatch" />
-              <!-- <p class="font-small blue-text d-flex justify-content-end pb-1">
-                Forgot
-                <a href="#" class="blue-text ml-1">Password?</a>
-              </p> -->
               <div class="text-center mb-2">
                 <mdb-btn type="submit" gradient="blue" rounded class="btn-block z-depth-1a" @click="registerNewUser">Sign up</mdb-btn>
               </div>

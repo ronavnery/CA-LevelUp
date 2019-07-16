@@ -2,8 +2,8 @@
   <!-- <section class="offer-details-container" v-if="offer"> -->
   <div class="offer-card" v-if="offer">
     <aside :class="offer.category.substring(0,2)">
-      <a href="#" class="button">
-        <span class="icon icon-play" @click="toggleBooking"></span>
+      <a href="#" class="button" @click="toggleBooking">
+        <span class="icon icon-play" ></span>
       </a>
     </aside>
 

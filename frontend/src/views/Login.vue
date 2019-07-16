@@ -23,11 +23,12 @@ export default {
   },
 
   methods: {
-    loginUser() {
-      this.$store.dispatch({
-        type: 'loginUser',
+    async loginUser() {
+      await this.$store.dispatch({
+        type: 'doLogin',
         credentials: this.credentials
       });
+      this.$router.back();
     }
   },
 

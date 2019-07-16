@@ -2,7 +2,8 @@ import userService from '../services/user.service.js'
 
 export default {
     state: {
-        connectedUser: '',
+        connectedUser: null,
+        currProfile: null,
         users: []
     },
 
@@ -86,6 +87,8 @@ export default {
             try {
                 const addedUser = await userService.add(newUser)
                 commit({type: 'addUserToStore', addedUser})
+                commit({type: 'setConnectedUser', user: addedUser})
+                return addedUser
             }
             catch (err) {
                 throw err

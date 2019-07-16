@@ -67,9 +67,13 @@ export default {
           }
           // process.env.NODE_ENV === 'production' ? 
           // this.newUser.profileUrl = '/'
-
-          const user = await this.$store.dispatch({type: 'addUser', newUser: this.newUser})
-          this.$router.back();
+          try {
+            const user = await this.$store.dispatch({type: 'addUser', newUser: this.newUser})
+            this.$router.back();
+          } catch(err) {
+            alert(err)
+            
+          }
         }
     },
     computed: {

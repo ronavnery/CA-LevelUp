@@ -19,3 +19,8 @@ a {
 }
 
 // linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%);
+a.clean-link {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}

@@ -112,6 +112,16 @@ export default {
             catch(err) {
                 throw err
             }
+        },
+        async doLogout({commit}) {
+            try {
+                const res = await userService.logout()
+                commit({type: 'setConnectedUser', user: null})
+                return res;
+            }
+            catch(err) {
+                throw err
+            }
         }
     }
 }

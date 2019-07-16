@@ -35,6 +35,16 @@ async function login(credentials) {
     }
 }
 
+async function logout() {
+    try {
+        await httpService.get(_getAuthUrl('logout'))
+        return 'All Good';
+    } 
+    catch(err) {
+        throw err
+    }
+}
+
 async function getProfileByNickname(nickName) {
     try {
         const user = await httpService.get(_getUrl(nickName))
@@ -83,5 +93,6 @@ export default {
     add,
     remove,
     update,
-    getUsers
+    getUsers,
+    logout
 }

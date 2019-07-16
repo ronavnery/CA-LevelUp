@@ -14,24 +14,19 @@
       <ul>
         <li>
           <span class="icon icon-users"></span>
-          <!-- <span>{{offer.minPeople}}</span> -->
-          <span>1</span>
+          <span>{{offer.minPeople}}</span>
         </li>
         <li>
           <span class="icon icon-clock"></span>
-          <span>{{20 | durationInMins}}</span>
-          <!-- uncomment below and delete above once duration is on offer data -->
-          <!-- <span>{{offer.duration | durationInMins}}</span> -->
+          <span>{{offer.duration | durationInMins}}</span>
         </li>
         <li>
           <span class="icon icon-level"></span>
-          <!-- uncomment below and delete above  once difficulty is on offer data -->
-          <!-- <span>{{difficulty}}</span> -->
-          <span>Beginner level</span>
+          <span>{{difficulty}}</span>
         </li>
         <li>
           <span class="icon icon-calories"></span>
-          <!-- <span>{{offer.reviews.length}}</span> -->
+          <span>{{offer.ratingAvg}}</span>
         </li>
       </ul>
     </article>
@@ -74,8 +69,8 @@ export default {
       this.offer = this.$store.getters.getCurrOffer;
     },
     difficulty() {
-      if (offer.difficulty === 1) return "Beginner level";
-      else if (offer.difficulty === 2) return "Intermediate level";
+      if (this.offer.difficulty === 1) return "Beginner level";
+      else if (this.offer.difficulty === 2) return "Intermediate level";
       else return "Advanced level";
     }
   },

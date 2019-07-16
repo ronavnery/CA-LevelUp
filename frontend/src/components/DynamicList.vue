@@ -8,7 +8,7 @@
     <ul v-if="list.length">
       <li v-for="(text,idx) in list" :key="idx">
         {{text}}
-        <button @click="removeText(idx)">X</button>
+        <button @click.prevent="removeText(idx)">X</button>
       </li>
     </ul>
     <p v-else>Nothing left in the list. Add a new text in the input above.</p>

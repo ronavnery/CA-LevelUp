@@ -12,20 +12,16 @@ module.exports = {
 }
 
 async function query(filterBy = {}) {
-
     const criteria = {};
     if (filterBy.txt) {
-        criteria.name = filterBy.txt
-    }
-    if (filterBy.minBalance) {
-        criteria.balance = { $gte: filterBy.minBalance }
+        const regex = new RegExp(filterBy.txt)
+        criteria.title = { $regex: regex }
     }
 
 
     const collection = await dbService.getCollection('offer')
     try {
         const offers = await collection.find(criteria).toArray();
-        // console.log(offers)
         return offers
     } catch (err) {
         console.log('ERROR: cannot find offers')

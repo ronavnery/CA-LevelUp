@@ -2,7 +2,7 @@
   <section class="sidebar-container">
     <section class="sidebar-content">
       <div class="img-btns-wrapper">
-        <img class="profile-img" :src="profile.userImg" />
+        <img class="profile-img" :src="profile.imgUrl" />
         <div class="btn-container">
           <button class="share">
             <i class="fas fa-share-alt"></i>

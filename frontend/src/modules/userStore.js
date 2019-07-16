@@ -123,6 +123,17 @@ export default {
             catch(err) {
                 throw err
             }
+        },
+        async checkIfLoggedInUser({commit}) {
+            try {
+                
+                const user = await userService.checkIfLoggedIn()
+                commit({type: 'setConnectedUser', user})
+                return user
+            }
+            catch(err) {
+                throw err
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <section @click="goToDetails" class="offer-preview" v-if="offer">
     <header>
-      <img class="preview-icon" src="../assets/offerpreviewicons/designicon.jpg" />
+      <i :class="categoryIcon"></i>
       <span>{{offer.category}}</span>
       <button @click.stop="goToEdit">
         <svg height="12" width="12" viewBox="0 -1 401.52289 401">
@@ -57,7 +57,7 @@
     <hr />
     <footer>
       <div class="wrapper">
-        <button class="like" @click.stop="">
+        <button class="like" @click.stop>
           <svg viewBox="0 0 478.2 478.2" width="16px" height="16px">
             <path
               d="M457.575,325.1c9.8-12.5,14.5-25.9,13.9-39.7c-0.6-15.2-7.4-27.1-13-34.4c6.5-16.2,9-41.7-12.7-61.5
@@ -81,7 +81,7 @@
         <span>{{this.offer.interested.length}}</span>
       </div>
       <div class="wrapper">
-        <button class="comment" @click.stop="">
+        <button class="comment" @click.stop>
           <svg width="16" height="16" viewBox="0 0 612 612">
             <path
               d="M401.625,325.125h-191.25c-10.557,0-19.125,8.568-19.125,19.125s8.568,19.125,19.125,19.125h191.25
@@ -108,7 +108,7 @@
           />
         </svg>
       </button>-->
-      <button class="share" @click.stop="">
+      <button class="share" @click.stop>
         <svg viewBox="0 0 481.6 481.6" height="16" width="16">
           <g>
             <path
@@ -145,8 +145,14 @@ export default {
   },
   methods: {
     goToDetails() {
-        this.$router.push({ name: 'Profile', params: { nickName: this.offer.createdBy.nickName, offerId: this.offer._id}});
-        // this.$router.push(`profile/${this.offer.createdBy.nickName}/${this.offer._id}`);
+      this.$router.push({
+        name: "Profile",
+        params: {
+          nickName: this.offer.createdBy.nickName,
+          offerId: this.offer._id
+        }
+      });
+      // this.$router.push(`profile/${this.offer.createdBy.nickName}/${this.offer._id}`);
     },
     goToEdit() {
       this.$router.push(`profile/edit/${this.offer._id}`);
@@ -164,9 +170,30 @@ export default {
     },
     shortDesc() {
       if (this.offer.description.length > 60) {
-        return this.offer.description.substring(0, 60) + '...';
+        return this.offer.description.substring(0, 60) + "...";
       }
       return this.offer.description;
+    },
+    categoryIcon() {
+      if (this.offer.category === "Development") return "fas fa-file-code";
+      else if (this.offer.category === "Business") return "fas fa-briefcase";
+      else if (this.offer.category === "Finance & Accounting")
+        return "fas fa-balance-scale";
+      else if (this.offer.category === "Office Productivity")
+        return "fas fa-mail-bulk";
+      else if (this.offer.category === "Personal Development")
+        return "fas fa-user-plus";
+      else if (this.offer.category === "Design") return "fas fa-pencil-ruler";
+      else if (this.offer.category === "IT & Software") return "fas fa-sitemap";
+      else if (this.offer.category === "Marketing") return "fas fa-ad";
+      else if (this.offer.category === "Lifestyle") return "fas fa-gamepad";
+      else if (this.offer.category === "Photography")
+        return "fas fa-camera-retro";
+      else if (this.offer.category === "Health & Fitness")
+        return "fas fa-running";
+      else if (this.offer.category === "Music") return "fas fa-guitar";
+      else if (this.offer.category === "Teaching & Academics")
+        return "fas fa-user-graduate";
     }
   }
 };
@@ -187,10 +214,10 @@ header {
   @include flexCustom(flex-start, center, row);
   min-height: 40px;
 
-  .preview-icon {
-    width: 16px;
-    height: 16px;
-    margin-left: 7px;
+  i {
+    font-size: rem(20px);
+    margin-left: 8px;
+    color: $btnBlue1;
   }
 
   span {
@@ -234,6 +261,7 @@ main {
         width: 50px;
         border-radius: 50%;
         border: 5px solid white;
+        background: white;
       }
       span {
         margin-left: 10px;

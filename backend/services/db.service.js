@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const config  =  require('../config')
 
 // Database Name
-const dbName = 'local';
+const dbName = 'levelup_db';
 
 var dbConn = null;
 

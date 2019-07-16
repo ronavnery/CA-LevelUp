@@ -6,7 +6,6 @@
     <!-- <OfferPreview /> -->
     <button @click="addOffer">Add offer</button>
     <OfferList :offers="offers" @removeOffer="removeOffer"></OfferList>
-    <!-- {{offers}} -->
   </section>
 </template>
 <script>
@@ -18,18 +17,13 @@ import OfferFilter from '@/components/OfferFilter.vue';
 export default {
   name: "Explore",
   
-  data() {
-    return {
-      filter: {}
-    };
-  },
   computed: {
     offers() {
       return this.$store.getters.getOffers;
     }
   },
   created() {
-    this.$store.dispatch({ type: "loadOffers", filter: this.filter });
+    this.$store.dispatch({ type: "loadOffers", filter: {} });
   },
   
   methods: {
@@ -38,6 +32,9 @@ export default {
         },
         addOffer() {
           this.$router.push('/explore/edit')
+        },
+        setFilter(filter) {
+            this.$store.dispatch({ type: "loadOffers", filter });
         }
   },
 

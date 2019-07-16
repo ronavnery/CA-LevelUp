@@ -9,8 +9,8 @@ export default {
     getById,
 }
 
-function query() {
-    return httpService.get(_getUrl())
+function query(filter) {
+    return httpService.get(_getUrl(), filter)
 }
 
 function add(offer) {

@@ -1,13 +1,13 @@
 const offerService = require('./offer.service')
 
+const getOffers = async (req, res) => {
+    const offers = await offerService.query(req.query)
+    res.send(offers)
+}
+
 async function getOffer(req, res) {
     const offer = await offerService.getById(req.params.id)
     res.send(offer)
-}
-  
-const getOffers = async (req, res) => {
-    const offers = await offerService.query()
-    res.send(offers)
 }
 
 async function deleteOffer(req, res) {

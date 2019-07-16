@@ -3,7 +3,7 @@
     <form @submit.prevent="filterOffers">
       <div class="search-box">
         <img src="../assets/search.png" alt />
-        <input @keyup.enter="filterOffers" v-model="filter.txt" type="text" placeholder="Look For Anything..."/>
+        <input @input="filterOffers" v-model="filter.txt" type="text" placeholder="Look For Anything..."/>
         <button v-show="filter.txt" @click.stop="clearTxt">
           <svg
             viewBox="0 0 426.667 426.667"

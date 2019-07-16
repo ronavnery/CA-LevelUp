@@ -3,7 +3,7 @@
     <!-- <offer-filter @set-filter="setFilter"></offer-filter>
     <img v-if="!offers" src="../img/loading.svg" width="100" alt=""> -->
     <OfferFilter />
-    <OfferPreview />
+    <!-- <OfferPreview /> -->
     <button @click="addOffer">Add offer</button>
     <OfferList :offers="offers" @removeOffer="removeOffer"></OfferList>
     <!-- {{offers}} -->

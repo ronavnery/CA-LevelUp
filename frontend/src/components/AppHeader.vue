@@ -11,7 +11,7 @@
     </div>
     <div class="user-action-container">
       <button class="btn-login" @click="goLogin">Login</button>
-      <button class="btn-register" @click="goSignUp">Register</button>
+      <button class="btn-signup" @click="goSignUp">Sign-Up</button>
     </div>
   </section>
 </template>
@@ -32,6 +32,7 @@ export default {
 <style scoped lang="scss">
 .app-header {
   @include flexCustom(space-between, center, row);
+  position: relative;
   background: $tpPurple;
   line-height: rem(50px);
   font-family: $Montserrat-Regular;
@@ -62,13 +63,17 @@ a {
 
 .nav-container {
   text-transform: uppercase;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .nav-container > *:not(:last-child) {
   margin-right: rem(30px)
 }
 
-.btn-register {
+.btn-signup {
   @include btnActionColorSm;
 }
 

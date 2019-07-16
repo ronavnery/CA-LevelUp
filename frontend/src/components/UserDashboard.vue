@@ -9,11 +9,13 @@
     <nav v-if="showNav">
       <ul class="user-commands clean-list">
         <li>
+            <p>{{currUser.name}}</p>
+        </li>
+        <li>
           <router-link :to="'/profile/' + currUser.nickName">My Profile</router-link>
         </li>
         <li>
           <button @click.stop="doLogout">Logout</button>
-        
         </li>
       </ul>
     </nav>
@@ -56,8 +58,8 @@ export default {
 
 <style lang="scss" scoped>
 .user-dashboard-header {
-  position: relative;
-  display: flex;
+  @include flexCustom(space-between, stretch, row);
+  width: 250px;
 }
 
 .icon-container {
@@ -70,15 +72,24 @@ export default {
   }
 }
 
-ul {
+nav {
   position: absolute;
   top: 100%;
-  right: calc(0px - 10px);
-  width: calc(100% + 10px);
+  right: 0;
+  width: 150px;
+  z-index: 100;
+
+  li:first-child {
+      @include flexCustom(center, stretch, row);
+  }
+
+  li > p {
+      margin: 0;
+      font-size: 2rem;
+  }
 }
 
 .btn-add-offer {
   @include btnActionSm;
-  margin-right: rem(10px);
 }
 </style>

@@ -117,7 +117,7 @@ async function add(newUser) {
     const collection = await dbService.getCollection('user')
     try {
         const registeredUser = await collection.insertOne(newUser);
-        return registeredUser;
+        return registeredUser.ops[0];
     } catch (err) {
         console.log(`ERROR: cannot insert user`)
         throw err;

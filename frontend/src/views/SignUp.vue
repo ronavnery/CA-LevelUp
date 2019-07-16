@@ -1,6 +1,6 @@
 <template>
   <section class="sign-up-page">
-    <form @submit.prevent>
+    <form @submit.prevent="registerNewUser">
       <input
         type="text"
         v-model="newUser.name"
@@ -24,6 +24,7 @@
         required
         :class="passwordsMatch"
       />
+      <button type="submit">Submit</button>
     </form>
   </section>
 </template>
@@ -58,7 +59,18 @@ export default {
         buildNickname: _(function() {
             const nickName = this.newUser.name.split(' ').join('');
             this.newUser.nickName = nickName;
-        }, 500) 
+        }, 500),
+        async registerNewUser() {
+          if (this.newUser.password !== this.confirmPassword) {
+            alert('Passwords Do Not Match!')
+            return;
+          }
+          // process.env.NODE_ENV === 'production' ? 
+          // this.newUser.profileUrl = '/'
+
+          const user = await this.$store.dispatch({type: 'addUser', newUser: this.newUser})
+          this.$router.back();
+        }
     },
     computed: {
         passwordsMatch() {

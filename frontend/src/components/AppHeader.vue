@@ -11,7 +11,7 @@
     </div>
     <div class="user-action-container">
       <button class="btn-login" @click="goLogin">Login</button>
-      <button class="btn-register" @click="goSignUp">Register</button>
+      <button class="btn-signup" @click="goSignUp">Sign-Up</button>
     </div>
   </section>
 </template>
@@ -68,7 +68,7 @@ a {
   margin-right: rem(30px)
 }
 
-.btn-register {
+.btn-signup {
   @include btnActionColorSm;
 }
 

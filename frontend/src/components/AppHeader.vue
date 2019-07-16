@@ -11,7 +11,7 @@
     </div>
     <div class="user-action-container">
       <button class="btn-login" @click="goLogin">Login</button>
-      <button class="btn-register">Register</button>
+      <button class="btn-register" @click="goSignUp">Register</button>
     </div>
   </section>
 </template>
@@ -21,6 +21,9 @@ export default {
   methods: {
     goLogin() {
       this.$router.push('/sign-in')
+    },
+    goSignUp() {
+      this.$router.push('/sign-up')
     }
   }
 };

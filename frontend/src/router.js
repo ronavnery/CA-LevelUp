@@ -5,6 +5,7 @@ import Explore from './views/Explore.vue'
 import OfferEdit from './views/OfferEdit.vue'
 import SignIn from './views/SignIn.vue'
 import Profile from './views/Profile.vue'
+import SignUp from './views/SignUp.vue'
  
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/sign-in',
       name: 'SignIn',
       component: SignIn
+    },
+    {
+      path: '/sign-up',
+      name: 'SignUp',
+      component: SignUp
     },
     {
       path: '/about',

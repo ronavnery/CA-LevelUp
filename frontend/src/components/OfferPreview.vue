@@ -34,7 +34,7 @@
       <img :src="offer.imgs[0]" alt />
       <div class="user-date-starred-container">
         <div class="wrapper">
-          <img :src="offer.createdBy.userImg" alt />
+          <img :src="offer.createdBy.imgUrl" alt />
           <span>{{offer.createdBy.nickName}}</span>
         </div>
         <svg viewBox="-1 -1 108.99999999999991 109.04511627906979" width="20" height="20">

@@ -12,6 +12,7 @@ module.exports = {
 }
 
 async function query(filterBy = {}) {
+    console.log(filterBy)
     const criteria = {};
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt)

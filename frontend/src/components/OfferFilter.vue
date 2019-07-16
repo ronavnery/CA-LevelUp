@@ -38,7 +38,6 @@ export default {
           this.filter.txt = '';
       },
       filterOffers() {
-        console.log('doing filter', this.filter);
           this.$emit('filter-offers', this.filter)
       }
   }

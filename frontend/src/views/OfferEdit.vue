@@ -38,16 +38,11 @@
 <script>
 import DynamicList from "../components/DynamicList";
 import VueTagsInput from "@johmun/vue-tags-input";
-import Slick from "vue-slick";
 
 export default {
   name: "offer-edit",
   data() {
     return {
-      slickOptions: {
-        slidesToShow: 3
-        // Any other options that can be got from plugin documentation
-      },
       tag: "",
       tags: [],
       optionalPhotos: [],

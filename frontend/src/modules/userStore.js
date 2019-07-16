@@ -78,6 +78,7 @@ export default {
             try {
                 const user = await userService.login(credentials)
                 commit({type: 'setConnectedUser', user})
+                return user;
             }
             catch (err) {
                 throw err

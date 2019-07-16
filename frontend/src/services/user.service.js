@@ -47,7 +47,7 @@ async function logout() {
 
 async function getProfileByNickname(nickName) {
     try {
-        const user = await httpService.get(_getUrl(nickName))
+        const user = await httpService.get(_getUrl('user/'+nickName))
         return user;
     } 
     catch (err) {

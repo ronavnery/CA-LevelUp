@@ -1,19 +1,19 @@
 <template>
   <div class="offer-edit">
-    <form class="flex column">
+    <form  class="flex column">
       <h2>Add lesson</h2>
       <input type="text" v-model="editedOffer.title" placeholder="Title" />
       <input type="text" v-model="editedOffer.description" placeholder="Description" />
       <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
-      <DynamicList @requirements-updated="changeRequirments" />
       <select v-model="editedOffer.category" name="category">
         <option v-for="(category,idx) in optionalCategorys" :key="idx">{{category}}</option>
       </select>
       <select v-model.number="editedOffer.difficulty" name="difficulty">
         <option v-for="(difficult,idx) in 3" :key="idx">{{difficult}}</option>
       </select>
-      <DynamicList @whatIncluded-updated="changeWhatsIncluded" />
       <input v-model.number="editedOffer.duration" placeholder="Duration in minuets" type="number" />
+      <DynamicList @requirements-updated="changeRequirments" />
+      <DynamicList @whatIncluded-updated="changeWhatsIncluded" />
       <input
         v-model.number="editedOffer.minPeople"
         placeholder="Min participate peoples"
@@ -26,7 +26,8 @@
       </select>
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
-
+      <!-- <DynamicList @requirements-updated="changeRequirments" />
+      <DynamicList @whatIncluded-updated="changeWhatsIncluded" /> -->
     <div v-for="(photo,idx) in optionalPhotos" :key="idx">
       <img :src="photo" alt @click="addPhoto(photo)" />
     </div>
@@ -101,7 +102,6 @@ export default {
   },
 
   methods: {
-
     save() {
       const newOffer = this.editedOffer;
       if (newOffer._id) {
@@ -124,6 +124,7 @@ export default {
     },
 
     changeRequirments(newRequirments) {
+      // console.log(newRequirments)
       this.editedOffer.requirements = newRequirments;
     },
     changeWhatsIncluded(newIncludes) {
@@ -159,7 +160,7 @@ export default {
     width: 400px;
     & > * {
       margin: 6px;
-      height: rem(48px);
+      // height: rem(48px);
       padding: 0.75em;
       border: 1px solid #dfe0e6;
       background-color: #f2f2f2;

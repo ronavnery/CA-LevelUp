@@ -25,6 +25,7 @@ async function query(filterBy = {}) {
     const collection = await dbService.getCollection('offer')
     try {
         const offers = await collection.find(criteria).toArray();
+        // console.log(offers)
         return offers
     } catch (err) {
         console.log('ERROR: cannot find offers')
@@ -42,6 +43,7 @@ async function getById(offerId) {
         throw err;
     }
 }
+
 async function getByEmail(email) {
     const collection = await dbService.getCollection('offer')
     try {
@@ -76,24 +78,10 @@ async function update(offer) {
     }
 }
 
-async function add(offer) {
+async function add(offer, creator) {
     const collection = await dbService.getCollection('offer')
     offer.createdAt = Date.now()
-    offer.wishers = []
-    offer.leveledUp = []
-    stars = 0
-    offer.createdBy = {
-        "_id": 'usrId1',
-        "name": "Harding Holden",
-        "nickName": "HardingH11",
-        "dateJoined": 1545835345590.0,
-        "email": "pughthomas@retrack.com",
-        "password": "aliquip89",
-        "userImg": "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg",
-        "skillTags": [
-            "Web Development",
-            "Spiritualism"]
-    }
+    offer.createdBy = creator
     try {
         await collection.insertOne(offer);
         return offer;

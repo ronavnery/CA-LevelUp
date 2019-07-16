@@ -1,13 +1,13 @@
 <template>
   <!-- <section class="offer-details-container" v-if="offer"> -->
-  <div class="offer-card">
+  <div class="offer-card" v-if="offer">
     <aside :class="offer.category.substring(0,2)">
       <a href="#" class="button">
         <span class="icon icon-play" @click="toggleBooking"></span>
       </a>
     </aside>
 
-    <article v-if="offer">
+    <article >
       <h2>{{offer.title}}</h2>
       <h3 class="category">{{offer.category}}</h3>
 

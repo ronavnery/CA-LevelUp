@@ -9,6 +9,10 @@ async function getUser(req, res) {
     const user = await userService.getById(req.params.id)
     res.send(user)
 }
+async function getUserByNickname(req, res) {
+    const user = await userService.getByNickname(req.params.nick)
+    res.send(user)
+}
   
 const getUsers = async (req, res) => {
     const filterBy = req.query
@@ -46,5 +50,6 @@ module.exports = {
     deleteUser,
     login,
     addUser,
-    updateUser
+    updateUser,
+    getUserByNickname
 }

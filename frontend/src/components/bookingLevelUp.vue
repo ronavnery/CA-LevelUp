@@ -7,8 +7,8 @@
       <textarea v-model="bookingReq.reason" id="reason" type="text" />
       <label for="availability">Hows your availability?</label>
       <textarea v-model="bookingReq.availability" id="availability" type="text" />
-      <label for="userDetails">What more should this person know about you?</label>
-      <textarea v-model="bookingReq.userDetails" id="userDetails" type="text" />
+      <label for="extraInfo">What more should this person know about you?</label>
+      <textarea v-model="bookingReq.extraInfo" id="extraInfo" type="text" />
       <input id="levelUp" class="level-up-btn" @click.prevent="sendBookingReq" value="Level Me Up" type="submit" />
     </form>
   </section>
@@ -16,12 +16,17 @@
 
 <script>
 export default {
+  created() {
+    this.$on
+  },
   data() {
     return {
       bookingReq: {
+        currOffer: null,
+        currProfile: null,
         reason: '',
         availability: '',
-        userDetails: ''
+        extraInfo: ''
       }
     }
   },

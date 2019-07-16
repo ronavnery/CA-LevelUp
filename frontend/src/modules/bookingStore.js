@@ -22,6 +22,7 @@ export default {
     actions: {
         async sendBookingReq(context, { bookingReq }) {
             try {
+                console.log('got booking request:', bookingReq);
                 await bookingService.set(bookingReq)
             } catch (err) {
                 console.log(err)

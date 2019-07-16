@@ -44,6 +44,11 @@ async function updateUser(req, res) {
     }
 }
 
+async function checkIfLoggedIn(req, res) {
+    if (req.session.user) res.send(req.session.user)
+    else return res.status(418).end('No User Logged In')
+}
+
 module.exports = {
     getUser,
     getUsers,
@@ -51,5 +56,6 @@ module.exports = {
     login,
     addUser,
     updateUser,
-    getUserByNickname
+    getUserByNickname,
+    checkIfLoggedIn
 }

@@ -9,5 +9,5 @@ export default {
 }
 
 function set(booking) {
-    console.log(booking)
+    console.log(booking) 
 }

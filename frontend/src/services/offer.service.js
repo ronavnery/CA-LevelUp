@@ -10,6 +10,7 @@ export default {
 }
 
 function query(filter) {
+    console.log(filter)
     return httpService.get(_getUrl(), filter)
 }
 

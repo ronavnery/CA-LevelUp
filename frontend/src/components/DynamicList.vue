@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="list">
     <input
       type="text"
       v-model="newText"
@@ -17,10 +17,14 @@
 
 <script>
 export default {
+  props: {
+    list: {
+      type: Array
+    }
+  },
   data() {
     return {
       newText: "",
-      list: []
     };
   },
 

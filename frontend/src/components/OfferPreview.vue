@@ -155,7 +155,7 @@ export default {
       // this.$router.push(`profile/${this.offer.createdBy.nickName}/${this.offer._id}`);
     },
     goToEdit() {
-      this.$router.push(`explore/edit/${this.offer._id}`);
+      this.$router.push(`profile/edit/${this.offer._id}`);
     },
     removeOffer() {
       this.$emit("removeOffer", this.offer._id);

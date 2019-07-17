@@ -1,8 +1,11 @@
+const dbService = require('../services/db.service')
+const ObjectId = require('mongodb').ObjectId
 
 // This is a room service that allows up to 2 people in a room
 
 module.exports = {
-    placeInRoom
+    placeInRoom,
+    getMsgsById
 }
 
 function placeInRoom(member) {
@@ -37,6 +40,17 @@ function createRoom(member){
     }
     gRooms.push(newRoom);
     return newRoom;
+}
+
+async function getMsgsById(msgsId) {
+    const collection = await dbService.getCollection('msg')
+    try {
+        const msgs = await collection.find({ "_id": ObjectId(msgsId) })
+        return msgs
+    } catch (err) {
+        console.log(`ERROR: while finding msgs ${msgsId}`)
+        throw err;
+    }
 }
 
 // function makeId(size = 5) {

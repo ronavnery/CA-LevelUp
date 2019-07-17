@@ -231,6 +231,7 @@ header {
     width: 25px;
     height: 25px;
     margin: 3px;
+    outline: none;
   }
 
   button:first-of-type {
@@ -319,6 +320,7 @@ footer {
 
     button {
       margin-right: 3px;
+      outline: none;
     }
 
     span {
@@ -337,6 +339,7 @@ button {
   @include flexCenter(row);
   @include btnRound(32px);
   border: 0;
+  outline: none;
   background: #f5f5f6;
   cursor: pointer;
   transition: background 0.2s;

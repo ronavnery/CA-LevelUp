@@ -216,7 +216,10 @@ export default {
   background: $tpWhite;
   border-radius: 5px;
   cursor: pointer;
+  margin: 10px;
 }
+
+
 header {
   @include flexCustom(flex-start, center, row);
   min-height: 40px;

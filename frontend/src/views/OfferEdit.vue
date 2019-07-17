@@ -1,10 +1,10 @@
 <template>
   <div class="offer-edit">
+      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
     <form @submit.prevent='prevent' class="flex column">
       <h2>Add lesson</h2>
       <input type="text" v-model="editedOffer.title" placeholder="Title" />
       <input type="text" v-model="editedOffer.description" placeholder="Description" />
-      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
       <select v-model="editedOffer.category" name="category">
         <option v-for="(category,idx) in optionalCategorys" :key="idx">{{category}}</option>
       </select>

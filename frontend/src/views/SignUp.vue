@@ -77,6 +77,8 @@ export default {
                 interestedIn: [],
                 leveledUpIn: [],
                 ratingAvg: 0,
+                aboutMe: '',
+                age: 30
             },
             confirmPassword: ''
         }

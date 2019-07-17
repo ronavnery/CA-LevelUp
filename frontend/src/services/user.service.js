@@ -11,6 +11,7 @@ function _getAuthUrl(route = '') {
 }
 
 
+
 async function getUsers(filterBy = null) {
     try {
         const users = await httpService.get(_getUrl(), filterBy)
@@ -104,5 +105,5 @@ export default {
     update,
     getUsers,
     logout,
-    checkIfLoggedIn
+    checkIfLoggedIn,
 }

@@ -11,6 +11,7 @@ function _getAuthUrl(route = '') {
 }
 
 
+
 async function getUsers(filterBy = null) {
     try {
         const users = await httpService.get(_getUrl(), filterBy)
@@ -101,7 +102,9 @@ async function getUserInbox(userId) {
         const msgs = await httpService.get(_getUrl()+'/msgs', userId)
         return msgs
     }
-    catch(err) {}
+    catch(err) {
+        throw err
+    }
 }
 
 export default {

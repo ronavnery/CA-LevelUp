@@ -7,6 +7,7 @@ import Login from './views/Login.vue'
 import Profile from './views/Profile.vue'
 import ProfileEdit from './views/ProfileEdit.vue';
 import SignUp from './views/SignUp.vue'
+import Inbox from './views/Inbox.vue'
  
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
       path: '/profile/:nickName/:offerId?',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/profile/:nickName/inbox?',
+      name: 'Inbox',
+      component: Inbox
     },
     {
       path: '/login',

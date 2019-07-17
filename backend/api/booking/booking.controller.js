@@ -1,4 +1,6 @@
 const bookingService = require('./booking.service') 
+// const offerService = require('../offer/offer.service') 
+// const userService = require('../user/user.service') 
 
 const getBookings = async (req, res) => {
     const bookings = await bookingService.query(req.query)
@@ -21,11 +23,13 @@ async function updateBooking(req, res) {
 }
 
 async function addBooking(req, res) {
-    console.log('in controller, req.body is:', req.body)
+    console.log('Controller: Got request:', req.body)
+    console.log('Controller: Adding to booking db')
     const booking = await bookingService.add(req.body,req.session.user)
-    console.log('in controller after service, booking is:', booking)
+    console.log('Controller: after service, booking is:', booking)
+    console.log('Controller: Updating offer db with booking')
     booking.createdBy = req.session.user
-    console.log('req.session.user is:', req.session.user)
+    console.log('Controller: req.session.user is:', req.session.user)
     res.send({booking})
 }
 

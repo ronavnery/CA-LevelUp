@@ -1,39 +1,42 @@
 <template>
   <!-- <section class="offer-details-container" v-if="offer"> -->
   <div class="offer-card" v-if="offer">
-    <aside :class="offer.category.substring(0,2)">
-      <a href="#" class="button" @click="toggleBooking">
-        <span class="icon icon-play" ></span>
-      </a>
-    </aside>
+    <header>
+      <img :src="offer.imgs[0]" />
 
-    <article >
-      <h2>{{offer.title}}</h2>
-      <h3 class="category">{{offer.category}}</h3>
+      <article>
+        <h2>{{offer.title}}</h2>
+        <h3 class="category">{{offer.category}}</h3>
 
-      <ul>
-        <li>
-          <span class="icon icon-users"></span>
-          <span>{{offer.minPeople}}</span>
-        </li>
-        <li>
-          <span class="icon icon-clock"></span>
-          <span>{{offer.duration | durationInMins}}</span>
-        </li>
-        <li>
-          <span class="icon icon-level"></span>
-          <span>{{difficulty}}</span>
-        </li>
-        <li>
-          <span class="icon icon-calories"></span>
-          <span>{{offer.ratingAvg}}</span>
-        </li>
-      </ul>
-    </article>
+        <ul>
+          <li>
+            <span class="icon icon-users"></span>
+            <span>{{offer.minPeople}}</span>
+          </li>
+          <li>
+            <span class="icon icon-clock"></span>
+            <span>{{offer.duration | durationInMins}}</span>
+          </li>
+          <li>
+            <span class="icon icon-level"></span>
+            <span>{{difficulty}}</span>
+          </li>
+          <li>
+            <span class="icon icon-calories"></span>
+            <span>{{offer.ratingAvg}}</span>
+          </li>
+        </ul>
+      </article>
+    </header>
     <main v-if="offer">
+      <button class="btn-toggle-booking" @click="toggleBooking">Book to level up!</button>
       <h4>Requirements:</h4>
       <ul>
         <li v-for="requirement in offer.requirements" :key="requirement">{{requirement}}</li>
+      </ul>
+      <h4 v-if="offer.whatsIncluded.length">Whats included:</h4>
+      <ul>
+        <li v-for="included in offer.whatsIncluded" :key="included">{{included}}</li>
       </ul>
       <h4>Description:</h4>
       <p>{{offer.description}}</p>
@@ -85,14 +88,16 @@ export default {
 <style scoped lang="scss">
 img {
   min-width: 100%;
-  height: rem(200px);
+  height: 100%;
   object-fit: cover;
   vertical-align: bottom;
 }
 
 article {
   position: absolute;
-  top: 50px;
+  top: 0;
+  background: rgba(61, 43, 97, 0.7);
+  border-radius: 0 0 70px;
 }
 
 .category {
@@ -112,32 +117,17 @@ article {
   // border-bottom-right-radius: 5px;
 }
 
-.offer-card aside {
-  height: 220px;
+.offer-card header {
+  height: 400px;
   position: relative;
-  &.De {
-    background-image: url("../assets/categories_covers/development.jpg");
-    background-size: cover;
-    background-position-y: center;
-  }
-  &.Bu {
-    background-image: url("../assets/categories_covers/business.jpg");
-    background-size: cover;
-    background-position-y: -138px;
-  }
-  &.Mu {
-    background-image: url("../assets/categories_covers/music.jpg");
-    background-size: cover;
-    background-position-y: center;
-  }
 }
 
-.offer-card aside img {
+.offer-card header img {
   // border-top-left-radius: 5px;
   // border-top-right-radius: 5px;
 }
 
-.offer-card aside .button {
+.offer-card header .button {
   background: $tpPink;
   display: inline-block;
   position: absolute;
@@ -149,11 +139,14 @@ article {
   line-height: 4.0625em;
   text-align: center;
 }
-.offer-card aside .button .icon {
-  vertical-align: middle;
+.btn-toggle-booking  {
+  @include btnActionColor();
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 .offer-card article {
-  padding: 1.25em 1.5em;
+  padding: 1em 2em 1em 1em;
 }
 .offer-card article ul {
   list-style: none;
@@ -247,7 +240,8 @@ article {
 }
 
 main {
-  padding: 0 rem(20px) rem(20px) rem(20px);
+  padding: rem(20px);
+  position: relative;
 }
 </style>
 

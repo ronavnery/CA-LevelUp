@@ -12,7 +12,7 @@ export default {
 function query(filter) {
     console.log(filter)
     return httpService.get(_getUrl(), filter)
-}
+} 
 
 function add(offer) {
     return httpService.post(_getUrl(), offer)

@@ -5,9 +5,9 @@
       <span class="logo-title fs14 strong">LevelUp</span>
     </div>
     <div class="nav-container fs12">
-      <router-link exact to="/">Home</router-link>
-      <router-link to="/explore">Explore</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link exact to="/" class="header-link">Home</router-link>
+      <router-link to="/explore" class="header-link">Explore</router-link>
+      <router-link to="/about" class="header-link">About</router-link>
     </div>
     <UserDashboard :currUser="connectedUser" v-if="connectedUser" />
     <div class="user-action-container" v-else>

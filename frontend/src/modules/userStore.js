@@ -120,6 +120,15 @@ export default {
                 throw err
             }
         },
+        async getUserMsgs(userId) {
+            try {
+                const msgs = await userService.getUserInbox(userId)
+                return msgs
+            }catch(err) {
+                console.log(err)
+            }
+        },
+
         async checkIfLoggedInUser({ commit }) {
             try {
                 const user = await userService.checkIfLoggedIn()

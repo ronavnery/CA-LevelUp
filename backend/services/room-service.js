@@ -5,7 +5,7 @@ const ObjectId = require('mongodb').ObjectId
 
 module.exports = {
     placeInRoom,
-    getMsgsById
+    getHistorByUserId
 }
 
 function placeInRoom(member) {
@@ -26,14 +26,14 @@ const gRooms = [];
 //     members : []
 // }
 function findRoomWith(member) {
-	return gRooms.find(room => room.members.find((currMember) => currMember === member));
+    return gRooms.find(room => room.members.find((currMember) => currMember === member));
 }
 
 function findAvailableRoom() {
-	return gRooms.find(({ members }) => members.length === 1);
+    return gRooms.find(({ members }) => members.length === 1);
 }
 
-function createRoom(member){
+function createRoom(member) {
     var newRoom = {
         members: [member],
         id: makeId()
@@ -42,15 +42,26 @@ function createRoom(member){
     return newRoom;
 }
 
-async function getMsgsById(msgsId) {
-    const collection = await dbService.getCollection('msg')
-    try {
-        const msgs = await collection.find({ "_id": ObjectId(msgsId) })
-        return msgs
-    } catch (err) {
-        console.log(`ERROR: while finding msgs ${msgsId}`)
-        throw err;
+let msgsDb = [
+    {
+        userId: '5d2eeb6efc34a70a48413cac',
+        rooms: {
+            roomId: "fsdsf32dsc534534r",
+            msgs: ['vvfds', 'vfdsvdv', '']
+        }
     }
+]
+
+ function getHistorByUserId(userId) {
+    // const collection = await dbService.getCollection('msg')
+    // try {
+        // const msgs = await collection.find({ "_id": ObjectId(msgsId) })
+        return msgsDb
+        return msgsDb.find(user => user.userId === userId)
+    // } catch (err) {
+    //     console.log(`ERROR: while finding msgs ${msgsId}`)
+    //     throw err;
+    // }
 }
 
 // function makeId(size = 5) {

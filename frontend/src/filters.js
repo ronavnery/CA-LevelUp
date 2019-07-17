@@ -10,3 +10,8 @@ Vue.filter('durationInMins', mins =>{
     else if (hours && !minutes) return hours + 'h'
     return minutes + 'm'
  })
+
+Vue.filter('rating', ratingAvg =>{
+    if (!ratingAvg) return 'Not rated yet'
+    else return ratingAvg
+ })

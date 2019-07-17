@@ -10,20 +10,25 @@
 
         <ul>
           <li>
-            <span class="icon icon-users"></span>
-            <span>{{offer.minPeople}}</span>
+            <i class="header-icon fas fa-user-friends" v-if="offer.minPeople > 1 "></i>
+            <i class="header-icon fas fa-user-alt" v-else></i>
+            <span class="header-icon-title">{{offer.minPeople}}</span>
           </li>
           <li>
-            <span class="icon icon-clock"></span>
-            <span>{{offer.duration | durationInMins}}</span>
+            <i class="header-icon far fa-clock"></i>
+            <span class="header-icon-title">{{offer.duration | durationInMins}}</span>
           </li>
           <li>
-            <span class="icon icon-level"></span>
-            <span>{{difficulty}}</span>
+            <i class="header-icon fas fa-dice-one" v-if="offer.difficulty === 1"></i>
+            <i class="header-icon fas fa-dice-two" v-if="offer.difficulty === 2"></i>
+            <i class="header-icon fas fa-dice-three" v-if="offer.difficulty === 3"></i>
+            <span class="header-icon-title">{{difficulty}}</span>
           </li>
           <li>
-            <span class="icon icon-calories"></span>
-            <span>{{offer.ratingAvg}}</span>
+            <i class="header-icon fas fa-star" v-if="offer.ratingAvg"></i>
+            <i class="header-icon far fa-star" v-else></i>
+            <span class="header-icon-title">{{offer.ratingAvg | rating}}/5</span>
+            <span class="header-icon-title" v-if="offer.ratingAvg">({{offer.reviews.length}} reviews)</span>
           </li>
         </ul>
       </article>
@@ -122,9 +127,16 @@ article {
   position: relative;
 }
 
-.offer-card header img {
-  // border-top-left-radius: 5px;
-  // border-top-right-radius: 5px;
+.header-icon {
+  color: $tpLightPink;
+}
+
+.header-icon-title {
+  margin-left: 0.5em;
+  font-size: 0.8em;
+  font-weight: 300;
+  vertical-align: middle;
+  color: #fff;
 }
 
 .offer-card header .button {
@@ -139,7 +151,7 @@ article {
   line-height: 4.0625em;
   text-align: center;
 }
-.btn-toggle-booking  {
+.btn-toggle-booking {
   @include btnActionColor();
   position: absolute;
   right: 20px;
@@ -171,6 +183,7 @@ article {
   vertical-align: middle;
   color: $tpWhite;
 }
+
 .offer-card article h2,
 .offer-card article h3 {
   margin: 0;
@@ -180,6 +193,7 @@ article {
   font-size: 1.75em;
   color: $tpWhite;
   font-weight: bold;
+  max-width: 70%;
 }
 .offer-card article h3 {
   font-size: 0.9375em;

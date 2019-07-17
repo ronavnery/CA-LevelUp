@@ -24,7 +24,7 @@ async function getUsers(filterBy = null) {
 async function login(credentials) {
     try {
         const registeredUser = await httpService.post(_getAuthUrl('login'), credentials)
-        if (registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
+        if(registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
         
         console.log(registeredUser)
         return registeredUser
@@ -96,6 +96,14 @@ async function checkIfLoggedIn() {
     }
 }
 
+async function getUserInbox(userId) {
+    try {
+        const msgs = await httpService.get(_getUrl()+'/msgs', userId)
+        return msgs
+    }
+    catch(err) {}
+}
+
 export default {
     login,
     getProfileByNickname,
@@ -104,5 +112,6 @@ export default {
     update,
     getUsers,
     logout,
-    checkIfLoggedIn
+    checkIfLoggedIn,
+    getUserInbox
 }

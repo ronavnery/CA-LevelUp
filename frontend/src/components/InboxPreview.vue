@@ -25,23 +25,32 @@ export default {
       socket: io("localhost:3000")
     };
   },
+
+  created() {
+
+  },
+
   methods: {
     
   },
   
-   mounted() {
-     const inboxId = this.$store.getters.connectedUser._id
-     console.log(inboxId)
-    //  this.socket.on("MESSAGE", data => {
-    //    this.msgs = [...this.msgs, data];
-    //  });
-    //  this.socket.emit("inbox join", {
+//    mounted() {
+//      const inboxId = this.$store.getters.connectedUser._id
+//      console.log(inboxId)
+//     //  this.socket.on("MESSAGE", data => {
+//     //    this.msgs = [...this.msgs, data];
+//     //  });
+//     //  this.socket.emit("inbox join", {
        
-    //  });
-     this.socket.on("get_history", inboxId => {
-       this.msgs = [...this.msgs, ...data];
-     });
-   }
+//     //  });
+//     this.socket.emit("SEND_MESSAGE", {
+//         user: this.user,
+//         message: this.msg,
+//         roomId: this.$route.params.id
+
+//       });
+//      this.socket.emit("history", inboxId)
+//    }
 };
 </script>
 

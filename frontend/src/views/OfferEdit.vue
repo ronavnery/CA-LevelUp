@@ -1,16 +1,16 @@
 <template>
   <div class="offer-edit">
-    <form @submit.prevent="console.log('hi')" class="flex column">
-      <h2>Share your skill</h2>
+    <form @submit.prevent='prevent' class="flex column">
+      <h2>Add lesson</h2>
       <input type="text" v-model="editedOffer.title" placeholder="Title" />
       <input type="text" v-model="editedOffer.description" placeholder="Description" />
-      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
       <select v-model="editedOffer.category" name="category">
         <option v-for="(category,idx) in optionalCategorys" :key="idx">{{category}}</option>
       </select>
       <select v-model.number="editedOffer.difficulty" name="difficulty">
         <option v-for="(difficult,idx) in 3" :key="idx">{{difficult}}</option>
       </select>
+      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
       <input v-model.number="editedOffer.duration" placeholder="Duration in minuets" type="number" />
       <DynamicList @requirements-updated="changeRequirments" :list="editedOffer.requirements" />
       <DynamicList @whatIncluded-updated="changeWhatsIncluded" :list="editedOffer.whatsIncluded" />

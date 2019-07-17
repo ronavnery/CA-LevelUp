@@ -92,7 +92,7 @@ form {
     width: 200px;
     padding: 8px 0;
     background: transparent;
-    border-radius: 25px;
+    border-radius: 5px;
     border: 1px solid white;
     color: white;
     font-family: 'Montserrat-Bold', sans-serif;
@@ -104,7 +104,6 @@ form {
 
     &::after {
         content: url('../assets/arrow-right.svg');
-        
         position: absolute;
         @include flexCenter(row);
         right: 5px;

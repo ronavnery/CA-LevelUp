@@ -5,10 +5,11 @@
   background: linear-gradient(90deg, #c654dd 0%, #e6306a 186.42%);
   border-radius: rem(20px);
   border: 0px;
-  font-family: "$Montserrat-Bold";
+  font-family: $Montserrat-Bold;
   font-weight: bold;
   outline: none;
   line-height: 1;
+  color: $tpWhite;
 }
 
 @mixin btnActionColorSm() {

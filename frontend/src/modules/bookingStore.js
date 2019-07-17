@@ -26,10 +26,12 @@ export default {
             try {
                 console.log('got booking request:', bookingReq);
                 const newBooking = await bookingService.add(bookingReq)
-                const newBookingId = newBooking._id
-                console.log('GOT RESPONSE! its:', newBookingId)
+                const newBookingId = newBooking.booking._id
+                if (newBookingId) return 'Request sent!'
+                else throw new Error('Request failed to send')
             } catch (err) {
                 console.log(err)
+                return err
             }
         }
     }

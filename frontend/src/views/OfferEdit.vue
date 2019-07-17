@@ -1,7 +1,7 @@
 <template>
   <div class="offer-edit">
-    <form @submit.prevent='prevent' class="flex column">
-      <h2>Add lesson</h2>
+    <form @submit.prevent="console.log('hi')" class="flex column">
+      <h2>Share your skill</h2>
       <input type="text" v-model="editedOffer.title" placeholder="Title" />
       <input type="text" v-model="editedOffer.description" placeholder="Description" />
       <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
@@ -27,6 +27,13 @@
       <DynamicCarousel :imgs="this.optionalPhotos" @img-choosed="addPhoto" />
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
+    <!-- <DynamicList @requirements-updated="changeRequirments" />
+    <DynamicList @whatIncluded-updated="changeWhatsIncluded" />-->
+    <!-- <div v-for="(photo,idx) in optionalPhotos" :key="idx">
+      <img :src="photo" alt @click="addPhoto(photo)" />
+    </div> -->
+    <!-- {{ tags }} -->
+    <!-- {{ editedOffer }} -->
   </div>
 </template>
 
@@ -103,11 +110,14 @@ export default {
       return
     },
     save() {
+    async save() {
       const newOffer = this.editedOffer;
       if (newOffer._id) {
-        this.$store.dispatch({ type: "updateOffer", newOffer });
+        await this.$store.dispatch({ type: "updateOffer", newOffer })
+        this.$router.push('/explore')
       } else {
-        this.$store.dispatch({ type: "addOffer", newOffer });
+        await this.$store.dispatch({ type: "addOffer", newOffer })
+        this.$router.push('/explore')
       }
     },
     async searchPhotos() {

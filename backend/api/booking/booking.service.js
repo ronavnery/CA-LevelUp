@@ -78,11 +78,13 @@ async function update(booking) {
 async function add(booking, creator) {
     console.log('in service, got booking:', booking)
     const collection = await dbService.getCollection('booking')
-    console.log('in service, after dbService, collection is:', collection)
+    console.log('Connected to collection booking')
     booking.createdAt = Date.now()
     booking.createdBy = creator
     try {
+        console.log('Trying to insert booking to db');
         await collection.insertOne(booking);
+        console.log('Inserted booking to db.');
         return booking;
     } catch (err) {
         console.log(`ERROR: cannot insert booking`)

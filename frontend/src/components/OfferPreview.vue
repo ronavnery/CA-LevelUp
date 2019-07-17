@@ -206,7 +206,7 @@ export default {
 <style scoped lang="scss">
 .offer-preview {
   @include flexCustom(space-between, stretch, column);
-  max-width: rem(250px);
+  width: rem(250px);
   background: $tpWhite;
   border-radius: 5px;
   cursor: pointer;

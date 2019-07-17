@@ -9,16 +9,9 @@
       <textarea v-model="bookingReq.availability" id="availability" type="text" />
       <label for="extraInfo">What more should this person know about you?</label>
       <textarea v-model="bookingReq.extraInfo" id="extraInfo" type="text" />
-      <label for="extraInfo">What more should this person know about you?</label>
-      <textarea v-model="bookingReq.extraInfo" id="extraInfo" type="text" />
-      <label for="extraInfo">What more should this person know about you?</label>
-      <textarea v-model="bookingReq.extraInfo" id="extraInfo" type="text" />
-      <label for="extraInfo">What more should this person know about you?</label>
-      <textarea v-model="bookingReq.extraInfo" id="extraInfo" type="text" />
-      <label for="extraInfo">What more should this person know about you?</label>
-      <textarea v-model="bookingReq.extraInfo" id="extraInfo" type="text" />
       
       <input id="levelUp" class="level-up-btn" @click.prevent="sendBookingReq" value="Level Me Up" type="submit" />
+      <p class="success-status">{{successStatus}}</p>
     </form>
     <div class="login-msg fs18" v-else>
       Level up requests are for registered users only.<br>
@@ -35,15 +28,30 @@ export default {
         reason: '',
         availability: '',
         extraInfo: ''
-      }
+      },
+      successStatus: ''
     }
   },
   methods: {
     sendBookingReq() {
-      this.bookingReq.offerId = this.$store.getters.getCurrOffer._id
-      this.bookingReq.offererId= this.$store.getters.currProfile._id
-      this.bookingReq.requesterId= this.$store.getters.connectedUser._id
+      this.bookingReq.offer = {
+        offerId: this.$store.getters.getCurrOffer._id,
+        offerTitle:  this.$store.getters.getCurrOffer.title,
+        offerType:  this.$store.getters.getCurrOffer.location.type,
+        offerImg:  this.$store.getters.getCurrOffer.imgs[0],
+      }
+      this.bookingReq.offerMaker = {
+        makerId: this.$store.getters.currProfile._id,
+        makerName: this.$store.getters.currProfile.name,
+        makerImg: this.$store.getters.currProfile.imgUrl,
+      }
+      this.bookingReq.bookingMaker = {
+        makerId: this.$store.getters.connectedUser._id,
+        makerName: this.$store.getters.connectedUser.name,
+        makerImg: this.$store.getters.connectedUser.imgUrl,
+      } 
       this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
+        .then(bookingId => this.successStatus = bookingId)
     } 
   },
   computed: {
@@ -92,6 +100,10 @@ export default {
   a {
     color: $tpPink;
   }
+}
+
+.success-status {
+  color : $tpPink;
 }
 
 </style>

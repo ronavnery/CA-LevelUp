@@ -31,6 +31,7 @@ export default {
   
    mounted() {
      const inboxId = this.$store.getters.connectedUser._id
+     console.log(inboxId)
     //  this.socket.on("MESSAGE", data => {
     //    this.msgs = [...this.msgs, data];
     //  });

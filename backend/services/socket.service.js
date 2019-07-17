@@ -5,7 +5,7 @@ const roomService = require('./room-service');
 var io;
 var activeUsersCount = 0;
 
-function setup(http) {
+ function setup(http) {
     io = socketIO(http);
     io.on('connection', function (socket) {
         console.log('a user connected');
@@ -22,7 +22,7 @@ function setup(http) {
             console.log(data)
             socket.join(data);
             socket.on('get_history', (inboxId) => {
-                const msgs = ''
+                const msgs = roomService.getMsgsById(inboxId)
                 
                 io.to(inboxId).emit('MESSAGE', msgs);
             });

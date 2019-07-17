@@ -55,7 +55,8 @@ import {
   mdbIcon,
   mdbModal,
   mdbModalBody,
-  mdbModalFooter
+  mdbModalFooter,
+  mdbFileInput
 } from "mdbvue";
 
 export default {
@@ -119,7 +120,8 @@ export default {
     mdbIcon,
     mdbModal,
     mdbModalBody,
-    mdbModalFooter
+    mdbModalFooter,
+    mdbFileInput
   }
 }
 </script>

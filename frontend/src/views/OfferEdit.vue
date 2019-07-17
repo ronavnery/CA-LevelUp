@@ -1,6 +1,5 @@
 <template>
   <div class="offer-edit">
-      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
     <form @submit.prevent='prevent' class="flex column">
       <h2>Add lesson</h2>
       <input type="text" v-model="editedOffer.title" placeholder="Title" />
@@ -11,6 +10,7 @@
       <select v-model.number="editedOffer.difficulty" name="difficulty">
         <option v-for="(difficult,idx) in 3" :key="idx">{{difficult}}</option>
       </select>
+      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
       <input v-model.number="editedOffer.duration" placeholder="Duration in minuets" type="number" />
       <DynamicList @requirements-updated="changeRequirments" :list="editedOffer.requirements" />
       <DynamicList @whatIncluded-updated="changeWhatsIncluded" :list="editedOffer.whatsIncluded" />
@@ -27,6 +27,13 @@
       <DynamicCarousel :imgs="this.optionalPhotos" @img-choosed="addPhoto" />
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
+    <!-- <DynamicList @requirements-updated="changeRequirments" />
+    <DynamicList @whatIncluded-updated="changeWhatsIncluded" />-->
+    <!-- <div v-for="(photo,idx) in optionalPhotos" :key="idx">
+      <img :src="photo" alt @click="addPhoto(photo)" />
+    </div> -->
+    <!-- {{ tags }} -->
+    <!-- {{ editedOffer }} -->
   </div>
 </template>
 
@@ -102,12 +109,14 @@ export default {
     prevent() {
       return
     },
-    save() {
+    async save() {
       const newOffer = this.editedOffer;
       if (newOffer._id) {
-        this.$store.dispatch({ type: "updateOffer", newOffer });
+        await this.$store.dispatch({ type: "updateOffer", newOffer })
+        this.$router.push('/explore')
       } else {
-        this.$store.dispatch({ type: "addOffer", newOffer });
+        await this.$store.dispatch({ type: "addOffer", newOffer })
+        this.$router.push('/explore')
       }
     },
     async searchPhotos() {

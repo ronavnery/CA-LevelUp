@@ -14,6 +14,7 @@
         <OfferPreview :offer="offer" />
       </div>
     </div>
+    <router-view />
   </section>
 </template>
 

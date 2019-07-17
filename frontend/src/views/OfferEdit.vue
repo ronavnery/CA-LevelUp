@@ -109,7 +109,6 @@ export default {
     prevent() {
       return
     },
-    save() {
     async save() {
       const newOffer = this.editedOffer;
       if (newOffer._id) {

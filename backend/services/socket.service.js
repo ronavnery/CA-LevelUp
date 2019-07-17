@@ -16,7 +16,20 @@ function setup(http) {
             console.log('user disconnected');
             activeUsersCount--;
         });
+        socket.on('JOIN_ROOM', (data) => {
+            const { roomId, user } = data
+            // const room = roomService.placeInRoom(user, roomId)
+            console.log(data)
+            socket.join(data);
+            socket.on('get_history', (inboxId) => {
+                const msgs = ''
+                
+                io.to(inboxId).emit('MESSAGE', msgs);
+            });
+            // io.emit('MESSAGE', data)
+        });
 
+        
         socket.on('chat join', (user) => {
             room = roomService.placeInRoom(user)
             console.log('Placed', user, 'in room:', room);

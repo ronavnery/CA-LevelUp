@@ -2,10 +2,11 @@
   <section class="user-dashboard-header">
     <button class="btn-add-offer" @click="addOffer">Share Your Skill</button>
     <div class="icon-container">
-      <i class="fas fa-envelope"></i>
+      <i class="fas fa-envelope" @click="toggleInbox"></i>
       <i class="fas fa-bell"></i>
       <i class="fas fa-user" @click="toggleNav"></i>
     </div>
+    <inboxPreview :isOpen="isOpen"/>
     <nav v-if="showNav">
       <ul class="user-commands clean-list">
         <li>
@@ -24,6 +25,8 @@
 
 
 <script>
+import inboxPreview from './InboxPreview'
+
 export default {
   props: {
     currUser: {
@@ -32,7 +35,8 @@ export default {
   },
   data() {
     return {
-      showNav: false
+      showNav: false,
+      isOpen: false
     };
   },
   methods: {
@@ -45,12 +49,18 @@ export default {
         console.log("Couldnt log out, got err:", err);
       }
     },
+    toggleInbox() {
+      this.isOpen = !this.isOpen
+    },
     addOffer() {
       this.$router.push("/profile/edit");
     },
     toggleNav() {
       this.showNav = !this.showNav;
     }
+  },
+  components: {
+    inboxPreview
   }
 };
 </script>

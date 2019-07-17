@@ -33,7 +33,8 @@ export default {
 
 <style lang="scss">
 .offer-list-container {
-  @include flexCustom(space-around,center,row)
+  @include flexCustom(space-around,center,row);
+      flex-wrap: wrap;
 }
 
 </style>

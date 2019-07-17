@@ -56,7 +56,7 @@ export default {
             state.users = users
         },
         setConnectedUser(state, {user}) {
-            state.connectedUser = user
+            state.connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
         },
         addUserToStore(state, {addedUser}) {
             state.users.push(addedUser)
@@ -69,8 +69,7 @@ export default {
             try {
                 const users = await userService.getUsers(filterBy)
                 context.commit({type: 'setUsers', users})
-            }
-            catch(err) {
+            } catch(err) {
                 throw err
             }
         },
@@ -79,8 +78,7 @@ export default {
                 const user = await userService.login(credentials)
                 commit({type: 'setConnectedUser', user})
                 return user;
-            }
-            catch (err) {
+            } catch (err) {
                 throw err
             }
         },
@@ -100,8 +98,7 @@ export default {
                 const user = await userService.getProfileByNickname(nickName)
                 commit({type: 'setCurrProfile', user})
                 return user
-            }
-            catch(err) {
+            } catch(err) {
                 throw err
             }
         },
@@ -109,8 +106,7 @@ export default {
             try {
                 const updatedUser = await userService.update(userToUpdate)
                 commit({type: 'updateUserInStore', updatedUser})
-            }
-            catch(err) {
+            } catch(err) {
                 throw err
             }
         },
@@ -119,19 +115,16 @@ export default {
                 const res = await userService.logout()
                 commit({type: 'setConnectedUser', user: null})
                 return res;
-            }
-            catch(err) {
+            } catch(err) {
                 throw err
             }
         },
         async checkIfLoggedInUser({commit}) {
             try {
-                
                 const user = await userService.checkIfLoggedIn()
                 commit({type: 'setConnectedUser', user})
                 return user
-            }
-            catch(err) {
+            } catch(err) {
                 throw err
             }
         }

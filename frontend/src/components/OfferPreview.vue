@@ -209,6 +209,7 @@ export default {
   max-width: rem(250px);
   background: $tpWhite;
   border-radius: 5px;
+  cursor: pointer;
 }
 header {
   @include flexCustom(flex-start, center, row);

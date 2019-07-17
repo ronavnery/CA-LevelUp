@@ -2,9 +2,6 @@
 import httpService from './http.service';
 
 
-
-
-
 function _getUrl(route = '') {
     return `user/${route}`
 }
@@ -27,6 +24,8 @@ async function getUsers(filterBy = null) {
 async function login(credentials) {
     try {
         const registeredUser = await httpService.post(_getAuthUrl('login'), credentials)
+        sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
+        
         console.log(registeredUser)
         return registeredUser
     }
@@ -38,6 +37,7 @@ async function login(credentials) {
 async function logout() {
     try {
         await httpService.get(_getAuthUrl('logout'))
+        sessionStorage.clear()
         return 'All Good';
     } 
     catch(err) {
@@ -58,6 +58,7 @@ async function getProfileByNickname(nickName) {
 async function add(newUser) {
     try {
         const addedUser = await httpService.post(_getAuthUrl('signup'), newUser)
+        sessionStorage.setItem('loggedInUser', JSON.stringify(addedUser));
         return addedUser;
     }
     catch (err) {

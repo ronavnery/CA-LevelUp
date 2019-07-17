@@ -2,12 +2,16 @@
 import httpService from './http.service';
 
 export default {
-    set,
+    add,
     // getLoggedinUser,
     // logOut,
     // deleteUser,
 }
 
-function set(booking) {
-    console.log(booking) 
+function add(bookingReq) {
+    return httpService.post(_getUrl(), bookingReq)
+}
+
+function _getUrl(id = '') {
+    return `booking/${id}`
 }

@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId
 
 module.exports = {
     query,
-    getById,
+    getById, 
     getByEmail,
     remove,
     update,

@@ -5,7 +5,7 @@ import Explore from './views/Explore.vue'
 import OfferEdit from './views/OfferEdit.vue'
 import Login from './views/Login.vue'
 import Profile from './views/Profile.vue'
-// import ProfileEdit from './views/ProfileEdit.vue';
+import ProfileEdit from './views/ProfileEdit.vue';
 import SignUp from './views/SignUp.vue'
  
 Vue.use(Router)
@@ -29,11 +29,11 @@ export default new Router({
       name: 'OfferEdit',
       component: OfferEdit
     },
-    // {
-    //   path: '/profile/:nickName/edit',
-    //   name: 'ProfileEdit',
-    //   component: ProfileEdit
-    // },
+    {
+      path: '/profile/:nickName/edit',
+      name: 'ProfileEdit',
+      component: ProfileEdit
+    },
     {
       path: '/profile/:nickName/:offerId?',
       name: 'Profile',

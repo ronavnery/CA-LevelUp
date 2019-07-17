@@ -43,7 +43,6 @@ export default {
     actions: {
         async loadOffers(context, { filter = '' }) {
             try {
-                console.log(filter)
                 const offers = await offerService.query(filter)
                 context.commit({ type: 'setOffers', offers })
                 return offers

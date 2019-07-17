@@ -1,6 +1,6 @@
 <template>
   <div class="offer-edit">
-    <form @submit.prevent="console.log('hi')" class="flex column">
+    <form @submit.prevent='prevent' class="flex column">
       <h2>Add lesson</h2>
       <input type="text" v-model="editedOffer.title" placeholder="Title" />
       <input type="text" v-model="editedOffer.description" placeholder="Description" />
@@ -12,8 +12,8 @@
         <option v-for="(difficult,idx) in 3" :key="idx">{{difficult}}</option>
       </select>
       <input v-model.number="editedOffer.duration" placeholder="Duration in minuets" type="number" />
-      <DynamicList @requirements-updated="changeRequirments"  :list ="editedOffer.requirements"/>
-      <DynamicList @whatIncluded-updated="changeWhatsIncluded" :list ="editedOffer.whatsIncluded" />
+      <DynamicList @requirements-updated="changeRequirments" :list="editedOffer.requirements" />
+      <DynamicList @whatIncluded-updated="changeWhatsIncluded" :list="editedOffer.whatsIncluded" />
       <input
         v-model.number="editedOffer.minPeople"
         placeholder="Min participate peoples"
@@ -24,24 +24,16 @@
         <option>Skype</option>
         <option>In Person</option>
       </select>
-    <DynamicCarousel :imgs="this.optionalPhotos" @img-choosed="addPhoto" />
+      <DynamicCarousel :imgs="this.optionalPhotos" @img-choosed="addPhoto" />
       <input @click.prevent="save" class="add-offer-btn" type="submit" />
     </form>
-    <!-- <DynamicList @requirements-updated="changeRequirments" />
-    <DynamicList @whatIncluded-updated="changeWhatsIncluded" />-->
-    <!-- <div v-for="(photo,idx) in optionalPhotos" :key="idx">
-      <img :src="photo" alt @click="addPhoto(photo)" />
-    </div> -->
-    {{ tags }}
-    {{ editedOffer }}
   </div>
 </template>
 
 <script>
 import DynamicList from "../components/DynamicList";
 import VueTagsInput from "@johmun/vue-tags-input";
-import DynamicCarousel from '../components/DynamicCarousel'
-
+import DynamicCarousel from "../components/DynamicCarousel";
 
 export default {
   name: "offer-edit",
@@ -99,7 +91,7 @@ export default {
         if (!this.$store.getters.connectedUser) this.$router.push("/");
         this.searchPhotos();
         this.editedOffer = offerToEdit;
-        this.tags = offerToEdit.tags.map(tag => tag = {text: tag});
+        this.tags = offerToEdit.tags.map(tag => (tag = { text: tag }));
       } catch (err) {
         console.log(err);
       }
@@ -107,6 +99,9 @@ export default {
   },
 
   methods: {
+    prevent() {
+      return
+    },
     save() {
       const newOffer = this.editedOffer;
       if (newOffer._id) {
@@ -122,7 +117,7 @@ export default {
           type: "searchRelatedPhotos",
           searchTerm
         });
-        console.log(imgUrls)
+        console.log(imgUrls);
         this.optionalPhotos = imgUrls;
       } catch (err) {
         console.log(err);

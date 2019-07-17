@@ -1,7 +1,9 @@
 <template>
   <carousel v-if="imgs.length" :mouseDrag="true" :paginationColor="'#159046'" :perPage="2">
     <slide class="slide" v-for="(img,idx) in imgs" :key="idx" data-index="0" data-name="MySlideName">
-      <img :src="img" width="auto" @click.prevent="addPhoto(img)" />
+      <img :src="img" width="auto"
+      @click="e => e.target.classList.toggle('choosed')"
+      @click.prevent="addPhoto(img,idx)" />
     </slide>
   </carousel>
 </template>
@@ -17,11 +19,17 @@ export default {
     }
   },
 
+  data() {
+    return {
+      isChoosed: {}
+    }
+  },
+
   methods: {
     handleSlideClick(dataset) {
       return;
     },
-    addPhoto(img) {
+    addPhoto(img,idx) {
       this.$emit("img-choosed", img);
     }
   },
@@ -40,5 +48,10 @@ export default {
 }
 img {
   width: 90%;
+  border-radius: 4px;
+  transition: 0.3s
+}
+.choosed {
+  border: green solid 4px;
 }
 </style>

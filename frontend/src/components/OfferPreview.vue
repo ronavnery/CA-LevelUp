@@ -49,7 +49,7 @@
       </div>
 
       <div class="details">
-        <p class="title">{{offer.title}}</p>
+        <p class="title">{{shortTitle}}</p>
         <p class="desc">{{shortDesc}}</p>
         <p v-for="tag in offer.tags" :key="tag" class="tags">{{tag}}</p>
       </div>
@@ -144,7 +144,7 @@ export default {
     }
   },
   methods: {
-    goToDetails() {
+    goToDetails() { 
       this.$router.push({
         name: "Profile",
         params: {
@@ -173,6 +173,12 @@ export default {
         return this.offer.description.substring(0, 60) + "...";
       }
       return this.offer.description;
+    },
+    shortTitle() {
+      if (this.offer.title.length > 60) {
+        return this.offer.title.substring(0, 60) + "...";
+      }
+      return this.offer.title;
     },
     categoryIcon() {
       if (this.offer.category === "Development") return "fas fa-file-code";

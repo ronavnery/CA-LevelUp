@@ -24,7 +24,7 @@ async function getUsers(filterBy = null) {
 async function login(credentials) {
     try {
         const registeredUser = await httpService.post(_getAuthUrl('login'), credentials)
-        sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
+        if (registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
         
         console.log(registeredUser)
         return registeredUser

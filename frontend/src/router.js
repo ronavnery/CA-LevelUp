@@ -25,7 +25,7 @@ export default new Router({
       component: Explore
     },
     {
-      path: '/explore/edit/:_id?',
+      path: '/profile/edit/:_id?',
       name: 'OfferEdit',
       component: OfferEdit
     },

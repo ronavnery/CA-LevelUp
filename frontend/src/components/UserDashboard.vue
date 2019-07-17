@@ -46,7 +46,7 @@ export default {
       }
     },
     addOffer() {
-      this.$router.push("/explore/edit");
+      this.$router.push("/profile/edit");
     },
     toggleNav() {
       this.showNav = !this.showNav;

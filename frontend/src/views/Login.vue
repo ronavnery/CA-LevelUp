@@ -10,14 +10,27 @@
                   <strong>Login</strong>
                 </h3>
               </div>
-              <mdb-input label="Your Nickname" type="text"  v-model="credentials.nickName" />
-              <mdb-input label="Your password" type="password" containerClass="mb-0" v-model="credentials.password" />
+              <mdb-input label="Your Nickname" type="text" v-model="credentials.nickName" />
+              <mdb-input
+                label="Your password"
+                type="password"
+                containerClass="mb-0"
+                v-model="credentials.password"
+              />
+              <p v-if="failedLoginTxt" class="font-small red-text d-flex justify-content-start pb-1">
+                {{failedLoginTxt}}
+              </p>
               <p class="font-small blue-text d-flex justify-content-end pb-1">
                 Forgot
                 <a href="#" class="blue-text ml-1">Password?</a>
               </p>
               <div class="text-center mb-2">
-                <mdb-btn gradient="blue" rounded class="btn-block z-depth-1a" @click="loginUser">Login</mdb-btn>
+                <mdb-btn
+                  gradient="blue"
+                  rounded
+                  class="btn-block z-depth-1a"
+                  @click="loginUser"
+                >Login</mdb-btn>
               </div>
               <p
                 class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-1"
@@ -34,7 +47,7 @@
             <mdb-modal-footer class="mx-3 pt-3 mb-0">
               <p class="font-small grey-text d-flex justify-content-end">
                 Not a member?
-                <a href="#" class="blue-text ml-1">Sign Up</a>
+                <router-link to="/sign-up" class="blue-text ml-1">Sign Up</router-link>
               </p>
             </mdb-modal-footer>
           </mdb-card>
@@ -65,19 +78,28 @@ export default {
       credentials: {
         nickName: "",
         password: "",
-        showModal: false
-      }
+        showModal: false,
+      },
+      failedLoginTxt: ''
     };
   },
 
   methods: {
     async loginUser() {
-      const res = await this.$store.dispatch({
-        type: "doLogin",
-        credentials: this.credentials
-      });
-      if (!res) console.log('no user found')
-      else this.$router.push('/explore')
+      try {
+        const res = await this.$store.dispatch({
+          type: "doLogin",
+          credentials: this.credentials
+        });
+        if (!res) {
+          console.log("no user found", res);
+        } else this.$router.push("/explore");
+      } catch (err) {
+        this._handleErr(err)
+      }
+    },
+    _handleErr(err) {
+      this.failedLoginTxt = err;
     }
   },
 
@@ -108,7 +130,7 @@ export default {
 }
 
 .form-card {
-  background: rgba(255,255,255,0.8)
+  background: rgba(255, 255, 255, 0.8);
 }
 .form-elegant .font-small {
   font-size: 0.8rem;

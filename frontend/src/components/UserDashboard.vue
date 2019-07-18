@@ -6,7 +6,6 @@
       <i class="fas fa-bell"></i>
       <i class="fas fa-user" @click="toggleNav"></i>
     </div>
-    <inboxPreview :isOpen="isOpen"/>
     <nav v-if="showNav">
       <ul class="user-commands clean-list">
         <li>
@@ -25,7 +24,9 @@
 
 
 <script>
-import inboxPreview from './InboxPreview'
+//     <inboxPreview :isOpen="isOpen"/>
+
+// import inboxPreview from './InboxPreview'
 
 export default {
   props: {
@@ -60,7 +61,7 @@ export default {
     }
   },
   components: {
-    inboxPreview
+    // inboxPreview
   }
 };
 </script>

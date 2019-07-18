@@ -23,16 +23,23 @@
       <br />
       <br />
       <span class="city fs12">{{profile.intro}}add intro here</span>
+      <button>start chat</button>
+      <BookingChat :userId="profile._id" />
+
     </section>
   </section>
 </template>
 
 <script>
+import BookingChat from './BookingChat'
 export default {
   props: {
     profile: {
       type: Object
     }
+  },
+  components: {
+    BookingChat 
   }
 };
 </script>

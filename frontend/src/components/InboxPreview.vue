@@ -27,7 +27,9 @@ export default {
   },
 
   created() {
-
+    const inboxId = this.$store.getters.connectedUser._id
+        console.log(inboxId)
+    this.$store.dispatch({ type: "getUserInbox", inboxId})
   },
 
   methods: {

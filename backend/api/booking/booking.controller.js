@@ -22,6 +22,11 @@ async function updateBooking(req, res) {
     res.send({booking})
 }
 
+async function getInbox(req, res) {
+    const inbox = await bookingService.getInbox(req.query)
+    res.send(inbox)
+}
+
 async function addBooking(req, res) {
     console.log('Controller: Got request:', req.body)
     console.log('Controller: Adding to booking db')
@@ -38,5 +43,6 @@ module.exports = {
     getBookings,
     deleteBooking,
     addBooking,
-    updateBooking
+    updateBooking,
+    getInbox
 }

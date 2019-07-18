@@ -96,13 +96,6 @@ async function checkIfLoggedIn() {
     }
 }
 
-async function getUserInbox(userId) {
-    try {
-        const msgs = await httpService.get(_getUrl()+'/msgs', userId)
-        return msgs
-    }
-    catch(err) {}
-}
 
 export default {
     login,
@@ -113,5 +106,4 @@ export default {
     getUsers,
     logout,
     checkIfLoggedIn,
-    getUserInbox
 }

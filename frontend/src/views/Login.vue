@@ -17,7 +17,7 @@
                 containerClass="mb-0"
                 v-model="credentials.password"
               />
-              <p v-if="failedLoginTxt" class="font-small red-text d-flex justify-content-start pb-1">
+              <p v-if="failedLoginTxt" class="font-large red-text d-flex justify-content-start pb-1">
                 {{failedLoginTxt}}
               </p>
               <p class="font-small blue-text d-flex justify-content-end pb-1">

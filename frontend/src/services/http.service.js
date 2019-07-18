@@ -1,4 +1,5 @@
 import router from '@/router'
+import store from '../store';
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
@@ -22,6 +23,7 @@ async function ajax(endpoint, method='get', data=null,params=null) {
     } catch (err) {
         if (err.response.status === 401) {
             router.push('/login');
+            store.dispatch({ type: "doLogout" });
         }
     }
 }

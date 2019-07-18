@@ -4,10 +4,12 @@ const cors = require('cors')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-
+const MongoStore = require('connect-mongo')(session);
+ 
 const app = express()
 const http = require('http').createServer(app);
 
+const config = require('./config')
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
 const offerRoutes = require('./api/offer/offer.routes')
@@ -23,7 +25,8 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { secure: false },
+    store: new MongoStore({ url: config.dbURL })
   }))
 
 

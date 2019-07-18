@@ -6,7 +6,7 @@ async function requireAuth(req, res, next) {
     return;
   }
   next();
-}
+} 
 
 async function requireAdmin(req, res, next) {
   if (!req.session.user.isAdmin) {

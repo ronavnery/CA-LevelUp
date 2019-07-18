@@ -3,9 +3,7 @@
     <input v-model="msg" />
     <button>send</button>
     <ul>
-      <li v-for="(m,idx) in msgs" :key="idx">
-        {{m}}
-      </li>
+      <li v-for="(m,idx) in msgs" :key="idx">{{m}}</li>
     </ul>
   </form>
 </template>
@@ -23,35 +21,46 @@ export default {
     return {
       msg: "",
       msgs: [],
+      fromId: "",
       socket: io("localhost:3000")
     };
   },
 
   created() {
-    console.log(this.userId)
     this.fromId = this.$store.getters.connectedUser._id;
-    this.toId = this.userId;
+    // this.offerOwnerId = this.userId;
   },
 
-    mounted() {
-    this.socket.on("MESSAGE", data => {
-      console.log(data)
-      this.msgs = [...this.msgs, data];
+  mounted() {
+    const { userId: ownerId, fromId } = this;
+
+    this.socket.emit("JOIN", {
+      ownerId,
+      fromId
     });
-    this.socket.emit("JOIN_ROOM", {
-      roomId: this.fromId
+
+    this.socket.on(`message:${ownerId}:${fromId}`, ({ message, senderId }) => {
+      this.msgs = [...this.msgs, { message, senderId }];
     });
+    // this.socket.on("MESSAGE", data => {
+    //   console.log(data)
+    //   this.msgs = [...this.msgs, data];
+    // });
+
+    // this.socket.emit("JOIN_ROOM", {
+    //   roomId: this.fromId
+    // });
     // this.socket.on("HISTORY", data => {
     //   this.msgs = [...this.msgs, ...data];
     // });
   },
-  
 
   methods: {
     sendMsg() {
       this.socket.emit("SEND_MESSAGE", {
         fromId: this.fromId,
-        toId: this.toId,
+        ownerId: this.userId,
+        senderId: this.fromId,
         message: this.msg
       });
       this.msg = "";

@@ -1,6 +1,6 @@
 <template>
   <section class="user-profile-edit">
-    <form>
+    <form @submit.prevent="emitUpdatedUser">
       <p class="h4 text-center mb-4">Edit</p>
 
       <label for="name-input" class="grey-text">Your Name</label>
@@ -41,7 +41,7 @@
 
       <div class="input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+          <span class="input-group-text" id="inputGroupFileAddon01"><img v-if="imgIsUploading" src="../assets/Ripple.gif" alt=""></span>
         </div>
         <div class="custom-file">
           <input
@@ -50,7 +50,7 @@
             id="inputGroupFile01"
             aria-describedby="inputGroupFileAddon01"
             ref="myImg"
-            @change="changeUserImgUrl"
+            @change="getImgUrl"
           />
           <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
@@ -67,7 +67,7 @@
 
       <div class="text-center mt-4">
         <button class="btn btn-outline-warning" type="submit">
-          Send
+          Update
           <i class="far fa-paper-plane ml-2"></i>
         </button>
       </div>
@@ -91,6 +91,7 @@ export default {
     return {
       skill: "",
       skills: [],
+      imgIsUploading: false,
       user: null
       // oldPassword: "",
       // newPassword: "",
@@ -103,10 +104,19 @@ export default {
       const newSkillsFormatted = newSkills.map(skill => skill.text);
       this.user.skillTags = newSkillsFormatted;
     },
-    async changeUserImgUrl(ev) {
-      const file = ev.target.files[0];
-      const fileUrl = await cloudinaryService.uploadImgToCloud(file);
-      this.user.imgUrl = fileUrl;
+    async getImgUrl(ev) {
+      try {
+        this.imgIsUploading = !this.imgIsUploading;
+        const file = (ev.target.files[0])
+        const imgUrl =  await cloudinaryService.uploadImgToCloud(file)
+        this.user.imgUrl = imgUrl
+        this.imgIsUploading = !this.imgIsUploading;
+      } catch(err) {
+        console.log('couldnt generate ImgUrl')
+      }
+    },
+    emitUpdatedUser() {
+      this.$emit('new-user-deats', this.user)
     }
   },
   components: {
@@ -147,5 +157,10 @@ form {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
     -webkit-box-shadow 0.15s ease-in-out;
 }
+
+span#inputGroupFileAddon01 {
+  height: 38px;
+}
+
 </style>
 

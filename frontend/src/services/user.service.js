@@ -25,11 +25,13 @@ async function getUsers(filterBy = null) {
 async function login(credentials) {
     try {
         const registeredUser = await httpService.post(_getAuthUrl('login'), credentials)
-        if (registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
+        if(registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
+        else throw new Error('Invalid Username or Password');
         return registeredUser
     }
     catch (err) {
-        throw err
+        console.log('in user service got err', err.message)
+        throw err.message
     }
 }
 

@@ -5,6 +5,7 @@ async function login(req, res) {
     const { nickName , password } = req.body
     try {
         const user = await authService.login(nickName, password)
+        console.log('in backend got user', user)
         req.session.user = user;
         res.json(user)
     } catch (err) {

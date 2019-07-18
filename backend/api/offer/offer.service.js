@@ -29,7 +29,7 @@ async function query(filterBy = {}) {
     try {
         const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray();
         // const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray(); //attemp for index
-        console.log('offers are', offers);
+        // console.log('offers are', offers);
         return offers
     } catch (err) {
         console.log('ERROR: cannot find offers')

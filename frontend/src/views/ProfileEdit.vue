@@ -1,6 +1,6 @@
 <template>
   <section class="user-profile-edit">
-    <form @submit.prevent="emitUpdatedUser">
+    <form @submit.prevent="updateUser">
       <p class="h4 text-center mb-4">Edit</p>
 
       <label for="name-input" class="grey-text">Your Name</label>
@@ -56,8 +56,12 @@
         </div>
       </div>
       <br />
+      <label for="img-input" class="grey-text">Or Just Enter An Image Url</label>
+      <input v-model="user.imgUrl" type="text" id="img-input" class="form-control" />
+      <br />
       <label for="defaultFormContactMessageEx" class="grey-text">About Me</label>
       <textarea
+        v-model="user.aboutMe"
         type="text"
         id="defaultFormContactMessageEx"
         class="form-control"
@@ -85,6 +89,11 @@ export default {
     const { nickName } = this.$route.params;
     const user = await this.$store.dispatch({ type: "getProfile", nickName });
     this.user = user;
+    this.skills = this.user.skillTags.map(skill => {
+      const skillFormatted = {text: skill, tiClasses: ['ti-valid']}
+      return skillFormatted
+    })
+    // this.skills = this.user.skillTags
   },
 
   data() {
@@ -101,6 +110,7 @@ export default {
   computed: {},
   methods: {
     tagChanged(newSkills) {
+      console.log(newSkills);
       const newSkillsFormatted = newSkills.map(skill => skill.text);
       this.user.skillTags = newSkillsFormatted;
     },
@@ -115,8 +125,15 @@ export default {
         console.log('couldnt generate ImgUrl')
       }
     },
-    emitUpdatedUser() {
-      this.$emit('new-user-deats', this.user)
+    async updateUser() {
+        try {
+
+          const updatedUser = await this.$store.dispatch({type: 'updateUser', userToUpdate: this.user})
+          console.log(updatedUser.name, 'Was Successfully Updated!')
+          
+        } catch(err) {
+          console.log('couldnt update user got err:', err)
+        }
     }
   },
   components: {

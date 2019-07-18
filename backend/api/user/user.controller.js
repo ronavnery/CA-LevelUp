@@ -32,11 +32,9 @@ async function deleteUser(req, res) {
 }
 
 async function updateUser(req, res) {
-    // const loggedInUser = req.session.user;
-    // const userToUpdate = req.body
-    // if (loggedInUser._id !== userToUpdate)
     try {
         const updatedUser = await userService.update(req.body)
+        console.log('sending back updated user:', updatedUser)
         res.send(updatedUser)
     }
     catch(err) {

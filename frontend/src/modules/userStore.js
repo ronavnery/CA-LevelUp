@@ -5,7 +5,7 @@ export default {
         // connectedUser: null,
         connectedUser: { _id: "5d2eeb6efc34a70a48413cac", name:"oriel shalem" ,nickName:"orielshalem", age: 30,profileUrl:"" ,email: "orielshalem@gmail.com", city:"", contactInfo:{}, createdAt:1563356014687 , imgUrl:"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png"},
         currProfile: null,
-        users: []
+        // users: []
     },
 
     getters: {
@@ -44,20 +44,13 @@ export default {
         setCurrProfile(state, { user }) {
             state.currProfile = user
         },
-
-        updateUserInStore(state, { updatedUser }) {
-            const idx = state.users.findIndex(user => user._id === updatedUser._id)
-            state.users.splice(idx, 1, updatedUser)
-            if (state.connectedUser._id === updatedUser._id) {
-                state.connectedUser = updatedUser
-            }
-        },
         //Front-end Only Mutations
         setUsers(state, { users }) {
             state.users = users
         },
         setConnectedUser(state, { user }) {
             state.connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
+            // state.connectedUser = user;
         },
         addUserToStore(state, { addedUser }) {
             state.users.push(addedUser)
@@ -106,7 +99,8 @@ export default {
         async updateUser({ commit }, { userToUpdate }) {
             try {
                 const updatedUser = await userService.update(userToUpdate)
-                commit({ type: 'updateUserInStore', updatedUser })
+                commit({ type: 'setConnectedUser', user: updatedUser })
+                return updatedUser;
             } catch (err) {
                 throw err
             }

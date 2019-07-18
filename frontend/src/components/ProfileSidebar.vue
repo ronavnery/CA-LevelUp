@@ -24,7 +24,7 @@
       <br />
       <span class="city fs12">{{profile.intro}}add intro here</span>
       <button>start chat</button>
-      <BookingChat :userId="profile._id" />
+      <BookingChat v-if="connectedUser" :userId="profile._id" />
 
       <a class="city fs20" @click="goToEdit">Edit this profile</a>
     </section>
@@ -37,6 +37,12 @@ export default {
   props: {
     profile: {
       type: Object
+    }
+  },
+
+  data() {
+    return {
+      connectedUser: this.$store.getters.connectedUser
     }
   },
   components: {

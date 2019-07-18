@@ -17,7 +17,7 @@ async function getUsers(filterBy = null) {
         const users = await httpService.get(_getUrl(), filterBy)
         return users
     }
-    catch(err) {
+    catch (err) {
         throw err
     }
 }
@@ -40,17 +40,17 @@ async function logout() {
         await httpService.get(_getAuthUrl('logout'))
         sessionStorage.clear()
         return 'All Good';
-    } 
-    catch(err) {
+    }
+    catch (err) {
         throw err
     }
 }
 
 async function getProfileByNickname(nickName) {
     try {
-        const user = await httpService.get(_getUrl('user/'+nickName))
+        const user = await httpService.get(_getUrl('user/' + nickName))
         return user;
-    } 
+    }
     catch (err) {
         throw err;
     }
@@ -72,7 +72,7 @@ async function remove(userId) {
         const idx = await httpService.delete(_getUrl(`${userId}`))
         return idx
     }
-    catch(err) {
+    catch (err) {
         throw err
     }
 }
@@ -82,7 +82,7 @@ async function update(updatedUser) {
         const updated = await httpService.put(_getUrl(), updatedUser)
         return updated
     }
-    catch(err) {
+    catch (err) {
         throw err
     }
 }
@@ -90,7 +90,7 @@ async function update(updatedUser) {
 async function checkIfLoggedIn() {
     try {
         const user = await httpService.get(_getUrl('loggedin'))
-        return  user
+        return user
     }
     catch (err) {
         throw err
@@ -99,10 +99,10 @@ async function checkIfLoggedIn() {
 
 async function getUserInbox(userId) {
     try {
-        const msgs = await httpService.get(_getUrl()+'/msgs', userId)
+        const msgs = await httpService.get(_getUrl() + '/msgs', userId)
         return msgs
     }
-    catch(err) {
+    catch (err) {
         throw err
     }
 }

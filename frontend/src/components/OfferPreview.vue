@@ -146,13 +146,12 @@ export default {
   methods: {
     goToDetails() { 
       this.$router.push({
-        name: "Profile",
+        name: "OfferDetails",
         params: {
           nickName: this.offer.createdBy.nickName,
           offerId: this.offer._id
         }
       });
-      // this.$router.push(`profile/${this.offer.createdBy.nickName}/${this.offer._id}`);
     },
     goToEdit() {
       this.$router.push(`profile/edit/${this.offer._id}`);

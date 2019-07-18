@@ -82,7 +82,7 @@
 <script>
 import { mdbBtn } from "mdbvue";
 import VueTagsInput from "@johmun/vue-tags-input";
-import cloudinaryService from '../services/cloudinary.service';
+import cloudinaryService from "../services/cloudinary.service";
 
 export default {
   async created() {
@@ -144,6 +144,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.user-profile-edit {
+  overflow: auto;
+  height: 100%;
+}
 form {
   padding: rem(16px);
   max-width: 500px;

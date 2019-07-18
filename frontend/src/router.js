@@ -5,6 +5,9 @@ import Explore from './views/Explore.vue'
 import OfferEdit from './views/OfferEdit.vue'
 import Login from './views/Login.vue'
 import Profile from './views/Profile.vue'
+import ProfileDetails from './components/ProfileDetails.vue'
+import ProfileOffers from './components/ProfileOffers'
+import OfferDetails from './components/OfferDetails'
 import ProfileEdit from './views/ProfileEdit.vue';
 import SignUp from './views/SignUp.vue'
 import Inbox from './views/Inbox.vue'
@@ -25,22 +28,43 @@ export default new Router({
       name: 'Explore',
       component: Explore
     },
+    
     {
-      path: '/profile/edit/:_id?',
-      name: 'OfferEdit',
-      component: OfferEdit
-    },
-    {
-      path: '/profile/:nickName/edit',
-      name: 'ProfileEdit',
-      component: ProfileEdit
-    },
-    {
-      path: '/profile/:nickName/:offerId?',
+      path: '/profile',
       name: 'Profile',
-      component: Profile
+      component: Profile,
+      children: [
+        {
+          path: ':nickName',
+          name: 'ProfileDetails',
+          component: ProfileDetails
+        },
+        {
+          path: ':nickName/edit',
+          name: 'ProfileEdit',
+          component: ProfileEdit
+        },
+        {
+          // need to work on this
+          path: 'edit/:_id?',
+          name: 'OfferEdit',
+          component: OfferEdit
+        },
+        {
+          path: ':nickName/offers',
+          name: 'ProfileOffers',
+          component: ProfileOffers
+        },
+        {
+          path: ':nickName/:offerId?',
+          name: 'OfferDetails',
+          component: OfferDetails
+        },
+      ]
     },
+
     {
+      // is relevant?
       path: '/profile/:nickName/inbox?',
       name: 'Inbox',
       component: Inbox

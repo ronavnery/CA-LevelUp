@@ -1,7 +1,7 @@
 <template>
   <section class="profile-content-container">
     <div class="content-header" v-if="isShowingOneOffer">
-      <button @click="showAll" class="btn-show-all" >Show all offers from this person</button>
+      <button @click="showAll" class="btn-show-all">Show all offers from this person</button>
     </div>
 
     <div class="profile-content">
@@ -44,6 +44,7 @@ export default {
       : (this.isShowingOneOffer = false);
     this.currNickName = this.$route.params.nickName;
     this.filter.nickName = this.currNickName;
+    
     try {
       const userOffers = await this.$store.dispatch({
         type: "loadOffers",
@@ -89,7 +90,7 @@ export default {
 .content-header {
   z-index: 1;
   position: absolute;
-  right:0;
+  right: 0;
 }
 .profile-content {
   flex: 1;
@@ -105,8 +106,6 @@ export default {
 .btn-show-all {
   margin: rem(10px);
   @include btnActionWhiteSm;
-   font-weight: normal;
+  font-weight: normal;
 }
-
-
 </style>

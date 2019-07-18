@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "production ready server",
     "main": "server.js",
+    "start": "node server.js",
     "scripts": {
         "server:dev": "NODE_ENV=development nodemon app.js",
         "server:prod": "node app.js"

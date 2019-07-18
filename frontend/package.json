@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --dest ../backend/public",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
@@ -20,7 +20,6 @@
     "style-resources-loader": "^1.2.1",
     "vue": "^2.6.10",
     "vue-carousel": "^0.18.0",
-    "vue-masonry": "^0.11.7",
     "vue-masonry-css": "^1.0.3",
     "vue-moment": "^4.0.0",
     "vue-router": "^3.0.3",

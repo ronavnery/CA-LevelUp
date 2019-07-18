@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 
 const app = express()
+
 const http = require('http').createServer(app);
 
 const authRoutes = require('./api/auth/auth.routes')

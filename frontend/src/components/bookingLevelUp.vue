@@ -22,6 +22,9 @@
 
 <script>
 export default {
+  created() {
+console.log('yoohoo');
+  },
   data() {
     return {
       bookingReq: {
@@ -71,6 +74,7 @@ export default {
   position: fixed;
   height: 100%;
   right: 0;
+  top:0;
   border-left: 0.1px solid $tpGray3;
   padding: 20px;
   overflow: auto;

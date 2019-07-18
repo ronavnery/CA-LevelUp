@@ -2,8 +2,8 @@ import userService from '../services/user.service.js'
 
 export default {
     state: {
-        // connectedUser: null,
-        connectedUser: { _id: "5d2eeb6efc34a70a48413cac", name:"oriel shalem" ,nickName:"orielshalem", age: 30,profileUrl:"" ,email: "orielshalem@gmail.com", city:"", contactInfo:{}, createdAt:1563356014687 , imgUrl:"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png"},
+        connectedUser: null,
+        // connectedUser: { _id: "5d2eeb6efc34a70a48413cac", name:"oriel shalem" ,nickName:"orielshalem", age: 30,profileUrl:"" ,email: "orielshalem@gmail.com", city:"", contactInfo:{}, createdAt:1563356014687 , imgUrl:"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png"},
         currProfile: null,
         users: []
     },

@@ -78,7 +78,7 @@
 <script>
 import { mdbBtn } from "mdbvue";
 import VueTagsInput from "@johmun/vue-tags-input";
-import cloudinaryService from '../services/cloudinary.service';
+import cloudinaryService from "../services/cloudinary.service";
 
 export default {
   async created() {
@@ -104,9 +104,9 @@ export default {
       this.user.skillTags = newSkillsFormatted;
     },
     async changeUserImgUrl(ev) {
-      const file = (ev.target.files[0])
-      const fileUrl = await cloudinaryService.uploadImgToCloud(file)
-      this.user.imgUrl = fileUrl
+      const file = ev.target.files[0];
+      const fileUrl = await cloudinaryService.uploadImgToCloud(file);
+      this.user.imgUrl = fileUrl;
     }
   },
   components: {
@@ -117,6 +117,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.user-profile-edit {
+  overflow: auto;
+  height: 100%;
+}
 form {
   padding: rem(16px);
   max-width: 500px;

@@ -2,7 +2,10 @@
   <div class="offer-details-container" v-if="offer">
     <header>
       <img :src="offer.imgs[0]" />
-      <button @click="goToProfileOffers" class="btn-show-all">Show all offers from this person</button>
+      <div class="show-all-overlay" @click="goToProfileOffers">
+        <span class="show-all-text">Show all offers from this person</span>
+      </div>
+      <!-- <button  class="btn-show-all">Show all offers from this person</button> -->
       <button class="btn-toggle-booking" @click="toggleBooking">Book to level up!</button>
       <section class="header-overlay">
         <h2>{{offer.title}}</h2>
@@ -105,7 +108,7 @@ export default {
     }
   },
   components: {
-     bookingLevelUp
+    bookingLevelUp
   }
 };
 </script>
@@ -122,6 +125,22 @@ export default {
   z-index: 1;
   position: absolute;
   right: 20px;
+}
+
+.show-all-overlay {
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(61, 43, 97, 0.7);
+  padding: 10px 10px 15px 30px;
+  border-radius: 0 0 0 40px;
+  .show-all-text {
+    text-decoration: underline;
+    color: white;
+  }
 }
 
 img {

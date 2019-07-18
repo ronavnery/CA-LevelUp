@@ -46,7 +46,6 @@ export default {
 
 <style scoped lang="scss">
 .sidebar-container {
-  @include flexCustom(center,space-around,column);
   height: 100%;
   min-width: 300px;
   background: $tpPink;
@@ -56,7 +55,7 @@ export default {
 }
 
 .sidebar-content {
-  @include flexCustom(center, center, column);
+  @include flexCustom(space-between, center, column);
   height: 50%;
   padding: rem(40px);
 }

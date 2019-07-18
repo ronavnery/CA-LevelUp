@@ -27,7 +27,7 @@
           <li>
             <i class="header-icon fas fa-star" v-if="offer.ratingAvg"></i>
             <i class="header-icon far fa-star" v-else></i>
-            <span class="header-icon-title">{{offer.ratingAvg | rating}}/5</span>
+            <span class="header-icon-title">{{offer.ratingAvg | rating}}</span>
             <span class="header-icon-title" v-if="offer.ratingAvg">({{offer.reviews.length}} reviews)</span>
           </li>
         </ul>

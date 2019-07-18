@@ -13,5 +13,5 @@ Vue.filter('durationInMins', mins =>{
 
 Vue.filter('rating', ratingAvg =>{
     if (!ratingAvg) return 'Not rated yet'
-    else return ratingAvg
+    else return ratingAvg + '/5'
  })

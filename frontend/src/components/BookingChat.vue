@@ -27,21 +27,21 @@ export default {
   },
 
   created() {
-    this.fromId = this.$store.getters.connectedUser._id;
+    // this.fromId = this.$store.getters.connectedUser._id;
     // this.offerOwnerId = this.userId;
   },
 
   mounted() {
-    const { userId: ownerId, fromId } = this;
+    // const { userId: ownerId, fromId } = this;
 
-    this.socket.emit("JOIN", {
-      ownerId,
-      fromId
-    });
+    // this.socket.emit("JOIN", {
+    //   ownerId,
+    //   fromId
+    // });
 
-    this.socket.on(`message:${ownerId}:${fromId}`, ({ message, senderId }) => {
-      this.msgs = [...this.msgs, { message, senderId }];
-    });
+    // this.socket.on(`message:${ownerId}:${fromId}`, ({ message, senderId }) => {
+    //   this.msgs = [...this.msgs, { message, senderId }];
+    // });
     // this.socket.on("MESSAGE", data => {
     //   console.log(data)
     //   this.msgs = [...this.msgs, data];
@@ -56,15 +56,15 @@ export default {
   },
 
   methods: {
-    sendMsg() {
-      this.socket.emit("SEND_MESSAGE", {
-        fromId: this.fromId,
-        ownerId: this.userId,
-        senderId: this.fromId,
-        message: this.msg
-      });
-      this.msg = "";
-    }
+    // sendMsg() {
+    //   this.socket.emit("SEND_MESSAGE", {
+    //     fromId: this.fromId,
+    //     ownerId: this.userId,
+    //     senderId: this.fromId,
+    //     message: this.msg
+    //   });
+    //   this.msg = "";
+    // }
   }
 };
 </script>

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import BookingChat from './BookingChat'
+import BookingChat from "./BookingChat";
 export default {
   props: {
     profile: {
@@ -40,13 +40,14 @@ export default {
     }
   },
   components: {
-    BookingChat 
+    BookingChat
   },
   methods: {
     goToEdit() {
-      this.$router.push(`/profile/${this.profile.nickName}/edit`)
+      this.$router.push(`/profile/${this.profile.nickName}/edit`);
+    }
   }
-}
+};
 </script>
 
 

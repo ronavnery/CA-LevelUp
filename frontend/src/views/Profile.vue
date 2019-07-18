@@ -1,7 +1,7 @@
 <template>
   <div class="profile-container flex">
     <profile-sidebar :profile="currProfile" v-if="currProfile" />
-    <profile-content @toggle-booking="toggleBooking" :currOffer="currOffer" />
+    <profile-content :currOffer="currOffer" />
   </div>
 </template>
 

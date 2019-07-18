@@ -5,9 +5,6 @@
 <script>
 export default {
     name: "ProfileDetails",
-    created() {
-        console.log('created again yooo');
-    }
 }
 </script>
 

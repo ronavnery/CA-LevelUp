@@ -7,7 +7,9 @@ import store from './store'
 import './filters'
 import './registerServiceWorker'
 import VueCarousel from 'vue-carousel';
+import VueMasonry from 'vue-masonry-css'
  
+Vue.use(VueMasonry);
 Vue.use(VueCarousel);
 Vue.use(require('vue-moment'));
 

@@ -12,17 +12,24 @@ module.exports = {
 }
 
 async function query(filterBy = {}) {
-    console.log(filterBy)
+    console.log('filter by is', filterBy)
     const criteria = {};
     if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt)
+        const regex = new RegExp(filterBy.txt.toLowerCase(), 'i')
         criteria.title = { $regex: regex }
+    }
+    if (filterBy.nickName) {
+        const regex = new RegExp(filterBy.nickName)
+        criteria["createdBy.nickName"] = { $regex: regex }
     }
 
 
+    console.log('criteria is', criteria)
     const collection = await dbService.getCollection('offer')
     try {
-        const offers = await collection.find(criteria).toArray();
+        const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray();
+        // const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray(); //attemp for index
+        console.log('offers are', offers);
         return offers
     } catch (err) {
         console.log('ERROR: cannot find offers')

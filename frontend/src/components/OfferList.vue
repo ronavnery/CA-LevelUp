@@ -1,11 +1,13 @@
 <template>
   <section class="offer-list-container">
-    <OfferPreview
-      v-for="(offer,idx) in offers"
-      :key="idx"
-      @removeOffer="removeOffer"
-      :offer="offer"
+    <masonry :cols="{default: 4, 1200: 3 , 1100: 2 ,900: 1}" :gutter="{default: '20px'}">
+      <OfferPreview
+        v-for="(offer,idx) in offers"
+        :key="idx"
+        @removeOffer="removeOffer"
+        :offer="offer"
       ></OfferPreview>
+    </masonry>
   </section>
 </template>
 
@@ -22,7 +24,6 @@ export default {
   methods: {
     removeOffer(offerId) {
       this.$emit("removeOffer", offerId);
-
     }
   },
   components: {
@@ -33,8 +34,10 @@ export default {
 
 <style lang="scss">
 .offer-list-container {
-  @include flexCustom(space-around,center,row);
-      flex-wrap: wrap;
+  @include flexCustom(space-around, center, row);
+  flex-wrap: wrap;
+  padding: 2rem 0;
 }
+
 
 </style>

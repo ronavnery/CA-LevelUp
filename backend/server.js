@@ -7,6 +7,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session);
  
 const app = express()
+
 const http = require('http').createServer(app);
 
 const config = require('./config')
@@ -14,6 +15,7 @@ const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
 const offerRoutes = require('./api/offer/offer.routes')
 const bookingRoutes = require('./api/booking/booking.routes')
+const cloudinaryRoutes = require('./api/cloudinary/cloudinary.routes')
 
 const logger = require('./services/logger.service')
 const socketService = require('./services/socket.service')
@@ -43,6 +45,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/offer', offerRoutes)
 app.use('/api/booking', bookingRoutes)
+app.use('/api/cloudinary', cloudinaryRoutes)
 
 socketService.setup(http);
 

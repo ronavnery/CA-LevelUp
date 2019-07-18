@@ -26,6 +26,7 @@
       <button>start chat</button>
       <BookingChat :userId="profile._id" />
 
+      <a class="city fs20" @click="goToEdit">Edit this profile</a>
     </section>
   </section>
 </template>
@@ -40,8 +41,12 @@ export default {
   },
   components: {
     BookingChat 
+  },
+  methods: {
+    goToEdit() {
+      this.$router.push(`/profile/${this.profile.nickName}/edit`)
   }
-};
+}
 </script>
 
 
@@ -56,7 +61,7 @@ export default {
 }
 
 .sidebar-content {
-  @include flexCustom(center, center, column);
+  @include flexCustom(space-between, center, column);
   height: 50%;
   padding: rem(40px);
 }
@@ -88,17 +93,17 @@ export default {
     transition: background-color 0.2s, color 0.2s;
     outline: none;
   }
-  
-  button.share, button.message {
+
+  button.share,
+  button.message {
     cursor: pointer;
   }
 
-  button.share:hover, button.message:hover {
+  button.share:hover,
+  button.message:hover {
     background-color: white;
     color: $tpPink;
   }
-
-
 
   .wrapper {
     position: absolute;

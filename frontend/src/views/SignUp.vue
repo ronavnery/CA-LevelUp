@@ -79,7 +79,7 @@ export default {
                 leveledUpIn: [],
                 ratingAvg: 0,
                 aboutMe: '',
-                age: 30
+                age: 25
             },
             confirmPassword: ''
         }

@@ -1,6 +1,7 @@
 const offerService = require('./offer.service')
 
 const getOffers = async (req, res) => {
+    console.log('getting offers,req query is:', req.query);
     const offers = await offerService.query(req.query)
     res.send(offers)
 }

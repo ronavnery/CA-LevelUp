@@ -12,12 +12,13 @@ function _getAuthUrl(route = '') {
 }
 
 
+
 async function getUsers(filterBy = null) {
     try {
         const users = await httpService.get(_getUrl(), filterBy)
         return users
     }
-    catch(err) {
+    catch (err) {
         throw err
     }
 }
@@ -27,12 +28,14 @@ async function login(credentials) {
         const registeredUser = await httpService.post(_getAuthUrl('login'), credentials)
         if(registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
         
+        else throw new Error('Invalid Username or Password');
         console.log(registeredUser)
         safeToLogout = true;
         return registeredUser
     }
     catch (err) {
-        throw err
+        console.log('in user service got err', err.message)
+        throw err.message
     }
 }
 async function logout() {
@@ -53,9 +56,9 @@ async function logout() {
 
 async function getProfileByNickname(nickName) {
     try {
-        const user = await httpService.get(_getUrl('user/'+nickName))
+        const user = await httpService.get(_getUrl('user/' + nickName))
         return user;
-    } 
+    }
     catch (err) {
         throw err;
     }
@@ -77,7 +80,7 @@ async function remove(userId) {
         const idx = await httpService.delete(_getUrl(`${userId}`))
         return idx
     }
-    catch(err) {
+    catch (err) {
         throw err
     }
 }
@@ -87,7 +90,7 @@ async function update(updatedUser) {
         const updated = await httpService.put(_getUrl(), updatedUser)
         return updated
     }
-    catch(err) {
+    catch (err) {
         throw err
     }
 }
@@ -95,13 +98,22 @@ async function update(updatedUser) {
 async function checkIfLoggedIn() {
     try {
         const user = await httpService.get(_getUrl('loggedin'))
-        return  user
+        return user
     }
     catch (err) {
         throw err
     }
 }
 
+async function getUserInbox(userId) {
+    try {
+        const msgs = await httpService.get(_getUrl() + '/msgs', userId)
+        return msgs
+    }
+    catch (err) {
+        throw err
+    }
+}
 
 export default {
     login,

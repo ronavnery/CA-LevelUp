@@ -47,6 +47,7 @@ export default {
       this.$router.push(`/profile/${this.profile.nickName}/edit`)
   }
 }
+}
 </script>
 
 

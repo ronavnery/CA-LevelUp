@@ -1,5 +1,5 @@
 <template>
-  <section class="user-profile-edit">
+  <section class="user-profile-edit" v-if="user">
     <form @submit.prevent="updateUser">
       <p class="h4 text-center mb-4">Edit</p>
 

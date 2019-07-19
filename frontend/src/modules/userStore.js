@@ -49,8 +49,8 @@ export default {
             state.users = users
         },
         setConnectedUser(state, { user }) {
-            state.connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
-            // state.connectedUser = user;
+            // state.connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
+            state.connectedUser = user;
         },
         addUserToStore(state, { addedUser }) {
             state.users.push(addedUser)

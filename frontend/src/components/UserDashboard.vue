@@ -1,6 +1,6 @@
 <template>
   <section class="user-dashboard-header">
-    <button class="btn-add-offer" @click="addOffer">Share a Skill</button>
+    <button class="btn-add-offer" @click="addOffer">Create Skill</button>
     <div class="icon-container">
       <i class="fas fa-envelope" @click="toggleInbox"></i>
       <i class="fas fa-bell"></i>

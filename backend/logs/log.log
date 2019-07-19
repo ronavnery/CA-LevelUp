@@ -517,3 +517,9 @@ Fri, 19 Jul 2019 10:02:20 GMT - Debug - auth.service - login with nickName: rona
 Fri, 19 Jul 2019 10:02:25 GMT - Debug - auth.service - login with nickName: aaa
 Fri, 19 Jul 2019 10:41:47 GMT - Debug - auth.service - login with nickName: aaa
 Fri, 19 Jul 2019 10:59:04 GMT - Debug - auth.service - login with nickName: aaa
+
+Fri, 19 Jul 2019 12:39:17 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 12:41:41 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Fri, 19 Jul 2019 18:00:58 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 18:01:05 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 18:01:45 GMT - Info - Server is running on port: 3000

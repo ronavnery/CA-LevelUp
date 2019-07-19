@@ -22,9 +22,6 @@
 
 <script>
 export default {
-  created() {
-console.log('yoohoo');
-  },
   data() {
     return {
       bookingReq: {

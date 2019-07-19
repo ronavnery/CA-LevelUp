@@ -1,6 +1,7 @@
 'use strict';
 import httpService from './http.service';
 
+let safeToLogout = true;
 
 function _getUrl(route = '') {
     return `user/${route}`
@@ -26,7 +27,10 @@ async function login(credentials) {
     try {
         const registeredUser = await httpService.post(_getAuthUrl('login'), credentials)
         if(registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
+        
         else throw new Error('Invalid Username or Password');
+        console.log(registeredUser)
+        safeToLogout = true;
         return registeredUser
     }
     catch (err) {
@@ -34,14 +38,18 @@ async function login(credentials) {
         throw err.message
     }
 }
-
 async function logout() {
     try {
-        await httpService.get(_getAuthUrl('logout'))
         sessionStorage.clear()
+    
+        
+        if (safeToLogout) {
+            safeToLogout = false;
+            await httpService.get(_getAuthUrl('logout'))
+        }
+
         return 'All Good';
-    }
-    catch (err) {
+    } catch(err) {
         throw err
     }
 }
@@ -116,5 +124,4 @@ export default {
     getUsers,
     logout,
     checkIfLoggedIn,
-    getUserInbox
 }

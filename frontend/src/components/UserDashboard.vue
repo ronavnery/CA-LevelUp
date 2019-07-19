@@ -25,6 +25,7 @@
 
 
 <script>
+
 import inboxPreview from './InboxPreview'
 
 export default {

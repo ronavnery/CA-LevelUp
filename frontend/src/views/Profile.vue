@@ -1,7 +1,7 @@
 <template>
   <div class="profile-container flex">
     <profile-sidebar :profile="currProfile" v-if="currProfile" />
-    <profile-content @toggle-booking="toggleBooking" :currOffer="currOffer" />
+    <profile-content />
   </div>
 </template>
 
@@ -14,8 +14,6 @@ export default {
   data() {
     return {
       currProfile: null,
-      currOffer: null,
-      currProfileAllOffers: null
     };
     
   },

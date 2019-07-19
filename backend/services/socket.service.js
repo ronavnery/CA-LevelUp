@@ -5,59 +5,44 @@ const roomService = require('./room-service');
 var io;
 var activeUsersCount = 0;
 
+let msgsDB = []
+
 function setup(http) {
+
     io = socketIO(http);
-    io.on('connection', function (socket) {
-        console.log('a user connected');
-        var room;
-        activeUsersCount++;
-
-        socket.on('disconnect', () => {
-            console.log('user disconnected');
-            activeUsersCount--;
+    io.on('connection', (socket) => {
+        socket.on('JOIN', ({ ownerId, fromId }) => {
+            io.emit(`incoming:${ownerId}`, { fromId });
         });
-
-        socket.on('history', (userId) => {
-            console.log('check for history');
-            const msgs = roomService.getHistorByUserId(userId)
-            socket.emit('got_history', msgs)
-            console.log(msgs)
-
-            activeUsersCount--;
+        socket.on('SEND_MESSAGE', ({ ownerId, fromId, message, senderId }) => {
+            io.emit(`message:${ownerId}:${fromId}`, { message, senderId });
         });
-
-
-
-
         // socket.on('JOIN_ROOM', (data) => {
-        //     const { roomId, user } = data
-        //     // const room = roomService.placeInRoom(user, roomId)
+        //     const { roomId, toId } = data
+        //     // const room = roomService.placeInRoom(fromID)
+        //     console.log(roomId)
+        //     socket.join(roomId);
+        //     io.emit('MESSAGE', data)
+        // });
+
+        // socket.emit('HISTORY', msgsDB)
+        // socket.on('SEND_MESSAGE', (data) => {
+        //     // msgsDB.push(data)
+
+        //     const { fromID, toId } = data
         //     console.log(data)
-        //     socket.join(data);
-
-        //     socket.on('history', (inboxId) => {
-        //         const msgs = roomService.getMsgsById(inboxId)
-
-        //         io.to(inboxId).emit('MESSAGE', msgs);
-        //     });
-        //     // io.emit('MESSAGE', data)
+        //     io.to(toId).emit('MESSAGE', data);
         // });
-
         // socket.on('chat join', (user) => {
+        //     const msg = { from: 'System', txt: `${user} Joined` }
         //     room = roomService.placeInRoom(user)
-        //     console.log('Placed', user, 'in room:', room);
         //     socket.join(room.id);
-        // });
 
-        // socket.on('chat msg', (msg) => {
-        //     console.log('message: ' + msg);
-        //     io.to(room.id).emit('chat newMsg', msg);
+        //     console.log('Placed', user, 'in room:', room);
+
+        //     socket.emit('chat newMsg', msg);
         // });
     });
-
-
-
-
 }
 
 

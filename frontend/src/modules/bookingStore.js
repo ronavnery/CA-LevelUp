@@ -5,6 +5,7 @@ import offerService from '../services/offer.service.js'
 export default {
     state: {
         offers: [],
+        userInbox: {},
         currOffer: {},
         isBooking: false
     },
@@ -22,6 +23,16 @@ export default {
     },
 
     actions: {
+        async getInbox(context, {filter}) {
+            try {
+                console.log('currprofile is:', this.$store.getters.currProfile)
+                console.log('store got action: filter is', filter)
+                const inbox = await bookingService.query()
+            }
+            catch(err) {
+                console.log(err)
+            }
+        },
         async sendBookingReq(context, { bookingReq }) {
             try {
                 console.log('got booking request:', bookingReq);
@@ -33,6 +44,14 @@ export default {
                 console.log(err)
                 return err
             }
-        }
+        },
+        async getUserInbox(context, { inboxId }) {
+            try {
+                const inbox = await bookingService.getUserInbox(inboxId)
+                console.log(inbox)
+            }catch(err) {
+                console.log(err)
+            }
+        },
     }
 }

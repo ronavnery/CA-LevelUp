@@ -1,11 +1,12 @@
- 
-const dbService = require('../../services/db.service') 
+
+const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
 
 module.exports = {
     query,
-    getById, 
+    getById,
     getByEmail,
+    getInbox,
     remove,
     update,
     add
@@ -92,5 +93,36 @@ async function add(booking, creator) {
     }
 }
 
+async function getInbox(inboxId) {
+    console.log('inbox id',inboxId[0])
+    const collection = await dbService.getCollection('msgs')
+    try {
+        const inbox = await collection.find({ "userId": ObjectId(userId) })
+        console.log('inbox', inbox)
 
+    } catch (err) {
+    }
 
+    //     'msgs' = [
+    //         {
+    //             userId: 'dsada424r23dd',
+    //             msgs: 
+    //             [{  
+    //                 roomId: '432423423eqwdq',
+    //                 participants: ['id1', 'id2'],
+    //                 content:
+    //                     [{
+    //                         createdAt: 4234234234,
+    //                         txt: 'fcdscvds'
+    //                     }]
+    //         }]
+    //     }
+    // ]
+
+    // }
+    // const criteria = {};
+    // if (filterBy.txt) {
+    //     const regex = new RegExp(filterBy.txt)
+    //     criteria.title = { $regex: regex }
+    // }
+}

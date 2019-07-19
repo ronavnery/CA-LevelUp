@@ -23,30 +23,43 @@
       <br />
       <br />
       <span class="city fs12">{{profile.intro}}add intro here</span>
+      <button>start chat</button>
+      <BookingChat v-if="connectedUser" :userId="profile._id" />
+
       <a class="city fs20" @click="goToEdit">Edit this profile</a>
     </section>
   </section>
 </template>
 
 <script>
+import BookingChat from "./BookingChat";
 export default {
   props: {
     profile: {
       type: Object
     }
   },
+
+  data() {
+    return {
+      connectedUser: this.$store.getters.connectedUser
+    }
+  },
+  components: {
+    BookingChat
+  },
   methods: {
     goToEdit() {
-      this.$router.push(`/profile/${this.profile.nickName}/edit`)
+      this.$router.push(`/profile/${this.profile.nickName}/edit`);
     }
   }
-};
+}
+
 </script>
 
 
 <style scoped lang="scss">
 .sidebar-container {
-  @include flexCustom(center,space-around,column);
   height: 100%;
   min-width: 300px;
   background: $tpPink;
@@ -56,7 +69,7 @@ export default {
 }
 
 .sidebar-content {
-  @include flexCustom(center, center, column);
+  @include flexCustom(space-between, center, column);
   height: 50%;
   padding: rem(40px);
 }

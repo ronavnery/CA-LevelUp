@@ -11,7 +11,7 @@ import OfferDetails from './components/OfferDetails'
 import ProfileEdit from './views/ProfileEdit.vue';
 import SignUp from './views/SignUp.vue'
 import Inbox from './views/Inbox.vue'
- 
+
 Vue.use(Router)
 
 export default new Router({
@@ -28,7 +28,7 @@ export default new Router({
       name: 'Explore',
       component: Explore
     },
-    
+
     {
       path: '/profile',
       name: 'Profile',
@@ -50,7 +50,17 @@ export default new Router({
           name: 'ProfileEdit',
           component: ProfileEdit
         },
-
+        {
+          path: ':nickName/inbox',
+          name: 'Inbox',
+          component: Inbox
+        },
+        {
+          // need to work on this
+          path: 'edit/:_id?',
+          name: 'OfferEdit',
+          component: OfferEdit
+        },
         {
           path: ':nickName/offers',
           name: 'ProfileOffers',
@@ -62,13 +72,6 @@ export default new Router({
           component: OfferDetails
         },
       ]
-    },
-
-    {
-      // is relevant?
-      path: '/profile/:nickName/inbox?',
-      name: 'Inbox',
-      component: Inbox
     },
     {
       path: '/login',

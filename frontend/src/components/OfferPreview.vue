@@ -144,13 +144,22 @@ export default {
     }
   },
   methods: {
-    goToDetails() { 
+    async goToDetails() {
       this.$router.push({
         name: "OfferDetails",
         params: {
           nickName: this.offer.createdBy.nickName,
           offerId: this.offer._id
         }
+      });
+
+      let connectedUser = await this.$store.dispatch({type: 'checkIfLoggedInUser'})
+      if (!connectedUser) connectedUser = "visitor"
+      else connectedUser = connectedUser.nickName
+      this.$store.dispatch({
+        type: "logUserCategoryChoice",
+        category: this.offer.category,
+        user: connectedUser
       });
     },
     goToEdit() {
@@ -217,7 +226,6 @@ export default {
   cursor: pointer;
   margin: 10px;
 }
-
 
 header {
   @include flexCustom(flex-start, center, row);

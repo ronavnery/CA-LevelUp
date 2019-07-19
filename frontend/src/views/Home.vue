@@ -1,44 +1,79 @@
 <template>
-  <section class="home">
-      <span class="changing-title fs36">Level up in </span>
-    <div class="changing-title fs36">
-      <vue-typer class="typer"
-        :text='["Development","Business","Finance & Accounting","IT & Software","Office Productivity","Personal Development","Design","Marketing","Photography","Health & Fitness","Music","Teaching & Academics"]'
-        :repeat="Infinity"
-        :shuffle="true"
-        initial-action="typing"
-        :pre-type-delay="70"
-        :type-delay="70"
-        :pre-erase-delay="2000"
-        :erase-delay="50"
-        erase-style="backspace"
-        :erase-on-complete="false"
-        caret-animation="solid"
-      ></vue-typer>
-    </div>
+  <section class="home-container">
+    <section class="front">
+      <span class="changing-title fs36">Level up in</span>
+      <div class="changing-title fs36">
+        <vue-typer
+          class="typer"
+          :text='["Development","Business","Finance & Accounting","IT & Software","Office Productivity","Personal Development","Design","Marketing","Photography","Health & Fitness","Music","Teaching & Academics"]'
+          :repeat="Infinity"
+          :shuffle="true"
+          initial-action="typing"
+          :pre-type-delay="70"
+          :type-delay="70"
+          :pre-erase-delay="2000"
+          :erase-delay="50"
+          erase-style="backspace"
+          :erase-on-complete="false"
+          caret-animation="solid"
+        ></vue-typer>
+      </div>
+      <!-- <Offer-Filter @filter-offers="setFilter" ref="entry" class="filter-section" /> -->
+    </section>
+    <div class="home-list">
+      Recommended for you:
+      <OfferList v-if="offers.length" :offers="recommendedOffers"></OfferList>
+      Music:
+      <OfferList v-if="offers.length" :offers="musicOffers"></OfferList>
+      </div>
   </section>
 </template>
 
 <script>
 import OfferFilter from "@/components/OfferFilter.vue";
+import OfferList from "../components/OfferList";
 export default {
   name: "home",
   components: {
-    OfferFilter
+    OfferFilter,
+    OfferList
   },
   data() {
     return {
-      filter: {
-        txt: ""
-      }
-    };
+      recommendedOffers: null,
+      musicOffers: null
+    }
+  },
+  computed: {
+    offers() {
+      return this.$store.getters.getOffers;
+    }
+  },
+  async mounted() {
+    let connectedUser = await this.$store.dispatch({type: 'checkIfLoggedInUser'})
+    if (!connectedUser) connectedUser = 'visitor'
+    else connectedUser = connectedUser.nickName
+    const category = await this.$store.dispatch({type: 'getUserPopularCategory', user: connectedUser})
+    let recommendedOffers = await this.$store.dispatch({ type: "loadOffers", filter: {category, limit: 4} });
+    this.recommendedOffers = recommendedOffers
+    let musicOffers = await this.$store.dispatch({ type: "loadOffers", filter: {category:'music',limit: 4}});
+    this.musicOffers = musicOffers
+    //TODOS: get more categories
+    
+  },
+
+  methods: {
+    setFilter(filter) {
+      this.$router.push("/explore");
+      this.$store.dispatch({ type: "loadOffers", filter });
+    }
   }
 };
 </script>
 
 <style scoped lang="scss">
-.home {
-  height: calc(100vh - 50px);
+.front {
+  height: calc(80vh - 50px);
   background-image: url("../assets/backgrounds/home-purple.jpg");
   background-size: cover;
   background-position-y: -80px;
@@ -57,6 +92,5 @@ export default {
 .vue-typer {
   color: white;
 }
-
 </style>
 

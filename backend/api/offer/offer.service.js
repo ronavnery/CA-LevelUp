@@ -35,10 +35,11 @@ async function query(filterBy = {}) {
     console.log('criteria is', criteria)
     const collection = await dbService.getCollection('offer')
     try {
-        const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray();
-        // const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray(); //attemp for index
-        // console.log('offers are', offers);
-        return offers
+        console.log('filter by.limit is:',filterBy.limit)
+        if (filterBy.limit) {const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).limit(+filterBy.limit).toArray();
+        return offers}
+        else {const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray();
+        return offers}
     } catch (err) {
         console.log('ERROR: cannot find offers')
         throw err;

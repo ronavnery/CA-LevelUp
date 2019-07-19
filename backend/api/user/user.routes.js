@@ -11,7 +11,7 @@ router.get('/', getUsers)
 router.get('/loggedin', checkIfLoggedIn)
 router.get('/user/:nick', getUserByNickname)
 router.get('/:id', getUser)
-router.put('/', requireAuth, updateUser)
+router.put('/', updateUser)
 router.delete('/:id', requireAuth, deleteUser)
 
 module.exports = router

@@ -36,7 +36,7 @@ export default {
 .offer-list-container {
   @include flexCustom(space-around, center, row);
   flex-wrap: wrap;
-  padding: 2rem 0;
+  padding: 0 0 2rem;
 }
 
 

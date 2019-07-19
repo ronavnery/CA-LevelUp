@@ -18,9 +18,17 @@ async function query(filterBy = {}) {
         const regex = new RegExp(filterBy.txt.toLowerCase(), 'i')
         criteria.title = { $regex: regex }
     }
-    if (filterBy.nickName) {
-        const regex = new RegExp(filterBy.nickName)
-        criteria["createdBy.nickName"] = { $regex: regex }
+    // if (filterBy.nickName) {
+    //     const regex = new RegExp(filterBy.nickName)
+    //     criteria["createdBy.nickName"] = { $regex: regex }
+    // }
+    // if (filterBy.type) {
+        
+    //     criteria.type = { type: filterBy.type}
+    // }
+
+    if (filterBy.category) {
+        criteria.category = filterBy.category
     }
 
 
@@ -29,7 +37,7 @@ async function query(filterBy = {}) {
     try {
         const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray();
         // const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray(); //attemp for index
-        console.log('offers are', offers);
+        // console.log('offers are', offers);
         return offers
     } catch (err) {
         console.log('ERROR: cannot find offers')

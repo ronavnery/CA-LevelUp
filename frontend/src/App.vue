@@ -12,13 +12,6 @@ export default {
   components: {
     AppHeader
   },
-  async created() {
-    try {
-      const user = await this.$store.dispatch({type: 'checkIfLoggedInUser'}) 
-    } catch (err) {
-      console.log('No User Logged In')
-    }
-  }
 };
 </script>
 

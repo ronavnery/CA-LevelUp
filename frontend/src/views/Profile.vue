@@ -28,6 +28,11 @@ export default {
       console.log("Error!", err);
     }
   },
+  methods: {
+    toggleBooking() {
+      
+    }
+  },
   components: {
     ProfileSidebar,
     ProfileContent,

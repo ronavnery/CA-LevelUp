@@ -23,6 +23,16 @@ export default {
     },
 
     actions: {
+        async getInbox(context, {filter}) {
+            try {
+                console.log('currprofile is:', this.$store.getters.currProfile)
+                console.log('store got action: filter is', filter)
+                const inbox = await bookingService.query()
+            }
+            catch(err) {
+                console.log(err)
+            }
+        },
         async sendBookingReq(context, { bookingReq }) {
             try {
                 console.log('got booking request:', bookingReq);

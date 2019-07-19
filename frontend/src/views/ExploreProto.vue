@@ -4,7 +4,7 @@
     <img v-if="!offers" src="../img/loading.svg" width="100" alt=""> -->
     <OfferFilter @filter-offers="setFilter"/>
     <!-- <OfferPreview /> -->
-    <OfferList v-if="offers.length" :offers="offers" @removeOffer="removeOffer"></OfferList>
+    <OfferList :offers="offers" @removeOffer="removeOffer"></OfferList>
   </section>
 </template>
 <script>

@@ -2,7 +2,7 @@
   <section class="sidebar-container">
     <section class="sidebar-content">
       <div class="img-btns-wrapper">
-        <img class="profile-img" :src="profile.imgUrl" />
+        <img class="profile-img" :src="profile.imgUrl" @click="goToProfile"/>
         <div class="btn-container">
           <button class="share">
             <i class="fas fa-share-alt"></i>
@@ -18,7 +18,7 @@
           </button>
         </div>
       </div>
-      <span class="name fs20">{{profile.name}}</span>
+      <span class="name fs20" @click="goToProfile">{{profile.name}}</span>
       <span class="city fs14">{{profile.city}}add city here</span>
       <br />
       <br />
@@ -51,6 +51,9 @@ export default {
   methods: {
     goToEdit() {
       this.$router.push(`/profile/${this.profile.nickName}/edit`);
+    },
+    goToProfile() {
+      this.$router.push(`/profile/${this.profile.nickName}`);
     }
   }
 }
@@ -84,6 +87,11 @@ export default {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
+}
+
+.name {
+  cursor: pointer;
 }
 
 .btn-container {

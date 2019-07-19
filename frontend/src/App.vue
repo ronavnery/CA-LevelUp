@@ -14,8 +14,7 @@ export default {
   },
   async created() {
     try {
-      const user = await this.$store.dispatch({type: 'checkIfLoggedInUser'})
-      console.log('logged In:', user)
+      const user = await this.$store.dispatch({type: 'checkIfLoggedInUser'}) 
     } catch (err) {
       console.log('No User Logged In')
     }

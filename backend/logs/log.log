@@ -479,3 +479,4 @@ Thu, 18 Jul 2019 17:29:36 GMT - Debug - auth.service - login with nickName: aaa
 Thu, 18 Jul 2019 17:30:37 GMT - Debug - auth.service - login with nickName: orielshalem
 Thu, 18 Jul 2019 17:34:12 GMT - Debug - auth.service - login with nickName: aaa
 Thu, 18 Jul 2019 17:37:03 GMT - Debug - auth.service - login with nickName: aaa
+Fri, 19 Jul 2019 13:22:22 GMT - Info - Server is running on port: 3000

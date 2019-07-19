@@ -1,10 +1,10 @@
 <template>
   <section class="explore-main-container">
     <header class="cover">
-      <h3>Learn Your New Skill</h3>
+      <span class="fs32">Learn Your New Skill</span>
       <span>{{offers.length}} skills to choose from</span>
+      <Offer-Filter @filter-offers="setFilter" ref="entry" class="filter-section" />
     </header>
-    <Offer-Filter @filter-offers="setFilter" ref="entry" class="filter-section" />
     <OfferList v-if="offers.length" :offers="offers" @removeOffer="removeOffer"></OfferList>
   </section>
 </template>
@@ -41,7 +41,7 @@ export default {
     },
     setFilter(filter) {
       this.$store.dispatch({ type: "loadOffers", filter });
-    },
+    }
     // callback() {
     //   const filterEl = this.$refs.entry.$el
     //   if (window.pageYOffset >= filterEl.offsetTop) {
@@ -67,13 +67,12 @@ export default {
   background-color: #3d2b61;
   color: white;
   text-align: center;
-  padding: 30px 30px 60px;
   font-family: $HanGroBlack;
+  height: 200px;
+  padding: 20px;
 
-  @include flexCenter(column);
-  h3 {
-    font-size: rem(32px);
-  }
+  @include flexCustom(space-between, center, column);
+
   span {
     color: #ffffffbd;
   }

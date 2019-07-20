@@ -774,3 +774,5 @@ Sat, 20 Jul 2019 16:31:26 GMT - Debug - auth.service - login with nickName: rona
 =======
 >>>>>>> ecd50aa9c2839d4f0e512362912117ead621e838
 >>>>>>> f375160730026ded80c281ac545bc2ac7c71bf7a
+
+Sat, 20 Jul 2019 16:48:39 GMT - Info - Server is running on port: 3000

@@ -1,7 +1,7 @@
 <template>
   <section class="explore-main-container">
     <header class="cover">
-      <span class="fs32">Learn Your New Skill</span>
+      <span class="fs32">Which new skill are you looking for?</span>
       <span>{{offers.length}} skills to choose from</span>
       <Offer-Filter @filter-offers="setFilter" ref="entry" class="filter-section" />
     </header>

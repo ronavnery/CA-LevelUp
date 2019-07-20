@@ -54,13 +54,17 @@
         {{tag}}
         <span v-if="idx !== offer.tags.length -1">,</span>
       </span>
+    
+    <h4 style="margin-top: 8px;">Leave A Review!</h4>
+    <ReviewEdit />
     </main>
-    <bookingLevelUp v-if="isBooking" @click="sendBookingReq" />
+    <bookingLevelUp v-if="isBooking" @click="sendBookingReq" @close-booking-request="toggleBooking"/>
   </div>
 </template>
 
 <script>
 import bookingLevelUp from "../components/bookingLevelUp";
+import ReviewEdit from '../components/ReviewEdit';
 import moment from "moment";
 export default {
   name: "OfferDetails",
@@ -108,7 +112,8 @@ export default {
     }
   },
   components: {
-    bookingLevelUp
+    bookingLevelUp,
+    ReviewEdit
   }
 };
 </script>

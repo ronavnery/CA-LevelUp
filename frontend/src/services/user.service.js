@@ -96,12 +96,19 @@ async function update(updatedUser) {
 }
 
 async function checkIfLoggedIn() {
+    // try {
+    //     const user = await httpService.get(_getUrl('loggedin'))
+    //     return user
+    // }
+    // catch (err) {
+    //     throw err
+    // }
     try {
-        const user = await httpService.get(_getUrl('loggedin'))
-        return user
-    }
-    catch (err) {
-        throw err
+        const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+        if (user) return Promise.resolve(user);
+        else return Promise.reject('No User Found');
+    } catch (err) {
+        throw err;
     }
 }
 
@@ -143,5 +150,6 @@ export default {
     logout,
     checkIfLoggedIn,
     logUserCategoryChoice,
-    getUserPopularCategory
+    getUserPopularCategory,
+    getUserInbox
 }

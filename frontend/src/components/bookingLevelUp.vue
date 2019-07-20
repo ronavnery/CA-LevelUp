@@ -1,5 +1,6 @@
 <template> 
   <section class="levelup-booking fs14">
+   <button class="btn-toggle-booking" @click="toggleBooking">X</button>
     <form class="booking-form" v-if="userConnected">
       <h4 class="text-center">Contact to levelup!</h4>
       <p>Before you level up, please add some info about you so the person gets to know you better!</p>
@@ -52,6 +53,9 @@ export default {
       } 
       this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
         .then(bookingId => this.successStatus = bookingId)
+    },
+    toggleBooking() {
+      this.$emit('close-booking-request');
     } 
   },
   computed: {

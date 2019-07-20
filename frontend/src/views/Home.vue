@@ -1,7 +1,7 @@
 <template>
   <section class="home-container">
     <section class="front">
-      <span class="fs36">Level up in</span>
+      <span class="fs36">Get new skills for free in</span>
       <div class="changing-title fs36">
         <vue-typer
           class="typer"

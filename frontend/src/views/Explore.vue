@@ -64,18 +64,21 @@ export default {
 
 <style lang="scss" scoped>
 .cover {
-  background-color: #3d2b61;
+  // background-color: #3d2b61;
+  background-image: url('../assets/backgrounds/explore-cover.jpg');
+  background-size: cover;
   color: white;
   text-align: center;
   font-family: $HanGroBlack;
   height: 200px;
   padding: 20px;
-
   @include flexCustom(space-between, center, column);
 
   span {
     color: #ffffffbd;
   }
 }
+
+
 </style>
 

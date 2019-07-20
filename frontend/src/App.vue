@@ -12,6 +12,13 @@ export default {
   components: {
     AppHeader
   },
+  async mounted() {
+    try {
+      this.$store.dispatch({type: 'checkIfLoggedInUser'})
+    } catch(err) {
+      console.log('App Couldnt find logged in user');
+    }
+  }
 };
 </script>
 

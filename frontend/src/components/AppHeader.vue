@@ -1,8 +1,8 @@
 <template>
   <section class="app-header">
     <div @click="goHome" class="logo-container">
-      <img class="logo" src="../assets/logo.png" />
-      <span class="logo-title fs14 strong">LevelUp</span>
+      <img class="logo" src="../assets/logo/levelup-v5.png" />
+      <!-- <span class="logo-title fs14 strong">LevelUp</span> -->
     </div>
     <div class="nav-container fs12">
       <router-link exact to="/" class="header-link">Home</router-link>
@@ -73,7 +73,8 @@ a {
 }
 
 .logo {
-  width: rem(30px);
+  height: 35px;
+  margin-left: 10px;
 }
 
 .nav-container {

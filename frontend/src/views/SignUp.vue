@@ -7,7 +7,7 @@
             <mdb-card-body class="mx-3">
               <div class="text-center">
                 <h3 class="dark-grey-text mb-4">
-                  <strong>Sign-up</strong>
+                  <strong class="fs22">Sign-up</strong>
                 </h3>
               </div>
               <mdb-input label="Name" type="text"  v-model="newUser.name" @input="buildNickname()" required />
@@ -16,9 +16,9 @@
               <mdb-input label="Password" type="password" containerClass="mb-0" v-model="newUser.password" :class="passwordsMatch" />
               <mdb-input label="Repeat Password" type="password" containerClass="mb-0" v-model="confirmPassword" :class="passwordsMatch" />
               <div class="text-center mb-2">
-                <mdb-btn type="submit" gradient="blue" rounded class="btn-block z-depth-1a" @click="registerNewUser">Sign up</mdb-btn>
+                <mdb-btn type="submit" gradient="blue" rounded class="fs18 btn-block z-depth-1a" @click="registerNewUser">Sign up</mdb-btn>
               </div>
-              <p
+              <!-- <p
                 class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-1"
               >or Sign up with:</p>
               <div class="row my-1 d-flex justify-content-center">
@@ -28,7 +28,7 @@
                 <mdb-btn type="button" color="white" rounded class="z-depth-1a">
                   <mdb-icon fab icon="google-plus" class="blue-text" />
                 </mdb-btn>
-              </div>
+              </div> -->
             </mdb-card-body>
             <!-- <mdb-modal-footer class="mx-3 pt-3 mb-0">
               <p class="font-small grey-text d-flex justify-content-end">
@@ -130,13 +130,15 @@ export default {
 <style scoped lang="scss">
 .signup-container {
   height: calc(100vh - 50px);
-  background-image: url("../assets/backgrounds/home-purple.jpg");
+  background-image: url("../assets/backgrounds/login-main.jpg");
   background-size: cover;
 }
 
 .form-container {
   @include flexCenter(row);
   margin: 0;
+  padding: 20px;
+  // remove padding if social links activated
 }
 
 .form-card {

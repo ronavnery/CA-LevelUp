@@ -32,7 +32,7 @@
                   @click="loginUser"
                 >Login</mdb-btn>
               </div>
-              <p
+              <!-- <p
                 class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-1"
               >or Login with:</p>
               <div class="row my-1 d-flex justify-content-center">
@@ -42,7 +42,7 @@
                 <mdb-btn type="button" color="white" rounded class="z-depth-1a">
                   <mdb-icon fab icon="google-plus" class="blue-text" />
                 </mdb-btn>
-              </div>
+              </div> -->
             </mdb-card-body>
             <mdb-modal-footer class="mx-3 pt-3 mb-0">
               <p class="font-small grey-text d-flex justify-content-end">
@@ -121,7 +121,7 @@ export default {
 <style scoped lang="scss">
 .login-container {
   height: calc(100vh - 50px);
-  background-image: url("../assets/backgrounds/home-purple.jpg");
+  background-image: url("../assets/backgrounds/login-main.jpg");
   background-size: cover;
 }
 .form-container {

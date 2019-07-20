@@ -7,8 +7,8 @@ import store from './store'
 import './filters'
 import './registerServiceWorker'
 import VueCarousel from 'vue-carousel';
-import VueMasonry from 'vue-masonry-css'
-import VueTyperPlugin from 'vue-typer'
+import VueMasonry from 'vue-masonry-css';
+import VueTyperPlugin from 'vue-typer';
  
 Vue.use(VueTyperPlugin)
 Vue.use(VueMasonry);

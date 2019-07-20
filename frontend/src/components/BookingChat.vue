@@ -42,6 +42,10 @@ export default {
     this.socket.on(`message:${ownerId}:${fromId}`, ({ message, senderId }) => {
       this.msgs = [...this.msgs, { message, senderId }];
     });
+    
+
+
+
     // this.socket.on("MESSAGE", data => {
     //   console.log(data)
     //   this.msgs = [...this.msgs, data];

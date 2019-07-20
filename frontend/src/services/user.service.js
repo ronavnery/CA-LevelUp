@@ -115,6 +115,24 @@ async function getUserInbox(userId) {
     }
 }
 
+function logUserCategoryChoice(category, user) {
+    var storedCategories = JSON.parse(localStorage.getItem(user))
+    if (!storedCategories) storedCategories = []
+    storedCategories.push(category)
+    localStorage.setItem(user, JSON.stringify(storedCategories));
+}
+function getUserPopularCategory(user = 'visitor') {
+    var storedCategories = JSON.parse(localStorage.getItem(user))
+    function mode(arr){
+        return arr.sort((a,b) =>
+              arr.filter(v => v===a).length
+            - arr.filter(v => v===b).length
+        ).pop();
+    }
+    // console.log('mode is!!!', mode(storedCategories))
+    return mode(storedCategories);
+}
+
 export default {
     login,
     getProfileByNickname,
@@ -124,4 +142,6 @@ export default {
     getUsers,
     logout,
     checkIfLoggedIn,
+    logUserCategoryChoice,
+    getUserPopularCategory
 }

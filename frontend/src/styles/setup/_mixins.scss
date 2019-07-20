@@ -23,3 +23,9 @@
     grid-template-columns: repeat($auto-fit-fill, minmax($minmax));
     grid-gap: $gap;
 }
+
+@mixin container($max-width,$margin-top-bottom, $padding) {
+    max-width: $max-width;
+    margin: $margin-top-bottom auto;
+    padding: $padding;
+}

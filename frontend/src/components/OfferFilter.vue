@@ -1,114 +1,146 @@
 <template>
-  <section class="offer-filter">
-    <form @submit.prevent="filterOffers">
-      <div class="search-box">
-        <img src="../assets/search.png" alt />
-        <input @input="filterOffers" v-model="filter.txt" type="text" placeholder="Look For Anything..."/>
-        <button v-show="filter.txt" @click.stop="clearTxt">
-          <svg
-            viewBox="0 0 426.667 426.667"
-            width="16px"
-            height="16px"
-          >
-            <path
-              style="fill:#ECEBED;"
-              d="M213.333,0C95.514,0,0,95.514,0,213.333s95.514,213.333,213.333,213.333
-	s213.333-95.514,213.333-213.333S331.153,0,213.333,0z M330.995,276.689l-54.302,54.306l-63.36-63.356l-63.36,63.36l-54.302-54.31
-	l63.356-63.356l-63.356-63.36l54.302-54.302l63.36,63.356l63.36-63.356l54.302,54.302l-63.356,63.36L330.995,276.689z"
-            />
-          </svg>
-        </button>
-      </div>
-      <button type="submit" class="search-btn">Search</button>
+  <section class="offer-filter-wrapper">
+    <multiselect
+      v-model="filter.category"
+      :options="options"
+      :searchable="false"
+      :select-label="''"
+      :deselect-label="''"
+      :selectedLabel="''"
+      :placeholder="'Choose A Category'"
+      @remove="removeCategory"
+      @select="emitFilter"
+    ></multiselect>
+    <form @submit.prevent class="offer-filter">
+      <input type="text" placeholder="Search" v-model="filter.txt" @keyup.enter="emitFilter" />
     </form>
+
+    <div class="type-wrapper">
+      <div @click="setType('')" data-value ref="type1" class="selected">All</div>
+      <div @click="setType('group', $event)" data-value="group" ref="type2">Group</div>
+      <div @click="setType('single', $event)" data-value="single" ref="type3">Single</div>
+    </div>
   </section>
-</template>
+</template> 
 
 <script>
+import Multiselect from "vue-multiselect";
+
 export default {
   data() {
     return {
-        filter: {
-            txt: ''
-        }
+      filter: {
+        txt: "",
+        type: "",
+        category: ""
+      },
+      options: [
+        "Development",
+        "Business",
+        "Finance & Accounting",
+        "Office Productivity",
+        "Personal Development",
+        "Design",
+        "IT & Software",
+        "Marketing",
+        "Lifestyle",
+        "Photography",
+        "Music",
+        "Teaching & Academics",
+        "Health & Fitness"
+      ]
     };
   },
   methods: {
-      clearTxt() {
-          this.filter.txt = '';
-      },
-      filterOffers() {
-          this.$emit('filter-offers', this.filter)
-      }
+    emitFilter() {
+      this.$emit("filter-offers", this.filter);
+    },
+    removeCategory() {
+      this.filter.category = "";
+      this.emitFilter();
+    },
+    setType(selectedValue) {
+      const targets = [this.$refs.type1, this.$refs.type2, this.$refs.type3];
+      targets.forEach(target => {
+        if (target.dataset.value !== selectedValue)
+          target.classList.remove("selected");
+        else target.classList.add("selected");
+      });
+      this.filter.type = selectedValue;
+      this.emitFilter();
+    }
+  },
+
+  components: {
+    Multiselect
   }
 };
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
+</style>
+
+
 <style lang="scss" scoped>
+.multiselect {
+  max-width: 215px;
+}
+
+.offer-filter-wrapper {
+  border-radius: 4px;
+  // height: 60px;
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+  // @include container(750px, 0, 0);
+  // position: relative;
+  // top: -25px;
+  // @include flexCustom(space-between, center, row);
+}
+
 .offer-filter {
-  width: 100%;
-  padding: 20px 0;
-  background: #3d2b61;
-}
-
-form {
-  @include flexCenter(row);
-}
-
-.search-box {
-  @include flexCustom(flex-start, stretch, row);
-  width: rem(400px);
-  min-width: 200px;
-  background: white;
-  padding: 8px 5px;
-  border-radius: 5px;
-  margin-right: 8px;
-
+  position: relative;
   input {
-    flex: 1;
-    background: transparent;
-    color: #756f6f;
-    border: 0;
-    outline: 0px;
+    border-radius: 4px;
+    // margin-left: 5px;
+    // height
+    outline: none;
+    border: none;
+    padding: 9px 33px 9px 10px;
   }
 
-  img {
-    width: 18px;
-    height: 18px;
-    margin-right: 5px;
-  }
-
-  button {
-    background: transparent;
-    border: 0px;
-    padding: 0;
-    cursor: pointer;
-    @include flexCenter(row);
+  &::after {
+    content: url("../assets/musica-searcher.png");
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 5px;
+    top: 9.5px;
   }
 }
 
-// Todos: use button mixin instead
-.search-btn {
-    width: 200px;
-    padding: 8px 0;
-    background: transparent;
-    border-radius: 5px;
-    border: 1px solid white;
-    color: white;
-    font-family: 'Montserrat-Bold', sans-serif;
-    font-size: rem(16px);
-    font-weight: bold;
-    outline: none;
-    text-transform: uppercase;
-    position: relative;
+.type-wrapper {
+  display: flex;
+  margin-right: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+  div {
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+    padding: 5px 15px;
+    cursor: pointer;
+    height: 46px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.135s;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 34px;
+  }
 
-    &::after {
-        content: url('../assets/arrow-right.svg');
-        position: absolute;
-        @include flexCenter(row);
-        right: 5px;
-        top: 5px;
-    }
+  div.selected {
+    background-color: grey;
+    color: white;
+  }
 }
 </style>
 

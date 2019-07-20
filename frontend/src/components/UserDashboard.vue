@@ -4,7 +4,8 @@
     <div class="icon-container">
       <i class="fas fa-envelope" @click="toggleInbox"></i>
       <i class="fas fa-bell"></i>
-      <i class="fas fa-user" @click="toggleNav"></i>
+      <!-- <i class="fas fa-user" @click="toggleNav"></i> -->
+      <img class="user-small-img" :src="currUser.imgUrl" @click="toggleNav" />
     </div>
     <inboxPreview :isOpen="isOpen"/>
     <nav v-if="showNav">
@@ -73,13 +74,22 @@ export default {
   width: 250px;
 }
 
+
 .icon-container {
   width: 100.25px;
   @include flexCustom(space-around, center, row);
 
   i {
-    color: #d0c9d6;
+    color: $tpGray;
     cursor: pointer;
+  }
+
+  .user-small-img {
+    border-radius: 50%;
+    width: 20px;
+    border: 0.5px solid white;
+    cursor: pointer;
+    background: $tpGray;
   }
 }
 

@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import io from "socket.io-client";
+
 export default {
   data() {
     return {
@@ -30,7 +32,8 @@ export default {
         availability: '',
         extraInfo: ''
       },
-      successStatus: ''
+      successStatus: '',
+      socket: io("localhost:3000")
     }
   },
   methods: {
@@ -52,7 +55,10 @@ export default {
         makerImg: this.$store.getters.connectedUser.imgUrl,
       } 
       this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
-        .then(bookingId => this.successStatus = bookingId)
+        .then(bookingId => {
+          this.successStatus = bookingId
+          this.socket.emit('level-up-req', this.bookingReq)
+        })
     },
     toggleBooking() {
       this.$emit('close-booking-request');

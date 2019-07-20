@@ -1,14 +1,25 @@
 <template>
   <div>
     <ul v-if="isOpen" class="inbox">
-      <li class="inbox-preview" v-for="(msg,idx) in msgs" :key="idx" @click="openChat(msg.recipient._id)">
+      <li
+        class="inbox-preview"
+        v-for="(msg,idx) in msgs"
+        :key="idx"
+        @click="openChat(msg.recipient._id)"
+      >
         <h2>{{msg.recipient.name}}</h2>
         <p>{{msg.msgs[0].txt}}</p>
         <p>{{msg.msgs[0].createdAt | formatDate}}</p>
         {{msg}}
       </li>
+      <!-- <li class="inbox-preview" v-for="(msg,idx) in msgs" :key="idx" @click="openChat(msg.recipient._id)">
+        <h2>{{msg.recipient.name}}</h2>
+        <p>{{msg.msgs[0].txt}}</p>
+        <p>{{msg.msgs[0].createdAt | formatDate}}</p>
+        {{msg}}
+      </li>-->
     </ul>
-    <ChatBox v-if="chatOpen" :directors="directors" class="chat-box"/>
+    <ChatBox v-if="chatOpen" :directors="directors" class="chat-box" />
   </div>
 </template>
 
@@ -16,7 +27,7 @@
 <script>
 import io from "socket.io-client";
 import moment from "moment";
-import ChatBox from './ChatBox'
+import ChatBox from "./ChatBox";
 
 export default {
   props: {
@@ -28,14 +39,14 @@ export default {
   data() {
     return {
       inboxId: null,
-      chatOpen:false,
+      chatOpen: false,
       recipient: null,
       user: "samuel",
       msg: "",
       msgs: [
         {
           recipient: {
-            _id: '5d2dec114cfb9f419072650d',
+            _id: "5d2dec114cfb9f419072650d",
             name: "jihri"
           },
           msgs: [
@@ -52,13 +63,12 @@ export default {
 
   created() {
     this.inboxId = this.$store.getters.connectedUser._id;
-
     // this.$store.dispatch({ type: "getUserInbox", inboxId})
   },
 
   methods: {
     openChat(recipient) {
-      this.directors = {recipient, sender: this.inboxId}
+      this.directors = { recipient, sender: this.inboxId };
       this.chatOpen = true;
     }
   },
@@ -71,19 +81,24 @@ export default {
     let connected = [];
     const userId = this.$store.getters.connectedUser._id;
 
-    this.socket.on(`incoming:${userId}`, ({ fromId }) => {
-      if (!connected.includes(fromId)) {
-        connected.push(fromId);
+    this.socket.emit("JOIN_ROOM", userId);
+    this.socket.on('req-sent', (offerMaker, offer)=> {
+            // const {bookingMaker, offerMaker, offer} = req
+            console.log(offerMaker,offer)
+    })
+    // this.socket.on(`incoming:${userId}`, ({ fromId }) => {
+    //   if (!connected.includes(fromId)) {
+    //     connected.push(fromId);
 
-        this.socket.on(
-          `message:${userId}:${fromId}`,
-          ({ message, senderId }) => {
-            this.msgs.push({ message, senderId });
-            console.log(message, senderId);
-          }
-        );
-      }
-    });
+    //     this.socket.on(
+    //       `message:${userId}:${fromId}`,
+    //       ({ message, senderId }) => {
+    //         this.msgs.push({ message, senderId });
+    //         console.log(message, senderId);
+    //       }
+    //     );
+    //   }
+    // });
     //      console.log(inboxId)
     //     //  this.socket.on("MESSAGE", data => {
     //     //    this.msgs = [...this.msgs, data];
@@ -113,7 +128,7 @@ export default {
   color: white;
 }
 
-.chat-box{
+.chat-box {
   border: #f1f0f0 1px solid;
   border-radius: 3px;
   position: fixed;
@@ -122,5 +137,4 @@ export default {
   bottom: 0;
   color: white;
 }
-
 </style>

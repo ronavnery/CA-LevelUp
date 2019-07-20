@@ -1,7 +1,7 @@
 <template>
   <section class="home-container">
     <section class="front">
-      <span class="changing-title fs36">Level up in</span>
+      <span class="fs36">Level up in</span>
       <div class="changing-title fs36">
         <vue-typer
           class="typer"
@@ -18,12 +18,12 @@
           caret-animation="solid"
         ></vue-typer>
       </div>
-      <!-- <Offer-Filter @filter-offers="setFilter" ref="entry" class="filter-section" /> -->
     </section>
-    <div class="home-list">
+    <div class="home-list fs20 strong">
+
       Recommended for you:
       <OfferList v-if="offers.length" :offers="recommendedOffers"></OfferList>
-      Music:
+      Newest in music:
       <OfferList v-if="offers.length" :offers="musicOffers"></OfferList>
       </div>
   </section>
@@ -73,11 +73,12 @@ export default {
 
 <style scoped lang="scss">
 .front {
+  padding: 20px;
   height: calc(80vh - 50px);
-  background-image: url("../assets/backgrounds/home-purple.jpg");
+  background-image: url("../assets/backgrounds/puzzle1resize2.jpg");
   background-size: cover;
-  background-position-y: -80px;
-  @include flexCenter(column);
+  background-position-y: -175px;
+  @include flexCustom(flex-start, center, column);
   .overlay {
     height: calc(100vh - 50px);
     background-color: $tpBlue1;
@@ -85,12 +86,17 @@ export default {
   }
 }
 
-.changing-title {
-  color: $tpWhite;
+.front  {
+  color: white;
+  &.vue-typer {
+    color: white;
+  }
 }
 
-.vue-typer {
-  color: white;
-}
+.home-list {
+  padding-top: 20px;
+  width: 70%;
+  margin: 0 auto;
+} 
 </style>
 

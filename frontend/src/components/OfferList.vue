@@ -1,6 +1,6 @@
 <template>
-  <section class="offer-list-container">
-    <masonry :cols="{default: 4, 1200: 3 , 1100: 2 ,900: 1}" :gutter="{default: '20px'}">
+  <section class="offer-list-container" :class="{'list-on-profile': isShowingOnProfile} ">
+    <masonry :cols="{default: 4 , 1200: 3 , 1100: 2 ,900: 1}" :gutter="{default: '20px'}">
       <OfferPreview
         v-for="(offer,idx) in offers"
         :key="idx"
@@ -28,6 +28,11 @@ export default {
   },
   components: {
     OfferPreview
+  },
+  computed: {
+    isShowingOnProfile() {
+      if(this.$route.params.nickName) return true;
+    }
   }
 };
 </script>
@@ -37,7 +42,14 @@ export default {
   @include flexCustom(space-around, center, row);
   flex-wrap: wrap;
   padding: 0 0 2rem;
+
+  &div {
+    width: auto;
+  }
 }
 
-
+.list-on-profile {
+  justify-content: flex-start;
+  padding: 20px;
+}
 </style>

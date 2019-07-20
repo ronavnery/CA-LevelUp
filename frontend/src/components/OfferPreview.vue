@@ -224,7 +224,7 @@ export default {
   background: $tpWhite;
   border-radius: 5px;
   cursor: pointer;
-  margin: 10px;
+  margin: 20px 0;
 }
 
 header {

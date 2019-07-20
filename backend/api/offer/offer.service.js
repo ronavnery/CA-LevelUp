@@ -18,10 +18,10 @@ async function query(filterBy = {}) {
         const regex = new RegExp(filterBy.txt.toLowerCase(), 'i')
         criteria.title = { $regex: regex }
     }
-    // if (filterBy.nickName) {
-    //     const regex = new RegExp(filterBy.nickName)
-    //     criteria["createdBy.nickName"] = { $regex: regex }
-    // }
+    if (filterBy.nickName) {
+        const regex = new RegExp(filterBy.nickName)
+        criteria["createdBy.nickName"] = { $regex: regex }
+    }
     // if (filterBy.type) {
         
     //     criteria.type = { type: filterBy.type}

@@ -106,6 +106,7 @@ export default {
                 const editedOffer = offerService.addReviewToOffer(offer, review)
                 const updatedOffer = await offerService.update(editedOffer)
                 commit({type: 'updateOffer', newOffer: updatedOffer})
+                return Promise.resolve()
             } catch(err) {
                 throw err
             }

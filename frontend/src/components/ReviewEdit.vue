@@ -10,14 +10,26 @@
     <div class="btn-wrapper">
      <mdb-btn color="deep-purple" @click="emitRating">Submit</mdb-btn>
      <mdb-btn color="default" @click="clearFields">Clear</mdb-btn>
+     <div class="icon-container">
+     <v-icon name="sync" spin scale="1.2" v-if="status === 'submitting'"/>
+     <v-icon name="check-circle" scale="1.5" class="success" v-else-if="status === 'success'"/>
+     <v-icon name="check-circle" scale="1.5" class="failure" v-else-if="status === 'error'"/>
+     </div>
     </div>
         </div>
+
     </section>
 </template>
 
 <script>
+
+
 import StarRating from 'vue-star-rating';
 import { mdbInput, mdbBtn } from 'mdbvue';
+import 'vue-awesome/icons/sync';
+import 'vue-awesome/icons/check-circle';
+import 'vue-awesome/icons/exclamation-circle';
+import Icon from 'vue-awesome/components/Icon'; 
 
 export default {
 
@@ -29,7 +41,13 @@ export default {
     components: {
         StarRating,
         mdbInput,
-        mdbBtn
+        mdbBtn,
+        'v-icon': Icon
+    },
+    props: {
+        status: {
+            type: String
+        }
     },
     data() {
         return {
@@ -37,7 +55,7 @@ export default {
                 body: '',
                 score: 0,
                 maker: null
-            }
+            },
         }
     },
     methods: {
@@ -59,7 +77,6 @@ export default {
     max-width: 300px;
     .btn-wrapper {
         display: flex;
-        justify-content: center;
     }
     input {
         margin: 5px 0;
@@ -76,6 +93,19 @@ export default {
 textarea {
     // max-width: 300px;
     resize: none;
+}
+
+.icon-container {
+    width: 30px;
+    @include flexCenter(row);
+}
+
+.fa-icon.success {
+    fill: rgb(9, 211, 9);
+}
+
+.fa-icon.failure {
+    fill: rgb(255, 0, 0);
 }
 
 

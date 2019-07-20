@@ -54,8 +54,9 @@
         {{tag}}
         <span v-if="idx !== offer.tags.length -1">,</span>
       </span>
+      <ReviewList />
     
-    <ReviewEdit v-if="connectedUser" @add-review="addReviewToOffer"/>
+    <ReviewEdit v-if="connectedUser" @add-review="addReviewToOffer" :status="reviewStatus"/>
     </main>
     <bookingLevelUp v-if="isBooking" @click="sendBookingReq" @close-booking-request="toggleBooking"/>
   </div>
@@ -63,6 +64,7 @@
 
 <script>
 import bookingLevelUp from "../components/bookingLevelUp";
+import ReviewList from '@/components/ReviewList';
 import ReviewEdit from '../components/ReviewEdit';
 import moment from "moment";
 export default {
@@ -71,7 +73,8 @@ export default {
     return {
       isBooking: false,
       offer: null,
-      connectedUser: null
+      connectedUser: null,
+      reviewStatus: ''
     };
   },
   async created() {
@@ -112,16 +115,20 @@ export default {
       this.$store.dispatch({ type: "sendBookingReq", bookingReq });
     },
     async addReviewToOffer(review) {
+      this.reviewStatus = 'submitting';
       try {
-        this.$store.dispatch({type: 'updateOfferWithNewReview', review, offer: this.offer})
+        await this.$store.dispatch({type: 'updateOfferWithNewReview', review, offer: this.offer})
+        this.reviewStatus = 'success';
       } catch(err) {
         console.log('error in adding review:', err)
+        this.reviewStatus = 'error';
       }
     }
   },
   components: {
     bookingLevelUp,
-    ReviewEdit
+    ReviewEdit,
+    ReviewList
   }
 };
 </script>

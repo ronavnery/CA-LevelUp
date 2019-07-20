@@ -100,5 +100,15 @@ export default {
                 console.log(err)
             }
         },
+
+        async updateOfferWithNewReview({commit}, {review, offer}) {
+            try {
+                const editedOffer = offerService.addReviewToOffer(offer, review)
+                const updatedOffer = await offerService.update(editedOffer)
+                commit({type: 'updateOffer', newOffer: updatedOffer})
+            } catch(err) {
+                throw err
+            }
+        }
     }
 }

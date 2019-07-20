@@ -54,20 +54,24 @@
         {{tag}}
         <span v-if="idx !== offer.tags.length -1">,</span>
       </span>
+    
+    <ReviewEdit v-if="connectedUser" @add-review="addReviewToOffer"/>
     </main>
-    <bookingLevelUp v-if="isBooking" @click="sendBookingReq" />
+    <bookingLevelUp v-if="isBooking" @click="sendBookingReq" @close-booking-request="toggleBooking"/>
   </div>
 </template>
 
 <script>
 import bookingLevelUp from "../components/bookingLevelUp";
+import ReviewEdit from '../components/ReviewEdit';
 import moment from "moment";
 export default {
   name: "OfferDetails",
   data() {
     return {
       isBooking: false,
-      offer: null
+      offer: null,
+      connectedUser: null
     };
   },
   async created() {
@@ -83,6 +87,7 @@ export default {
         console.log(err);
       }
     }
+    this.connectedUser = this.$store.getters.connectedUser
   },
   computed: {
     getCurrOffer() {
@@ -105,10 +110,18 @@ export default {
       this.isBooking = false;
       bookingReq.offerId = this.offer._id;
       this.$store.dispatch({ type: "sendBookingReq", bookingReq });
+    },
+    async addReviewToOffer(review) {
+      try {
+        this.$store.dispatch({type: 'updateOfferWithNewReview', review, offer: this.offer})
+      } catch(err) {
+        console.log('error in adding review:', err)
+      }
     }
   },
   components: {
-    bookingLevelUp
+    bookingLevelUp,
+    ReviewEdit
   }
 };
 </script>

@@ -1,23 +1,35 @@
 <template>
-  <div>
+  <div v-if="isOpen">
+    <ul v-if="isOpen" class="inbox">
+      <li v-for="(booking,idx) in pendingBookings" :key="idx">
+        <h3>{{booking.offer.offerTitle}}</h3>
+        
+        <p v-if="booking.isConfirmed"> heyyyyy</p>
+        <p v-else>pending</p>
+        <img
+          :src="booking.offer.offerImg"
+          alt
+        />
+      </li>
+    </ul>
     <ul v-if="isOpen" class="inbox">
       <li
         class="inbox-preview"
-        v-for="(msg,idx) in msgs"
+        v-for="(booking,idx) in bookings"
         :key="idx"
-        @click="openChat(msg.recipient._id)"
+        @click="openChat(booking)"
       >
-        <h2>{{msg.recipient.name}}</h2>
-        <p>{{msg.msgs[0].txt}}</p>
-        <p>{{msg.msgs[0].createdAt | formatDate}}</p>
-        {{msg}}
+        <img :src="booking.bookingMaker.makerImg" alt />
+        <p>{{booking.bookingMaker.makerName}}</p>
+        <p>{{booking.sentAt | formatDate}}</p>
+        <button>start chat</button>
+        <button
+          @click.stop="sendConfirm({userId:booking.bookingMaker.makerId, offerId: booking.offer.offerId, isConfirmed:true})"
+        >Confirm</button>
+        <button
+          @click.stop="sendConfirm({userId:booking.bookingMaker.makerId, offerId: booking.offer.offerId, isConfirmed:false})"
+        >Not now</button>
       </li>
-      <!-- <li class="inbox-preview" v-for="(msg,idx) in msgs" :key="idx" @click="openChat(msg.recipient._id)">
-        <h2>{{msg.recipient.name}}</h2>
-        <p>{{msg.msgs[0].txt}}</p>
-        <p>{{msg.msgs[0].createdAt | formatDate}}</p>
-        {{msg}}
-      </li>-->
     </ul>
     <ChatBox v-if="chatOpen" :directors="directors" class="chat-box" />
   </div>
@@ -42,21 +54,8 @@ export default {
       chatOpen: false,
       recipient: null,
       user: "samuel",
-      msg: "",
-      msgs: [
-        {
-          recipient: {
-            _id: "5d2dec114cfb9f419072650d",
-            name: "jihri"
-          },
-          msgs: [
-            {
-              txt: "hey how are you",
-              createdAt: 1565044340240
-            }
-          ]
-        }
-      ],
+      pendingBookings: [],
+      bookings: [],
       socket: io("localhost:3000")
     };
   },
@@ -70,6 +69,9 @@ export default {
     openChat(recipient) {
       this.directors = { recipient, sender: this.inboxId };
       this.chatOpen = true;
+    },
+    sendConfirm(confirm) {
+      this.socket.emit("confirmed", confirm);
     }
   },
 
@@ -78,14 +80,21 @@ export default {
   },
 
   mounted() {
-    let connected = [];
     const userId = this.$store.getters.connectedUser._id;
 
     this.socket.emit("JOIN_ROOM", userId);
-    this.socket.on('req-sent', (offerMaker, offer)=> {
-            // const {bookingMaker, offerMaker, offer} = req
-            console.log(offerMaker,offer)
-    })
+    this.socket.on("req-sent", booking => this.bookings.push(booking));
+    this.socket.on("booking-sent", booking =>
+      this.pendingBookings.push(booking)
+    );
+    this.socket.on("req-ans", ans => {
+      const pendingBooking = this.pendingBookings.find(
+        booking => booking.offer.offerId === ans.offerId
+      );
+      console.log(pendingBooking)
+      pendingBooking.isConfirmed = ans.isConfirmed;
+    });
+
     // this.socket.on(`incoming:${userId}`, ({ fromId }) => {
     //   if (!connected.includes(fromId)) {
     //     connected.push(fromId);
@@ -93,7 +102,7 @@ export default {
     //     this.socket.on(
     //       `message:${userId}:${fromId}`,
     //       ({ message, senderId }) => {
-    //         this.msgs.push({ message, senderId });
+    //         this.bookings.push({ message, senderId });
     //         console.log(message, senderId);
     //       }
     //     );
@@ -101,14 +110,14 @@ export default {
     // });
     //      console.log(inboxId)
     //     //  this.socket.on("MESSAGE", data => {
-    //     //    this.msgs = [...this.msgs, data];
+    //     //    this.bookings = [...this.bookings, data];
     //     //  });
     //     //  this.socket.emit("inbox join", {
 
     //     //  });
     //     this.socket.emit("SEND_MESSAGE", {
     //         user: this.user,
-    //         message: this.msg,
+    //         message: this.booking,
     //         roomId: this.$route.params.id
 
     //       });
@@ -118,6 +127,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+
 .inbox {
   position: absolute;
   right: 0;

@@ -533,4 +533,33 @@ Fri, 19 Jul 2019 18:01:45 GMT - Info - Server is running on port: 3000
 Fri, 19 Jul 2019 13:25:25 GMT - Info - Server is running on port: 3000
 >>>>>>> a36d064299aefc1d710beb0e968b2cace499cb7d
 
+<<<<<<< HEAD
 Sat, 20 Jul 2019 11:57:14 GMT - Info - Server is running on port: 3000
+=======
+Fri, 19 Jul 2019 19:44:55 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 21:42:53 GMT - Debug - auth.service - login with nickName: aaa
+Fri, 19 Jul 2019 22:03:17 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:03:22 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:04:42 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:04:58 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:05:09 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:05:19 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:08:59 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:09:29 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:09:54 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:11:16 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:11:38 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:11:49 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:12:31 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:12:35 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:13:03 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:13:09 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:13:13 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:13:22 GMT - Info - Server is running on port: 3000
+Fri, 19 Jul 2019 22:13:30 GMT - Info - Server is running on port: 3000
+Sat, 20 Jul 2019 07:56:25 GMT - Info - Server is running on port: 3000
+Sat, 20 Jul 2019 09:10:34 GMT - Info - Server is running on port: 3000
+Sat, 20 Jul 2019 09:22:32 GMT - Debug - auth.service - login with nickName: ronavnery
+>>>>>>> d143d33c2679153d7e30d54baf8edb72f4f15a10
+
+Sat, 20 Jul 2019 12:11:41 GMT - Info - Server is running on port: 3000

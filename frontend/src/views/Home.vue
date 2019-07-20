@@ -1,27 +1,84 @@
 <template>
-  <div class="home"> 
-     <div class="overlay"></div>
-  </div>
+  <section class="home-container">
+    <section class="front">
+      <span class="fs36">Get new skills for free in</span>
+      <div class="changing-title fs36">
+        <vue-typer
+          class="typer"
+          :text='["Development","Business","Finance & Accounting","IT & Software","Office Productivity","Personal Development","Design","Marketing","Photography","Health & Fitness","Music","Teaching & Academics"]'
+          :repeat="Infinity"
+          :shuffle="true"
+          initial-action="typing"
+          :pre-type-delay="70"
+          :type-delay="70"
+          :pre-erase-delay="2000"
+          :erase-delay="50"
+          erase-style="backspace"
+          :erase-on-complete="false"
+          caret-animation="solid"
+        ></vue-typer>
+      </div>
+    </section>
+    <div class="home-list fs20 strong">
+
+      Recommended for you:
+      <OfferList v-if="offers.length" :offers="recommendedOffers"></OfferList>
+      Newest in music:
+      <OfferList v-if="offers.length" :offers="musicOffers"></OfferList>
+      </div>
+  </section>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import OfferFilter from "@/components/OfferFilter.vue";
+import OfferList from "../components/OfferList";
 export default {
-  name: 'home',
+  name: "home",
   components: {
+    OfferFilter,
+    OfferList
+  },
+  data() {
+    return {
+      recommendedOffers: null,
+      musicOffers: null
+    }
+  },
+  computed: {
+    offers() {
+      return this.$store.getters.getOffers;
+    }
+  },
+  async mounted() {
+    let connectedUser = await this.$store.dispatch({type: 'checkIfLoggedInUser'})
+    if (!connectedUser) connectedUser = 'visitor'
+    else connectedUser = connectedUser.nickName
+    const category = await this.$store.dispatch({type: 'getUserPopularCategory', user: connectedUser})
+    let recommendedOffers = await this.$store.dispatch({ type: "loadOffers", filter: {category, limit: 4} });
+    this.recommendedOffers = recommendedOffers
+    let musicOffers = await this.$store.dispatch({ type: "loadOffers", filter: {category:'music',limit: 4}});
+    this.musicOffers = musicOffers
+    //TODOS: get more categories
     
+  },
+
+  methods: {
+    setFilter(filter) {
+      this.$router.push("/explore");
+      this.$store.dispatch({ type: "loadOffers", filter });
+    }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-
-.home {
-  height: calc(100vh - 50px);
-  background-image: url('../assets/backgrounds/home.jpg');
+.front {
+  padding: 20px;
+  height: calc(80vh - 50px);
+  background-image: url("../assets/backgrounds/puzzle1resize2.jpg");
   background-size: cover;
-  background-position-y: -80px;
+  background-position-y: -175px;
+  @include flexCustom(flex-start, center, column);
   .overlay {
     height: calc(100vh - 50px);
     background-color: $tpBlue1;
@@ -29,6 +86,17 @@ export default {
   }
 }
 
+.front  {
+  color: white;
+  &.vue-typer {
+    color: white;
+  }
+}
 
+.home-list {
+  padding-top: 20px;
+  width: 70%;
+  margin: 0 auto;
+} 
 </style>
 

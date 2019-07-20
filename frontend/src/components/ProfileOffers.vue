@@ -1,5 +1,6 @@
 <template>
-  <section v-if="profileOffers">
+  <section class="profile-offers-container" v-if="profileOffers">
+        <span class="title fs24 strong">{{this.$store.getters.currProfile.name}}'s offers:</span>
         <OfferList :offers="profileOffers" @removeOffer="removeOffer"></OfferList>
   </section>
 </template>
@@ -41,4 +42,17 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+
+.title {
+  margin-left: 20px;
+}
+.profile-offers-container {
+  padding: 20px;
+  overflow: auto;
+  height: 100%;
+}
+</style>
+
 

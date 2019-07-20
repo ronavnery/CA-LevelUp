@@ -123,6 +123,24 @@ export default {
             } catch (err) {
                 throw err
             }
+        },
+
+        logUserCategoryChoice({commit}, {category, user}) {
+            try {
+                const res = userService.logUserCategoryChoice(category, user)
+            }
+            catch(err) {
+                console.log(err)
+            }
+        },
+        getUserPopularCategory({commit}, {user}) {
+            try {
+                const res = userService.getUserPopularCategory(user)
+                return res
+            }
+            catch(err) {
+                console.log('Could not get user popular categories,', err)
+            }
         }
     }
 }

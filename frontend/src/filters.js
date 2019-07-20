@@ -11,6 +11,8 @@ Vue.filter('durationInMins', mins =>{
     return minutes + 'm'
  })
 
+Vue.filter('formatDate', timestamp => moment(timestamp).calendar())
+
 Vue.filter('rating', ratingAvg =>{
     if (!ratingAvg) return 'Not rated yet'
     else return ratingAvg + '/5'

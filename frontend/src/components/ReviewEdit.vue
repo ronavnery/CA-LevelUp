@@ -1,9 +1,12 @@
 <template>
     <section class="review-wrapper">
-        <StarRating :increment="0.1" :star-size="30" text-class="pretty-text" v-model="rating.score"/>
+        <h4 style="margin-top: 8px;">Leave A Review!</h4>
+        <label for="review-title">Title</label>
+        <input type="text" id="review-title" class="form-control" v-model="review.title" required>
+        <StarRating :increment="0.1" :star-size="30" text-class="pretty-text" v-model="review.score" />
         <div>
          <label for="exampleFormControlTextarea1">What Did You Think Of The Lesson?</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="rating.body"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="review.body" required></textarea>
     <div class="btn-wrapper">
      <mdb-btn color="deep-purple" @click="emitRating">Submit</mdb-btn>
      <mdb-btn color="default" @click="clearFields">Clear</mdb-btn>
@@ -21,7 +24,7 @@ export default {
     mounted() {
         const connectedUser = this.$store.getters.connectedUser
         const {_id, name, nickName, imgUrl, email, age} = connectedUser;
-        this.rating.maker = {_id, name, nickName, imgUrl, email, age}
+        this.review.maker = {_id, name, nickName, imgUrl, email, age}
     },
     components: {
         StarRating,
@@ -30,7 +33,7 @@ export default {
     },
     data() {
         return {
-            rating: {
+            review: {
                 body: '',
                 score: 0,
                 maker: null
@@ -39,11 +42,12 @@ export default {
     },
     methods: {
         clearFields() {
-            this.rating.body = '';
-            this.rating.score = 0;
+            this.review.body = '';
+            this.review.title = '';
+            this.review.score = 0;
         },
         emitRating() {
-            
+            this.$emit('add-review', this.review)
         }
     }
 }
@@ -56,6 +60,12 @@ export default {
     .btn-wrapper {
         display: flex;
         justify-content: center;
+    }
+    input {
+        margin: 5px 0;
+    }
+    label {
+        margin: 5px 0;
     }
 }
 

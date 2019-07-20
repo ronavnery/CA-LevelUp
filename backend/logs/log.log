@@ -572,3 +572,6 @@ Sat, 20 Jul 2019 13:25:32 GMT - Debug - auth.service - login with nickName: Stav
 Sat, 20 Jul 2019 13:32:27 GMT - Debug - auth.service - login with nickName: StavDorkam119
 Sat, 20 Jul 2019 13:35:29 GMT - Debug - auth.service - login with nickName: StavDorkam119
 Sat, 20 Jul 2019 13:42:49 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Sat, 20 Jul 2019 15:18:19 GMT - Info - Server is running on port: 3000
+Sat, 20 Jul 2019 15:25:16 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Sat, 20 Jul 2019 16:06:43 GMT - Info - Server is running on port: 3000

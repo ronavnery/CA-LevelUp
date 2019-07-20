@@ -82,6 +82,10 @@ export default {
         location: {
           type: "In Person",
           address: ""
+        },
+        rating: {
+          avgScore: 0,
+          reviews: []
         }
       }
     };

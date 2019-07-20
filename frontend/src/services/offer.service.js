@@ -7,6 +7,7 @@ export default {
     update,
     remove,
     getById,
+    addReviewToOffer
 }
 
 function query(filter) {
@@ -27,6 +28,24 @@ function remove(_id) {
 
 function getById(_id) {
     return httpService.get(_getUrl(_id))
+}
+
+function addReviewToOffer(offer, review) {
+    if (!offer.rating) {
+        offer.rating = {
+            avgScore: 0,
+            reviews: []
+        }
+    }
+    offer.rating.reviews.push(review)
+    let scoreSum = offer.rating.reviews.reduce((accScore, review) => {
+        console.log('lololol', review)
+        accScore += review.score
+        return accScore
+    }, 0)
+    console.log('Score Sum:', scoreSum)
+    offer.rating.avgScore = parseFloat(scoreSum / offer.rating.reviews.length).toFixed(2);
+    return offer
 }
 
 function _getUrl(id = '') {

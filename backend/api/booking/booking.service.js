@@ -77,7 +77,7 @@ async function update(booking) {
 }
 
 async function add(booking, creator) {
-    console.log('in service, got booking:', booking)
+    // console.log('in service, got booking:', booking)
     const collection = await dbService.getCollection('booking')
     console.log('Connected to collection booking')
     booking.createdAt = Date.now()

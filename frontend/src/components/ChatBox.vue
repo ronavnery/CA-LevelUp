@@ -58,11 +58,11 @@ export default {
   },
 
   mounted() {
-    this.socket.emit("JOIN_ROOM", this.directors.sender,);
-    this.socket.on(`MESSAGE`, ({ message, senderId }) => {
-      this.messages = [...this.messages, { message, senderId }];
-      console.log(this.messages)
-    });
+    // this.socket.emit("JOIN_ROOM", this.directors.sender,);
+    // this.socket.on(`MESSAGE`, ({ message, senderId }) => {
+    //   this.messages = [...this.messages, { message, senderId }];
+    //   console.log(this.messages)
+    // });
 
 
     // this.socket.on("MESSAGE", data => {

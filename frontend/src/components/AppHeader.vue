@@ -1,8 +1,8 @@
 <template>
   <section class="app-header">
     <div @click="goHome" class="logo-container">
-      <img class="logo" src="../assets/logo.png" />
-      <span class="logo-title fs14 strong">LevelUp</span>
+      <img class="logo" src="../assets/logo/levelup-v5.png" />
+      <!-- <span class="logo-title fs14 strong">LevelUp</span> -->
     </div>
     <div class="nav-container fs12">
       <router-link exact to="/" class="header-link">Home</router-link>
@@ -50,12 +50,10 @@ export default {
   position: relative;
   background: $tpPurple;
   line-height: rem(50px);
+  min-height: 50px;
   font-family: $Montserrat-Regular;
   padding: 0 rem(10px) 0 rem(10px);
   box-shadow: 2px 15px 26px -10px rgba(0, 0, 0, 0.59);
-  // For floating header:
-  // border-radius: 15px;
-  // margin-bottom: rem(30px)
 }
 
 a {
@@ -73,7 +71,8 @@ a {
 }
 
 .logo {
-  width: rem(30px);
+  height: 35px;
+  margin-left: 10px;
 }
 
 .nav-container {

@@ -75,7 +75,7 @@ export default {
 .front {
   padding: 20px;
   height: calc(80vh - 50px);
-  background-image: url("../assets/backgrounds/puzzle1resize2.jpg");
+  background-image: url("../assets/backgrounds/home-main.jpg");
   background-size: cover;
   background-position-y: -175px;
   @include flexCustom(flex-start, center, column);

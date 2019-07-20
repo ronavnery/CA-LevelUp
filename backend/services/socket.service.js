@@ -17,8 +17,14 @@ function setup(http) {
         socket.on('SEND_MESSAGE', (data) => {
             const { recipientId, senderId, message } = data
             chatService.pushToInbox(data)
+
             io.to(recipientId).emit('MESSAGE', {senderId, message});
         });
+        socket.on('level-up-req', (req)=> {
+            const {bookingMaker, offerMaker, offer} = req
+            console.log()
+            io.to(bookingMaker.makerId).emit('req-sent', {offerMaker, offer});
+        })
 
 
         // socket.on('SEND_MESSAGE', ({ ownerId, fromId, message, senderId }) => {

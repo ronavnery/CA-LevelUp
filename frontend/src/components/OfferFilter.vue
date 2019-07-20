@@ -8,6 +8,10 @@
       v-model="filter.category"
       :options="options"
       :searchable="false"
+      :select-label="''"
+      :deselect-label="''"
+      :selectedLabel="''"
+      :placeholder="'Choose A Category'"
       @remove="removeCategory"
       @select="emitFilter">
     </multiselect>

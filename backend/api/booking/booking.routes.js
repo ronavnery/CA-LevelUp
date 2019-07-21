@@ -7,10 +7,10 @@ const router = express.Router()
 // router.use(requireAuth)
 
 router.get('/', getBookings)
-router.get('/inbox', getInbox)
+router.get('/inbox',requireAuth, getInbox)
 router.post('/',requireAuth, addBooking)
 router.get('/:id',getBooking)
-router.put('/:id',requireAuth, updateBooking)
+router.put('/',requireAuth, updateBooking)
 router.delete('/:id',requireAuth, deleteBooking)
 
 module.exports = router

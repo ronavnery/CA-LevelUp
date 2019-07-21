@@ -23,7 +23,8 @@ async function updateBooking(req, res) {
 }
 
 async function getInbox(req, res) {
-    const inbox = await bookingService.getInbox(req.query)
+    console.log('query', req.query)
+    const inbox = await bookingService.getInbox(req.query.id)
     res.send(inbox)
 }
 

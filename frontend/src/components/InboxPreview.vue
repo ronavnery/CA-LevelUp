@@ -88,7 +88,6 @@ export default {
     this.socket.emit("JOIN_ROOM", userId);
     this.socket.on("req-sent", booking => this.bookings.push(booking));
     this.socket.on("booking-sent", booking =>{
-      console.dir(booking)
       this.pendingBookings.push(booking)
     }
     );

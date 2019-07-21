@@ -24,11 +24,12 @@ function setup(http) {
             io.to(offerMaker.makerId).emit('req-sent', { bookingMaker, offer, offerMaker, sentAt });
             io.to(offerMaker.makerId).emit('notify');
             io.to(bookingMaker.makerId).emit('booking-sent', { bookingMaker, offer, offerMaker, sentAt });
-            io.to(bookingMaker.makerId).emit('notify');
+            // io.to(bookingMaker.makerId).emit('notify');
         })
         socket.on('confirmed', (confirm) => {
             const { userId, offerId, isConfirmed } = confirm
             io.to(userId).emit('req-ans', { offerId, isConfirmed });
+            io.to(userId).emit('notify');
         })
 
 

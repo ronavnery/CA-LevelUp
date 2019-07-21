@@ -74,10 +74,8 @@ export default {
         category: "Development",
         difficulty: 1,
         minPeople: "",
-        ratingAvg: 0,
         whatsIncluded: [],
         interested: [],
-        reviews: [],
         leveledUp: [],
         location: {
           type: "In Person",

@@ -19,13 +19,12 @@
         ></vue-typer>
       </div>
     </section>
-    <div class="home-list fs20 strong">
-
-      Recommended for you:
+    <div class="home-list fs20">
+      <span class="strong">Recommended for you:</span>
       <OfferList v-if="offers.length" :offers="recommendedOffers"></OfferList>
-      Newest in music:
+      <span class="strong">Newest in music:</span>
       <OfferList v-if="offers.length" :offers="musicOffers"></OfferList>
-      </div>
+    </div>
   </section>
 </template>
 
@@ -42,7 +41,7 @@ export default {
     return {
       recommendedOffers: null,
       musicOffers: null
-    }
+    };
   },
   computed: {
     offers() {
@@ -50,16 +49,26 @@ export default {
     }
   },
   async mounted() {
-    let connectedUser = await this.$store.dispatch({type: 'checkIfLoggedInUser'})
-    if (!connectedUser) connectedUser = 'visitor'
-    else connectedUser = connectedUser.nickName
-    const category = await this.$store.dispatch({type: 'getUserPopularCategory', user: connectedUser})
-    let recommendedOffers = await this.$store.dispatch({ type: "loadOffers", filter: {category, limit: 4} });
-    this.recommendedOffers = recommendedOffers
-    let musicOffers = await this.$store.dispatch({ type: "loadOffers", filter: {category:'music',limit: 4}});
-    this.musicOffers = musicOffers
+    let connectedUser = await this.$store.dispatch({
+      type: "checkIfLoggedInUser"
+    });
+    if (!connectedUser) connectedUser = "visitor";
+    else connectedUser = connectedUser.nickName;
+    const category = await this.$store.dispatch({
+      type: "getUserPopularCategory",
+      user: connectedUser
+    });
+    let recommendedOffers = await this.$store.dispatch({
+      type: "loadOffers",
+      filter: { category, limit: 4 }
+    });
+    this.recommendedOffers = recommendedOffers;
+    let musicOffers = await this.$store.dispatch({
+      type: "loadOffers",
+      filter: { category: "music", limit: 4 }
+    });
+    this.musicOffers = musicOffers;
     //TODOS: get more categories
-    
   },
 
   methods: {
@@ -75,9 +84,12 @@ export default {
 .front {
   padding: 20px;
   height: calc(80vh - 50px);
-  background-image: url("../assets/backgrounds/home-main.jpg");
+  background-image: url("../assets/backgrounds/home-main-v2.jpg");
+  @media screen and (max-width: 660px) {
+    background-image: url("../assets/backgrounds/home-main-v2-media1.jpg")
+  }
   background-size: cover;
-  background-position-y: -175px;
+  background-position: center;
   @include flexCustom(flex-start, center, column);
   .overlay {
     height: calc(100vh - 50px);
@@ -86,7 +98,7 @@ export default {
   }
 }
 
-.front  {
+.front {
   color: white;
   &.vue-typer {
     color: white;
@@ -95,8 +107,12 @@ export default {
 
 .home-list {
   padding-top: 20px;
-  width: 70%;
+  max-width: 1080px;
   margin: 0 auto;
-} 
+
+  @media screen and (max-width: 1080px) {
+    padding: 20px;
+  }
+}
 </style>
 

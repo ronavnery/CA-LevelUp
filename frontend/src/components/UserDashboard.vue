@@ -1,6 +1,6 @@
 <template>
   <section class="user-dashboard-header">
-    <button class="btn-add-offer" @click="addOffer">Create Skill</button>
+    <button class="btn-add-offer" @click="addOffer">Share a skill</button>
     <div class="icon-container">
       <div class="inbox" @click="removeNotification">
         <router-link :to="'/profile/' + currUser.nickName + '/inbox'">

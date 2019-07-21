@@ -96,10 +96,19 @@ export default {
   // position: relative;
   // top: -25px;
   // @include flexCustom(space-between, center, row);
+
+  @media screen and(max-width: 760px) {
+    flex-direction: column;
+    align-items: center;
+    &>* {
+      margin: 10px;
+    }
+  }
 }
 
 .offer-filter {
   position: relative;
+      width: max-content;
   input {
     border-radius: 4px;
     // margin-left: 5px;

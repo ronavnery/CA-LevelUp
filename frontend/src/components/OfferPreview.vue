@@ -22,15 +22,15 @@
           <span>{{offer.createdBy.nickName}}</span>
         </div>
         <div class="rating fs12">
-          <span class="rating-avg" v-if="offer.ratingAvg > 0">
-            <span class="rating-avg-text strong">{{offer.ratingAvg}}</span>
-            ({{offer.reviews.length}})
+          <span class="rating-avg" v-if="offer.rating.avgScore > 0">
+            <span class="rating-avg-text strong">{{offer.rating.avgScore}}</span>
+            ({{offer.rating.reviews.length}})
           </span>
           <span class="rating-avg" v-else>Unrated</span>
           <i
             class="star-full fas fa-star"
-            v-if="offer.ratingAvg > 0"
-            :class="{'high-rating': offer.ratingAvg > 4 }"
+            v-if="offer.rating.avgScore > 0"
+            :class="{'high-rating': offer.rating.avgScore > 4 }"
           ></i>
           <i class="far fa-star" v-else></i>
         </div>
@@ -115,7 +115,6 @@ export default {
     },
     async getOfferMakerImgUrl() {
       const user = await this.$store.dispatch({type: 'getProfile', nickName: this.offer.createdBy.nickName})
-      console.log('user is', user)
       this.offerMakerUpdatedImgUrl = user.imgUrl
     }
   },
@@ -176,16 +175,50 @@ export default {
 <style scoped lang="scss">
 .offer-preview {
   @include flexCustom(space-between, stretch, column);
-  width: rem(250px);
+  // width: rem(250px);
   background: $tpWhite;
   border-radius: 5px;
   cursor: pointer;
   margin: 20px 0;
-  box-shadow: 0px 0px 1.5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: all 0.3s;
+  position: relative;
 
-  &:hover {
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+  &::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease-in-out;
   }
+
+
+  &:hover::after {
+  opacity: 1;
+}
+
+
+  & main {
+    max-height: 260px;
+    overflow: hidden;
+    
+    transition: max-height 0.5s;
+  }
+
+  &:hover main {
+    max-height: 1200px;
+    transition: max-height 1s;
+  }
+
+  // &:hover {
+  //   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+  // }
+
+
 }
 
 header {

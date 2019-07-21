@@ -47,13 +47,17 @@ export default {
 <style scoped lang="scss">
 .app-header {
   @include flexCustom(space-between, center, row);
-  position: relative;
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  width: 100%;
   background: $tpPurple;
   line-height: rem(50px);
   min-height: 50px;
   font-family: $Montserrat-Regular;
   padding: 0 rem(10px) 0 rem(10px);
   box-shadow: 2px 15px 26px -10px rgba(0, 0, 0, 0.59);
+
 }
 
 a {

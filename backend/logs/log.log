@@ -898,6 +898,11 @@ Sun, 21 Jul 2019 15:45:37 GMT - Info - Server is running on port: 3000
 Sun, 21 Jul 2019 15:53:11 GMT - Info - Server is running on port: 3000
 Sun, 21 Jul 2019 15:53:44 GMT - Info - Server is running on port: 3000
 Sun, 21 Jul 2019 15:54:34 GMT - Info - Server is running on port: 3000
+<<<<<<< HEAD
 >>>>>>> bbde2fcccfc3e5b2d77bbfe24db44dd05d9fd495
 
 Sun, 21 Jul 2019 16:14:42 GMT - Info - Server is running on port: 3000
+=======
+Sun, 21 Jul 2019 15:59:23 GMT - Info - Server is running on port: 3000
+Sun, 21 Jul 2019 15:59:29 GMT - Debug - auth.service - login with nickName: StavDorkam119
+>>>>>>> 2f1b708dd9e827d26cfb2185cae8f9bef7fa9e13

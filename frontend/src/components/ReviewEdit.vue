@@ -3,7 +3,7 @@
         <h4 style="margin-top: 8px;">Leave A Review!</h4>
         <label for="review-title">Title</label>
         <input type="text" id="review-title" class="form-control" v-model="review.title" required>
-        <StarRating :increment="0.1" :star-size="30" text-class="pretty-text" v-model="review.score" />
+        <StarRating :increment="1" :star-size="30" text-class="pretty-text" v-model="review.score" />
         <div>
          <label for="exampleFormControlTextarea1">What Did You Think Of The Lesson?</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="review.body" required></textarea>

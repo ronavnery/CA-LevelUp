@@ -46,7 +46,7 @@ function addReviewToOffer(offer, review) {
         return accScore
     }, 0)
     console.log('Score Sum:', scoreSum)
-    offer.rating.avgScore = parseFloat(scoreSum / offer.rating.reviews.length).toFixed(2);
+    offer.rating.avgScore = parseFloat(scoreSum / offer.rating.reviews.length).toFixed(1);
     return offer
 }
 

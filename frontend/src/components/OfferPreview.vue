@@ -38,7 +38,7 @@
 
       <div class="details">
         <p class="title">{{offer.title | truncateText(30)}}</p>
-        <p class="desc">{{offer.description | truncateText(80)}}</p>
+        <p class="desc">{{offer.description | truncateText(320)}}</p>
         <p v-for="tag in offer.tags.slice(0,3)" :key="tag" class="tags">{{tag}}</p>
       </div>
     </main>

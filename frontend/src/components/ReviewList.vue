@@ -7,7 +7,7 @@
           <div class="wrapper">
             <div class="review-maker-image" :style="getImage(review.maker.imgUrl)"></div>
             <div class="title-time">
-              <p>{{review.title| truncateText(50)}}</p>
+              <p>{{review.title| truncateText(40)}}</p>
               <div class="date-wrapper">
                 <i class="fas fa-clock"></i>
                 <span>{{review.createdAt | formatDateFromNow}}</span>
@@ -126,7 +126,6 @@ export default {
 }
 
 .date-wrapper {
-  text-align: end;
   color: #00000073;
   padding-bottom: 5px;
   i {

@@ -6,7 +6,12 @@
       <form @submit.prevent="prevent">
         <section class="settings-first">
           <!-- CATEGORY -->
-          <select v-model="editedOffer.category" name="category" class="form-control category" required>
+          <select
+            v-model="editedOffer.category"
+            name="category"
+            class="form-control category"
+            required
+          >
             <option selected disabled>Choose a category</option>
             <option v-for="(category,idx) in optionalCategories" :key="idx">{{category}}</option>
           </select>
@@ -23,24 +28,24 @@
             <div class="custom-control custom-radio custom-control-inline">
               <input
                 type="radio"
-                name="radioInline"
+                name="radioInline1"
                 class="custom-control-input"
-                id="defaultInline1"
-                value="true"
+                id="singleOrGroup1"
+                :value="false"
                 v-model.number="editedOffer.isGroup"
               />
-              <label class="custom-control-label" for="defaultInline1">1 on 1</label>
+              <label class="custom-control-label" for="singleOrGroup1">1 on 1</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
               <input
                 type="radio"
-                name="radioInline"
+                name="radioInline1"
                 class="custom-control-input"
-                id="defaultInline2"
-                value="false"
+                id="singleOrGroup2"
+                :value="true"
                 v-model.number="editedOffer.isGroup"
               />
-              <label class="custom-control-label" for="defaultInline2">Group</label>
+              <label class="custom-control-label" for="singleOrGroup2">Group</label>
             </div>
           </div>
 
@@ -60,13 +65,13 @@
             class="desc-input form-control"
           />
 
-           <!-- DIFFICULTY -->
+          <!-- DIFFICULTY -->
           <span class="fs14">Skill difficulty</span>
           <div class="difficulty-container fs14">
             <div class="custom-control custom-radio custom-control-inline">
               <input
                 type="radio"
-                name="radioInline"
+                name="radioInline2"
                 class="custom-control-input"
                 id="defaultInline1"
                 value="1"
@@ -77,7 +82,7 @@
             <div class="custom-control custom-radio custom-control-inline">
               <input
                 type="radio"
-                name="radioInline"
+                name="radioInline2"
                 class="custom-control-input"
                 id="defaultInline2"
                 value="2"
@@ -88,7 +93,7 @@
             <div class="custom-control custom-radio custom-control-inline">
               <input
                 type="radio"
-                name="radioInline"
+                name="radioInline2"
                 class="custom-control-input"
                 id="defaultInline3"
                 value="3"
@@ -121,23 +126,10 @@
               />
             </div>
           </div>
-
-          <!-- CAROUSEL -->
-          <span
-            class="fs14"
-            v-if="this.optionalPhotos.length > 0"
-          >Choose some photos that best suit your offer:</span>
-          <DynamicCarousel
-            class="dynamic-carousel"
-            :imgs="this.optionalPhotos"
-            @img-choosed="addPhoto"
-          />
         </section>
 
         <!-- RIGHT SIDE -->
         <section class="settings-second">
-         
-
           <!-- REQUIREMENTS -->
           <span class="tags-title fs14">Are there any previous requirements for this skill?</span>
           <DynamicList @requirements-updated="changeRequirments" :list="editedOffer.requirements" />
@@ -171,7 +163,18 @@
             @tags-changed="tagChanged"
           />
 
-          <button @click.prevent="save" class="add-offer-btn" type="submit" >Share!</button>
+          <!-- CAROUSEL -->
+          <span
+            class="fs14"
+            v-if="this.optionalPhotos.length > 0"
+          >Choose some photos that best suit your offer:</span>
+          <DynamicCarousel
+            class="dynamic-carousel"
+            :imgs="this.optionalPhotos"
+            @img-choosed="addPhoto"
+          />
+
+          <button @click.prevent="save" class="add-offer-btn" type="submit">Share!</button>
         </section>
       </form>
     </section>
@@ -380,6 +383,10 @@ export default {
       input {
         max-width: 75px;
       }
+    }
+
+    .single-group-container {
+      margin-bottom: 20px;
     }
   }
 

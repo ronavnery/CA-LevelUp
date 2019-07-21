@@ -5,8 +5,14 @@
       <div v-for="(review, idx) in reviews" :key="idx">
         <button class="accordion" @click="toggleReview($event)" :ref="idx">
           <div class="wrapper">
-            <div class="review-maker-image" :style="getImage(review.maker.imgUrl)"></div>
-            <p>{{review.title}}</p>
+              <div class="review-maker-image" :style="getImage(review.maker.imgUrl)"></div>
+            <div class="title-time">
+              <p>{{review.title}}</p>
+              <div class="date-wrapper">
+                <i class="fas fa-clock"></i>
+                <span>{{review.createdAt | formatDateFromNow}}</span>
+              </div>
+            </div>
           </div>
           <StarRating
             :rating="review.score"
@@ -18,12 +24,7 @@
         <div class="panel">
           <p>What they had to say:</p>
           <p>{{review.body}}</p>
-          <div class="title-date-wrapper">
-            <div class="date-wrapper">
-              <i class="fas fa-clock"></i>
-              <span>{{review.createdAt | formatDateFromNow}}</span>
-            </div>
-          </div>
+          <div class="title-date-wrapper"></div>
         </div>
       </div>
     </main>
@@ -70,8 +71,10 @@ export default {
 
 <style lang="scss" scoped>
 .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: $tpGray;
+  border-radius: 4px;
+  opacity: 0.9;
+  color: $tpPurple;
   cursor: pointer;
   padding: 10px;
   width: 100%;
@@ -88,8 +91,13 @@ export default {
       @include btnRound(45px);
     }
 
+    .title-time {
+      margin: 0 0 0 10px;
+    }
+
     p {
-      margin: 0 0 0 5px;
+      margin: 0;
+      font-weight: bold;
     }
   }
 }

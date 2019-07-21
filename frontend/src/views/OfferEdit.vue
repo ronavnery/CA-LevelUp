@@ -6,7 +6,7 @@
       <form @submit.prevent="prevent">
         <section class="settings-first">
           <!-- CATEGORY -->
-          <select v-model="editedOffer.category" name="category" class="form-control category">
+          <select v-model="editedOffer.category" name="category" class="form-control category" required>
             <option selected disabled>Choose a category</option>
             <option v-for="(category,idx) in optionalCategories" :key="idx">{{category}}</option>
           </select>
@@ -26,7 +26,7 @@
                 name="radioInline"
                 class="custom-control-input"
                 id="defaultInline1"
-                value=true
+                value="true"
                 v-model.number="editedOffer.isGroup"
               />
               <label class="custom-control-label" for="defaultInline1">1 on 1</label>
@@ -37,7 +37,7 @@
                 name="radioInline"
                 class="custom-control-input"
                 id="defaultInline2"
-                value=false
+                value="false"
                 v-model.number="editedOffer.isGroup"
               />
               <label class="custom-control-label" for="defaultInline2">Group</label>
@@ -59,47 +59,8 @@
             rows="5"
             class="desc-input form-control"
           />
-          <!-- <mdb-input type="textarea" label="Description" :rows="5" v-model="editedOffer.description" /> -->
 
-          
-          <!-- SESSION DURATION -->
-          <span class="tags-title fs14">How long will the session be? (in minutes)</span>
-          <div class="duration-container">
-            <!-- <circle-slider
-              v-model="editedOffer.duration"
-              @touchmove="$refs.input.blur()"
-              circle-color="#cecece"
-              progress-color="#a0a0ff"
-              knob-color="#4e36dd"
-              :min="5"
-              :max="360"
-              :step-size="5"
-            ></circle-slider>-->
-
-            <input
-              v-model.number="editedOffer.duration"
-              placeholder
-              type="number"
-              class="form-control"
-            />
-          </div>
-
-          <!-- CAROUSEL -->
-          <span
-            class="fs14"
-            v-if="this.optionalPhotos.length > 0"
-          >Choose some photos that best suit your offer:</span>
-          <DynamicCarousel
-            class="dynamic-carousel"
-            :imgs="this.optionalPhotos"
-            @img-choosed="addPhoto"
-          />
-        </section>
-
-        <!-- RIGHT SIDE -->
-        <section class="settings-second">
-
-          <!-- DIFFICULTY -->
+           <!-- DIFFICULTY -->
           <span class="fs14">Skill difficulty</span>
           <div class="difficulty-container fs14">
             <div class="custom-control custom-radio custom-control-inline">
@@ -137,6 +98,46 @@
             </div>
           </div>
 
+          <!-- SESSION DURATION -->
+          <div>
+            <div class="duration-container">
+              <span class="tags-title fs14">How long will the session be? (in minutes)</span>
+              <!-- <circle-slider
+              v-model="editedOffer.duration"
+              @touchmove="$refs.input.blur()"
+              circle-color="#cecece"
+              progress-color="#a0a0ff"
+              knob-color="#4e36dd"
+              :min="5"
+              :max="360"
+              :step-size="5"
+              ></circle-slider>-->
+
+              <input
+                v-model.number="editedOffer.duration"
+                placeholder
+                type="number"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <!-- CAROUSEL -->
+          <span
+            class="fs14"
+            v-if="this.optionalPhotos.length > 0"
+          >Choose some photos that best suit your offer:</span>
+          <DynamicCarousel
+            class="dynamic-carousel"
+            :imgs="this.optionalPhotos"
+            @img-choosed="addPhoto"
+          />
+        </section>
+
+        <!-- RIGHT SIDE -->
+        <section class="settings-second">
+         
+
           <!-- REQUIREMENTS -->
           <span class="tags-title fs14">Are there any previous requirements for this skill?</span>
           <DynamicList @requirements-updated="changeRequirments" :list="editedOffer.requirements" />
@@ -170,7 +171,7 @@
             @tags-changed="tagChanged"
           />
 
-          <input @click.prevent="save" class="add-offer-btn" type="submit" />
+          <button @click.prevent="save" class="add-offer-btn" type="submit" >Share!</button>
         </section>
       </form>
     </section>
@@ -322,7 +323,7 @@ export default {
 .offer-edit {
   @include flexCustom(left, center, row);
   form {
-    height: 100%;
+    min-height: max-content;
     display: flex;
     width: max-content;
     padding: 10px;
@@ -363,14 +364,18 @@ export default {
     }
     .session-type {
       margin: 0;
+      margin-bottom: 20px;
     }
     .category {
       margin: 0;
+      margin-bottom: 20px;
     }
 
     .duration-container {
+      display: flex;
+      align-items: center;
       div {
-        width: max-content;
+        width: 75px;
       }
       input {
         max-width: 75px;
@@ -381,16 +386,16 @@ export default {
   .add-offer-btn {
     width: 50%;
     place-self: center;
-    @include btnActionColorSm;
+    @include btnActionColor;
   }
 }
 .settings-first,
 .settings-second {
-  @include flexCustom(space-between, left, column);
+  @include flexCustom(flex-start, left, column);
   height: 100%;
 }
 .edit-container {
-  @include flexCustom(center, left, column);
+  @include flexCustom(baseline, left, column);
   height: calc(100vh - 50px);
   overflow: auto;
   flex: 1;
@@ -406,6 +411,7 @@ export default {
 .edit-container form .settings-first .title-input,
 .edit-container form .settings-first .desc-input {
   margin: 0;
+  margin-bottom: 20px;
 }
 
 .dynamic-carousel {

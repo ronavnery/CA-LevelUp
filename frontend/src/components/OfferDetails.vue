@@ -56,7 +56,7 @@
       <ReviewList :reviews="offer.rating.reviews" v-if="offer.rating.reviews.length"/>
       <h4 style="margin-top: 8px;" v-else>This Offer Has No Reviews At This Time</h4>
     
-    <ReviewEdit v-if="connectedUser" @add-review="addReviewToOffer" :status="reviewStatus"/>
+    <ReviewEdit class="review-edit" v-if="connectedUser" @add-review="addReviewToOffer" :status="reviewStatus"/>
     </main>
     <bookingLevelUp v-if="isBooking" @click="sendBookingReq" @close-booking-request="toggleBooking"/>
   </div>
@@ -306,6 +306,10 @@ img {
 main {
   padding: rem(20px);
   position: relative;
+}
+
+.review-edit {
+  margin-top: 50px;
 }
 </style>
 

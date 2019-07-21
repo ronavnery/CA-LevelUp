@@ -16,5 +16,6 @@ Vue.filter('formatDateFromNow', timestamp => moment(timestamp).calendar(Date.now
 
 Vue.filter('rating', ratingAvg =>{
     if (!ratingAvg) return 'Not rated yet'
-    else return ratingAvg + '/5'
+    ratingAvg = +ratingAvg;
+    return ratingAvg + '/5'
  })

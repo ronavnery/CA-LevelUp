@@ -27,11 +27,11 @@
           <li>
             <i class="header-icon fas fa-star" v-if="offer.ratingAvg"></i>
             <i class="header-icon far fa-star" v-else></i>
-            <span class="header-icon-title">{{offer.ratingAvg | rating}}</span>
+            <span class="header-icon-title">{{offer.rating.avgScore | rating}}</span>
             <span
               class="header-icon-title"
               v-if="offer.ratingAvg"
-            >({{offer.reviews.length}} reviews)</span>
+            >({{offer.rating.reviews.length}} reviews)</span>
           </li>
         </ul>
       </section>
@@ -53,7 +53,8 @@
         {{tag}}
         <span v-if="idx !== offer.tags.length -1">,</span>
       </span>
-      <ReviewList />
+      <ReviewList :reviews="offer.rating.reviews" v-if="offer.rating.reviews.length"/>
+      <h4 style="margin-top: 8px;" v-else>This Offer Has No Reviews At This Time</h4>
     
     <ReviewEdit v-if="connectedUser" @add-review="addReviewToOffer" :status="reviewStatus"/>
     </main>

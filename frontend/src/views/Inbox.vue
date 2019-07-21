@@ -75,6 +75,7 @@ export default {
     async sendConfirm(booking, confirmation) {
       booking.isConfirmed = confirmation;
       const newBooking = await this.$store.dispatch({type: "sendConfirm", booking});
+      
       console.log(newBooking)
       // this.socket.emit("confirmed", newBooking);
     }

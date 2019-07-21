@@ -2,7 +2,7 @@
   <section class="sidebar-container">
     <section class="sidebar-content">
       <div class="img-btns-wrapper">
-        <img class="profile-img" :src="profile.imgUrl" @click="goToProfile"/>
+        <img class="profile-img" :src="profile.imgUrl" @click="goToProfile" />
         <div class="btn-container" v-if="!isOnAboutPage">
           <button class="share">
             <i class="fas fa-share-alt"></i>
@@ -14,7 +14,9 @@
             <span>4.8</span>
           </div>
           <button class="message">
-            <i class="fas fa-envelope"></i>
+            <router-link :to="'/profile/' + connectedUser.nickName + '/inbox'">
+              <i class="fas fa-envelope"></i>
+            </router-link>
           </button>
         </div>
       </div>
@@ -23,59 +25,52 @@
       <br />
       <br />
       <span class="city fs12">{{profile.intro}}</span>
-      <a class="city fs20" @click="goToEdit" v-if="!isOnAboutPage">Edit this profile</a>
-      <a class="city fs20" @click="goToEdit" v-if="isUser">Edit this profile</a>
+      <router-link
+        class="city fs20"
+        v-if="isUser"
+        :to="'/profile/' + connectedUser.nickName + '/edit'"
+      >Edit this profile</router-link>
     </section>
   </section>
 </template>
 
 <script>
-import BookingChat from "./BookingChat";
 export default {
   props: {
     profile: {
       type: Object
     }
   },
-  data() {
-    return {
-      connectedUser: this.$store.getters.connectedUser
-    }
-  },
-  components: {
-    BookingChat
-  },
+
   methods: {
-    goToEdit() {
-      this.$router.push(`/profile/${this.profile.nickName}/edit`);
-    },
     goToProfile() {
       this.$router.push(`/profile/${this.profile.nickName}`);
     }
   },
   computed: {
+    connectedUser() {
+      return this.$store.getters.connectedUser;
+    },
     isOnAboutPage() {
-      return (this.$route.path.includes('about'))
+      return this.$route.path.includes("about");
     },
     isUser() {
-      if (this.profile._id === this.connectedUser._id) return true;
-      else false;
+      return this.connectedUser._id === this.profile._id;
     }
   }
-}
-
+};
 </script>
 
 
 <style scoped lang="scss">
 .sidebar-container {
-  // height: 100%;
   min-width: 300px;
   background: $tpPink;
   color: $tpGray;
   box-shadow: 11px 2px 26px -10px rgba(0, 0, 0, 0.75);
   position: relative;
 }
+
 
 .sidebar-content {
   @include flexCustom(space-between, center, column);

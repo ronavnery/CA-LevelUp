@@ -1119,3 +1119,8 @@ Sun, 21 Jul 2019 17:06:49 GMT - Debug - auth.service - login with nickName: Stav
 
 Sun, 21 Jul 2019 17:11:18 GMT - Info - Server is running on port: 3000
 >>>>>>> 8422fd85d045b0d435ebdbda53988d71fbb27a51
+
+Sun, 21 Jul 2019 17:42:21 GMT - Info - Server is running on port: 3000
+Sun, 21 Jul 2019 17:52:51 GMT - Info - Server is running on port: 3000
+Sun, 21 Jul 2019 17:53:02 GMT - Debug - auth.service - login with nickName: aaa
+Sun, 21 Jul 2019 19:07:57 GMT - Debug - auth.service - login with nickName: orielshalem

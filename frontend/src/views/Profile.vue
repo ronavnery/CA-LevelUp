@@ -1,6 +1,6 @@
 <template>
   <div class="profile-container flex">
-    <profile-sidebar :profile="currProfile" v-if="currProfile" />
+    <profile-sidebar v-if="currProfile" :profile="currProfile" />
     <profile-content />
   </div>
 </template>

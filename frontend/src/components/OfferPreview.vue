@@ -95,16 +95,10 @@ export default {
           offerId: this.offer._id
         }
       });
-
-      let connectedUser = await this.$store.dispatch({
-        type: "checkIfLoggedInUser"
-      });
-      if (!connectedUser) connectedUser = "visitor";
-      else connectedUser = connectedUser.nickName;
       this.$store.dispatch({
         type: "logUserCategoryChoice",
         category: this.offer.category,
-        user: connectedUser
+        user: this.connectedUser
       });
     },
     goToEdit() {
@@ -125,6 +119,10 @@ export default {
     }
   },
   computed: {
+    connectedUser() {
+      return this.$store.getters.connectedUser._id
+    },
+
     starIconFill() {
       if (this.offer.stars >= 4) return "#ffbf00";
       else if (this.offer.stars < 4 && this.offer.stars >= 3) return "#ffcf40";

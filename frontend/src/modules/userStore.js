@@ -2,7 +2,7 @@ import userService from '../services/user.service.js'
 
 export default {
     state: {
-        connectedUser: JSON.parse(sessionStorage.getItem('loggedInUser'))|| null,
+        connectedUser: JSON.parse(sessionStorage.getItem('loggedInUser')) || null,
         // connectedUser: { _id: "5d2eeb6efc34a70a48413cac", name:"oriel shalem" ,nickName:"orielshalem" ,profileUrl:"" ,email: "orielshalem@gmail.com", city:"", contactInfo:{}, createdAt:1563356014687 ,email:"orielshalem@gmail.com", imgUrl:"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png"},
         currProfile: null,
         // users: []
@@ -70,7 +70,7 @@ export default {
                 throw err
             }
         },
-        async getProfile({ commit }, { nickName }) { 
+        async getProfile({ commit }, { nickName }) {
             try {
                 const user = await userService.getProfileByNickname(nickName)
                 commit({ type: 'setCurrProfile', user })
@@ -108,20 +108,20 @@ export default {
             }
         },
 
-        logUserCategoryChoice({commit}, {category, user}) {
+        logUserCategoryChoice({ commit }, { category, user }) {
             try {
                 const res = userService.logUserCategoryChoice(category, user)
             }
-            catch(err) {
+            catch (err) {
                 console.log(err)
             }
         },
-        getUserPopularCategory({commit}, {user}) {
+        getUserPopularCategory({ commit }, { user }) {
             try {
                 const res = userService.getUserPopularCategory(user)
                 return res
             }
-            catch(err) {
+            catch (err) {
                 console.log('Could not get user popular categories,', err)
             }
         }

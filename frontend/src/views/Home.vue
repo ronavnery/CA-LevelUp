@@ -21,9 +21,9 @@
     </section>
     <div class="home-list fs20">
       <span class="strong">Recommended for you:</span>
-      <OfferList v-if="offers.length" :offers="recommendedOffers"></OfferList>
+      <OfferList v-if="recommendedOffers.length" :offers="recommendedOffers"></OfferList>
       <span class="strong">Newest in music:</span>
-      <OfferList v-if="offers.length" :offers="musicOffers"></OfferList>
+      <OfferList v-if="musicOffers.length" :offers="musicOffers"></OfferList>
     </div>
   </section>
 </template>
@@ -39,36 +39,33 @@ export default {
   },
   data() {
     return {
-      recommendedOffers: null,
-      musicOffers: null
+      recommendedOffers: [],
+      musicOffers: [],
+
     };
   },
   computed: {
     offers() {
       return this.$store.getters.getOffers;
+    },
+    connectedUser() {
+      return this.$store.getters.connectedUser.nickName
     }
   },
   async mounted() {
-    let connectedUser = await this.$store.dispatch({
-      type: "checkIfLoggedInUser"
-    });
-    if (!connectedUser) connectedUser = "visitor";
-    else connectedUser = connectedUser.nickName;
     const category = await this.$store.dispatch({
       type: "getUserPopularCategory",
-      user: connectedUser
+      user: this.connectedUser
     });
-    let recommendedOffers = await this.$store.dispatch({
+    this.recommendedOffers = await this.$store.dispatch({
       type: "loadOffers",
       filter: { category, limit: 4 }
     });
-    this.recommendedOffers = recommendedOffers;
-    let musicOffers = await this.$store.dispatch({
+    this.musicOffers = await this.$store.dispatch({
       type: "loadOffers",
       filter: { category: "music", limit: 4 }
     });
-    this.musicOffers = musicOffers;
-    //TODOS: get more categories
+    // TODOS: get more categories
   },
 
   methods: {

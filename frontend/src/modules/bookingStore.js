@@ -71,6 +71,7 @@ export default {
         async sendConfirm(context, { booking }) {
             try {
                 const newBookingReq = await bookingService.update(booking)
+                // context.commit({type: ''})
                 return newBookingReq
             } catch (err) {
                 throw err

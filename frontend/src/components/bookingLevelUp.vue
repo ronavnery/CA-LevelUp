@@ -1,6 +1,6 @@
-<template> 
+<template>
   <section class="levelup-booking fs14">
-   <button class="btn-toggle-booking" @click="toggleBooking">X</button>
+    <button class="btn-toggle-booking" @click="toggleBooking">X</button>
     <form class="booking-form" v-if="userConnected">
       <h4 class="text-center">Contact to levelup!</h4>
       <p>Before you level up, please add some info about you so the person gets to know you better!</p>
@@ -10,14 +10,22 @@
       <textarea v-model="bookingReq.availability" id="availability" type="text" />
       <label for="extraInfo">What more should this person know about you?</label>
       <textarea v-model="bookingReq.extraInfo" id="extraInfo" type="text" />
-      
-      <input id="levelUp" class="level-up-btn" @click.prevent="sendBookingReq" value="Level Me Up" type="submit" />
+
+      <input
+        id="levelUp"
+        class="level-up-btn"
+        @click.prevent="sendBookingReq"
+        value="Level Me Up"
+        type="submit"
+      />
       <p class="success-status">{{successStatus}}</p>
     </form>
     <div class="login-msg fs18" v-else>
-      Level up requests are for registered users only.<br>
-      Please <router-link to="/sign-up">sign-up</router-link> or <router-link to="/login">login</router-link> first.
-      </div>
+      Level up requests are for registered users only.
+      <br />Please
+      <router-link to="/sign-up">sign-up</router-link>or
+      <router-link to="/login">login</router-link>first.
+    </div>
   </section>
 </template>
 
@@ -28,45 +36,46 @@ export default {
   data() {
     return {
       bookingReq: {
-        reason: '',
-        availability: '',
-        extraInfo: ''
+        reason: "",
+        availability: "",
+        extraInfo: ""
       },
-      successStatus: '',
+      successStatus: "",
       socket: io("localhost:3000")
-    }
+    };
   },
   methods: {
     sendBookingReq() {
       this.bookingReq.offer = {
         offerId: this.$store.getters.getCurrOffer._id,
-        offerTitle:  this.$store.getters.getCurrOffer.title,
-        offerType:  this.$store.getters.getCurrOffer.location.type,
-        offerImg:  this.$store.getters.getCurrOffer.imgs[0],
-      }
+        offerTitle: this.$store.getters.getCurrOffer.title,
+        offerType: this.$store.getters.getCurrOffer.location.type,
+        offerImg: this.$store.getters.getCurrOffer.imgs[0]
+      };
       this.bookingReq.offerMaker = {
         makerId: this.$store.getters.currProfile._id,
         makerName: this.$store.getters.currProfile.name,
-        makerImg: this.$store.getters.currProfile.imgUrl,
-      }
+        makerImg: this.$store.getters.currProfile.imgUrl
+      };
       this.bookingReq.bookingMaker = {
         makerId: this.$store.getters.connectedUser._id,
         makerName: this.$store.getters.connectedUser.name,
-        makerImg: this.$store.getters.connectedUser.imgUrl,
-      } 
-      this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
+        makerImg: this.$store.getters.connectedUser.imgUrl
+      };
+      this.$store
+        .dispatch({ type: "sendBookingReq", bookingReq: this.bookingReq })
         .then(bookingId => {
-          this.successStatus = bookingId
-          this.socket.emit('level-up-req', this.bookingReq)
-        })
+          this.successStatus = bookingId;
+          this.socket.emit("level-up-req", this.bookingReq);
+        });
     },
     toggleBooking() {
-      this.$emit('close-booking-request');
-    } 
+      this.$emit("close-booking-request");
+    }
   },
   computed: {
     userConnected() {
-      return this.$store.getters.connectedUser
+      return this.$store.getters.connectedUser;
     }
   }
 };
@@ -79,9 +88,9 @@ export default {
   min-width: 300px;
   background: $tpWhite;
   position: fixed;
-  height: 100%;
+  height: calc(100% - 50px);
   right: 0;
-  top:0;
+  top: 50px;
   border-left: 0.1px solid $tpGray3;
   padding: 20px;
   overflow: auto;
@@ -92,18 +101,20 @@ export default {
   margin-bottom: 70px;
 }
 
-.levelup-booking form > label ,p {
-  padding: 0 10px
+.levelup-booking form > label,
+p {
+  padding: 0 10px;
 }
 
-.levelup-booking form > input ,textarea{
+.levelup-booking form > input,
+textarea {
   margin: 10px;
 }
 
-.level-up-btn{
+.level-up-btn {
   @include btnActionColorSm;
   width: 50%;
-    place-self: center;
+  place-self: center;
 }
 
 .login-msg {
@@ -114,7 +125,6 @@ export default {
 }
 
 .success-status {
-  color : $tpPink;
+  color: $tpPink;
 }
-
 </style>

@@ -8,24 +8,28 @@ module.exports = {
     getByEmail,
     remove,
     update,
-    add
+    add,
+    updateOfferMakerImg
 }
 
 async function query(filterBy = {}) {
     console.log('filter by is', filterBy)
-    const criteria = {};
+    let criteria = {};
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt.toLowerCase(), 'i')
-        criteria.title = { $regex: regex }
+        // criteria.title = { $regex: regex }
+        // criteria.desc = { $regex: regex }
+        // criteria.tags = { $regex: regex }
+        criteria = { $or: [{title: { $regex: regex}}, {description: {$regex: regex}}, {tags: {$in: [regex]}}]}
     }
     if (filterBy.nickName) {
         const regex = new RegExp(filterBy.nickName)
         criteria["createdBy.nickName"] = { $regex: regex }
     }
-    // if (filterBy.type) {
+    if (filterBy.type) {
         
-    //     criteria.type = { type: filterBy.type}
-    // }
+        criteria.groupType = filterBy.type
+    }
 
     if (filterBy.category) {
         criteria.category = filterBy.category
@@ -36,10 +40,14 @@ async function query(filterBy = {}) {
     const collection = await dbService.getCollection('offer')
     try {
         console.log('filter by.limit is:',filterBy.limit)
-        if (filterBy.limit) {const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).limit(+filterBy.limit).toArray();
-        return offers}
-        else {const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray();
-        return offers}
+        if (filterBy.limit) {
+            const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).limit(+filterBy.limit).toArray();
+            return offers
+        }
+        else {
+            const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray();
+            return offers
+        }
     } catch (err) {
         console.log('ERROR: cannot find offers')
         throw err;
@@ -88,6 +96,18 @@ async function update(offer) {
     } catch (err) {
         console.log(`ERROR: cannot update offer ${offer._id}`)
         throw err;
+    }
+}
+
+async function updateOfferMakerImg(user) {
+    const collection = await dbService.getCollection('offer')
+    try {
+        const {_id, imgUrl} = user;
+        const secondary = "" + _id
+        await collection.updateMany({"createdBy._id": secondary}, {$set: {"createdBy.imgUrl" : imgUrl}})
+        return Promise.resolve();
+    } catch (err) {
+        throw err
     }
 }
 

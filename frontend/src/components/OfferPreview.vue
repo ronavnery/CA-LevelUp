@@ -18,7 +18,7 @@
       <img :src="offer.imgs[0]" alt />
       <div class="user-date-starred-container">
         <div class="wrapper">
-          <img :src="offerMakerUpdatedImgUrl" alt />
+          <img :src="offer.createdBy.imgUrl" alt />
           <span>{{offer.createdBy.nickName}}</span>
         </div>
         <div class="rating fs12">

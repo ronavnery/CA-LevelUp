@@ -5,6 +5,7 @@
 html {
     font-family: 'Lato';
     font-size: 14px;
+    overflow-y: scroll;
     @include for-normal-layout {
         font-size: 16px;
     }

@@ -12,6 +12,7 @@ Vue.filter('durationInMins', mins =>{
  })
 
 Vue.filter('formatDate', timestamp => moment(timestamp).calendar())
+Vue.filter('formatDateFromNow', timestamp => moment(timestamp).calendar(Date.now()))
 
 Vue.filter('rating', ratingAvg =>{
     if (!ratingAvg) return 'Not rated yet'

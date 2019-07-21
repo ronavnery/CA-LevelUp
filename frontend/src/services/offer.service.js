@@ -37,7 +37,9 @@ function addReviewToOffer(offer, review) {
             reviews: []
         }
     }
-    offer.rating.reviews.push(review)
+    review.createdAt = Date.now();
+    const finalReview = JSON.parse(JSON.stringify(review))
+    offer.rating.reviews.push(finalReview)
     let scoreSum = offer.rating.reviews.reduce((accScore, review) => {
         console.log('lololol', review)
         accScore += review.score

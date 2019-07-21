@@ -115,7 +115,6 @@ export default {
     },
     async getOfferMakerImgUrl() {
       const user = await this.$store.dispatch({type: 'getProfile', nickName: this.offer.createdBy.nickName})
-      console.log('user is', user)
       this.offerMakerUpdatedImgUrl = user.imgUrl
     }
   },

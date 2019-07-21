@@ -19,11 +19,11 @@
         ></vue-typer>
       </div>
     </section>
-    <div class="home-list fs20 strong">
+    <div class="home-list fs20">
 
-      Recommended for you:
+      <span class="strong">Recommended for you:</span>
       <OfferList v-if="offers.length" :offers="recommendedOffers"></OfferList>
-      Newest in music:
+      <span class="strong">Newest in music:</span>
       <OfferList v-if="offers.length" :offers="musicOffers"></OfferList>
       </div>
   </section>

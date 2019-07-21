@@ -35,7 +35,6 @@ export default new Router({
       component: Profile,
       children: [
         {
-          // need to work on this
           path: 'edit/:_id?',
           name: 'OfferEdit',
           component: OfferEdit
@@ -54,12 +53,6 @@ export default new Router({
           path: ':nickName/inbox',
           name: 'Inbox',
           component: Inbox
-        },
-        {
-          // need to work on this
-          path: 'edit/:_id?',
-          name: 'OfferEdit',
-          component: OfferEdit
         },
         {
           path: ':nickName/offers',

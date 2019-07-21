@@ -17,9 +17,9 @@
     <main>
       <img :src="offer.imgs[0]" alt />
       <div class="user-date-starred-container">
-        <div class="wrapper">
+        <div class="wrapper" @click.stop="goToProfile">
           <img :src="offerMakerUpdatedImgUrl" alt />
-          <span>{{offer.createdBy.nickName}}</span>
+          <span>{{offer.createdBy.name}}</span>
         </div>
         <div class="rating fs12">
           <span class="rating-avg" v-if="offer.ratingAvg > 0">
@@ -80,11 +80,11 @@ export default {
   },
   data() {
     return {
-      offerMakerUpdatedImgUrl: ''
-    }
+      offerMakerUpdatedImgUrl: ""
+    };
   },
   created() {
-    this.getOfferMakerImgUrl()
+    this.getOfferMakerImgUrl();
   },
   methods: {
     async goToDetails() {
@@ -114,8 +114,14 @@ export default {
       this.$emit("removeOffer", this.offer._id);
     },
     async getOfferMakerImgUrl() {
-      const user = await this.$store.dispatch({type: 'getProfile', nickName: this.offer.createdBy.nickName})
-      this.offerMakerUpdatedImgUrl = user.imgUrl
+      const user = await this.$store.dispatch({
+        type: "getProfile",
+        nickName: this.offer.createdBy.nickName
+      });
+      this.offerMakerUpdatedImgUrl = user.imgUrl;
+    },
+    goToProfile() {
+      this.$router.push(`/profile/${this.offer.createdBy.nickName}`);
     }
   },
   computed: {

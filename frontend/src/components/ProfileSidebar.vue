@@ -3,7 +3,7 @@
     <section class="sidebar-content">
       <div class="img-btns-wrapper">
         <img class="profile-img" :src="profile.imgUrl" @click="goToProfile"/>
-        <div class="btn-container">
+        <div class="btn-container" v-if="!isOnAboutPage">
           <button class="share">
             <i class="fas fa-share-alt"></i>
           </button>
@@ -19,11 +19,11 @@
         </div>
       </div>
       <span class="name fs20" @click="goToProfile">{{profile.name}}</span>
-      <span class="city fs14">{{profile.city}}add city here</span>
+      <span class="city fs14">{{profile.city}}</span>
       <br />
       <br />
-      <span class="city fs12">{{profile.intro}}add intro here</span>
-      <a class="city fs20" @click="goToEdit">Edit this profile</a>
+      <span class="city fs12">{{profile.intro}}</span>
+      <a class="city fs20" @click="goToEdit" v-if="!isOnAboutPage">Edit this profile</a>
     </section>
   </section>
 </template>
@@ -36,7 +36,6 @@ export default {
       type: Object
     }
   },
-
   data() {
     return {
       connectedUser: this.$store.getters.connectedUser
@@ -51,6 +50,11 @@ export default {
     },
     goToProfile() {
       this.$router.push(`/profile/${this.profile.nickName}`);
+    }
+  },
+  computed: {
+    isOnAboutPage() {
+      return (this.$route.path.includes('about'))
     }
   }
 }

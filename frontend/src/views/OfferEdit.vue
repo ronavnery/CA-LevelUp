@@ -1,6 +1,6 @@
 <template>
   <div class="offer-edit">
-    <ProfileSidebar :profile="connectedUser" />
+    <ProfileSidebar class="profile-sidebar" :profile="connectedUser" />
     <section class="edit-container">
       <span class="fs18 strong">Share a new skill</span>
       <form @submit.prevent="prevent">
@@ -417,6 +417,10 @@ export default {
 .dynamic-carousel {
   width: 360px;
   // position: absolute;
+}
+
+.profile-sidebar {
+  height: 100%;
 }
 </style>
 

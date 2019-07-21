@@ -5,9 +5,9 @@
       <div v-for="(review, idx) in reviews" :key="idx">
         <button class="accordion" @click="toggleReview($event)" :ref="idx">
           <div class="wrapper">
-              <div class="review-maker-image" :style="getImage(review.maker.imgUrl)"></div>
+            <div class="review-maker-image" :style="getImage(review.maker.imgUrl)"></div>
             <div class="title-time">
-              <p>{{review.title}}</p>
+              <p>{{review.title| truncateText(50)}}</p>
               <div class="date-wrapper">
                 <i class="fas fa-clock"></i>
                 <span>{{review.createdAt | formatDateFromNow}}</span>
@@ -71,6 +71,7 @@ export default {
 
 <style lang="scss" scoped>
 .accordion {
+  max-width: 500px;
   background-color: $tpGray;
   border-radius: 4px;
   opacity: 0.9;
@@ -108,10 +109,11 @@ export default {
 }
 
 .panel {
+  width: 500px;
+  overflow: hidden;
   padding: 0 18px;
   background-color: white;
   max-height: 0;
-  overflow: hidden;
   transition: max-height 0.2s ease-out;
   border: 1px solid rgba(0, 0, 0, 0.13);
   border-top: 0px;

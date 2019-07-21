@@ -48,10 +48,9 @@ export default {
 .app-header {
   @include flexCustom(space-between, center, row);
   position: sticky;
-  z-index: 100;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
   background: $tpPurple;
   line-height: rem(50px);
   min-height: 50px;

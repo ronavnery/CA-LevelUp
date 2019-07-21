@@ -37,8 +37,8 @@
       </div>
 
       <div class="details">
-        <p class="title">{{shortTitle}}</p>
-        <p class="desc">{{shortDesc}}</p>
+        <p class="title">{{offer.title | truncateText(30)}}</p>
+        <p class="desc">{{offer.description | truncateText(80)}}</p>
         <p v-for="tag in offer.tags.slice(0,3)" :key="tag" class="tags">{{tag}}</p>
       </div>
     </main>
@@ -131,18 +131,12 @@ export default {
       else if (this.offer.stars < 3 && this.offer.stars >= 2) return "#ffdc73";
       return "#8e8b80";
     },
-    shortDesc() {
-      if (this.offer.description.length > 500) {
-        return this.offer.description.substring(0, 500) + "...";
-      }
-      return this.offer.description;
-    },
-    shortTitle() {
-      if (this.offer.title.length > 28) {
-        return this.offer.title.substring(0, 28) + "...";
-      }
-      return this.offer.title;
-    },
+    // shortTitle() {
+    //   if (this.offer.title.length > 28) {
+    //     return this.offer.title.substring(0, 28) + "...";
+    //   }
+    //   return this.offer.title;
+    // },
     categoryIcon() {
       if (this.offer.category === "Development") return "fas fa-file-code";
       else if (this.offer.category === "Business") return "fas fa-briefcase";
@@ -186,45 +180,29 @@ export default {
   border-radius: 5px;
   cursor: pointer;
   margin: 20px 0;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   transition: all 0.3s;
   position: relative;
 
   &::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  transition: opacity 0.3s ease-in-out;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease-in-out;
   }
-
 
   &:hover::after {
-  opacity: 1;
-}
-
-
-  & main {
-    max-height: 260px;
-    overflow: hidden;
-    
-    transition: max-height 0.5s;
-  }
-
-  &:hover main {
-    max-height: 1200px;
-    transition: max-height 1s;
+    opacity: 1;
   }
 
   // &:hover {
   //   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
   // }
-
-
 }
 
 header {
@@ -327,7 +305,12 @@ main {
       margin: 0;
       font-weight: bold;
       color: $tpBlue1;
-      overflow-wrap: break-word;
+      // overflow-wrap: break-word;
+      text-overflow: ellipsis;
+
+      /* Required for text-overflow to do anything */
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     p.tags {
@@ -345,6 +328,8 @@ main {
       padding: 5px;
       font-size: rem(12px);
       color: #9597a1;
+
+      /* Required for text-overflow to do anything */
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <section class="offer-list-container" :class="{'list-on-profile': isShowingOnProfile} ">
-    <masonry :cols="{default: 4 , 1200: 3 , 1100: 2 ,900: 1}" :gutter="{default: '20px'}">
+    <masonry :cols="{default: 4 , 1080: 3, 830: 2, 500: 1}" :gutter="{default: '20px'}">
       <OfferPreview
         v-for="(offer,idx) in offers"
         :key="idx"
@@ -52,4 +52,5 @@ export default {
   justify-content: flex-start;
   padding: 20px;
 }
+
 </style>

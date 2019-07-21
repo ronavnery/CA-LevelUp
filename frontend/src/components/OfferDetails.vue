@@ -5,7 +5,6 @@
       <div class="show-all-overlay" @click="goToProfileOffers">
         <span class="show-all-text">Show all offers from this person</span>
       </div>
-      <!-- <button  class="btn-show-all">Show all offers from this person</button> -->
       <button class="btn-toggle-booking" @click="toggleBooking">Book to level up!</button>
       <section class="header-overlay">
         <h2>{{offer.title}}</h2>
@@ -230,7 +229,7 @@ img {
 .btn-toggle-booking {
   @include btnActionColor();
   position: absolute;
-  right: 20px;
+  left: 20px;
   bottom: 20px;
 }
 

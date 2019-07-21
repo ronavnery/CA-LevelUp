@@ -12,7 +12,7 @@
       @select="emitFilter"
     ></multiselect>
     <form @submit.prevent class="offer-filter">
-      <input type="text" placeholder="Search" v-model="filter.txt" @keyup.enter="emitFilter" />
+      <input type="text" placeholder="ie. Hula hooping..." v-model="filter.txt" @keyup.enter="emitFilter" />
     </form>
 
     <div class="type-wrapper">
@@ -96,10 +96,19 @@ export default {
   // position: relative;
   // top: -25px;
   // @include flexCustom(space-between, center, row);
+
+  @media screen and(max-width: 760px) {
+    flex-direction: column;
+    align-items: center;
+    &>* {
+      margin: 10px;
+    }
+  }
 }
 
 .offer-filter {
   position: relative;
+      width: max-content;
   input {
     border-radius: 4px;
     // margin-left: 5px;
@@ -107,6 +116,9 @@ export default {
     outline: none;
     border: none;
     padding: 9px 33px 9px 10px;
+    &::placeholder {
+      color: $tpGray2;
+    }
   }
 
   &::after {
@@ -122,7 +134,7 @@ export default {
 .type-wrapper {
   display: flex;
   margin-right: 5px;
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
   div {
     display: inline-block;
@@ -130,15 +142,15 @@ export default {
     text-align: center;
     padding: 5px 15px;
     cursor: pointer;
-    height: 46px;
+    height: 42px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.135s;
     color: rgba(255, 255, 255, 0.7);
-    line-height: 34px;
+    line-height: 2;
   }
 
   div.selected {
-    background-color: grey;
+    background-color: $tpPink2;
     color: white;
   }
 }

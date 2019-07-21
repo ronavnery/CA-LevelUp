@@ -23,9 +23,6 @@
       <br />
       <br />
       <span class="city fs12">{{profile.intro}}add intro here</span>
-      <button>start chat</button>
-      <BookingChat v-if="connectedUser" :userId="profile._id" />
-
       <a class="city fs20" @click="goToEdit">Edit this profile</a>
     </section>
   </section>

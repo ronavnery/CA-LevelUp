@@ -1,11 +1,13 @@
 <template>
   <section class="explore-main-container">
     <header class="cover">
-      <span class="fs32">Learn Your New Skill</span>
+      <span class="fs32">Which new skill are you looking for?</span>
       <span>{{offers.length}} skills to choose from</span>
       <Offer-Filter @filter-offers="setFilter" ref="entry" class="filter-section" />
     </header>
+    <div class="explore-list-container">
     <OfferList v-if="offers.length" :offers="offers" @removeOffer="removeOffer"></OfferList>
+    </div>
   </section>
 </template>
 <script>
@@ -65,20 +67,30 @@ export default {
 <style lang="scss" scoped>
 .cover {
   // background-color: #3d2b61;
-  background-image: url('../assets/backgrounds/explore-cover.jpg');
+  background-image: url("../assets/backgrounds/explore-cover.jpg");
   background-size: cover;
   color: white;
   text-align: center;
   font-family: $HanGroBlack;
-  height: 200px;
+  min-height: 200px;
+  max-height: max-content;
   padding: 20px;
   @include flexCustom(space-between, center, column);
 
   span {
     color: #ffffffbd;
   }
+
 }
 
+.explore-list-container {
+  // padding-top: 20px;
+  max-width: 1080px;
+  margin: 0 auto;
 
+  @media screen and (max-width: 1080px) {
+    padding: 20px;
+  }
+}
 </style>
 

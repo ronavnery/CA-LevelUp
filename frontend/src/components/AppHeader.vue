@@ -47,7 +47,9 @@ export default {
 <style scoped lang="scss">
 .app-header {
   @include flexCustom(space-between, center, row);
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
   background: $tpPurple;
   line-height: rem(50px);
   min-height: 50px;

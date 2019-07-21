@@ -23,7 +23,7 @@
       <br />
       <br />
       <span class="city fs12">{{profile.intro}}add intro here</span>
-      <a class="city fs20" @click="goToEdit">Edit this profile</a>
+      <a class="city fs20" @click="goToEdit" v-if="isUser">Edit this profile</a>
     </section>
   </section>
 </template>
@@ -51,6 +51,13 @@ export default {
     },
     goToProfile() {
       this.$router.push(`/profile/${this.profile.nickName}`);
+    }
+
+  },
+  computed: {
+    isUser() {
+      if (this.profile._id === this.connectedUser._id) return true;
+      else false;
     }
   }
 }

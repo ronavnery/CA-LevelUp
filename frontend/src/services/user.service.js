@@ -88,6 +88,7 @@ async function remove(userId) {
 async function update(updatedUser) {
     try {
         const updated = await httpService.put(_getUrl(), updatedUser)
+        sessionStorage.setItem('loggedInUser', JSON.stringify(updated))
         return updated
     }
     catch (err) {

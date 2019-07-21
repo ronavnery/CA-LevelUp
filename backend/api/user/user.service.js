@@ -106,6 +106,7 @@ async function update(user) {
         const _id = new ObjectId(user._id)
         delete user._id
         await collection.updateOne({_id}, { $set: user })
+        user._id = _id;
         delete user.password;
         return user
     } catch (err) {

@@ -55,12 +55,12 @@ export default new Router({
           name: 'Inbox',
           component: Inbox
         },
-        {
-          // need to work on this
-          path: 'edit/:_id?',
-          name: 'OfferEdit',
-          component: OfferEdit
-        },
+        // {
+        //   // need to work on this
+        //   path: 'edit/:_id?',
+        //   name: 'OfferEdit',
+        //   component: OfferEdit
+        // },
         {
           path: ':nickName/offers',
           name: 'ProfileOffers',

@@ -23,33 +23,16 @@ export default {
     mutations: {
 
 
-        // removeuser(state, { userId }) {
-        //     const idx = state.users.findIndex(user => user._id === userId)
-        //     state.users.splice(idx, 1)
-        // },
-
-        // adduser(state, { user }) {
-        //     state.users.unshift(user)
-        // },
-
-        // updateuser(state, { newuser }) {
-        //     const idx = state.users.findIndex(user => user._id === newuser._id)
-        //     state.users.splice(idx, 1, newuser)
-        // },
-
-        // //currently server does not provide user back 'cause there is no server
         setCurrUser(state, { loggedInUser }) {
             state.currUser = loggedInUser
         },
         setCurrProfile(state, { user }) {
             state.currProfile = user
         },
-        //Front-end Only Mutations
         setUsers(state, { users }) {
             state.users = users
         },
         setConnectedUser(state, { user }) {
-            // state.connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
             state.connectedUser = user;
         },
         addUserToStore(state, { addedUser }) {
@@ -87,7 +70,7 @@ export default {
                 throw err
             }
         },
-        async getProfile({ commit }, { nickName }) {
+        async getProfile({ commit }, { nickName }) { 
             try {
                 const user = await userService.getProfileByNickname(nickName)
                 commit({ type: 'setCurrProfile', user })

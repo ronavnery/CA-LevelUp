@@ -24,6 +24,7 @@
       <br />
       <span class="city fs12">{{profile.intro}}</span>
       <a class="city fs20" @click="goToEdit" v-if="!isOnAboutPage">Edit this profile</a>
+      <a class="city fs20" @click="goToEdit" v-if="isUser">Edit this profile</a>
     </section>
   </section>
 </template>
@@ -55,6 +56,10 @@ export default {
   computed: {
     isOnAboutPage() {
       return (this.$route.path.includes('about'))
+    },
+    isUser() {
+      if (this.profile._id === this.connectedUser._id) return true;
+      else false;
     }
   }
 }

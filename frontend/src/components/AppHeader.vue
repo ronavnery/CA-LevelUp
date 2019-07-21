@@ -66,7 +66,10 @@ a {
 }
 
 .logo-container {
-  @include flexCenter(center);
+  @include flexCenter(row);
+  @include for-narrow-layout {
+      transform: scale(0.8);
+  }
   cursor: pointer;
 }
 

@@ -125,7 +125,7 @@ export default {
         console.log('couldnt generate ImgUrl')
       }
     },
-    async updateUser() {
+    async updateUser() { 
         try {
 
           const updatedUser = await this.$store.dispatch({type: 'updateUser', userToUpdate: this.user})
@@ -175,9 +175,7 @@ form {
     -webkit-box-shadow 0.15s ease-in-out;
 }
 
-span#inputGroupFileAddon01 {
-  height: 38px;
-}
+
 
 </style>
 

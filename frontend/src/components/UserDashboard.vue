@@ -71,7 +71,7 @@ export default {
 <style lang="scss" scoped>
 .user-dashboard-header {
   @include flexCustom(space-between, stretch, row);
-  width: 250px;
+  width: 230px;
 }
 
 

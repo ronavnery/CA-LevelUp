@@ -69,7 +69,7 @@ export default {
 
 <style scoped lang="scss">
 .sidebar-container {
-  height: 100%;
+  // height: 100%;
   min-width: 300px;
   background: $tpPink;
   color: $tpGray;
@@ -81,6 +81,8 @@ export default {
   @include flexCustom(space-between, center, column);
   height: 50%;
   padding: rem(40px);
+  position: sticky;
+  top: 50px;
 }
 
 .img-btns-wrapper {

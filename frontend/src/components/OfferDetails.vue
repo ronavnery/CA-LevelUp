@@ -53,19 +53,23 @@
         {{tag}}
         <span v-if="idx !== offer.tags.length -1">,</span>
       </span>
-      <ReviewList :reviews="offer.rating.reviews" v-if="offer.rating.reviews.length"/>
+      <ReviewList :reviews="offer.rating.reviews" v-if="offer.rating.reviews.length" />
       <h4 style="margin-top: 8px;" v-else>This Offer Has No Reviews At This Time</h4>
     
     <ReviewEdit class="review-edit" v-if="connectedUser" @add-review="addReviewToOffer" :status="reviewStatus"/>
     </main>
-    <bookingLevelUp v-if="isBooking" @click="sendBookingReq" @close-booking-request="toggleBooking"/>
+    <bookingLevelUp
+      v-if="isBooking"
+      @click="sendBookingReq"
+      @close-booking-request="toggleBooking"
+    />
   </div>
 </template>
 
 <script>
 import bookingLevelUp from "../components/bookingLevelUp";
-import ReviewList from '@/components/ReviewList';
-import ReviewEdit from '../components/ReviewEdit';
+import ReviewList from "@/components/ReviewList";
+import ReviewEdit from "../components/ReviewEdit";
 import moment from "moment";
 export default {
   name: "OfferDetails",
@@ -74,7 +78,7 @@ export default {
       isBooking: false,
       offer: null,
       connectedUser: null,
-      reviewStatus: ''
+      reviewStatus: ""
     };
   },
   async created() {
@@ -90,7 +94,7 @@ export default {
         console.log(err);
       }
     }
-    this.connectedUser = this.$store.getters.connectedUser
+    this.connectedUser = this.$store.getters.connectedUser;
   },
   computed: {
     getCurrOffer() {
@@ -115,13 +119,17 @@ export default {
       this.$store.dispatch({ type: "sendBookingReq", bookingReq });
     },
     async addReviewToOffer(review) {
-      this.reviewStatus = 'submitting';
+      this.reviewStatus = "submitting";
       try {
-        await this.$store.dispatch({type: 'updateOfferWithNewReview', review, offer: this.offer})
-        this.reviewStatus = 'success';
-      } catch(err) {
-        console.log('error in adding review:', err)
-        this.reviewStatus = 'error';
+        await this.$store.dispatch({
+          type: "updateOfferWithNewReview",
+          review,
+          offer: this.offer
+        });
+        this.reviewStatus = "success";
+      } catch (err) {
+        console.log("error in adding review:", err);
+        this.reviewStatus = "error";
       }
     }
   },
@@ -194,6 +202,9 @@ img {
   width: 100%;
   height: calc(100vh - 50px);
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .offer-details-container header {

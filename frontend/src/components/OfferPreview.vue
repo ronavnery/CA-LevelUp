@@ -17,9 +17,9 @@
     <main>
       <img :src="offer.imgs[0]" alt />
       <div class="user-date-starred-container">
-        <div class="wrapper" @click.stop="goToProfile">
-          <img :src="offerMakerUpdatedImgUrl" alt />
-          <span>{{offer.createdBy.name}}</span>
+        <div class="wrapper">
+          <img :src="offer.createdBy.imgUrl" alt />
+          <span>{{offer.createdBy.nickName}}</span>
         </div>
         <div class="rating fs12">
           <span class="rating-avg" v-if="offer.rating.avgScore > 0">

@@ -16,7 +16,7 @@ function setup(http) {
         });
         socket.on('SEND_MESSAGE', (data) => {
             const { recipientId, senderId, message } = data
-            chatService.pushToInbox(data)
+            // chatService.pushToInbox(data)
 
             io.to(recipientId).emit('MESSAGE', { senderId, message });
         });

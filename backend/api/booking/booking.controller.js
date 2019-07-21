@@ -1,4 +1,4 @@
-const bookingService = require('./booking.service') 
+const bookingService = require('./booking.service')
 // const offerService = require('../offer/offer.service') 
 // const userService = require('../user/user.service') 
 
@@ -19,23 +19,22 @@ async function deleteBooking(req, res) {
 
 async function updateBooking(req, res) {
     const booking = await bookingService.update(req.body)
-    res.send({booking})
+    res.send({ booking })
 }
 
 async function getInbox(req, res) {
-    const inbox = await bookingService.getInbox(req.query)
+    console.log('query', req.query)
+    const inbox = await bookingService.getInbox(req.query.id)
     res.send(inbox)
 }
 
 async function addBooking(req, res) {
-    // console.log('Controller: Got request:', req.body)
     console.log('Controller: Adding to booking db')
-    const booking = await bookingService.add(req.body,req.session.user)
-    // console.log('Controller: after service, booking is:', booking)
+    const booking = await bookingService.add(req.body, req.session.user)
     console.log('Controller: Updating offer db with booking')
-    booking.createdBy = req.session.user
+    // booking.createdBy = req.session.user
     // console.log('Controller: req.session.user is:', req.session.user)
-    res.send({booking})
+    res.send({ booking })
 }
 
 module.exports = {

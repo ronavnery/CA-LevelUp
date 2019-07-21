@@ -1,27 +1,30 @@
 <template>
   <div v-if="isOpen">
-    <ul v-if="isOpen" class="inbox">
+    <ul v-if="isOpen" class="inbox studend-inbox">
       <li v-for="(booking,idx) in pendingBookings" :key="idx">
-        <h3>{{booking.offer.offerTitle}}</h3>
-        
-        <p v-if="booking.isConfirmed"> heyyyyy</p>
-        <p v-else>pending</p>
         <img
           :src="booking.offer.offerImg"
-          alt
-        />
+          width="100px" />
+        <div class="details-container">
+        <p>{{booking.offer.offerTitle}}</p>
+        <p v-if="booking.isConfirmed">Confirmed</p>
+        <p v-else>Pending</p>
+        </div>
       </li>
     </ul>
-    <ul v-if="isOpen" class="inbox">
+    <ul v-if="isOpen" class="inbox teacher-inbox">
       <li
         class="inbox-preview"
         v-for="(booking,idx) in bookings"
         :key="idx"
         @click="openChat(booking)"
       >
-        <img :src="booking.bookingMaker.makerImg" alt />
+        <img :src="booking.bookingMaker.makerImg" width="100px"
+ alt />
+        <div class="details-container">
         <p>{{booking.bookingMaker.makerName}}</p>
         <p>{{booking.sentAt | formatDate}}</p>
+        </div>
         <button>start chat</button>
         <button
           @click.stop="sendConfirm({userId:booking.bookingMaker.makerId, offerId: booking.offer.offerId, isConfirmed:true})"
@@ -84,8 +87,9 @@ export default {
 
     this.socket.emit("JOIN_ROOM", userId);
     this.socket.on("req-sent", booking => this.bookings.push(booking));
-    this.socket.on("booking-sent", booking =>
+    this.socket.on("booking-sent", booking =>{
       this.pendingBookings.push(booking)
+    }
     );
     this.socket.on("req-ans", ans => {
       const pendingBooking = this.pendingBookings.find(
@@ -127,10 +131,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ul, li {
+ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+li {
   margin: 0;
   padding: 0;
   list-style-type: none;
+  display: flex;
+  &>img {
+    border-radius: 50%;
+    padding: 10px;
+  }
+  &>p {
+    font-size: 0.75rem
+  }
+  p:last-child {
+    color: #90949c ;
+  }
 }
 
 
@@ -138,10 +158,19 @@ ul, li {
   position: absolute;
   right: 0;
   z-index: 10;
-  width: 200px;
+  width: 500px;
   top: 49px;
-  background-color: #1c2129;
-  color: white;
+  background-color: #ECF3FF;
+  color: #220F41;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+ &>*{
+   margin: 0;
+   padding: 0;
+ }
 }
 
 .chat-box {

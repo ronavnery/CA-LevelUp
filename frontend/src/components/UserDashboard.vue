@@ -2,12 +2,17 @@
   <section class="user-dashboard-header">
     <button class="btn-add-offer" @click="addOffer">Share a skill</button>
     <div class="icon-container">
-      <i class="fas fa-envelope" @click="toggleInbox"></i>
+      <div class="inbox" @click="removeNotification">
+        <router-link :to="'/profile/' + currUser.nickName + '/inbox'">
+        <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div>
+          <i class="fas fa-envelope"></i>
+        </router-link>
+      </div>
       <i class="fas fa-bell"></i>
       <!-- <i class="fas fa-user" @click="toggleNav"></i> -->
       <img class="user-small-img" :src="currUser.imgUrl" @click="toggleNav" />
     </div>
-    <inboxPreview :isOpen="isOpen"/>
+    <inboxPreview :isOpen="isOpen" />
     <nav v-if="showNav">
       <ul class="user-commands clean-list">
         <li>
@@ -26,8 +31,8 @@
 
 
 <script>
-
-import inboxPreview from './InboxPreview'
+import inboxPreview from "./InboxPreview";
+import io from "socket.io-client";
 
 export default {
   props: {
@@ -38,8 +43,21 @@ export default {
   data() {
     return {
       showNav: false,
-      isOpen: false
+      isOpen: false,
+      socket: io("localhost:3000")
     };
+  },
+
+  mounted() {
+    this.socket.emit("JOIN_ROOM", this.currUser._id);
+    this.socket.on("notify", () => {
+      this.addNotification();
+    });
+  },
+  computed: {
+    unreadMsgs() {
+      return this.$store.getters.unreadMsgs;
+    }
   },
   methods: {
     async doLogout() {
@@ -51,8 +69,11 @@ export default {
         console.log("Couldnt log out, got err:", err);
       }
     },
-    toggleInbox() {
-      this.isOpen = !this.isOpen
+    addNotification() {
+      this.$store.commit({ type: "addNotification" });
+    },
+    removeNotification() {
+      this.$store.commit({ type: "removeNotification" });
     },
     addOffer() {
       this.$router.push("/edit");
@@ -73,7 +94,22 @@ export default {
   @include flexCustom(space-between, stretch, row);
   width: 230px;
 }
+.inbox{
+  position: relative;
+}
 
+.notification {
+  position: absolute;
+  width: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  top: 6px;
+
+  background-color: rgb(190, 2, 2);
+  color: white;
+  font-size: 0.75rem;
+  border-radius: 50%;
+}
 
 .icon-container {
   width: 100.25px;

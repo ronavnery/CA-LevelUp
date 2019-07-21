@@ -5,53 +5,87 @@ import offerService from '../services/offer.service.js'
 export default {
     state: {
         offers: [],
-        userInbox: {},
+        inboxSent: [],
+        inboxRecieved: [],
         currOffer: {},
+        unreadMsgs: 0,
         isBooking: false
     },
 
     getters: {
-       getIsBooking(state) {
-           return state.isBooking
-       }
+        getIsBooking(state) {
+            return state.isBooking
+        },
+        unreadMsgs(state) {
+            return state.unreadMsgs
+        },
+        inboxRecieved(state) {
+            return state.inboxRecieved
+        },
+        inboxSent(state) {
+            return state.inboxSent
+        }
+
     },
 
     mutations: {
         setIsBooked(state) {
             state.isBooking = false
+        },
+        addNotification(state) {
+            state.unreadMsgs++
+        },
+        removeNotification(state) {
+            state.unreadMsgs = 0
+        },
+        setUserInbox(state, { inbox, connectedUserId }) {
+            inbox.forEach(msg => {
+                msg.createdBy._id === connectedUserId
+                    ? state.inboxSent.push(msg)
+                    : state.inboxRecieved.push(msg);
+            });
         }
     },
 
     actions: {
-        async getInbox(context, {filter}) {
+        async getInbox(context, { connectedUserId }) {
             try {
-                console.log('currprofile is:', this.$store.getters.currProfile)
-                console.log('store got action: filter is', filter)
-                const inbox = await bookingService.query()
+                const inbox = await bookingService.getUserInbox(connectedUserId)
+                context.commit({ type: 'setUserInbox', inbox, connectedUserId })
+                return inbox
             }
-            catch(err) {
+            catch (err) {
                 console.log(err)
             }
         },
         async sendBookingReq(context, { bookingReq }) {
             try {
-                console.log('got booking request:', bookingReq);
                 const newBooking = await bookingService.add(bookingReq)
-                const newBookingId = newBooking.booking._id
-                if (newBookingId) return 'Request sent!'
-                else throw new Error('Request failed to send')
+                context.commit({ type: 'addBooking' })
+                return newBooking
+                // else throw new Error('Request failed to send')
             } catch (err) {
-                console.log(err)
-                return err
+                throw err
             }
         },
-        async getUserInbox(context, { inboxId }) {
+        async sendConfirm(context, { booking }) {
             try {
-                const inbox = await bookingService.getUserInbox(inboxId)
-                console.log(inbox)
-            }catch(err) {
-                console.log(err)
+                const newBookingReq = await bookingService.update(booking)
+                return newBookingReq
+            } catch (err) {
+                throw err
             }
-        },
+        }
     }
 }
+
+//         async getUserInbox(context, { inboxId }) {
+//             try {
+//                 const inbox = await bookingService.getUserInbox(inboxId)
+//                 console.log(inbox)
+//             } catch (err) {
+//                 console.log(err)
+//             }
+//         },
+//     }
+// }

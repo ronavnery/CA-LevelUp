@@ -16,19 +16,20 @@ function setup(http) {
         });
         socket.on('SEND_MESSAGE', (data) => {
             const { recipientId, senderId, message } = data
-            // chatService.pushToInbox(data)
-
             io.to(recipientId).emit('MESSAGE', { senderId, message });
         });
         socket.on('level-up-req', (req) => {
             const sentAt = Date.now()
             const { bookingMaker, offerMaker, offer } = req
-            io.to(offerMaker.makerId).emit('req-sent', { bookingMaker, offer,offerMaker, sentAt });
-            io.to(bookingMaker.makerId).emit('booking-sent', { bookingMaker, offer,offerMaker, sentAt });
+            io.to(offerMaker.makerId).emit('req-sent', { bookingMaker, offer, offerMaker, sentAt });
+            io.to(offerMaker.makerId).emit('notify');
+            io.to(bookingMaker.makerId).emit('booking-sent', { bookingMaker, offer, offerMaker, sentAt });
+            // io.to(bookingMaker.makerId).emit('notify');
         })
         socket.on('confirmed', (confirm) => {
-            const {userId, offerId, isConfirmed} = confirm
+            const { userId, offerId, isConfirmed } = confirm
             io.to(userId).emit('req-ans', { offerId, isConfirmed });
+            io.to(userId).emit('notify');
         })
 
 

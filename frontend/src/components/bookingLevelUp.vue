@@ -45,7 +45,7 @@ export default {
     };
   },
   methods: {
-    sendBookingReq() {
+    async sendBookingReq() {
       this.bookingReq.offer = {
         offerId: this.$store.getters.getCurrOffer._id,
         offerTitle: this.$store.getters.getCurrOffer.title,
@@ -60,14 +60,15 @@ export default {
       this.bookingReq.bookingMaker = {
         makerId: this.$store.getters.connectedUser._id,
         makerName: this.$store.getters.connectedUser.name,
-        makerImg: this.$store.getters.connectedUser.imgUrl
-      };
-      this.$store
-        .dispatch({ type: "sendBookingReq", bookingReq: this.bookingReq })
-        .then(bookingId => {
-          this.successStatus = bookingId;
-          this.socket.emit("level-up-req", this.bookingReq);
-        });
+        makerImg: this.$store.getters.connectedUser.imgUrl,
+      } 
+      const {booking} = await this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
+        this.socket.emit('level-up-req', booking)
+        this.$emit('close-booking-request');
+        // .then(bookingId => {
+        //   this.successStatus = bookingId
+        //   console.log(this.bookingReq)
+        // })
     },
     toggleBooking() {
       this.$emit("close-booking-request");

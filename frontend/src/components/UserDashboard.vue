@@ -55,7 +55,7 @@ export default {
       this.isOpen = !this.isOpen
     },
     addOffer() {
-      this.$router.push("/profile/edit");
+      this.$router.push("/edit");
     },
     toggleNav() {
       this.showNav = !this.showNav;

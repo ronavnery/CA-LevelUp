@@ -51,6 +51,7 @@ export default {
   z-index: 100;
   top: 0;
   width: 100%;
+  z-index: 1;
   background: $tpPurple;
   line-height: rem(50px);
   min-height: 50px;

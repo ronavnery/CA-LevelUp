@@ -1,39 +1,179 @@
 <template>
   <div class="offer-edit">
-    <form @submit.prevent='prevent' class="flex column">
-      <h2>Add lesson</h2>
-      <input type="text" v-model="editedOffer.title" placeholder="Title" />
-      <input type="text" v-model="editedOffer.description" placeholder="Description" />
-      <select v-model="editedOffer.category" name="category">
-        <option v-for="(category,idx) in optionalCategorys" :key="idx">{{category}}</option>
-      </select>
-      <select v-model.number="editedOffer.difficulty" name="difficulty">
-        <option v-for="(difficult,idx) in 3" :key="idx">{{difficult}}</option>
-      </select>
-      <vue-tags-input v-model="tag" :tags="tags" @tags-changed="tagChanged" />
-      <input v-model.number="editedOffer.duration" placeholder="Duration in minuets" type="number" />
-      <DynamicList @requirements-updated="changeRequirments" :list="editedOffer.requirements" />
-      <DynamicList @whatIncluded-updated="changeWhatsIncluded" :list="editedOffer.whatsIncluded" />
-      <input
-        v-model.number="editedOffer.minPeople"
-        placeholder="Min participate peoples"
-        type="number"
-      />
-      <input type="text" v-model="editedOffer.location.address" placeholder="Address" />
-      <select v-model="editedOffer.location.type">
-        <option>Skype</option>
-        <option>In Person</option>
-      </select>
-      <DynamicCarousel :imgs="this.optionalPhotos" @img-choosed="addPhoto" />
-      <input @click.prevent="save" class="add-offer-btn" type="submit" />
-    </form>
-    <!-- <DynamicList @requirements-updated="changeRequirments" />
-    <DynamicList @whatIncluded-updated="changeWhatsIncluded" />-->
-    <!-- <div v-for="(photo,idx) in optionalPhotos" :key="idx">
-      <img :src="photo" alt @click="addPhoto(photo)" />
-    </div> -->
-    <!-- {{ tags }} -->
-    <!-- {{ editedOffer }} -->
+    <ProfileSidebar :profile="connectedUser" />
+    <section class="edit-container">
+      <span class="fs18 strong">Share a new skill</span>
+      <form @submit.prevent="prevent">
+        <section class="settings-first">
+          <!-- CATEGORY -->
+          <select v-model="editedOffer.category" name="category" class="form-control category">
+            <option selected disabled>Choose a category</option>
+            <option v-for="(category,idx) in optionalCategories" :key="idx">{{category}}</option>
+          </select>
+
+          <!-- SESSION TYPE -->
+          <select v-model="editedOffer.location.type" class="session-type form-control">
+            <option selected disabled>Choose session type</option>
+            <option>In Person</option>
+            <option>Skype</option>
+          </select>
+
+          <!-- SINGLE OR GROUP -->
+          <div class="single-group-container fs14" v-if="editedOffer.location.type === 'In Person'">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                type="radio"
+                name="radioInline"
+                class="custom-control-input"
+                id="defaultInline1"
+                value=true
+                v-model.number="editedOffer.isGroup"
+              />
+              <label class="custom-control-label" for="defaultInline1">1 on 1</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                type="radio"
+                name="radioInline"
+                class="custom-control-input"
+                id="defaultInline2"
+                value=false
+                v-model.number="editedOffer.isGroup"
+              />
+              <label class="custom-control-label" for="defaultInline2">Group</label>
+            </div>
+          </div>
+
+          <!-- TITLE -->
+          <input
+            v-model="editedOffer.title"
+            type="text"
+            placeholder="Title"
+            class="title-input form-control"
+          />
+
+          <!-- DESCRIPTION -->
+          <textarea
+            v-model="editedOffer.description"
+            placeholder="Description"
+            rows="5"
+            class="desc-input form-control"
+          />
+          <!-- <mdb-input type="textarea" label="Description" :rows="5" v-model="editedOffer.description" /> -->
+
+          
+          <!-- SESSION DURATION -->
+          <span class="tags-title fs14">How long will the session be? (in minutes)</span>
+          <div class="duration-container">
+            <!-- <circle-slider
+              v-model="editedOffer.duration"
+              @touchmove="$refs.input.blur()"
+              circle-color="#cecece"
+              progress-color="#a0a0ff"
+              knob-color="#4e36dd"
+              :min="5"
+              :max="360"
+              :step-size="5"
+            ></circle-slider>-->
+
+            <input
+              v-model.number="editedOffer.duration"
+              placeholder
+              type="number"
+              class="form-control"
+            />
+          </div>
+
+          <!-- CAROUSEL -->
+          <span
+            class="fs14"
+            v-if="this.optionalPhotos.length > 0"
+          >Choose some photos that best suit your offer:</span>
+          <DynamicCarousel
+            class="dynamic-carousel"
+            :imgs="this.optionalPhotos"
+            @img-choosed="addPhoto"
+          />
+        </section>
+
+        <!-- RIGHT SIDE -->
+        <section class="settings-second">
+
+          <!-- DIFFICULTY -->
+          <span class="fs14">Skill difficulty</span>
+          <div class="difficulty-container fs14">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                type="radio"
+                name="radioInline"
+                class="custom-control-input"
+                id="defaultInline1"
+                value="1"
+                v-model.number="editedOffer.difficulty"
+              />
+              <label class="custom-control-label" for="defaultInline1">Beginner</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                type="radio"
+                name="radioInline"
+                class="custom-control-input"
+                id="defaultInline2"
+                value="2"
+                v-model.number="editedOffer.difficulty"
+              />
+              <label class="custom-control-label" for="defaultInline2">Intermediate</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                type="radio"
+                name="radioInline"
+                class="custom-control-input"
+                id="defaultInline3"
+                value="3"
+                v-model.number="editedOffer.difficulty"
+              />
+              <label class="custom-control-label" for="defaultInline3">Advanced</label>
+            </div>
+          </div>
+
+          <!-- REQUIREMENTS -->
+          <span class="tags-title fs14">Are there any previous requirements for this skill?</span>
+          <DynamicList @requirements-updated="changeRequirments" :list="editedOffer.requirements" />
+          <span class="tags-title fs14">Whats included in this session?</span>
+          <!-- WHATS INCLUDED -->
+          <DynamicList
+            @whatIncluded-updated="changeWhatsIncluded"
+            :list="editedOffer.whatsIncluded"
+          />
+          <!-- MIN PEOPLE -->
+          <input
+            class="form-control"
+            v-model.number="editedOffer.minPeople"
+            placeholder="Min participants"
+            type="number"
+          />
+          <!-- ADDRESS -->
+          <input
+            class="form-control"
+            type="text"
+            v-model="editedOffer.location.address"
+            placeholder="Address"
+          />
+
+          <!-- TAGS -->
+          <span class="tags-title fs14">Add tags so peope can easily find your skill</span>
+          <vue-tags-input
+            class="form-control"
+            v-model="tag"
+            :tags="tags"
+            @tags-changed="tagChanged"
+          />
+
+          <input @click.prevent="save" class="add-offer-btn" type="submit" />
+        </section>
+      </form>
+    </section>
   </div>
 </template>
 
@@ -41,6 +181,7 @@
 import DynamicList from "../components/DynamicList";
 import VueTagsInput from "@johmun/vue-tags-input";
 import DynamicCarousel from "../components/DynamicCarousel";
+import ProfileSidebar from "../components/ProfileSidebar";
 
 export default {
   name: "offer-edit",
@@ -49,7 +190,7 @@ export default {
       tag: "",
       tags: [],
       optionalPhotos: [],
-      optionalCategorys: [
+      optionalCategories: [
         "Development",
         "Business",
         "Finance & Accounting",
@@ -64,21 +205,27 @@ export default {
         "Music",
         "Teaching & Academics"
       ],
+      optionalDifficulties: [
+        "Beginner level",
+        "Intermediate level",
+        "Advanced level"
+      ],
       editedOffer: {
         title: "",
         description: "",
         imgs: [],
         tags: [],
         requirements: [],
+        isGroup: true,
         duration: "",
-        category: "Development",
+        category: "Choose a category",
         difficulty: 1,
         minPeople: "",
         whatsIncluded: [],
         interested: [],
         leveledUp: [],
         location: {
-          type: "In Person",
+          type: "Choose session type",
           address: ""
         },
         rating: {
@@ -109,16 +256,16 @@ export default {
 
   methods: {
     prevent() {
-      return
+      return;
     },
     async save() {
       const newOffer = this.editedOffer;
       if (newOffer._id) {
-        await this.$store.dispatch({ type: "updateOffer", newOffer })
-        this.$router.push('/explore')
+        await this.$store.dispatch({ type: "updateOffer", newOffer });
+        this.$router.push("/explore");
       } else {
-        await this.$store.dispatch({ type: "addOffer", newOffer })
-        this.$router.push('/explore')
+        await this.$store.dispatch({ type: "addOffer", newOffer });
+        this.$router.push("/explore");
       }
     },
     async searchPhotos() {
@@ -157,27 +304,77 @@ export default {
       this.searchPhotos();
     }
   },
-
+  computed: {
+    connectedUser() {
+      return this.$store.getters.connectedUser;
+    }
+  },
   components: {
     VueTagsInput,
     DynamicList,
-    DynamicCarousel
+    DynamicCarousel,
+    ProfileSidebar
   }
 };
 </script>
 
 <style lang="scss">
 .offer-edit {
-  @include flexCustom(center, center, column);
+  @include flexCustom(left, center, row);
   form {
-    width: 400px;
+    height: 100%;
+    display: flex;
+    width: max-content;
+    padding: 10px;
     & > * {
       margin: 6px;
       // height: rem(48px);
       padding: 0.75em;
-      border: 1px solid #dfe0e6;
       background-color: #f2f2f2;
       border-radius: 2px;
+    }
+
+    select {
+      border: none;
+      border-bottom: 1px solid $tpGray2;
+      color: #495057;
+      width: 324px;
+      margin: 6px;
+    }
+
+    .vue-tags-input {
+      background: none;
+      padding: 0;
+      .ti-input {
+        border: none;
+        border-bottom: 1px solid $tpGray2;
+      }
+      input {
+        background: none;
+      }
+    }
+
+    .form-control {
+      background: white;
+      border-radius: 4px;
+      width: 360px;
+      font-size: 14px;
+      margin: 10px;
+    }
+    .session-type {
+      margin: 0;
+    }
+    .category {
+      margin: 0;
+    }
+
+    .duration-container {
+      div {
+        width: max-content;
+      }
+      input {
+        max-width: 75px;
+      }
     }
   }
 
@@ -186,6 +383,34 @@ export default {
     place-self: center;
     @include btnActionColorSm;
   }
+}
+.settings-first,
+.settings-second {
+  @include flexCustom(space-between, left, column);
+  height: 100%;
+}
+.edit-container {
+  @include flexCustom(center, left, column);
+  height: calc(100vh - 50px);
+  overflow: auto;
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  .difficulty-container {
+    padding: 0;
+    // padding: 5px;
+    // padding-left: 30px;
+  }
+}
+
+.edit-container form .settings-first .title-input,
+.edit-container form .settings-first .desc-input {
+  margin: 0;
+}
+
+.dynamic-carousel {
+  width: 360px;
+  // position: absolute;
 }
 </style>
 

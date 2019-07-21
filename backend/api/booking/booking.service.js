@@ -82,6 +82,7 @@ async function add(booking, creator) {
     console.log('Connected to collection booking')
     booking.createdAt = Date.now()
     booking.createdBy = creator
+    booking.isConfirmed = false
     try {
         console.log('Trying to insert booking to db');
         await collection.insertOne(booking);

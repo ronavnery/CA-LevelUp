@@ -7,29 +7,39 @@ export default {
         offers: [],
         userInbox: {},
         currOffer: {},
+        unreadMsgs: 0,
         isBooking: false
     },
 
     getters: {
-       getIsBooking(state) {
-           return state.isBooking
-       }
+        getIsBooking(state) {
+            return state.isBooking
+        },
+        unreadMsgs(state) {
+            return state.unreadMsgs
+        }
     },
 
     mutations: {
         setIsBooked(state) {
             state.isBooking = false
+        },
+        addNotification(state) {
+            state.unreadMsgs++
+        },
+        removeNotification(state) {
+            state.unreadMsgs = 0
         }
     },
 
     actions: {
-        async getInbox(context, {filter}) {
+        async getInbox(context, { filter }) {
             try {
                 console.log('currprofile is:', this.$store.getters.currProfile)
                 console.log('store got action: filter is', filter)
                 const inbox = await bookingService.query()
             }
-            catch(err) {
+            catch (err) {
                 console.log(err)
             }
         },
@@ -37,8 +47,9 @@ export default {
             try {
                 console.log('got booking request:', bookingReq);
                 const newBooking = await bookingService.add(bookingReq)
-                const newBookingId = newBooking.booking._id
-                if (newBookingId) return 'Request sent!'
+                if (newBooking) return newBooking
+                // const newBookingId = newBooking.booking._id
+                // if (newBookingId) return 'Request sent!'
                 else throw new Error('Request failed to send')
             } catch (err) {
                 console.log(err)
@@ -49,7 +60,7 @@ export default {
             try {
                 const inbox = await bookingService.getUserInbox(inboxId)
                 console.log(inbox)
-            }catch(err) {
+            } catch (err) {
                 console.log(err)
             }
         },

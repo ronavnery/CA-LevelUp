@@ -19,3 +19,8 @@ Vue.filter('rating', ratingAvg =>{
     ratingAvg = +ratingAvg;
     return ratingAvg + '/5'
  })
+
+ Vue.filter('truncateText', (txt, limit) => {
+     if (txt.length >= limit) return txt.substring(0, limit) + '...'
+     return txt;
+})

@@ -6,7 +6,13 @@
         <button class="accordion" @click="toggleReview($event)" :ref="idx">
           <div class="wrapper">
             <div class="review-maker-image" :style="getImage(review.maker.imgUrl)"></div>
-            <p>{{review.title}}</p>
+            <div class="title-time">
+              <p>{{review.title| truncateText(40)}}</p>
+              <div class="date-wrapper">
+                <i class="fas fa-clock"></i>
+                <span>{{review.createdAt | formatDateFromNow}}</span>
+              </div>
+            </div>
           </div>
           <StarRating
             :rating="review.score"
@@ -18,12 +24,7 @@
         <div class="panel">
           <p>What they had to say:</p>
           <p>{{review.body}}</p>
-          <div class="title-date-wrapper">
-            <div class="date-wrapper">
-              <i class="fas fa-clock"></i>
-              <span>{{review.createdAt | formatDateFromNow}}</span>
-            </div>
-          </div>
+          <div class="title-date-wrapper"></div>
         </div>
       </div>
     </main>
@@ -70,8 +71,11 @@ export default {
 
 <style lang="scss" scoped>
 .accordion {
-  background-color: #eee;
-  color: #444;
+  max-width: 500px;
+  background-color: $tpGray;
+  border-radius: 4px;
+  opacity: 0.9;
+  color: $tpPurple;
   cursor: pointer;
   padding: 10px;
   width: 100%;
@@ -88,8 +92,13 @@ export default {
       @include btnRound(45px);
     }
 
+    .title-time {
+      margin: 0 0 0 10px;
+    }
+
     p {
-      margin: 0 0 0 5px;
+      margin: 0;
+      font-weight: bold;
     }
   }
 }
@@ -100,10 +109,11 @@ export default {
 }
 
 .panel {
+  width: 500px;
+  overflow: hidden;
   padding: 0 18px;
   background-color: white;
   max-height: 0;
-  overflow: hidden;
   transition: max-height 0.2s ease-out;
   border: 1px solid rgba(0, 0, 0, 0.13);
   border-top: 0px;
@@ -116,7 +126,6 @@ export default {
 }
 
 .date-wrapper {
-  text-align: end;
   color: #00000073;
   padding-bottom: 5px;
   i {

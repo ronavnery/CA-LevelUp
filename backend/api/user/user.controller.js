@@ -1,4 +1,5 @@
 const userService = require('./user.service')
+const offerService = require('../offer/offer.service')
 
 async function login(req, res) {
     const user = await userService.checkCredentials(req.body)
@@ -33,8 +34,10 @@ async function deleteUser(req, res) {
 
 async function updateUser(req, res) {
     try {
-        const updatedUser = await userService.update(req.body)
-        console.log('sending back updated user:', updatedUser)
+        const user = await userService.getByNickname(req.body.nickName);
+        const updatedUser = await userService.update(req.body);
+        if (user.imgUrl !== updatedUser.imgUrl) await offerService.updateOfferMakerImg(updatedUser)
+        // console.log('sending back updated user:', updatedUser)
         res.send(updatedUser)
     }
     catch(err) {

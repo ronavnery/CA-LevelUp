@@ -13,6 +13,11 @@ export default {
 <style scoped lang="scss">
 .profile-content-container {
   flex: 1;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
+
+
 
 </style>

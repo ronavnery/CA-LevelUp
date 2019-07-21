@@ -3,16 +3,16 @@
         <h4 style="margin-top: 8px;">Leave A Review!</h4>
         <label for="review-title">Title</label>
         <input type="text" id="review-title" class="form-control" v-model="review.title" required>
-        <StarRating :increment="0.1" :star-size="30" text-class="pretty-text" v-model="review.score" />
+        <StarRating :increment="1" :star-size="30" text-class="pretty-text" v-model="review.score" />
         <div>
          <label for="exampleFormControlTextarea1">What Did You Think Of The Lesson?</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="review.body" required></textarea>
     <div class="btn-wrapper">
-     <mdb-btn color="deep-purple" @click="emitRating">Submit</mdb-btn>
-     <mdb-btn color="default" @click="clearFields">Clear</mdb-btn>
+     <button class="submit-review-btn" @click="emitRating">Submit</button>
+     <button class="submit-clear-btn" color="default" @click="clearFields">Clear</button>
      <div class="icon-container">
      <v-icon name="sync" spin scale="1.2" v-if="status === 'submitting'"/>
-     <v-icon name="check-circle" scale="1.5" class="success" v-else-if="status === 'success'"/>
+     <span class="review-success-msg" v-else-if="status === 'success'"><v-icon name="check-circle" scale="1.5" class="success" /> Review added</span>
      <v-icon name="check-circle" scale="1.5" class="failure" v-else-if="status === 'error'"/>
      </div>
     </div>
@@ -77,6 +77,7 @@ export default {
     max-width: 300px;
     .btn-wrapper {
         display: flex;
+        margin-top: 20px;
     }
     input {
         margin: 5px 0;
@@ -96,7 +97,7 @@ textarea {
 }
 
 .icon-container {
-    width: 30px;
+    width: 150px;
     @include flexCenter(row);
 }
 
@@ -108,8 +109,17 @@ textarea {
     fill: rgb(255, 0, 0);
 }
 
+.submit-review-btn {
+    @include btnActionColorSm;
+    margin-right: 10px;
+}
 
+.submit-clear-btn {
+    @include btnActionGreySm;
+}
 
+.review-success-msg {
+}
 </style>
 
 

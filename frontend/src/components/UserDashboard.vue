@@ -76,7 +76,7 @@ export default {
       this.$store.commit({ type: "removeNotification" });
     },
     addOffer() {
-      this.$router.push("/profile/edit");
+      this.$router.push("/edit");
     },
     toggleNav() {
       this.showNav = !this.showNav;
@@ -92,7 +92,7 @@ export default {
 <style lang="scss" scoped>
 .user-dashboard-header {
   @include flexCustom(space-between, stretch, row);
-  width: 250px;
+  width: 230px;
 }
 .inbox{
   position: relative;

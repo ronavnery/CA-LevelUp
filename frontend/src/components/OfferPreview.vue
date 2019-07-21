@@ -131,12 +131,7 @@ export default {
       else if (this.offer.stars < 3 && this.offer.stars >= 2) return "#ffdc73";
       return "#8e8b80";
     },
-    // shortTitle() {
-    //   if (this.offer.title.length > 28) {
-    //     return this.offer.title.substring(0, 28) + "...";
-    //   }
-    //   return this.offer.title;
-    // },
+
     categoryIcon() {
       if (this.offer.category === "Development") return "fas fa-file-code";
       else if (this.offer.category === "Business") return "fas fa-briefcase";
@@ -159,10 +154,10 @@ export default {
         return "fas fa-user-graduate";
     },
     userOwnOffer() {
-      return (
-        this.offer.createdBy.nickName ===
-        this.$store.getters.connectedUser.nickName
-      );
+      const connectedUser = this.$store.getters.connectedUser;
+      if(!connectedUser || 
+      this.offer.createdBy.nickName !== connectedUser.nickName) return false;
+      else return true;
     }
   }
 };

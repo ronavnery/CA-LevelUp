@@ -48,9 +48,7 @@ export default {
     offers() {
       return this.$store.getters.getOffers;
     },
-    // connectedUser() {
-    //   return this.$store.getters.connectedUser.nickName
-    // }
+
   },
   async mounted() {
     let connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
@@ -99,6 +97,7 @@ export default {
 
 .front {
   color: white;
+  text-align: center;
   &.vue-typer {
     color: white;
   }

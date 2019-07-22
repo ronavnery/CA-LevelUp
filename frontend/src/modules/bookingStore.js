@@ -35,15 +35,37 @@ export default {
         addNotification(state) {
             state.unreadMsgs++
         },
+
+        addBooking(state, { booking }) {
+            (JSON.parse(sessionStorage.getItem('loggedInUser'))._id === booking.createdBy._id)
+            ? state.inboxSent.unshift(booking)
+            : state.inboxRecieved.unshift(booking)
+        },
+
+        updateBooking(state, { booking }) {
+            let idx = 0;
+            if (JSON.parse(sessionStorage.getItem('loggedInUser'))._id === booking.createdBy._id) {
+                idx = state.inboxSent.findIndex(msg => msg._id === booking._id) 
+                state.inboxSent.splice(idx,1,booking)
+            }else {
+                idx = state.inboxRecieved.findIndex(msg => msg._id === booking._id)  
+                state.inboxRecieved.splice(idx,1,booking)
+            }
+        },
         removeNotification(state) {
             state.unreadMsgs = 0
         },
         setUserInbox(state, { inbox, connectedUserId }) {
+            let tempSent = []
+            let tempRecieved = []
             inbox.forEach(msg => {
                 msg.createdBy._id === connectedUserId
-                    ? state.inboxSent.push(msg)
-                    : state.inboxRecieved.push(msg);
+                    ? tempSent.push(msg)
+                    : tempRecieved.push(msg);
             });
+            state.inboxSent = [...tempSent]
+            state.inboxRecieved = [...tempRecieved]
+            console.log(inbox)
         }
     },
 
@@ -60,11 +82,13 @@ export default {
         },
         async sendBookingReq(context, { bookingReq }) {
             try {
-                const newBooking = await bookingService.add(bookingReq)
-                context.commit({ type: 'addBooking' })
-                return newBooking
+                const {booking} = await bookingService.add(bookingReq)
+                context.commit({ type: 'addBooking',booking })
+                // console.log(booking)
+                return booking
                 // else throw new Error('Request failed to send')
             } catch (err) {
+                console.log(err)
                 throw err
             }
         },

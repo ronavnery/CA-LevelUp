@@ -80,11 +80,11 @@ export default {
   },
   data() {
     return {
-      offerMakerUpdatedImgUrl: ""
+      // offerMakerUpdatedImgUrl: ""
     };
   },
   created() {
-    this.getOfferMakerImgUrl();
+    // this.getOfferMakerImgUrl();
   },
   methods: {
     async goToDetails() {
@@ -107,13 +107,13 @@ export default {
     removeOffer() {
       this.$emit("removeOffer", this.offer._id);
     },
-    async getOfferMakerImgUrl() {
-      const user = await this.$store.dispatch({
-        type: "getProfile",
-        nickName: this.offer.createdBy.nickName
-      });
-      this.offerMakerUpdatedImgUrl = user.imgUrl;
-    },
+    // async getOfferMakerImgUrl() {
+    //   const user = await this.$store.dispatch({
+    //     type: "getProfile",
+    //     nickName: this.offer.createdBy.nickName
+    //   });
+    //   this.offerMakerUpdatedImgUrl = user.imgUrl;
+    // },
     goToProfile() {
       this.$router.push(`/profile/${this.offer.createdBy.nickName}`);
     }

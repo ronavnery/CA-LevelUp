@@ -35,9 +35,6 @@ export default {
         setConnectedUser(state, { user }) {
             state.connectedUser = user;
         },
-        addUserToStore(state, { addedUser }) {
-            state.users.push(addedUser)
-        }
     },
 
     actions: {
@@ -62,7 +59,6 @@ export default {
         async addUser({ commit }, { newUser }) {
             try {
                 const addedUser = await userService.add(newUser)
-                commit({ type: 'addUserToStore', addedUser })
                 commit({ type: 'setConnectedUser', user: addedUser })
                 return addedUser
             }

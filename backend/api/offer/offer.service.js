@@ -103,18 +103,19 @@ async function updateOfferMakerImg(user) {
     const collection = await dbService.getCollection('offer')
     try {
         const {nickName, imgUrl} = user;
-        
-        await collection.updateMany({"createdBy.nickName": nickName}, {$set: {"createdBy.imgUrl" : imgUrl}})
+        const offers = await collection.updateMany({"createdBy.nickName": nickName}, {$set: {"createdBy.imgUrl" : imgUrl}})
+        // const offers = await collection.find({"createdBy.nickName": nickName}).toArray()
+        console.log('offers in backend:', offers)
         return Promise.resolve();
     } catch (err) {
         throw err
     }
 }
 
-async function add(offer, creator) {
+async function add(offer) {
     const collection = await dbService.getCollection('offer')
     offer.createdAt = Date.now()
-    offer.createdBy = creator
+    // offer.createdBy = creator
     try {
         await collection.insertOne(offer);
         return offer;

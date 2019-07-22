@@ -278,7 +278,7 @@ export default {
         await this.$store.dispatch({ type: "updateOffer", newOffer });
         this.$router.push("/explore");
       } else {
-        newOffer.createdBy = this.$store.getters.connectedUser
+        newOffer.createdBy = this.connectedUser;
         await this.$store.dispatch({ type: "addOffer", newOffer });
         this.$router.push("/explore");
       }

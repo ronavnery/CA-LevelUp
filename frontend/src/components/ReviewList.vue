@@ -3,7 +3,7 @@
     <h4 style="margin-top: 8px;">Reviews:</h4>
     <main>
       <div v-for="(review, idx) in reviews" :key="idx">
-        <button class="accordion" @click="toggleReview($event)" :ref="idx">
+        <button class="accordion" @click="toggleReview($event)" :ref="'button' + idx">
           <div class="wrapper">
             <div class="review-maker-image" :style="getImage(review.maker.imgUrl)"></div>
             <div class="title-time">
@@ -47,13 +47,15 @@ export default {
   },
   methods: {
     toggleReview(ev) {
-      if (!ev.target.classList.contains("accordion")) return;
-      const review = ev.target.nextElementSibling;
-      if (!review.style.maxHeight || review.style.maxHeight === "0px") {
-        review.style.maxHeight = review.scrollHeight + "px";
-      } else {
-        review.style.maxHeight = "0px";
-      }
+      console.log(ev.target)
+      console.log(this.$refs)
+      // if (!ev.target.classList.contains("accordion")) return;
+      // const review = ev.target.nextElementSibling;
+      // if (!review.style.maxHeight || review.style.maxHeight === "0px") {
+      //   review.style.maxHeight = review.scrollHeight + "px";
+      // } else {
+      //   review.style.maxHeight = "0px";
+      // }
       // if (!review.classList.contains('panel-active')) review.classList.add('panel-active');
       // else review.classList.remove('panel-active');
     },

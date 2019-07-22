@@ -35,6 +35,9 @@ export default {
         addNotification(state) {
             state.unreadMsgs++
         },
+        addBooking(state, { booking }) {
+            (JSON.parse(sessionStorage.getItem('loggedInUser'))._id === booking.createdBy._id) ? state.inboxSent.unshift(booking) : state.inboxRecieved.unshift(booking)
+        },
         removeNotification(state) {
             state.unreadMsgs = 0
         },
@@ -60,11 +63,13 @@ export default {
         },
         async sendBookingReq(context, { bookingReq }) {
             try {
-                const newBooking = await bookingService.add(bookingReq)
-                context.commit({ type: 'addBooking' })
-                return newBooking
+                const {booking} = await bookingService.add(bookingReq)
+                context.commit({ type: 'addBooking',booking })
+                // console.log(booking)
+                return booking
                 // else throw new Error('Request failed to send')
             } catch (err) {
+                console.log(err)
                 throw err
             }
         },

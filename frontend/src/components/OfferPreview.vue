@@ -98,7 +98,7 @@ export default {
       this.$store.dispatch({
         type: "logUserCategoryChoice",
         category: this.offer.category,
-        user: this.connectedUser
+        user: (this.connectedUser)? this.connectedUser.nickName : 'visitor'
       });
     },
     goToEdit() {
@@ -120,7 +120,7 @@ export default {
   },
   computed: {
     connectedUser() {
-      return this.$store.getters.connectedUser._id
+      return this.$store.getters.connectedUser
     },
 
     starIconFill() {
@@ -156,7 +156,11 @@ export default {
       if(!connectedUser || 
       this.offer.createdBy.nickName !== connectedUser.nickName) return false;
       else return true;
+    },
+    userOwnOfferOriel() {
+      // return (this.connectedUser && this.offer.createdBy.nickName === this.connectedUser.nickName) 
     }
+    // same not working return true if 
   }
 };
 </script>

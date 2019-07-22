@@ -25,10 +25,11 @@
         <img :src="booking.bookingMaker.makerImg" width="100px" alt />
         <div class="details-container">
           <p>{{booking.bookingMaker.makerName}}</p>
-          <p>{{booking.sentAt | formatDate}}</p>
+          <p>{{booking.createdAt | formatDate}}</p>
         </div>
         <button>start chat</button>
-        <div class="confirm-buttons" v-if="booking.isConfirmed==='pending'">
+        {{booking.isConfirmed}}
+        <div class="confirm-buttons" v-if="booking.isConfirmed === 'pending'">
           <button @click.stop="sendConfirm(booking, true)">Confirm</button>
           <button @click.stop="sendConfirm(booking, false)">Not now</button>
         </div>

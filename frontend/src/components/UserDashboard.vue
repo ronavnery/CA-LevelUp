@@ -4,7 +4,7 @@
     <div class="icon-container">
       <div class="inbox" @click="removeNotification">
         <router-link :to="'/profile/' + currUser.nickName + '/inbox'">
-        <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div>
+          <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div>
           <i class="fas fa-envelope"></i>
         </router-link>
       </div>
@@ -50,9 +50,10 @@ export default {
 
   mounted() {
     this.socket.emit("JOIN_ROOM", this.currUser._id);
-    this.socket.on("notify", () => {
-      this.addNotification();
-    });
+    this.socket.on("notify", () => this.addNotification());
+    this.socket.on("req-sent", booking =>
+      this.$store.commit({ type: "addBooking", booking })
+    );
   },
   computed: {
     unreadMsgs() {
@@ -94,7 +95,7 @@ export default {
   @include flexCustom(space-between, stretch, row);
   width: 230px;
 }
-.inbox{
+.inbox {
   position: relative;
 }
 

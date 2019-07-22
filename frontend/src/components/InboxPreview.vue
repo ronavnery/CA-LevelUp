@@ -86,7 +86,7 @@ export default {
     const userId = this.$store.getters.connectedUser._id;
 
     this.socket.emit("JOIN_ROOM", userId);
-    this.socket.on("req-sent", booking => this.bookings.push(booking));
+    // this.socket.on("req-sent", booking => this.bookings.push(booking));
     this.socket.on("booking-sent", booking =>{
       this.pendingBookings.push(booking)
     }

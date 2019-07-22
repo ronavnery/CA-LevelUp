@@ -1,7 +1,7 @@
 <template>
   <section class="levelup-booking fs14">
     <button class="btn-toggle-booking" @click="toggleBooking">X</button>
-    <form class="booking-form" v-if="userConnected">
+    <form class="booking-form" v-if="connectedUser">
       <h4 class="text-center">Contact to levelup!</h4>
       <p>Before you level up, please add some info about you so the person gets to know you better!</p>
       <label for="reason">What makes you want to get this skill?</label>
@@ -31,6 +31,7 @@
 
 <script>
 import io from "socket.io-client";
+import { setTimeout } from 'timers';
 
 export default {
   data() {
@@ -58,24 +59,24 @@ export default {
         makerImg: this.$store.getters.currProfile.imgUrl
       };
       this.bookingReq.bookingMaker = {
-        makerId: this.$store.getters.connectedUser._id,
-        makerName: this.$store.getters.connectedUser.name,
-        makerImg: this.$store.getters.connectedUser.imgUrl,
+        makerId: this.connectedUser._id,
+        makerName: this.connectedUser.name,
+        makerImg: this.connectedUser.imgUrl,
       } 
-      const {booking} = await this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
+      const booking = await this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
         this.socket.emit('level-up-req', booking)
-        this.$emit('close-booking-request');
-        // .then(bookingId => {
-        //   this.successStatus = bookingId
-        //   console.log(this.bookingReq)
-        // })
+        
+        setTimeout(() =>{
+          this.$emit('close-booking-request');
+        })
+
     },
     toggleBooking() {
       this.$emit("close-booking-request");
     }
   },
   computed: {
-    userConnected() {
+    connectedUser() {
       return this.$store.getters.connectedUser;
     }
   }

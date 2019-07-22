@@ -132,6 +132,7 @@ function logUserCategoryChoice(category, user) {
 }
 
 function getUserPopularCategory(user = 'visitor') {
+    localStorage.setItem(user, JSON.stringify(storedCategories));
     var storedCategories = JSON.parse(localStorage.getItem(user))
     function mode(arr){
         return arr.sort((a,b) =>

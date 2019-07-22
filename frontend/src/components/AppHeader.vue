@@ -12,6 +12,7 @@
     <UserDashboard :currUser="connectedUser" v-if="connectedUser" />
     <div class="user-action-container" v-else>
       <button class="btn-login" @click="goLogin">Login</button>
+      <router-link to="/login" class="header-link"></router-link>
       <button class="btn-signup" @click="goSignUp">Sign-Up</button>
     </div>
   </section>

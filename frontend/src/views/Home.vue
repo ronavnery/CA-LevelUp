@@ -48,15 +48,17 @@ export default {
     offers() {
       return this.$store.getters.getOffers;
     },
-    connectedUserNickName() {
-      return this.$store.getters.connectedUser.nickName
-    }
+    // connectedUser() {
+    //   return this.$store.getters.connectedUser.nickName
+    // }
   },
   async mounted() {
+    let connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
+    connectedUser = (connectedUser)? connectedUser.nickName : 'visitor'
     const category = await this.$store.dispatch({
       type: "getUserPopularCategory",
-      user: this.connectedUserNickName
-    });
+      user: connectedUser
+          });
     this.recommendedOffers = await this.$store.dispatch({
       type: "loadOffers",
       filter: { category, limit: 4 }

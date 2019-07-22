@@ -17,7 +17,7 @@ async function add(booking, creator) {
     console.log('Connected to collection booking')
     booking.createdAt = Date.now()
     booking.createdBy = creator
-    booking.isConfirmed = false
+    booking.isConfirmed = 'pending'
     try {
         console.log('Trying to insert booking to db');
         await collection.insertOne(booking);
@@ -48,10 +48,10 @@ async function update(booking) {
     const collection = await dbService.getCollection('booking')
     const bookingId = booking._id
     delete booking._id
-    console.log(booking)
     try {
-        const newBooking = await collection.replaceOne({ "_id": ObjectId(bookingId) }, { $set: booking })
-        return newBooking
+        await collection.replaceOne({ "_id": ObjectId(bookingId) }, { $set: booking })
+        booking._id = bookingId
+        return booking
     } catch (err) {
         console.log(`ERROR: cannot update booking ${booking._id}`)
         throw err;

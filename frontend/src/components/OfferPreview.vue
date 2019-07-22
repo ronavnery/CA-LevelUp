@@ -87,7 +87,7 @@ export default {
     // this.getOfferMakerImgUrl();
   },
   methods: {
-    async goToDetails() {
+    goToDetails() {
       this.$router.push({
         name: "OfferDetails",
         params: {
@@ -98,7 +98,7 @@ export default {
       this.$store.dispatch({
         type: "logUserCategoryChoice",
         category: this.offer.category,
-        user: (this.connectedUser)? this.connectedUser.nickName : 'visitor'
+        user: this.connectedUser ? this.connectedUser.nickName : "visitor"
       });
     },
     goToEdit() {
@@ -120,10 +120,10 @@ export default {
   },
   computed: {
     connectedUser() {
-      return this.$store.getters.connectedUser
+      return this.$store.getters.connectedUser;
     },
     connectedUserNickName() {
-      return this.$store.getters.connectedUser.nickName
+      return this.$store.getters.connectedUser.nickName;
     },
 
     starIconFill() {
@@ -136,7 +136,8 @@ export default {
     categoryIcon() {
       if (this.offer.category === "Development") return "fas fa-file-code";
       else if (this.offer.category === "Business") return "fas fa-briefcase";
-      else if (this.offer.category === "Just For Fun") return "far fa-grin-tears";
+      else if (this.offer.category === "Just For Fun")
+        return "far fa-grin-tears";
       else if (this.offer.category === "DIY") return "fas fa-tools";
       else if (this.offer.category === "Finance & Accounting")
         return "fas fa-balance-scale";
@@ -158,14 +159,17 @@ export default {
     },
     userOwnOffer() {
       const connectedUser = this.$store.getters.connectedUser;
-      if(!connectedUser || 
-      this.offer.createdBy.nickName !== connectedUser.nickName) return false;
+      if (
+        !connectedUser ||
+        this.offer.createdBy.nickName !== connectedUser.nickName
+      )
+        return false;
       else return true;
     },
     userOwnOfferOriel() {
-      // return (this.connectedUser && this.offer.createdBy.nickName === this.connectedUser.nickName) 
+      // return (this.connectedUser && this.offer.createdBy.nickName === this.connectedUser.nickName)
     }
-    // same not working return true if 
+    // same not working return true if
   }
 };
 </script>

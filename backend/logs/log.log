@@ -1264,3 +1264,10 @@ Mon, 22 Jul 2019 09:29:34 GMT - Info - Server is running on port: 3000
 =======
 >>>>>>> a7441a2e352c241b50dca9c8a957c224551176d3
 >>>>>>> 9c46c708f6d856317afc0ed05850e40af40cb066
+
+Mon, 22 Jul 2019 09:45:47 GMT - Debug - auth.service - login with nickName: orielshalem
+Mon, 22 Jul 2019 09:58:53 GMT - Debug - auth.service - login with nickName: orielshalem
+Mon, 22 Jul 2019 10:02:14 GMT - Debug - auth.service - login with nickName: ronavnery
+Mon, 22 Jul 2019 10:05:23 GMT - Debug - auth.service - login with nickName: ronavnery
+Mon, 22 Jul 2019 10:07:16 GMT - Debug - auth.service - login with nickName: ronavnery
+Mon, 22 Jul 2019 10:36:22 GMT - Debug - auth.service - login with nickName: ronavnery

@@ -22,11 +22,8 @@ async function updateOffer(req, res) {
 }
 
 async function addOffer(req, res) {
-    const offer = await offerService.add(req.body,req.session.user)
-    offer.createdBy = req.session.user
-    console.log(req.session.user)
+    const offer = await offerService.add(req.body)
     res.send({offer})
-
 }
 
 module.exports = {

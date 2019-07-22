@@ -1142,3 +1142,26 @@ Mon, 22 Jul 2019 05:28:08 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 05:28:17 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 05:34:13 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 05:34:16 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 07:45:03 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 07:45:54 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Mon, 22 Jul 2019 08:42:37 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Mon, 22 Jul 2019 08:49:35 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:51:02 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:51:17 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:51:24 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:52:22 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:52:53 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:54:24 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:54:59 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 09:07:12 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 09:07:22 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 09:07:52 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 09:07:56 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 09:18:10 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 09:18:52 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Mon, 22 Jul 2019 09:21:19 GMT - Debug - JaredLeto@gmail.com, JaredLeto
+Mon, 22 Jul 2019 09:21:19 GMT - Debug - auth.service - signup with email: JaredLeto@gmail.com, nickName: JaredLeto
+Mon, 22 Jul 2019 09:21:19 GMT - Debug - auth.route - new user created: {"name":"Jared Leto","nickName":"JaredLeto","profileUrl":"","email":"JaredLeto@gmail.com","contactInfo":{},"socialInfo":{},"imgUrl":"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png","skillTags":[],"city":"","intro":"","offers":[],"interestedIn":[],"leveledUpIn":[],"ratingAvg":0,"aboutMe":"","age":25,"createdAt":1563787279820,"_id":"5d35800f8aed491f145e1557"}
+Mon, 22 Jul 2019 09:23:43 GMT - Debug - stoaem@masknd.com, something
+Mon, 22 Jul 2019 09:23:43 GMT - Debug - auth.service - signup with email: stoaem@masknd.com, nickName: something
+Mon, 22 Jul 2019 09:23:44 GMT - Debug - auth.route - new user created: {"name":"something","nickName":"something","profileUrl":"","email":"stoaem@masknd.com","contactInfo":{},"socialInfo":{},"imgUrl":"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png","skillTags":[],"city":"","intro":"","offers":[],"interestedIn":[],"leveledUpIn":[],"ratingAvg":0,"aboutMe":"","age":25,"createdAt":1563787423930,"_id":"5d35809f8aed491f145e1558"}

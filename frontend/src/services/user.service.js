@@ -26,8 +26,8 @@ async function getUsers(filterBy = null) {
 async function login(credentials) {
     try {
         const registeredUser = await httpService.post(_getAuthUrl('login'), credentials)
-        if(registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
-        
+        if (registeredUser) sessionStorage.setItem('loggedInUser', JSON.stringify(registeredUser));
+
         else throw new Error('Invalid Username or Password');
         console.log(registeredUser)
         safeToLogout = true;
@@ -41,15 +41,15 @@ async function login(credentials) {
 async function logout() {
     try {
         sessionStorage.clear()
-    
-        
+
+
         if (safeToLogout) {
             safeToLogout = false;
             await httpService.get(_getAuthUrl('logout'))
         }
 
         return 'All Good';
-    } catch(err) {
+    } catch (err) {
         throw err
     }
 }
@@ -132,12 +132,15 @@ function logUserCategoryChoice(category, user) {
 }
 
 function getUserPopularCategory(user = 'visitor') {
-    localStorage.setItem(user, JSON.stringify(storedCategories));
     var storedCategories = JSON.parse(localStorage.getItem(user))
-    function mode(arr){
-        return arr.sort((a,b) =>
-              arr.filter(v => v===a).length
-            - arr.filter(v => v===b).length
+    if (!storedCategories) {
+        localStorage.setItem(user, JSON.stringify([]));
+        storedCategories = [];
+    }
+    function mode(arr) {
+        return arr.sort((a, b) =>
+            arr.filter(v => v === a).length
+            - arr.filter(v => v === b).length
         ).pop();
     }
     // console.log('mode is!!!', mode(storedCategories))

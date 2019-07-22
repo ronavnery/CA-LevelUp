@@ -1,7 +1,7 @@
 <template>
   <div class="inbox-content">
     <span class="content-title fs18">Bookings sent</span>
-    <ul v-if="inboxRecieved.length" class="inbox-received">
+    <ul v-if="inboxSent.length" class="inbox-received">
       <li v-for="(booking,idx) in inboxSent" :key="idx">
         <div class="left-layout">
           <span class="offer-title strong">{{booking.offer.offerTitle}}</span>
@@ -12,8 +12,8 @@
             <img :src="booking.offerMaker.makerImg" alt />
             <p>{{booking.offerMaker.makerName}}</p>
           </div>
-          <p v-if="booking.isConfirmed">Status: Confirmed</p>
-          <p v-else>Status: Pending</p>
+          <p v-if="booking.isConfirmed==='pending'">Status: Pending</p>
+          <p v-else>Status: Confirmed</p>
         </div>
       </li>
       <!-- {{booking}} -->
@@ -63,6 +63,7 @@ export default {
         type: "getInbox",
         connectedUserId: this.connectedUser._id
       });
+      this.$store.commit({ type: "removeNotification" });
     } catch (err) {
       console.log(err);
     }
@@ -86,8 +87,7 @@ export default {
         booking
       });
 
-      console.log(newBooking);
-      // this.socket.emit("confirmed", newBooking);
+      this.socket.emit("req-updated", booking);
     }
   }
 };
@@ -127,7 +127,7 @@ li {
   box-sizing: border-box;
 
   &:hover {
-    background: #d4c9cd94
+    background: #d4c9cd94;
   }
 }
 .left-layout {
@@ -153,7 +153,7 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  flex:1;
+  flex: 1;
   & > .offer-creator {
     display: flex;
     margin-bottom: 4px;
@@ -172,13 +172,13 @@ li {
     justify-content: space-between;
     height: 100%;
   }
-  .right-user-details{ 
+  .right-user-details {
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
   }
-  .confirm-buttons *{
+  .confirm-buttons * {
     margin-right: 10px;
   }
 }

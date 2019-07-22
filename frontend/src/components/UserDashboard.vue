@@ -2,9 +2,9 @@
   <section class="user-dashboard-header">
     <button class="btn-add-offer" @click="addOffer">Share a skill</button>
     <div class="icon-container">
-      <div class="inbox" @click="removeNotification">
+      <div class="inbox">
         <router-link :to="'/profile/' + currUser.nickName + '/inbox'">
-        <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div>
+          <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div>
           <i class="fas fa-envelope"></i>
         </router-link>
       </div>
@@ -12,7 +12,6 @@
       <!-- <i class="fas fa-user" @click="toggleNav"></i> -->
       <img class="user-small-img" :src="currUser.imgUrl" @click="toggleNav" />
     </div>
-    <inboxPreview :isOpen="isOpen" />
     <nav class="user-actions-nav" v-if="showNav">
       <ul class="user-commands clean-list">
         <li class="li-user">
@@ -31,7 +30,6 @@
 
 
 <script>
-import inboxPreview from "./InboxPreview";
 import io from "socket.io-client";
 
 export default {
@@ -43,17 +41,20 @@ export default {
   data() {
     return {
       showNav: false,
-      isOpen: false,
       socket: io("localhost:3000")
     };
   },
 
   mounted() {
     this.socket.emit("JOIN_ROOM", this.currUser._id);
-    this.socket.on("notify", () => {
-      this.addNotification();
-    });
+    this.socket.on("notify", () => this.addNotification());
+    this.socket.on("req-sent", booking =>
+      this.$store.commit({ type: "addBooking", booking })
+    );
+    this.socket.on("booking-updated", booking =>
+      this.$store.commit({type: 'updateBooking',booking}))
   },
+
   computed: {
     unreadMsgs() {
       return this.$store.getters.unreadMsgs;
@@ -63,7 +64,6 @@ export default {
     async doLogout() {
       try {
         const res = await this.$store.dispatch({ type: "doLogout" });
-        console.log(res);
         this.$router.push("/");
       } catch (err) {
         console.log("Couldnt log out, got err:", err);
@@ -72,9 +72,6 @@ export default {
     addNotification() {
       this.$store.commit({ type: "addNotification" });
     },
-    removeNotification() {
-      this.$store.commit({ type: "removeNotification" });
-    },
     addOffer() {
       this.$router.push("/edit");
     },
@@ -82,9 +79,6 @@ export default {
       this.showNav = !this.showNav;
     }
   },
-  components: {
-    inboxPreview
-  }
 };
 </script>
 
@@ -96,7 +90,7 @@ export default {
   @include flexCustom(space-between, center, row);
   width: 230px;
 }
-.inbox{
+.inbox {
   position: relative;
 }
 

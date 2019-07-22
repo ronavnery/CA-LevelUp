@@ -78,14 +78,6 @@ export default {
       type: Object
     }
   },
-  data() {
-    return {
-      // offerMakerUpdatedImgUrl: ""
-    };
-  },
-  created() {
-    // this.getOfferMakerImgUrl();
-  },
   methods: {
     async goToDetails() {
       this.$router.push({
@@ -107,13 +99,6 @@ export default {
     removeOffer() {
       this.$emit("removeOffer", this.offer._id);
     },
-    // async getOfferMakerImgUrl() {
-    //   const user = await this.$store.dispatch({
-    //     type: "getProfile",
-    //     nickName: this.offer.createdBy.nickName
-    //   });
-    //   this.offerMakerUpdatedImgUrl = user.imgUrl;
-    // },
     goToProfile() {
       this.$router.push(`/profile/${this.offer.createdBy.nickName}`);
     }
@@ -162,10 +147,6 @@ export default {
       this.offer.createdBy.nickName !== connectedUser.nickName) return false;
       else return true;
     },
-    userOwnOfferOriel() {
-      // return (this.connectedUser && this.offer.createdBy.nickName === this.connectedUser.nickName) 
-    }
-    // same not working return true if 
   }
 };
 </script>

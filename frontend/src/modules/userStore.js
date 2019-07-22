@@ -63,7 +63,7 @@ export default {
                 return addedUser
             }
             catch (err) {
-                throw err
+                throw err 
             }
         },
         async getProfile({ commit }, { nickName }) {

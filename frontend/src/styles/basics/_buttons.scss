@@ -75,7 +75,7 @@
 @mixin btnActionGreySm() {
   cursor: pointer;
   padding: 0px rem(20px) 0px rem(20px);
-  height: rem(30px);
+  height: rem(30px); 
   background: None;
   border-radius: rem(20px);
   color: $tpGray;

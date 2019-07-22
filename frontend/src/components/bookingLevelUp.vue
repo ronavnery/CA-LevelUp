@@ -1,6 +1,5 @@
 <template>
   <section class="levelup-booking fs14">
-    <button class="btn-toggle-booking" @click="toggleBooking">X</button>
     <form class="booking-form" v-if="userConnected">
       <h4 class="text-center">Contact to levelup!</h4>
       <p>Before you level up, please add some info about you so the person gets to know you better!</p>
@@ -26,6 +25,7 @@
       <router-link to="/sign-up">sign-up</router-link>or
       <router-link to="/login">login</router-link>first.
     </div>
+    <button class="btn-toggle-booking" @click="toggleBooking">Close</button>
   </section>
 </template>
 
@@ -60,15 +60,18 @@ export default {
       this.bookingReq.bookingMaker = {
         makerId: this.$store.getters.connectedUser._id,
         makerName: this.$store.getters.connectedUser.name,
-        makerImg: this.$store.getters.connectedUser.imgUrl,
-      } 
-      const {booking} = await this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
-        this.socket.emit('level-up-req', booking)
-        this.$emit('close-booking-request');
-        // .then(bookingId => {
-        //   this.successStatus = bookingId
-        //   console.log(this.bookingReq)
-        // })
+        makerImg: this.$store.getters.connectedUser.imgUrl
+      };
+      const { booking } = await this.$store.dispatch({
+        type: "sendBookingReq",
+        bookingReq: this.bookingReq
+      });
+      this.socket.emit("level-up-req", booking);
+      this.$emit("close-booking-request");
+      // .then(bookingId => {
+      //   this.successStatus = bookingId
+      //   console.log(this.bookingReq)
+      // })
     },
     toggleBooking() {
       this.$emit("close-booking-request");
@@ -83,7 +86,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.btn-toggle-booking {
+  @include btnActionGreySm;
+  width: 100px;
+}
 .levelup-booking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 1;
   max-width: 400px;
   min-width: 300px;

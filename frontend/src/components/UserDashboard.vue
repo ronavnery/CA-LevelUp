@@ -13,16 +13,16 @@
       <img class="user-small-img" :src="currUser.imgUrl" @click="toggleNav" />
     </div>
     <inboxPreview :isOpen="isOpen" />
-    <nav v-if="showNav">
+    <nav class="user-actions-nav" v-if="showNav">
       <ul class="user-commands clean-list">
-        <li>
+        <li class="li-user">
           <p>{{currUser.name}}</p>
         </li>
         <li>
-          <router-link :to="'/profile/' + currUser.nickName">My Profile</router-link>
-        </li>
+          <router-link :to="'/profile/' + currUser.nickName">Go to profile</router-link>
+          </li>
         <li>
-          <button @click.stop="doLogout">Logout</button>
+          <button class="logout-btn" @click.stop="doLogout">Logout</button>
         </li>
       </ul>
     </nav>
@@ -90,6 +90,8 @@ export default {
 
 
 <style lang="scss" scoped>
+
+
 .user-dashboard-header {
   @include flexCustom(space-between, center, row);
   width: 230px;
@@ -153,8 +155,21 @@ nav {
     font-size: 1.5rem;
   }
 }
+.logout-btn {
+  @include btnActionGreySm
+}
+.user-actions-nav {
+  border-radius: 4px;
+  padding: 10px;
+  background: rgba(193, 87, 214, 0.7)
+}
 
 .btn-add-offer {
-  @include btnActionSm;
+  @include btnActionWhiteSm;
+  color: white;
+}
+
+.li-user {
+
 }
 </style>

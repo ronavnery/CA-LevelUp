@@ -24,6 +24,10 @@
       <OfferList v-if="recommendedOffers.length" :offers="recommendedOffers"></OfferList>
       <span class="strong">Newest in music:</span>
       <OfferList v-if="musicOffers.length" :offers="musicOffers"></OfferList>
+      <span class="strong">Newest in Just For Fun:</span>
+      <OfferList v-if="justForFunOffers.length" :offers="justForFunOffers"></OfferList>
+      <span class="strong">Newest in DIY:</span>
+      <OfferList v-if="diyOffers.length" :offers="diyOffers"></OfferList>
     </div>
   </section>
 </template>
@@ -41,6 +45,8 @@ export default {
     return {
       recommendedOffers: [],
       musicOffers: [],
+      justForFunOffers: [],
+      diyOffers: []
 
     };
   },
@@ -66,6 +72,14 @@ export default {
     this.musicOffers = await this.$store.dispatch({
       type: "loadOffers",
       filter: { category: "music", limit: 4 }
+    });
+    this.justForFunOffers = await this.$store.dispatch({
+      type: "loadOffers",
+      filter: { category: "Just For Fun", limit: 4 }
+    });
+    this.diyOffers = await this.$store.dispatch({
+      type: "loadOffers",
+      filter: { category: "DIY", limit: 4 }
     });
     // TODOS: get more categories
   },

@@ -20,7 +20,7 @@
           <select v-model="editedOffer.location.type" class="session-type form-control">
             <option selected disabled>Choose session type</option>
             <option>In Person</option>
-            <option>Skype</option>
+            <option>Voice/Video Chat</option>
           </select>
 
           <!-- SINGLE OR GROUP -->
@@ -163,6 +163,13 @@
             @tags-changed="tagChanged"
           />
 
+          <span class="tags-title fs14">Cover image url</span>
+          <input
+            class="form-control"
+            type="text"
+            v-model="editedOffer.imgs[0]"
+            placeholder="Image URL"
+          />
           <!-- CAROUSEL -->
           <span
             class="fs14"

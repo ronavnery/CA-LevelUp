@@ -41,6 +41,8 @@ export default {
         "Office Productivity",
         "Personal Development",
         "Design",
+        "DIY",
+        "Just For Fun",
         "IT & Software",
         "Marketing",
         "Lifestyle",

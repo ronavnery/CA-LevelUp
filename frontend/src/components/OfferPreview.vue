@@ -19,7 +19,7 @@
       <div class="user-date-starred-container">
         <div class="wrapper">
           <img :src="offer.createdBy.imgUrl" alt />
-          <span>{{offer.createdBy.nickName}}</span>
+          <span>{{offer.createdBy.name}}</span>
         </div>
         <div class="rating fs12">
           <span class="rating-avg" v-if="offer.rating.avgScore > 0">
@@ -122,6 +122,9 @@ export default {
     connectedUser() {
       return this.$store.getters.connectedUser
     },
+    connectedUserNickName() {
+      return this.$store.getters.connectedUser.nickName
+    },
 
     starIconFill() {
       if (this.offer.stars >= 4) return "#ffbf00";
@@ -133,6 +136,8 @@ export default {
     categoryIcon() {
       if (this.offer.category === "Development") return "fas fa-file-code";
       else if (this.offer.category === "Business") return "fas fa-briefcase";
+      else if (this.offer.category === "Just For Fun") return "far fa-grin-tears";
+      else if (this.offer.category === "DIY") return "fas fa-tools";
       else if (this.offer.category === "Finance & Accounting")
         return "fas fa-balance-scale";
       else if (this.offer.category === "Office Productivity")

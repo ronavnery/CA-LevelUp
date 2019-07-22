@@ -19,17 +19,13 @@ function setup(http) {
             io.to(recipientId).emit('MESSAGE', { senderId, message });
         });
         socket.on('level-up-req', (booking) => {
-            console.log('123')
             io.to(booking.offerMaker.makerId).emit('req-sent', booking);
             io.to(booking.offerMaker.makerId).emit('notify');
-            // io.to(bookingMaker.makerId).emit('booking-sent', { bookingMaker, offer, offerMaker, sentAt });
-            // io.to(bookingMaker.makerId).emit('notify');
         })
-        // socket.on('confirmed', (confirm) => {
-        //     const { userId, offerId, isConfirmed } = confirm
-        //     io.to(userId).emit('req-ans', { offerId, isConfirmed });
-        //     io.to(userId).emit('notify');
-        // })
+        socket.on('req-updated', (booking) => {
+            io.to(booking.bookingMaker.makerId).emit('booking-updated', booking);
+            io.to(booking.bookingMaker.makerId).emit('notify');
+        })
 
 
         // socket.on('SEND_MESSAGE', ({ ownerId, fromId, message, senderId }) => {

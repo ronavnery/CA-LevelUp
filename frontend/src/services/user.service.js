@@ -124,11 +124,13 @@ async function getUserInbox(userId) {
 }
 
 function logUserCategoryChoice(category, user) {
+    console.log('logging with', category, user )
     var storedCategories = JSON.parse(localStorage.getItem(user))
     if (!storedCategories) storedCategories = []
     storedCategories.push(category)
     localStorage.setItem(user, JSON.stringify(storedCategories));
 }
+
 function getUserPopularCategory(user = 'visitor') {
     var storedCategories = JSON.parse(localStorage.getItem(user))
     if (!storedCategories) {

@@ -1142,6 +1142,7 @@ Mon, 22 Jul 2019 05:28:08 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 05:28:17 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 05:34:13 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 05:34:16 GMT - Info - Server is running on port: 3000
+<<<<<<< HEAD
 Mon, 22 Jul 2019 06:10:15 GMT - Debug - auth.service - login with nickName: aaa
 Mon, 22 Jul 2019 06:12:55 GMT - Debug - auth.service - login with nickName: orielshalem
 Mon, 22 Jul 2019 06:40:16 GMT - Debug - auth.service - login with nickName: orielshalem
@@ -1194,3 +1195,24 @@ Mon, 22 Jul 2019 08:01:00 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 08:06:36 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 08:07:48 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 08:07:51 GMT - Info - Server is running on port: 3000
+=======
+Mon, 22 Jul 2019 06:15:03 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 06:17:55 GMT - Debug - bennir, bennir
+Mon, 22 Jul 2019 06:17:55 GMT - Debug - auth.service - signup with email: bennir, nickName: bennir
+Mon, 22 Jul 2019 06:17:55 GMT - Debug - auth.route - new user created: {"name":"Ben Nir","nickName":"bennir","profileUrl":"","email":"bennir","contactInfo":{},"socialInfo":{},"imgUrl":"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png","skillTags":[],"city":"","intro":"","offers":[],"interestedIn":[],"leveledUpIn":[],"ratingAvg":0,"aboutMe":"","age":25,"createdAt":1563776275479,"_id":"5d35551336a896136c189659"}
+Mon, 22 Jul 2019 06:18:17 GMT - Debug - auth.service - login with nickName: bennir
+Mon, 22 Jul 2019 06:24:56 GMT - Debug - new@gmail.com, NewUser
+Mon, 22 Jul 2019 06:24:56 GMT - Debug - auth.service - signup with email: new@gmail.com, nickName: NewUser
+Mon, 22 Jul 2019 06:24:56 GMT - Debug - auth.route - new user created: {"name":"NewUser","nickName":"NewUser","profileUrl":"","email":"new@gmail.com","contactInfo":{},"socialInfo":{},"imgUrl":"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png","skillTags":[],"city":"","intro":"","offers":[],"interestedIn":[],"leveledUpIn":[],"ratingAvg":0,"aboutMe":"","age":25,"createdAt":1563776696748,"_id":"5d3556b836a896136c18965a"}
+Mon, 22 Jul 2019 06:25:37 GMT - Debug - auth.service - login with nickName: BenNir
+Mon, 22 Jul 2019 06:25:43 GMT - Debug - auth.service - login with nickName: bennir
+Mon, 22 Jul 2019 06:52:27 GMT - Debug - auth.service - login with nickName: ronavnery
+Mon, 22 Jul 2019 07:26:30 GMT - Debug - auth.service - login with nickName: orielshalem
+Mon, 22 Jul 2019 07:28:44 GMT - Debug - auth.service - login with nickName: ronavnery
+>>>>>>> 707ac1b1c95eec7e165a352877fe6a97d3ddce04
+
+Mon, 22 Jul 2019 08:35:05 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:35:18 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:35:26 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:40:03 GMT - Info - Server is running on port: 3000
+Mon, 22 Jul 2019 08:40:06 GMT - Info - Server is running on port: 3000

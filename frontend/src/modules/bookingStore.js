@@ -35,8 +35,22 @@ export default {
         addNotification(state) {
             state.unreadMsgs++
         },
+        
         addBooking(state, { booking }) {
-            (JSON.parse(sessionStorage.getItem('loggedInUser'))._id === booking.createdBy._id) ? state.inboxSent.unshift(booking) : state.inboxRecieved.unshift(booking)
+            (JSON.parse(sessionStorage.getItem('loggedInUser'))._id === booking.createdBy._id)
+            ? state.inboxSent.unshift(booking)
+            : state.inboxRecieved.unshift(booking)
+        },
+
+        updateBooking(state, { booking }) {
+            let idx = 0;
+            if (JSON.parse(sessionStorage.getItem('loggedInUser'))._id === booking.createdBy._id) {
+                idx = state.inboxSent.findIndex(msg => msg._id === booking._id) 
+                state.inboxSent.splice(idx,1,booking)
+            }else {
+                idx = state.inboxRecieved.findIndex(msg => msg._id === booking._id)  
+                state.inboxRecieved.splice(idx,1,booking)
+            }
         },
         removeNotification(state) {
             state.unreadMsgs = 0
@@ -47,6 +61,7 @@ export default {
                     ? state.inboxSent.push(msg)
                     : state.inboxRecieved.push(msg);
             });
+            console.log(inbox)
         }
     },
 

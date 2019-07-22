@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Sat, 13 Jul 2019 08:30:03 GMT - Info - Server is running on port: 3000
 Sat, 13 Jul 2019 08:31:34 GMT - Info - Server is running on port: 3000
@@ -1280,3 +1281,5 @@ Mon, 22 Jul 2019 10:41:25 GMT - Debug - auth.service - login with nickName: benn
 Mon, 22 Jul 2019 10:45:52 GMT - Debug - auth.service - login with nickName: ronavnery
 Mon, 22 Jul 2019 11:10:55 GMT - Debug - auth.service - login with nickName: JamieKaren
 Mon, 22 Jul 2019 11:24:00 GMT - Debug - auth.service - login with nickName: orielshalem
+=======
+>>>>>>> 2bc10000b5e49aac066a786b273f5c1144d2629e

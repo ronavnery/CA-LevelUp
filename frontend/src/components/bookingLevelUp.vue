@@ -22,8 +22,8 @@
     <div class="login-msg fs18" v-else>
       Level up requests are for registered users only.
       <br />Please
-      <router-link to="/sign-up">sign-up</router-link>or
-      <router-link to="/login">login</router-link>first.
+      <router-link to="/sign-up">sign-up </router-link>or
+      <router-link to="/login">login </router-link>first.
     </div>
     <button class="btn-toggle-booking" @click="toggleBooking">Close</button>
   </section>

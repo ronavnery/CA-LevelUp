@@ -99,6 +99,7 @@ export default {
 
 .front {
   color: white;
+  text-align: center;
   &.vue-typer {
     color: white;
   }

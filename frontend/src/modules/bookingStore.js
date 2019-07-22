@@ -35,7 +35,7 @@ export default {
         addNotification(state) {
             state.unreadMsgs++
         },
-        
+
         addBooking(state, { booking }) {
             (JSON.parse(sessionStorage.getItem('loggedInUser'))._id === booking.createdBy._id)
             ? state.inboxSent.unshift(booking)
@@ -56,11 +56,15 @@ export default {
             state.unreadMsgs = 0
         },
         setUserInbox(state, { inbox, connectedUserId }) {
+            let tempSent = []
+            let tempRecieved = []
             inbox.forEach(msg => {
                 msg.createdBy._id === connectedUserId
-                    ? state.inboxSent.push(msg)
-                    : state.inboxRecieved.push(msg);
+                    ? tempSent.push(msg)
+                    : tempRecieved.push(msg);
             });
+            state.inboxSent = [...tempSent]
+            state.inboxRecieved = [...tempRecieved]
             console.log(inbox)
         }
     },

@@ -13,7 +13,7 @@
             </button>
             <span>4.8</span>
           </div>
-          <button class="message">
+          <button v-if="connectedUser" class="message">
             <router-link :to="'/profile/' + connectedUser.nickName + '/inbox'">
               <i class="fas fa-envelope"></i>
             </router-link>
@@ -55,7 +55,7 @@ export default {
       return this.$route.path.includes("about");
     },
     isUser() {
-      return this.connectedUser._id === this.profile._id;
+      return (this.connectedUser && this.connectedUser._id === this.profile._id);
     }
   }
 };

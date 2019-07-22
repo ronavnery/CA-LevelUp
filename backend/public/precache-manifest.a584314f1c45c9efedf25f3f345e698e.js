@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/fonts/Roboto-Thin.94998475.ttf"
   },
   {
-    "revision": "e892113d6c4a5b2d01ed",
-    "url": "/css/app.43b3f106.css"
+    "revision": "17d9d878baa47e6aebf2",
+    "url": "/css/app.02418cea.css"
   },
   {
     "revision": "e8eb40d489a8ec1fc48b",
@@ -104,8 +104,8 @@ self.__precacheManifest = [
     "url": "/js/about.53e9a38d.js"
   },
   {
-    "revision": "e892113d6c4a5b2d01ed",
-    "url": "/js/app.ed9da9f8.js"
+    "revision": "17d9d878baa47e6aebf2",
+    "url": "/js/app.7692e4ab.js"
   },
   {
     "revision": "46e48ce0628835f68a7369d0254e4283",
@@ -196,7 +196,7 @@ self.__precacheManifest = [
     "url": "/img/levelup-v5.3eaa66aa.png"
   },
   {
-    "revision": "9ff468fef2d2a3b0fe41b4bbfd59c7b7",
+    "revision": "e854349c43fa38c806921ffaa8cdbc1c",
     "url": "/index.html"
   },
   {

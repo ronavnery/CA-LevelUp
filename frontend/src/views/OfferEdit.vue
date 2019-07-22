@@ -195,11 +195,13 @@ export default {
       tags: [],
       optionalPhotos: [],
       optionalCategories: [
+        "Just For Fun",
         "Development",
         "Business",
         "Finance & Accounting",
         "IT & Software",
         "Office Productivity",
+        "DIY",
         "Personal Development",
         "Design",
         "Marketing",

@@ -48,14 +48,14 @@ export default {
     offers() {
       return this.$store.getters.getOffers;
     },
-    connectedUser() {
+    connectedUserNickName() {
       return this.$store.getters.connectedUser.nickName
     }
   },
   async mounted() {
     const category = await this.$store.dispatch({
       type: "getUserPopularCategory",
-      user: this.connectedUser
+      user: this.connectedUserNickName
     });
     this.recommendedOffers = await this.$store.dispatch({
       type: "loadOffers",

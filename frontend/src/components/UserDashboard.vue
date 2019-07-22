@@ -91,7 +91,7 @@ export default {
 
 <style lang="scss" scoped>
 .user-dashboard-header {
-  @include flexCustom(space-between, stretch, row);
+  @include flexCustom(space-between, center, row);
   width: 230px;
 }
 .inbox{
@@ -123,6 +123,7 @@ export default {
   .user-small-img {
     border-radius: 50%;
     width: 20px;
+    height: 20px;
     border: 0.5px solid white;
     cursor: pointer;
     background: $tpGray;

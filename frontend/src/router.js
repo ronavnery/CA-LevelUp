@@ -28,12 +28,17 @@ export default new Router({
       name: 'Explore',
       component: Explore
     },
-
+    
     {
       path: '/profile',
       name: 'Profile',
       component: Profile,
       children: [
+        {
+          path: '/edit/:_id?',
+          name: 'OfferEdit',
+          component: OfferEdit
+        },
         {
           path: ':nickName',
           name: 'ProfileDetails',
@@ -60,11 +65,6 @@ export default new Router({
           component: OfferDetails
         },
       ]
-    },
-    {
-      path: '/edit/:_id?',
-      name: 'OfferEdit',
-      component: OfferEdit
     },
     {
       path: '/login',

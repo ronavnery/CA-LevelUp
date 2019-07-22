@@ -47,15 +47,15 @@ export default {
   },
   methods: {
     toggleReview(ev) {
-      console.log(ev.target)
-      console.log(this.$refs)
+      // console.log(ev.target)
+      // console.log(this.$refs)
       // if (!ev.target.classList.contains("accordion")) return;
-      // const review = ev.target.nextElementSibling;
-      // if (!review.style.maxHeight || review.style.maxHeight === "0px") {
-      //   review.style.maxHeight = review.scrollHeight + "px";
-      // } else {
-      //   review.style.maxHeight = "0px";
-      // }
+      const review = ev.target.nextElementSibling;
+      if (!review.style.maxHeight || review.style.maxHeight === "0px") {
+        review.style.maxHeight = review.scrollHeight + "px";
+      } else {
+        review.style.maxHeight = "0px";
+      }
       // if (!review.classList.contains('panel-active')) review.classList.add('panel-active');
       // else review.classList.remove('panel-active');
     },

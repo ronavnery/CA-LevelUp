@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="flex column">
     <AppHeader />
-    <ChatApp />
+    <ChatApp v-if="connectedUsers"/>
     <router-view />
   </div>
 </template>
@@ -10,7 +10,11 @@
 import AppHeader from "./components/AppHeader";
 import ChatApp from './components/ChatApp'
 export default {
-
+computed: {
+  connectedUsers() {
+    return this.$store.getters.connectedUsers
+  }
+},
   components: {
     AppHeader,
     ChatApp

@@ -26,7 +26,7 @@
       <br />
       <span class="city fs12">{{profile.intro}}</span>
       <router-link
-        class="city fs20"
+        class="city fs12"
         v-if="isUser"
         :to="'/profile/' + connectedUser.nickName + '/edit'"
       >Edit this profile</router-link>

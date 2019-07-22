@@ -1,6 +1,6 @@
 <template>
   <div class="offer-edit">
-    <ProfileSidebar class="profile-sidebar" :profile="connectedUser" />
+    <!-- <ProfileSidebar class="profile-sidebar" :profile="connectedUser" /> -->
     <section class="edit-container">
       <span class="fs18 strong">Share a new skill</span>
       <form @submit.prevent="prevent">
@@ -20,7 +20,7 @@
           <select v-model="editedOffer.location.type" class="session-type form-control">
             <option selected disabled>Choose session type</option>
             <option>In Person</option>
-            <option>Skype</option>
+            <option>Voice/Video Chat</option>
           </select>
 
           <!-- SINGLE OR GROUP -->
@@ -163,6 +163,13 @@
             @tags-changed="tagChanged"
           />
 
+          <span class="tags-title fs14">Cover image url</span>
+          <input
+            class="form-control"
+            type="text"
+            v-model="editedOffer.imgs[0]"
+            placeholder="Image URL"
+          />
           <!-- CAROUSEL -->
           <span
             class="fs14"
@@ -230,6 +237,7 @@ export default {
         whatsIncluded: [],
         interested: [],
         leveledUp: [],
+        createdBy: null,
         location: {
           type: "Choose session type",
           address: ""
@@ -405,7 +413,7 @@ export default {
   height: 100%;
 }
 .edit-container {
-  @include flexCustom(baseline, left, column);
+  @include flexCustom(center, center, column);
   height: calc(100vh - 50px);
   overflow: auto;
   flex: 1;

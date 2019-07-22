@@ -1234,6 +1234,11 @@ Mon, 22 Jul 2019 06:25:43 GMT - Debug - auth.service - login with nickName: benn
 Mon, 22 Jul 2019 06:52:27 GMT - Debug - auth.service - login with nickName: ronavnery
 Mon, 22 Jul 2019 07:26:30 GMT - Debug - auth.service - login with nickName: orielshalem
 Mon, 22 Jul 2019 07:28:44 GMT - Debug - auth.service - login with nickName: ronavnery
+<<<<<<< HEAD
+Mon, 22 Jul 2019 08:31:56 GMT - Debug - auth.service - login with nickName: ronavnery
+Mon, 22 Jul 2019 08:32:27 GMT - Debug - auth.service - login with nickName: bennir
+Mon, 22 Jul 2019 08:45:20 GMT - Debug - auth.service - login with nickName: JamieKaren
+=======
 >>>>>>> 707ac1b1c95eec7e165a352877fe6a97d3ddce04
 
 Mon, 22 Jul 2019 08:35:05 GMT - Info - Server is running on port: 3000
@@ -1243,5 +1248,15 @@ Mon, 22 Jul 2019 08:40:03 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 08:40:06 GMT - Info - Server is running on port: 3000
 >>>>>>> 41720ddec52868f6fdf63186350572c019957f79
 
+<<<<<<< HEAD
 Mon, 22 Jul 2019 09:25:07 GMT - Info - Server is running on port: 3000
 Mon, 22 Jul 2019 09:26:55 GMT - Debug - auth.service - login with nickName: StavDorkam119
+=======
+<<<<<<< HEAD
+Mon, 22 Jul 2019 09:22:37 GMT - Info - Server is running on port: 3000
+=======
+Mon, 22 Jul 2019 09:25:07 GMT - Info - Server is running on port: 3000
+>>>>>>> 1f15c3f83effefc6571d7965bbb6bd3646837984
+
+Mon, 22 Jul 2019 09:27:41 GMT - Info - Server is running on port: 3000
+>>>>>>> a7441a2e352c241b50dca9c8a957c224551176d3

@@ -28,7 +28,7 @@
           <p>{{booking.sentAt | formatDate}}</p>
         </div>
         <button>start chat</button>
-        <div class="confirm-buttons">
+        <div class="confirm-buttons" v-if="booking.isConfirmed==='pending'">
           <button @click.stop="sendConfirm(booking, true)">Confirm</button>
           <button @click.stop="sendConfirm(booking, false)">Not now</button>
         </div>
@@ -74,9 +74,12 @@ export default {
   methods: {
     async sendConfirm(booking, confirmation) {
       booking.isConfirmed = confirmation;
-      const newBooking = await this.$store.dispatch({type: "sendConfirm", booking});
-      
-      console.log(newBooking)
+      const newBooking = await this.$store.dispatch({
+        type: "sendConfirm",
+        booking
+      });
+
+      console.log(newBooking);
       // this.socket.emit("confirmed", newBooking);
     }
   }

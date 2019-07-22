@@ -102,9 +102,9 @@ async function update(offer) {
 async function updateOfferMakerImg(user) {
     const collection = await dbService.getCollection('offer')
     try {
-        const {_id, imgUrl} = user;
-        const secondary = "" + _id
-        await collection.updateMany({"createdBy._id": secondary}, {$set: {"createdBy.imgUrl" : imgUrl}})
+        const {nickName, imgUrl} = user;
+        
+        await collection.updateMany({"createdBy.nickName": nickName}, {$set: {"createdBy.imgUrl" : imgUrl}})
         return Promise.resolve();
     } catch (err) {
         throw err

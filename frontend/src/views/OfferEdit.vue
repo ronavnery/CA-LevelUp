@@ -1,6 +1,6 @@
 <template>
   <div class="offer-edit">
-    <ProfileSidebar class="profile-sidebar" :profile="connectedUser" />
+    <!-- <ProfileSidebar class="profile-sidebar" :profile="connectedUser" /> -->
     <section class="edit-container">
       <span class="fs18 strong">Share a new skill</span>
       <form @submit.prevent="prevent">
@@ -230,6 +230,7 @@ export default {
         whatsIncluded: [],
         interested: [],
         leveledUp: [],
+        createdBy: null,
         location: {
           type: "Choose session type",
           address: ""
@@ -270,6 +271,7 @@ export default {
         await this.$store.dispatch({ type: "updateOffer", newOffer });
         this.$router.push("/explore");
       } else {
+        newOffer.createdBy = this.$store.getters.connectedUser
         await this.$store.dispatch({ type: "addOffer", newOffer });
         this.$router.push("/explore");
       }
@@ -404,7 +406,7 @@ export default {
   height: 100%;
 }
 .edit-container {
-  @include flexCustom(baseline, left, column);
+  @include flexCustom(center, center, column);
   height: calc(100vh - 50px);
   overflow: auto;
   flex: 1;

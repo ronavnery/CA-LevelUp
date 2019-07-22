@@ -1,6 +1,6 @@
 <template>
   <section class="levelup-booking fs14">
-    <form class="booking-form" v-if="userConnected">
+    <form class="booking-form" v-if="connectedUser">
       <h4 class="text-center">Contact to levelup!</h4>
       <p>Before you level up, please add some info about you so the person gets to know you better!</p>
       <label for="reason">What makes you want to get this skill?</label>

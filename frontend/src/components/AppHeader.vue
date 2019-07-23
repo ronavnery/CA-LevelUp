@@ -9,7 +9,10 @@
       <router-link to="/map" class="header-link">Map</router-link>
       <router-link to="/about" class="header-link">About</router-link>
     </div>
-    <UserDashboard :currUser="connectedUser" v-if="connectedUser" />
+    <button @click="emitToggSidebar" class="mobile-nav-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <UserDashboard :currUser="connectedUser" v-if="connectedUser" class="user-dashboard" />
     <div class="user-action-container" v-else>
       <button class="btn-login" @click="goLogin">Login</button>
       <button class="btn-signup" @click="goSignUp">Sign-Up</button>
@@ -30,6 +33,9 @@ export default {
     },
     goHome() {
       this.$router.push("/");
+    },
+    emitToggSidebar() {
+      this.$emit("toggleSidebar");
     }
   },
   computed: {
@@ -38,7 +44,7 @@ export default {
     }
   },
   components: {
-    UserDashboard,
+    UserDashboard
   }
 };
 </script>
@@ -58,16 +64,10 @@ export default {
   box-shadow: 2px 15px 26px -10px rgba(0, 0, 0, 0.59);
 }
 
-
 .logo-container {
   @include flexCenter(row);
-  // @include for-mobile-layout {
-  //   transform: scale(0.8);
-  // }
   cursor: pointer;
-  // background-image: url("../assets/logo/levelup-v5.png");
   width: 120px;
-
 }
 
 .nav-container {
@@ -76,10 +76,9 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  display: flex;
   transform: translate(-50%, -50%);
   @include for-normal-layout {
-    display: block;
+    display: flex;
   }
 }
 
@@ -96,12 +95,29 @@ export default {
   margin-right: rem(10px);
 }
 
+.user-dashboard {
+  display: none;
+  @include for-normal-layout {
+    display: flex;
+  }
+}
 
+.user-action-container {
+  display: none;
+  @include for-normal-layout {
+    display: block;
+  }
+}
 
+.mobile-nav-btn {
 
-
-
-
-
-
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 20px;
+  outline: none;
+  @include for-normal-layout {
+    display: none;
+  }
+}
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="flex column">
-    <AppHeader />
+    <AppHeader @toggleSidebar="toggleSidebar"/>
+    <MobileSidebar :showSidebar="showSideBar" :connectedUser="connectedUser"/>
     <ChatApp v-if="connectedUsers"/>
     <router-view />
   </div>
@@ -8,25 +9,33 @@
 
 <script>
 import AppHeader from "./components/AppHeader";
-import ChatApp from './components/ChatApp'
+import ChatApp from './components/ChatApp';
+import MobileSidebar from './components/MobileSidebar';
+
 export default {
 computed: {
   connectedUsers() {
-    return this.$store.getters.connectedUsers
+    return this.$store.getters.connectedUsers;
+  },
+  connectedUser() {
+    return this.$store.getters.connectedUser || undefined;
   }
 },
-  components: {
+data() {
+  return {
+    showSideBar: false
+  }
+},
+methods: {
+  toggleSidebar() {
+    this.showSideBar = !this.showSideBar
+  }
+},
+components: {
     AppHeader,
-    ChatApp
+    ChatApp,
+    MobileSidebar
   },
 };
 </script>
 
-
-
-<style lang="scss">
-#app {
-  height: 100%;
-}
-
-</style>

@@ -154,8 +154,4 @@ nav {
   color: white;
   font-size: rem(14px);
 }
-
-.li-user {
-
-}
 </style>

@@ -1,11 +1,13 @@
 <template>
   <section class="offer-list-container" :class="{'list-on-profile': isShowingOnProfile} ">
-    <masonry :cols="{default: 4 , 1080: 3, 830: 2, 500: 1}" :gutter="{default: '20px'}">
+    <masonry :cols="colConfig" :gutter="{default: '20px'}">
       <OfferPreview
         v-for="(offer,idx) in offers"
         :key="idx"
         @removeOffer="removeOffer"
+        @offerClicked="emitOfferClick"
         :offer="offer"
+        :currMarkedOfferId="currMarkedOfferId"
       ></OfferPreview>
     </masonry>
   </section>
@@ -19,11 +21,20 @@ export default {
   props: {
     offers: {
       type: Array
+    },
+    cols: {
+      type: Number
+    },
+    currMarkedOfferId: {
+      type: String
     }
   },
   methods: {
     removeOffer(offerId) {
       this.$emit("removeOffer", offerId);
+    },
+    emitOfferClick(offer) {
+      this.$emit('offerClicked', offer)
     }
   },
   components: {
@@ -32,6 +43,9 @@ export default {
   computed: {
     isShowingOnProfile() {
       if(this.$route.params.nickName) return true;
+    },
+    colConfig() {
+      return (this.cols) ? {default: this.cols} : {default: 4 , 1080: 3, 830: 2, 500: 1}
     }
   }
 };

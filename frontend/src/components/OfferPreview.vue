@@ -1,5 +1,5 @@
 <template>
-  <section @click="goToDetails" class="offer-preview" v-if="offer">
+  <section @click="goToDetails" class="offer-preview" :class="{marked: isMarked}" v-if="offer">
     <header>
       <div class="header-category">
         <i :class="categoryIcon" class="fs14"></i>
@@ -43,7 +43,7 @@
       </div>
     </main>
     <hr />
-    <footer>
+    <footer v-if="!isOnMapView">
       <div class="wrapper">
         <button class="like" @click.stop>
           <i class="fs14 far fa-heart"></i>
@@ -59,16 +59,11 @@
         </button>
       </div>
     </footer>
+    <footer v-else>
+      <button class="btn-goToDetails" @click="goToDetails(event, 'forced')">Go to details</button>
+    </footer>
   </section>
 </template>
-
-
-
-
-
-
-
-
 
 <script>
 export default {
@@ -76,10 +71,16 @@ export default {
   props: {
     offer: {
       type: Object
+    },
+    currMarkedOfferId: {
+      type: String
     }
   },
   methods: {
-    goToDetails() {
+    goToDetails(ev, isForced) {
+      if (!isForced) {
+        if (this.isOnMapView) return this.$emit("offerClicked", this.offer)
+      }
       this.$router.push({
         name: "OfferDetails",
         params: {
@@ -104,6 +105,9 @@ export default {
     }
   },
   computed: {
+    isOnMapView() {
+      return this.$route.name === "MapView";
+    },
     connectedUser() {
       return this.$store.getters.connectedUser;
     },
@@ -151,6 +155,9 @@ export default {
         return false;
       else return true;
     },
+    isMarked() {
+      return this.currMarkedOfferId === this.offer._id;
+    }
   }
 };
 </script>
@@ -347,6 +354,13 @@ footer {
       color: #5458f7;
     }
   }
+
+  .btn-goToDetails {
+    @include btnActionGrey;
+    font-size: rem(14px);
+    margin: 0 auto;
+    width: 80%;
+  }
 }
 
 button {
@@ -370,5 +384,9 @@ button {
   &:hover svg {
     fill: #5458f7;
   }
+}
+
+.marked {
+  box-shadow: 0 1px 15px black;
 }
 </style>

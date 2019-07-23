@@ -50,7 +50,7 @@ export default {
       this.bookingReq.offer = {
         offerId: this.$store.getters.getCurrOffer._id,
         offerTitle: this.$store.getters.getCurrOffer.title,
-        offerType: this.$store.getters.getCurrOffer.location.type,
+        offerType: this.$store.getters.getCurrOffer.type,
         offerImg: this.$store.getters.getCurrOffer.imgs[0]
       };
       this.bookingReq.offerMaker = {

@@ -9,11 +9,9 @@ import './registerServiceWorker'
 import VueCarousel from 'vue-carousel';
 import VueMasonry from 'vue-masonry-css';
 import VueTyperPlugin from 'vue-typer';
-import VueCircleSlider from 'vue-circle-slider'
 import * as VueGoogleMaps from 'vue2-google-maps'
- 
 
-Vue.use(VueCircleSlider)
+
 Vue.use(VueTyperPlugin)
 Vue.use(VueMasonry);
 Vue.use(VueCarousel);

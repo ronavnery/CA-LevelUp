@@ -27,8 +27,7 @@ async function query(filterBy = {}) {
         criteria["createdBy.nickName"] = { $regex: regex }
     }
     if (filterBy.type) {
-        
-        criteria.groupType = filterBy.type
+        criteria.type = filterBy.type
     }
 
     if (filterBy.category) {

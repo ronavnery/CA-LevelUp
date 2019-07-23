@@ -1,6 +1,6 @@
 <template>
   <section class="levelup-booking fs14">
-    <form class="booking-form" v-if="userConnected">
+    <form class="booking-form" v-if="connectedUser">
       <h4 class="text-center">Contact to levelup!</h4>
       <p>Before you level up, please add some info about you so the person gets to know you better!</p>
       <label for="reason">What makes you want to get this skill?</label>
@@ -22,8 +22,8 @@
     <div class="login-msg fs18" v-else>
       Level up requests are for registered users only.
       <br />Please
-      <router-link to="/sign-up">sign-up</router-link>or
-      <router-link to="/login">login</router-link>first.
+      <router-link to="/sign-up">sign-up </router-link>or
+      <router-link to="/login">login </router-link>first.
     </div>
     <button class="btn-toggle-booking" @click="toggleBooking">Close</button>
   </section>

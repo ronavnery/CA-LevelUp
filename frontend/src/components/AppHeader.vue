@@ -6,6 +6,7 @@
     <div class="nav-container fs12">
       <router-link exact to="/" class="header-link">Home</router-link>
       <router-link to="/explore" class="header-link">Explore</router-link>
+      <router-link to="/map" class="header-link">Map</router-link>
       <router-link to="/about" class="header-link">About</router-link>
     </div>
     <UserDashboard :currUser="connectedUser" v-if="connectedUser" />

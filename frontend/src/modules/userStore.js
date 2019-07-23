@@ -3,7 +3,6 @@ import userService from '../services/user.service.js'
 export default {
     state: {
         connectedUser: JSON.parse(sessionStorage.getItem('loggedInUser')) || null,
-        // connectedUser: { _id: "5d2eeb6efc34a70a48413cac", name:"oriel shalem" ,nickName:"orielshalem" ,profileUrl:"" ,email: "orielshalem@gmail.com", city:"", contactInfo:{}, createdAt:1563356014687 ,email:"orielshalem@gmail.com", imgUrl:"http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png"},
         currProfile: null,
         // users: []
     },
@@ -63,7 +62,7 @@ export default {
                 return addedUser
             }
             catch (err) {
-                throw err
+                throw err 
             }
         },
         async getProfile({ commit }, { nickName }) {

@@ -56,7 +56,7 @@ export default {
     },
 
   },
-  async mounted() {
+  async mounted() { 
     let connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
     connectedUser = (connectedUser)? connectedUser.nickName : 'visitor'
     const category = await this.$store.dispatch({

@@ -35,14 +35,13 @@
             </div>
           </div>
           <div class="action-btns">
-            <button class="start-chat-btn">start chat</button>
+            <button class="start-chat-btn" @click="startChat(booking)">start chat</button>
             <span class="fs12">{{booking.sentAt | formatDate}}</span>
           </div>
         </div>
       </li>
     </ul>
     <p v-else>Nothing to show yet</p>
-    <ChatBox v-if="shtok" :directors="directors" class="chat-box" />
   </div>
 </template>
 
@@ -52,7 +51,6 @@ import io from "socket.io-client";
 export default {
   data() {
     return {
-      shtok: false,
       socket: io("localhost:3000")
     };
   },
@@ -88,6 +86,19 @@ export default {
       });
 
       this.socket.emit("req-updated", booking);
+    },
+    startChat(booking) {
+      const to = {
+        _id: booking.createdBy._id,
+        nickName: booking.createdBy.nickName,
+        imgUrl: booking.createdBy.imgUrl
+      };
+      const from = {
+        _id: this.connectedUser._id,
+        nickName: this.connectedUser.nickName,
+        imgUrl: this.connectedUser.imgUrl
+      };
+      this.$store.dispatch({ type: "startChat", to, from });
     }
   }
 };

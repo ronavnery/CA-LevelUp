@@ -10,12 +10,26 @@ import VueCarousel from 'vue-carousel';
 import VueMasonry from 'vue-masonry-css';
 import VueTyperPlugin from 'vue-typer';
 import VueCircleSlider from 'vue-circle-slider'
+import * as VueGoogleMaps from 'vue2-google-maps'
  
+
 Vue.use(VueCircleSlider)
 Vue.use(VueTyperPlugin)
 Vue.use(VueMasonry);
 Vue.use(VueCarousel);
 Vue.use(require('vue-moment'));
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyAmsVJlq870Mn6SV5kjYlGRR5ssyKxVw58',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+    // OR: libraries: 'places,drawing'
+    // OR: libraries: 'places,drawing,visualization'
+    // (as you require)
+ 
+    //// If you want to set the version, you can do so:
+    // v: '3.26',
+  },
+})
 
 Vue.config.productionTip = false
 

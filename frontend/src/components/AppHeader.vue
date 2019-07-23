@@ -2,7 +2,6 @@
   <section class="app-header">
     <div @click="goHome" class="logo-container">
       <img class="logo" src="../assets/logo/levelup-v5.png" />
-      <!-- <span class="logo-title fs14 strong">LevelUp</span> -->
     </div>
     <div class="nav-container fs12">
       <router-link exact to="/" class="header-link">Home</router-link>
@@ -30,8 +29,7 @@ export default {
     },
     goHome() {
       this.$router.push("/");
-    },
-
+    }
   },
   computed: {
     connectedUser() {
@@ -39,7 +37,7 @@ export default {
     }
   },
   components: {
-    UserDashboard
+    UserDashboard,
   }
 };
 </script>
@@ -57,41 +55,35 @@ export default {
   font-family: $Montserrat-Regular;
   padding: 0 rem(10px) 0 rem(10px);
   box-shadow: 2px 15px 26px -10px rgba(0, 0, 0, 0.59);
-
 }
 
-a {
-  padding: rem(10px);
-}
 
 .logo-container {
   @include flexCenter(row);
-  @include for-narrow-layout {
-      transform: scale(0.8);
-  }
+  // @include for-mobile-layout {
+  //   transform: scale(0.8);
+  // }
   cursor: pointer;
-}
+  // background-image: url("../assets/logo/levelup-v5.png");
+  width: 120px;
 
-.logo-title {
-  margin-left: rem(5px);
-  color: white;
-}
-
-.logo {
-  height: 35px;
-  margin-left: 10px;
 }
 
 .nav-container {
+  display: none;
   text-transform: uppercase;
   position: absolute;
   top: 50%;
   left: 50%;
+  display: flex;
   transform: translate(-50%, -50%);
+  @include for-normal-layout {
+    display: block;
+  }
 }
 
 .nav-container > *:not(:last-child) {
-  margin-right: rem(30px);
+  margin-right: rem(24px);
 }
 
 .btn-signup {
@@ -102,4 +94,13 @@ a {
   @include btnActionSm;
   margin-right: rem(10px);
 }
+
+
+
+
+
+
+
+
+
 </style>

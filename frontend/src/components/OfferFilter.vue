@@ -90,14 +90,10 @@ export default {
 
 .offer-filter-wrapper {
   border-radius: 4px;
-  // height: 60px;
   display: flex;
   justify-content: space-between;
   width: 700px;
-  // @include container(750px, 0, 0);
-  // position: relative;
-  // top: -25px;
-  // @include flexCustom(space-between, center, row);
+
 
   @media screen and(max-width: 760px) {
     flex-direction: column;
@@ -113,8 +109,7 @@ export default {
       width: max-content;
   input {
     border-radius: 4px;
-    // margin-left: 5px;
-    // height
+    height: 100%;
     outline: none;
     border: none;
     padding: 9px 33px 9px 10px;

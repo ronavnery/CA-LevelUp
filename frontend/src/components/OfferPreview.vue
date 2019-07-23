@@ -194,7 +194,7 @@ export default {
     height: 100%;
     opacity: 0;
     border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.3);
     transition: opacity 0.3s ease-in-out;
   }
 

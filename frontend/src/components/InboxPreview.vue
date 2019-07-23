@@ -34,7 +34,6 @@
         >Not now</button>
       </li>
     </ul>
-    <ChatBox v-if="chatOpen" :directors="directors" class="chat-box" />
   </div>
 </template>
 
@@ -42,7 +41,6 @@
 <script>
 import io from "socket.io-client";
 import moment from "moment";
-import ChatBox from "./ChatBox";
 
 export default {
   props: {
@@ -76,10 +74,6 @@ export default {
     sendConfirm(confirm) {
       this.socket.emit("confirmed", confirm);
     }
-  },
-
-  components: {
-    ChatBox
   },
 
   mounted() {

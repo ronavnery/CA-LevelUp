@@ -11,6 +11,7 @@ function setup(http) {
 
     io = socketIO(http);
     io.on('connection', (socket) => {
+        // TODO: Remove notify 
         socket.on('JOIN_ROOM', (userId) => {
             socket.join(userId);
         });
@@ -25,6 +26,9 @@ function setup(http) {
         socket.on('req-updated', (booking) => {
             io.to(booking.bookingMaker.makerId).emit('booking-updated', booking);
             io.to(booking.bookingMaker.makerId).emit('notify');
+        })
+        socket.on('msg-sent', (data) => {
+            io.to(data.to._id).emit('msg-received',data);
         })
 
 

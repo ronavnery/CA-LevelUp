@@ -3,7 +3,7 @@
     <h4 style="margin-top: 8px;">Reviews:</h4>
     <main>
       <div v-for="(review, idx) in reviews" :key="idx">
-        <button class="accordion" @click="toggleReview($event)" :ref="'button' + idx">
+        <button class="accordion" @click="toggleReview(idx)">
           <div class="wrapper">
             <div class="review-maker-image" :style="getImage(review.maker.imgUrl)"></div>
             <div class="title-time">
@@ -21,7 +21,7 @@
             :star-size="15"
           />
         </button>
-        <div class="panel">
+        <div class="panel" ref="panel">
           <p>What they had to say:</p>
           <p>{{review.body}}</p>
           <div class="title-date-wrapper"></div>
@@ -46,18 +46,13 @@ export default {
     StarRating
   },
   methods: {
-    toggleReview(ev) {
-      // console.log(ev.target)
-      // console.log(this.$refs)
-      // if (!ev.target.classList.contains("accordion")) return;
-      const review = ev.target.nextElementSibling;
-      if (!review.style.maxHeight || review.style.maxHeight === "0px") {
-        review.style.maxHeight = review.scrollHeight + "px";
+    toggleReview(idx) {
+      const selectedPanel = this.$refs.panel[`${idx}`]
+      if (!selectedPanel.style.maxHeight || selectedPanel.style.maxHeight === "0px") {
+        selectedPanel.style.maxHeight = selectedPanel.scrollHeight + "px"
       } else {
-        review.style.maxHeight = "0px";
+        selectedPanel.style.maxHeight = "0px";
       }
-      // if (!review.classList.contains('panel-active')) review.classList.add('panel-active');
-      // else review.classList.remove('panel-active');
     },
     getImage(url) {
       return {

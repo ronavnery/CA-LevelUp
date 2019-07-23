@@ -1,19 +1,19 @@
 <template>
   <main>
     <div class="chat-header" @click="toggleChat()">
-      <p>user name</p>
-      <button v-if="isOpen" @click.stop="toggleChat()">X</button>
+      <img :src="chat.to.imgUrl" alt />
+      <p>{{ chat.to.nickName }}</p>
+      <button @click.stop="closeChat()">X</button>
     </div>
     <div v-if="isOpen">
       <section ref="chatArea" class="chat-area">
         <p
-          v-for="(message,idx) in messages"
+          v-for="(msg,idx) in chat.msgs"
           :key="idx"
           class="message"
-          :class="{ 'message-out': message.author === 'you', 'message-in': message.author !== 'you' }"
-        >{{ message.body }}</p>
+          :class="{ 'message-in': msg.author === chat.to.nickName, 'message-out': msg.author !== chat.to.nickName }"
+        >{{ msg }}</p>
       </section>
-
       <section>
         <form @submit.prevent="sendMsg" class="chat-input">
           <input v-model="msg" type="text" autocomplete="off" placeholder="Type your message" />
@@ -26,68 +26,34 @@
 
 
 <script>
-  import io from "socket.io-client";
 export default {
-
+  name: "chat-box",
   props: {
-    directors: {
+    chat: {
       type: Object
     }
   },
   data() {
     return {
-      socket: io("localhost:3000"),
       isOpen: false,
-      sender: null,
-      msg: "",
-      messages: [
-        {
-          body: "Welcome to the chat, I'm Bob!",
-          author: "bob"
-        },
-        {
-          body: "Thank you Bob",
-          author: "you"
-        },
-        {
-          body: "You're most welcome",
-          author: "bob"
-        }
-      ]
+      msg: ""
     };
-  },
-
-  mounted() {
-    // this.socket.emit("JOIN_ROOM", this.directors.sender,);
-    // this.socket.on(`MESSAGE`, ({ message, senderId }) => {
-    //   this.messages = [...this.messages, { message, senderId }];
-    //   console.log(this.messages)
-    // });
-
-
-    // this.socket.on("MESSAGE", data => {
-    //   console.log(data)
-    //   this.msgs = [...this.msgs, data];
-    // });
-
-    // this.socket.on("HISTORY", data => {
-    //   this.msgs = [...this.msgs, ...data];
-    // });
   },
 
   methods: {
     sendMsg() {
-      console.log(this.directors)
-      if (!this.msg && !this.msg) return
-      this.socket.emit("SEND_MESSAGE", {
-        recipientId: this.directors.recipient,
-        senderId: this.directors.sender,
-        message: this.msg
-      });
-      this.messages.push({ body: this.msg, author: "you" });
+      if (!this.msg) return;
+      const data = {
+        to: this.chat.to,
+        from: this.chat.from,
+        msg: { txt: this.msg, author: this.chat.from.nickName }
+      }
+      this.$emit("sendMsg", data);
       this.msg = "";
     },
-
+    closeChat() {
+      this.$emit("closeChat");
+    },
     toggleChat() {
       this.isOpen = !this.isOpen;
     }
@@ -103,8 +69,14 @@ export default {
   display: flex;
   // justify-content: space-around;
   line-height: 30px;
-  min-width: 250px;
+  // min-width: 250px;
   cursor: pointer;
+  & > img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
 p {
   margin: 0 10px;
@@ -116,7 +88,7 @@ p {
   color: white;
 }
 .chat-area {
-  max-width: 350px;
+  // max-width: 350px;
   background: white;
   height: 40vh;
   padding: 1em;

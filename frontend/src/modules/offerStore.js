@@ -41,10 +41,20 @@ export default {
     },
 
     actions: {
-        async loadOffers(context, { filter = ''}) {
+        async loadOffers(context, { filter = '', noCommit = false}) {
             try {
                 const offers = await offerService.query(filter)
+                if (noCommit) return offers;
                 context.commit({ type: 'setOffers', offers })
+                return offers
+            }
+            catch (err) {
+                console.log(err)
+            }
+        },
+        async loadOffersNoCommit(context, { filter = ''}) {
+            try {
+                const offers = await offerService.query(filter)
                 return offers
             }
             catch (err) {

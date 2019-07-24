@@ -17,17 +17,12 @@ async function query(filterBy = {}) {
     let criteria = {};
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt.toLowerCase(), 'i')
-        // criteria.title = { $regex: regex }
-        // criteria.desc = { $regex: regex }
-        // criteria.tags = { $regex: regex }
         criteria = { $or: [{title: { $regex: regex}}, {description: {$regex: regex}}, {tags: {$in: [regex]}}]}
     }
-    if (filterBy.nickName) {
-        const regex = new RegExp(filterBy.nickName)
-        criteria["createdBy.nickName"] = { $regex: regex }
-    }
-    if (filterBy.type) {
-        criteria.type = filterBy.type
+    if (filterBy.groupType) {
+        if (filterBy.groupType === 'group') criteria.isGroup = true;
+        else criteria.isGroup = false
+        // criteria.isGroup = filterBy.isGroup
     }
 
     if (filterBy.category) {

@@ -62,7 +62,7 @@ export default {
   methods: {
     async doLogout() {
       try {
-        const res = await this.$store.dispatch({ type: "doLogout" });
+        await this.$store.dispatch({ type: "doLogout" });
         this.$router.push("/");
       } catch (err) {
         console.log("Couldnt log out, got err:", err);

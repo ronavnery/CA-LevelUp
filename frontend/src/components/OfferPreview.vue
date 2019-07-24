@@ -125,26 +125,19 @@ export default {
     categoryIcon() {
       if (this.offer.category === "Development") return "fas fa-file-code";
       else if (this.offer.category === "Business") return "fas fa-briefcase";
-      else if (this.offer.category === "Just For Fun")
-        return "far fa-grin-tears";
+      else if (this.offer.category === "Just For Fun") return "far fa-grin-tears";
       else if (this.offer.category === "DIY") return "fas fa-tools";
-      else if (this.offer.category === "Finance & Accounting")
-        return "fas fa-balance-scale";
-      else if (this.offer.category === "Office Productivity")
-        return "fas fa-mail-bulk";
-      else if (this.offer.category === "Personal Development")
-        return "fas fa-user-plus";
+      else if (this.offer.category === "Finance & Accounting") return "fas fa-balance-scale";
+      else if (this.offer.category === "Office Productivity") return "fas fa-mail-bulk";
+      else if (this.offer.category === "Personal Development") return "fas fa-user-plus";
       else if (this.offer.category === "Design") return "fas fa-pencil-ruler";
       else if (this.offer.category === "IT & Software") return "fas fa-sitemap";
       else if (this.offer.category === "Marketing") return "fas fa-ad";
       else if (this.offer.category === "Lifestyle") return "fas fa-gamepad";
-      else if (this.offer.category === "Photography")
-        return "fas fa-camera-retro";
-      else if (this.offer.category === "Health & Fitness")
-        return "fas fa-running";
+      else if (this.offer.category === "Photography") return "fas fa-camera-retro";
+      else if (this.offer.category === "Health & Fitness") return "fas fa-running";
       else if (this.offer.category === "Music") return "fas fa-guitar";
-      else if (this.offer.category === "Teaching & Academics")
-        return "fas fa-user-graduate";
+      else if (this.offer.category === "Teaching & Academics") return "fas fa-user-graduate";
     },
     userOwnOffer() {
       const connectedUser = this.$store.getters.connectedUser;

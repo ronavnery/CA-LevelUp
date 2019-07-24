@@ -1,5 +1,8 @@
 <template>
-  <section class="side-bar-container" v-if="showSidebar">
+  <section>
+    <div class="side-bar-overlay" @click="emitToggleSidebar" v-if="showSidebar"></div>
+    <section class="side-bar-container" v-if="showSidebar">
+    
     <div class="connected-user-details">
       <div class="user-img" :style="userImg(connectedUser.imgUrl)"></div>
       <div class="user-name-city">
@@ -9,7 +12,6 @@
     </div>
     <nav>
       <ul class="clean-list navigation">
-        <h4>Navigation</h4>
         <li>
           <router-link to="/" exact>
             <i class="fas fa-home"></i>
@@ -43,7 +45,6 @@
       </ul>
     </nav>
     <ul class="clean-list actions" v-if="connectedUser.name !== 'Visitor'">
-      <h4>Actions</h4>
       <li>
         <router-link :to="'/profile/' + connectedUser.nickName" exact>
           <i class="fas fa-user-alt"></i>
@@ -70,7 +71,6 @@
       </li>
     </ul>
     <ul class="clean-list actions" v-else>
-      <h4>Actions</h4>
       <li>
         <router-link to="/login" exact>
           <i class="fas fa-sign-in-alt"></i>
@@ -85,6 +85,8 @@
       </li>
     </ul>
   </section>
+  </section>
+  
 </template>
 
 <script>
@@ -102,7 +104,7 @@ export default {
             "http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png",
           name: "Visitor",
           city: ""
-        }
+        };
       }
     }
   },
@@ -118,24 +120,52 @@ export default {
     },
     async doLogout() {
       try {
-        const res = await this.$store.dispatch({ type: "doLogout" });
+        await this.$store.dispatch({ type: "doLogout" });
+        this.emitToggleSidebar();
         this.$router.push("/");
       } catch (err) {
         console.log("Couldnt log out, got err:", err);
       }
+    },
+    emitToggleSidebar() {
+      // console.log('watched route');
+      this.$emit("toggle-me");
+    },
+    test(ev) {
+      console.log(ev.target)
+    }
+  },
+  watch: {
+    $route: {
+      handler() {
+        if (!this.showSidebar) return 
+        this.emitToggleSidebar();
+      },
+      deep: true
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
+.side-bar-overlay {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 998;
+  height: calc(100vh - 50px);
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.527);
+}
+
 .side-bar-container {
   @include flexCustom(flex-start, stretch, column);
   position: fixed;
   top: 50px;
   left: 0;
   height: calc(100vh - 50px);
-  width: 300px;
+  width: 250px;
   background: #220f41e8;
   color: white;
   z-index: 999;
@@ -149,7 +179,6 @@ export default {
   padding: 10px 8px;
   @include flexCustom(center, stretch, column);
   flex-wrap: wrap;
-  border-bottom: 1px solid #fff;
   margin-bottom: 10px;
 
   .user-img {
@@ -200,6 +229,22 @@ ul.clean-list {
     height: 100%;
     border: none;
   }
+}
+
+ul:first-child {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  position: relative;
+}
+
+ul:first-child::after {
+  content: "";
+  position: absolute;
+  width: 84%;
+  height: 0.5px;
+  background: grey;
+  bottom: 0;
+  left: 20px;
 }
 
 .logout {

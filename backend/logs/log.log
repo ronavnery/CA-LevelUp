@@ -1274,8 +1274,30 @@ Tue, 23 Jul 2019 12:02:20 GMT - Info - Server is running on port: 3000
 Tue, 23 Jul 2019 12:59:44 GMT - Info - Server is running on port: 3000
 Tue, 23 Jul 2019 13:03:33 GMT - Debug - auth.service - login with nickName: StavDorkam119
 Tue, 23 Jul 2019 14:52:28 GMT - Debug - auth.service - login with nickName: StavDorkam119
+<<<<<<< HEAD
 Tue, 23 Jul 2019 19:24:31 GMT - Info - Server is running on port: 3000
 Wed, 24 Jul 2019 05:31:01 GMT - Info - Server is running on port: 3000
 Wed, 24 Jul 2019 05:35:21 GMT - Info - Server is running on port: 3000
 Wed, 24 Jul 2019 11:39:31 GMT - Info - Server is running on port: 3000
 Wed, 24 Jul 2019 11:56:07 GMT - Debug - auth.service - login with nickName: ronavnery
+=======
+Tue, 23 Jul 2019 15:45:48 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Tue, 23 Jul 2019 15:47:57 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Tue, 23 Jul 2019 15:49:31 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Wed, 24 Jul 2019 10:32:52 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 10:40:54 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Wed, 24 Jul 2019 11:00:20 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Wed, 24 Jul 2019 11:01:01 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Wed, 24 Jul 2019 11:02:19 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Wed, 24 Jul 2019 11:04:18 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Wed, 24 Jul 2019 11:15:21 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Wed, 24 Jul 2019 12:44:38 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 12:46:36 GMT - Debug - auth.service - login with nickName: StavDorkam119
+Wed, 24 Jul 2019 13:08:51 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 13:14:10 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 13:52:23 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 13:54:42 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 13:59:09 GMT - Info - Server is running on port: 3000
+>>>>>>> c02f5aa411259c8ad0761da883afbac03f4fefc5
+
+Wed, 24 Jul 2019 14:07:26 GMT - Info - Server is running on port: 3000

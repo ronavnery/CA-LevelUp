@@ -35,7 +35,7 @@ export default {
       this.$router.push("/");
     },
     emitToggSidebar() {
-      this.$emit("toggleSidebar");
+      this.$emit("toggle-sidebar");
     }
   },
   computed: {
@@ -83,7 +83,7 @@ export default {
 }
 
 .nav-container > *:not(:last-child) {
-  margin-right: rem(24px);
+  margin-right: rem(18.4px);
 }
 
 .btn-signup {

@@ -65,9 +65,6 @@ import {
   mdbCardBody,
   mdbInput,
   mdbBtn,
-  mdbIcon,
-  mdbModal,
-  mdbModalBody,
   mdbModalFooter
 } from "mdbvue";
 
@@ -110,9 +107,6 @@ export default {
     mdbCardBody,
     mdbInput,
     mdbBtn,
-    mdbIcon,
-    mdbModal,
-    mdbModalBody,
     mdbModalFooter
   }
 };

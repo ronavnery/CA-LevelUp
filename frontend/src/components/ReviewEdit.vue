@@ -25,7 +25,6 @@
 
 
 import StarRating from 'vue-star-rating';
-import { mdbInput, mdbBtn } from 'mdbvue';
 import 'vue-awesome/icons/sync';
 import 'vue-awesome/icons/check-circle';
 import 'vue-awesome/icons/exclamation-circle';
@@ -40,8 +39,6 @@ export default {
     },
     components: {
         StarRating,
-        mdbInput,
-        mdbBtn,
         'v-icon': Icon
     },
     props: {

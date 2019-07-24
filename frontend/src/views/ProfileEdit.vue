@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import { mdbBtn } from "mdbvue";
 import VueTagsInput from "@johmun/vue-tags-input";
 import cloudinaryService from "../services/cloudinary.service";
 
@@ -137,7 +136,6 @@ export default {
     }
   },
   components: {
-    mdbBtn,
     VueTagsInput
   }
 };

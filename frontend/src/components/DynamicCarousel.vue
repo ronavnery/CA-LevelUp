@@ -26,10 +26,7 @@ export default {
   },
 
   methods: {
-    handleSlideClick(dataset) {
-      return;
-    },
-    addPhoto(img,idx) {
+    addPhoto(img) {
       this.$emit("img-choosed", img);
     }
   },

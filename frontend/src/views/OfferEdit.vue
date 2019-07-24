@@ -193,7 +193,6 @@
 import DynamicList from "../components/DynamicList";
 import VueTagsInput from "@johmun/vue-tags-input";
 import DynamicCarousel from "../components/DynamicCarousel";
-import ProfileSidebar from "../components/ProfileSidebar";
 
 export default {
   name: "offer-edit",
@@ -336,7 +335,6 @@ export default {
     VueTagsInput,
     DynamicList,
     DynamicCarousel,
-    ProfileSidebar
   }
 };
 </script>

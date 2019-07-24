@@ -30,9 +30,9 @@ export default {
   data() {
     return {
       filter: {
-        txt: "",
-        type: "",
-        category: ""
+        txt: '',
+        groupType: '',
+        category: ''
       },
       options: [
         "Development",
@@ -68,7 +68,7 @@ export default {
           target.classList.remove("selected");
         else target.classList.add("selected");
       });
-      this.filter.type = selectedValue;
+      this.filter.groupType = selectedValue;
       this.emitFilter();
     }
   },

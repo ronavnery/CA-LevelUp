@@ -52,11 +52,6 @@ import {
   mdbCardBody,
   mdbInput,
   mdbBtn,
-  mdbIcon,
-  mdbModal,
-  mdbModalBody,
-  mdbModalFooter,
-  mdbFileInput
 } from "mdbvue";
 
 export default {
@@ -97,7 +92,7 @@ export default {
           // process.env.NODE_ENV === 'production' ? 
           // this.newUser.profileUrl = '/'
 
-          const user = await this.$store.dispatch({type: 'addUser', newUser: this.newUser})
+          await this.$store.dispatch({type: 'addUser', newUser: this.newUser})
           this.$router.push('/');
         },
         goToLogin() {
@@ -117,11 +112,6 @@ export default {
     mdbCardBody,
     mdbInput,
     mdbBtn,
-    mdbIcon,
-    mdbModal,
-    mdbModalBody,
-    mdbModalFooter,
-    mdbFileInput
   }
 }
 </script>

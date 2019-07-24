@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="flex column">
-    <AppHeader @toggleSidebar="toggleSidebar"/>
-    <MobileSidebar :showSidebar="showSideBar" :connectedUser="connectedUser"/>
+    <AppHeader @toggle-sidebar="toggleSidebar"/>
+    <MobileSidebar :showSidebar="showSideBar" :connectedUser="connectedUser" @toggle-me="toggleSidebar" />
     <ChatApp v-if="connectedUsers"/>
     <router-view />
   </div>

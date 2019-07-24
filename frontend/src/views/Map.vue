@@ -84,7 +84,7 @@ export default {
       this.currOfferId = offerId;
       setTimeout(()=>{
           var el = this.$el.getElementsByClassName("offer-preview marked")[0];
-      el.scrollIntoView({behavior: "smooth",block: "center"});;
+      el.scrollIntoView({behavior: "smooth",block: "center"});
       },100)
     },
     setType(selectedValue) {

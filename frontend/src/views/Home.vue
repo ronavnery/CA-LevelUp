@@ -19,7 +19,7 @@
         ></vue-typer>
       </div>
     </section>
-    <div class="home-list fs20">
+    <div class="home-list fs20" v-if="!isLoading">
       <span class="strong">Recommended for you:</span>
       <OfferList v-if="recommendedOffers.length" :offers="recommendedOffers"></OfferList>
       <span class="strong">Newest in music:</span>
@@ -29,32 +29,37 @@
       <span class="strong">Newest in DIY:</span>
       <OfferList v-if="diyOffers.length" :offers="diyOffers"></OfferList>
     </div>
+    <div class="loading-container" v-else>
+          <breeding-rhombus-spinner
+
+      class="loader"
+      :animation-duration="2000"
+      :size="65"
+      :color="'#c654dd'"
+    />
+    </div>
+
   </section>
 </template>
 
 <script>
-import OfferFilter from "@/components/OfferFilter.vue";
+import "epic-spinners/dist/lib/epic-spinners.min.css";
+import { BreedingRhombusSpinner } from "epic-spinners/dist/lib/epic-spinners.min.js";
 import OfferList from "../components/OfferList";
 export default {
   name: "home",
   components: {
-    OfferFilter,
-    OfferList
+    OfferList,
+    BreedingRhombusSpinner
   },
   data() {
     return {
       recommendedOffers: [],
       musicOffers: [],
       justForFunOffers: [],
-      diyOffers: []
-
+      diyOffers: [],
+      isLoading: true
     };
-  },
-  computed: {
-    offers() {
-      return this.$store.getters.getOffers;
-    },
-
   },
   async mounted() { 
     let connectedUser = JSON.parse(sessionStorage.getItem('loggedInUser'))
@@ -63,23 +68,29 @@ export default {
       type: "getUserPopularCategory",
       user: connectedUser
           });
-    this.recommendedOffers = await this.$store.dispatch({
+    const recommendedOffers = this.$store.dispatch({
       type: "loadOffers",
-      filter: { category, limit: 4 }
+      filter: { category, limit: 4 },
+      noCommit: true
     });
-    this.musicOffers = await this.$store.dispatch({
+    const musicOffers = this.$store.dispatch({
       type: "loadOffers",
-      filter: { category: "music", limit: 4 }
+      filter: { category: "music", limit: 4 },
+      noCommit: true
     });
-    this.justForFunOffers = await this.$store.dispatch({
+    const justForFunOffers = this.$store.dispatch({
       type: "loadOffers",
-      filter: { category: "Just For Fun", limit: 4 }
+      filter: { category: "Just For Fun", limit: 4 },
+      noCommit: true
     });
-    this.diyOffers = await this.$store.dispatch({
+    const diyOffers = this.$store.dispatch({
       type: "loadOffers",
-      filter: { category: "DIY", limit: 4 }
+      filter: { category: "DIY", limit: 4 },
+      noCommit: true
     });
-    // TODOS: get more categories
+    [this.recommendedOffers, this.musicOffers, this.justForFunOffers, this.diyOffers] = await Promise.all([recommendedOffers, musicOffers, justForFunOffers, diyOffers])
+    this.isLoading = false;
+
   },
 
   methods: {
@@ -125,6 +136,12 @@ export default {
   @media screen and (max-width: 1080px) {
     padding: 20px;
   }
+}
+
+.loading-container {
+  @include flexCenter(row);
+  position: relative;
+  top: 50px;
 }
 </style>
 

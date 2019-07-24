@@ -13,7 +13,7 @@
           v-for="(offer, index) in offers"
           :key="'marker'+index"
           :position="offer.location"
-          :icon="offer.imgsUrl[0]"
+          :icon="require('../assets/Maps/marker-50x50-gradient.png')"
           @click="panTo(offer)"
         ></gmap-marker>
         <gmap-circle
@@ -84,7 +84,7 @@ export default {
       this.currOfferId = offerId;
       setTimeout(()=>{
           var el = this.$el.getElementsByClassName("offer-preview marked")[0];
-      el.scrollIntoView({behavior: "smooth",block: "center"});
+      el.scrollIntoView({behavior: "smooth",block: "center"});;
       },100)
     },
     setType(selectedValue) {

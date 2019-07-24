@@ -12,7 +12,6 @@
 </template>
 <script>
 import OfferList from "../components/OfferList";
-import OfferPreview from "@/components/OfferPreview.vue";
 import OfferFilter from "@/components/OfferFilter.vue";
 
 export default {
@@ -58,7 +57,6 @@ export default {
 
   components: {
     OfferList,
-    OfferPreview,
     OfferFilter
   }
 };

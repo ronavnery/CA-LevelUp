@@ -13,7 +13,7 @@
           v-for="(offer, index) in offers"
           :key="'marker'+index"
           :position="offer.location"
-          :icon="require('../assets/Maps/marker-50x50-gradient.png')"
+          :icon="offer.imgsUrl[0]"
           @click="panTo(offer)"
         ></gmap-marker>
         <gmap-circle
@@ -34,9 +34,9 @@
     </section>
     <section class="content-container">
       <div class="type-wrapper">
-        <div @click="setType('')" data-value ref="type1" class="selected">All offers</div>
-        <div @click="setType('group', $event)" data-value="group" ref="type2">Near me</div>
-        <div @click="setType('single', $event)" data-value="single" ref="type3">Booked</div>
+        <div @click="setType('all')" data-value='all' ref="type1" class="selected">All offers</div>
+        <div @click="setType('near-me', $event)" data-value="near-me" ref="type2">Near me</div>
+        <div @click="setType('booked', $event)" data-value="booked" ref="type3">Booked</div>
       </div>
       <!-- <gmap-autocomplete @place_changed="setPlace" class="form-input"></gmap-autocomplete> -->
       <span>Showing only offers with location</span>
@@ -72,7 +72,8 @@ export default {
     return {
       offers: null,
       map: null,
-      currOfferId: ""
+      currOfferId: "",
+      filterBy: 'all'
     };
   },
   methods: {
@@ -93,15 +94,8 @@ export default {
           target.classList.remove("selected");
         else target.classList.add("selected");
       });
-      console.log("changed to:", selectedValue);
-      //   this.filter.type = selectedValue;
-      //   this.emitFilter();
-    },
-    setPlace(payload) {
-      console.log(payload);
-    },
-    focusOnOffer(offerLocation) {
-      console.log("got it", offerLocation);
+
+      console.log("changed to:", this.filterBy);
     }
   },
   computed: {

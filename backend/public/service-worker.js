@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a584314f1c45c9efedf25f3f345e698e.js"
+  "/precache-manifest.fa3d5701187dfb4ee587e83738d45bc7.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "levelup"});

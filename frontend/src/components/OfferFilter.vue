@@ -97,6 +97,7 @@ export default {
 
   @media screen and(max-width: 760px) {
     flex-direction: column;
+    max-width: 700px;
     align-items: center;
     &>* {
       margin: 10px;

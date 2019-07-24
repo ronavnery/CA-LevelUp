@@ -24,6 +24,10 @@ async function query(filterBy = {}) {
         else criteria.isGroup = false
         // criteria.isGroup = filterBy.isGroup
     }
+    // Type is used for maps - do not change! :
+    if (filterBy.type) {
+        criteria.type = filterBy.type
+    }
 
     if (filterBy.category) {
         criteria.category = filterBy.category
@@ -40,6 +44,7 @@ async function query(filterBy = {}) {
         }
         else {
             const offers = await collection.find(criteria).collation({ locale: 'en', strength: 2 }).toArray();
+            console.log('returned offers:', offers.length)
             return offers
         }
     } catch (err) {

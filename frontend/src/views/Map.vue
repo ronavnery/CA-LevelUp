@@ -9,15 +9,16 @@
         map-type-id="terrain"
         style="width: 100%; height: calc(100vh - 50px)"
       >
+        <!-- ALL OFFERS MARKERS AND CIRCLES -->
         <gmap-marker
-          v-for="(offer, index) in offers"
+          v-for="(offer, index) in offersToShow"
           :key="'marker'+index"
           :position="offer.location"
           :icon="require('../assets/Maps/marker-50x50-gradient.png')"
           @click="panTo(offer)"
         ></gmap-marker>
         <gmap-circle
-          v-for="(offer, index) in offers"
+          v-for="(offer, index) in offersToShow"
           :key="'circle'+index"
           :center="offer.location"
           :options="{
@@ -30,20 +31,23 @@
             }"
           @click="panTo(offer)"
         ></gmap-circle>
+        <!-- MY LOCATION MARKER AND CIRCLE -->
+        <gmap-marker :position="myLocation"></gmap-marker>
       </GmapMap>
     </section>
     <section class="content-container">
       <div class="type-wrapper">
-        <div @click="setType('all')" data-value='all' ref="type1" class="selected">All offers</div>
-        <div @click="setType('near-me', $event)" data-value="near-me" ref="type2">Near me</div>
-        <div @click="setType('booked', $event)" data-value="booked" ref="type3">Booked</div>
+        <div @click="setFilter('all')" data-value="all" ref="type1" class="selected">All offers</div>
+        <div @click="setFilter('near-me', $event)" data-value="near-me" ref="type2">Near me</div>
+        <div @click="setFilter('booked', $event)" data-value="booked" ref="type3">Booked</div>
       </div>
       <!-- <gmap-autocomplete @place_changed="setPlace" class="form-input"></gmap-autocomplete> -->
       <span>Showing only offers with location</span>
+      <span v-if="filterBy === 'near-me'">within 20km</span>
       <OfferList
         class="offer-list"
-        v-if="offers"
-        :offers="offers"
+        v-if="offersToShow"
+        :offers="offersToShow"
         :currMarkedOfferId="currMarkedOfferId"
         :cols="2"
         @offerClicked="panTo"
@@ -71,36 +75,81 @@ export default {
   data() {
     return {
       offers: null,
+      offersNearMe: null,
       map: null,
-      currOfferId: "",
-      filterBy: 'all'
+      currOfferId: '',
+      filterBy: '',
+      currentLocation: null
     };
   },
   methods: {
-    panTo({ location, _id }) {
+    panTo({ location, _id = "" }) {
       if (!this.map) return;
       const offerId = _id;
       this.map.panTo(location);
       this.currOfferId = offerId;
-      setTimeout(()=>{
-          var el = this.$el.getElementsByClassName("offer-preview marked")[0];
-      el.scrollIntoView({behavior: "smooth",block: "center"});;
-      },100)
+      setTimeout(() => {
+        var el = this.$el.getElementsByClassName("offer-preview marked")[0];
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
     },
-    setType(selectedValue) {
+    setFilter(filterBy) {
       const targets = [this.$refs.type1, this.$refs.type2, this.$refs.type3];
       targets.forEach(target => {
-        if (target.dataset.value !== selectedValue)
+        if (target.dataset.value !== filterBy)
           target.classList.remove("selected");
         else target.classList.add("selected");
       });
-
-      console.log("changed to:", this.filterBy);
+      if (filterBy === 'all') this.filterBy = 'all'
+      else if (filterBy === "near-me") {
+        this.filterBy = filterBy
+        // TODOS: Make this ASYNC!
+        this.setMyLocation();
+        setTimeout(() => {
+          this.panToMyLocation();
+          this.setOffersNearMe(20);
+        }, 100);
+      }
+    },
+    setMyLocation() {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.currentLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+      });
+      return this.currentLocation
+    },
+    setOffersNearMe(maxDistance) {
+        this.offersNearMe =  this.offers.filter(offer=> {
+          const distance = this.calcDistance(this.currentLocation,offer.location)
+          return distance < maxDistance
+        })
+    },
+    panToMyLocation() {
+      if (!this.map) return;
+      this.map.panTo(this.currentLocation);
+    },
+    calcDistance(latLngA, latLngB) {
+      var pointA = new google.maps.LatLng(latLngA.lat, latLngA.lng);
+      var pointB = new google.maps.LatLng(latLngB.lat, latLngB.lng);
+      function getDistanceInKm(pointA, pointB) {
+        var distance_in_meters = google.maps.geometry.spherical.computeDistanceBetween(pointA,pointB);
+        return distance_in_meters / 1000
+      }
+      return getDistanceInKm(pointA, pointB).toFixed(2)
     }
   },
   computed: {
+    offersToShow() {
+      if (this.filterBy === 'near-me') return this.offersNearMe
+      return this.offers;
+    },
     currMarkedOfferId() {
       return this.currOfferId;
+    },
+    myLocation() {
+      return this.currentLocation;
     }
   },
   components: {

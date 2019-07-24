@@ -5,6 +5,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session);
+const history = require('connect-history-api-fallback');
  
 const app = express()
 
@@ -20,7 +21,7 @@ const cloudinaryRoutes = require('./api/cloudinary/cloudinary.routes')
 const logger = require('./services/logger.service')
 const socketService = require('./services/socket.service')
 
-
+app.use(history())
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(session({
@@ -49,12 +50,15 @@ app.use('/api/cloudinary', cloudinaryRoutes)
 
 socketService.setup(http);
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve(__dirname, 'public')));
-}
+
 
 
 const port = process.env.PORT || 3000;
 http.listen(port, () => {
     logger.info('Server is running on port: ' + port)
 });
+
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.resolve(__dirname, 'public')));
+}

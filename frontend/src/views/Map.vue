@@ -44,6 +44,7 @@
       <!-- <gmap-autocomplete @place_changed="setPlace" class="form-input"></gmap-autocomplete> -->
       <span>Showing only offers with location</span>
       <span v-if="filterBy === 'near-me'">within 20km</span>
+      <input type="number" @input="setDistance($event)" placeholder="Enter Distance" />
       <OfferList
         class="offer-list"
         v-if="offersToShow"
@@ -58,6 +59,7 @@
 
 <script>
 import OfferList from "../components/OfferList";
+import _ from "lodash";
 
 export default {
   async created() {
@@ -77,8 +79,8 @@ export default {
       offers: null,
       offersNearMe: null,
       map: null,
-      currOfferId: '',
-      filterBy: '',
+      currOfferId: "",
+      filterBy: "",
       currentLocation: null
     };
   },
@@ -100,9 +102,9 @@ export default {
           target.classList.remove("selected");
         else target.classList.add("selected");
       });
-      if (filterBy === 'all') this.filterBy = 'all'
+      if (filterBy === "all") this.filterBy = "all";
       else if (filterBy === "near-me") {
-        this.filterBy = filterBy
+        this.filterBy = filterBy;
         // TODOS: Make this ASYNC!
         this.setMyLocation();
         setTimeout(() => {
@@ -118,13 +120,17 @@ export default {
           lng: position.coords.longitude
         };
       });
-      return this.currentLocation
+      return this.currentLocation;
     },
     setOffersNearMe(maxDistance) {
-        this.offersNearMe =  this.offers.filter(offer=> {
-          const distance = this.calcDistance(this.currentLocation,offer.location)
-          return distance < maxDistance
-        })
+      console.log("seeting with distance", maxDistance);
+      this.offersNearMe = this.offers.filter(offer => {
+        const distance = this.calcDistance(
+          this.currentLocation,
+          offer.location
+        );
+        return distance < maxDistance;
+      });
     },
     panToMyLocation() {
       if (!this.map) return;
@@ -134,15 +140,22 @@ export default {
       var pointA = new google.maps.LatLng(latLngA.lat, latLngA.lng);
       var pointB = new google.maps.LatLng(latLngB.lat, latLngB.lng);
       function getDistanceInKm(pointA, pointB) {
-        var distance_in_meters = google.maps.geometry.spherical.computeDistanceBetween(pointA,pointB);
-        return distance_in_meters / 1000
+        var distance_in_meters = google.maps.geometry.spherical.computeDistanceBetween(
+          pointA,
+          pointB
+        );
+        return distance_in_meters / 1000;
       }
-      return getDistanceInKm(pointA, pointB).toFixed(2)
+      return getDistanceInKm(pointA, pointB).toFixed(2);
+    },
+    setDistance(ev) {
+      const distance = +ev.target.value;
+      this.setOffersNearMe(distance);
     }
   },
   computed: {
     offersToShow() {
-      if (this.filterBy === 'near-me') return this.offersNearMe
+      if (this.filterBy === "near-me") return this.offersNearMe;
       return this.offers;
     },
     currMarkedOfferId() {

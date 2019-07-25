@@ -14,6 +14,7 @@
           </div>
           <p v-if="booking.isConfirmed==='pending'">Status: Pending</p>
           <p v-else>Status: Confirmed</p>
+          <button class="start-chat-btn" @click="startChat(booking.offerMaker.makerId)">start chat</button>
         </div>
       </li>
       <!-- {{booking}} -->
@@ -35,7 +36,7 @@
             </div>
           </div>
           <div class="action-btns">
-            <button class="start-chat-btn" @click="startChat(booking)">start chat</button>
+            <button class="start-chat-btn" @click="startChat(booking.bookingMaker.makerId)">start chat</button>
             <span class="fs12">{{booking.sentAt | formatDate}}</span>
           </div>
         </div>
@@ -84,21 +85,22 @@ export default {
         type: "sendConfirm",
         booking
       });
-
       this.socket.emit("req-updated", booking);
     },
-    startChat(booking) {
-      const to = {
-        _id: booking.createdBy._id,
-        nickName: booking.createdBy.nickName,
-        imgUrl: booking.createdBy.imgUrl
-      };
-      const from = {
-        _id: this.connectedUser._id,
-        nickName: this.connectedUser.nickName,
-        imgUrl: this.connectedUser.imgUrl
-      };
-      this.$store.dispatch({ type: "startChat", to, from });
+
+    startChat(toId) {
+      // const user1 = {
+      //   _id: this.connectedUser._id,
+      //   imgUrl: this.connectedUser.imgUrl,
+      //   name: this.connectedUser.name
+      // };
+      // const user2 = {
+      //   _id: booking.offerMaker.makerId,
+      //   imgUrl: booking.offerMaker.makerImg,
+      //   name: booking.offerMaker.makerName
+      // };
+      console.log(toId)
+      this.$store.commit({type:'showChat', toId })
     }
   }
 };

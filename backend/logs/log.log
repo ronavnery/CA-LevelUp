@@ -1302,7 +1302,30 @@ Wed, 24 Jul 2019 13:59:09 GMT - Info - Server is running on port: 3000
 
 Wed, 24 Jul 2019 14:07:26 GMT - Info - Server is running on port: 3000
 Wed, 24 Jul 2019 14:15:00 GMT - Info - Server is running on port: 3000
+<<<<<<< HEAD
+Wed, 24 Jul 2019 18:14:43 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:14:47 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:14:52 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:14:57 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:16:58 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:19:46 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:19:48 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:19:50 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:19:53 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:20:03 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:20:05 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:20:11 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:23:49 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:23:54 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:23:58 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:24:01 GMT - Info - Server is running on port: 3000
+Wed, 24 Jul 2019 18:24:08 GMT - Info - Server is running on port: 3000
+=======
 Wed, 24 Jul 2019 14:31:51 GMT - Info - Server is running on port: 3000
 Wed, 24 Jul 2019 14:34:50 GMT - Info - Server is running on port: 3000
+<<<<<<< HEAD
 Wed, 24 Jul 2019 15:57:55 GMT - Info - Server is running on port: 3000
 Wed, 24 Jul 2019 16:10:04 GMT - Debug - auth.service - login with nickName: StavDorkam119
+=======
+>>>>>>> d8baf83e222ec1cc4b230ac35bc0b1b688503e5c
+>>>>>>> 0de33d21616cc4d8090594f933291195a632b52b

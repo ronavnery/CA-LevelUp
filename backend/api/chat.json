@@ -1,0 +1,32 @@
+{
+    "chats": [
+        {
+            "members": [ {
+                "id1": {
+                    "imgUrl":"url",
+                    "nickName":"nickName"
+                },
+                "id2": {
+                    "imgUrl":"url",
+                    "nickName":"nickName"
+                }
+            }] ,
+            "msgs": [
+                {
+                    "createdAt": 534543524524532,
+                    "author": {
+                        "id":"id",
+                        "imgUrl":"url",
+                        "nickName":"nickName"
+                    },
+                    "reciver": {
+                        "id":"id",
+                        "imgUrl":"url",
+                        "nickName":"nickName"
+                    },
+                    "txt": "blablabla"
+                }
+            ]
+        }
+    ]
+}

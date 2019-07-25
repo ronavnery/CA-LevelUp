@@ -1,6 +1,4 @@
 import bookingService from '../services/booking.service.js'
-import userService from '../services/user.service.js'
-import offerService from '../services/offer.service.js'
 
 export default {
     state: {

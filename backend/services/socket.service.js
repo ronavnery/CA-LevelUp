@@ -27,28 +27,31 @@ function setup(http) {
             io.to(booking.bookingMaker.makerId).emit('booking-updated', booking);
             io.to(booking.bookingMaker.makerId).emit('notify');
         })
-        socket.on('msg-sent', (data) => {
-            io.to(data.to._id).emit('msg-received',data);
+
+
+
+        // chat
+        socket.on('chat-join', async userId => {
+            socket.join(userId)
+            const history = await chatService.getHistory(userId)
+            io.to(userId).emit('got-history', history);
         })
-
-
-        // socket.on('SEND_MESSAGE', ({ ownerId, fromId, message, senderId }) => {
-        //     io.emit(`message:${ownerId}:${fromId}`, { message, senderId });
-        // });
-
-        // socket.on('JOIN', ({ ownerId, fromId }) => {
-        //     io.emit(`incoming:${ownerId}`, { fromId });
-        // });
-        // socket.emit('HISTORY', msgsDB)
-        // socket.on('chat join', (user) => {
-        //     const msg = { from: 'System', txt: `${user} Joined` }
-        //     room = chatService.placeInRoom(user)
-        //     socket.join(room.id);
-
-        //     console.log('Placed', user, 'in room:', room);
-
-        //     socket.emit('chat newMsg', msg);
-        // });
+        socket.on('start-chat', ({ user1, user2 }) => {
+            chatService.checkConversationExists(user1, user2)
+        })
+        socket.on('msg-sent', (msg) => {
+            chatService.addMsg(msg);
+            io.to(msg.to._id).emit('msg-received', msg);
+        })
+        // socket.on('history', async routes => {
+        //     try{
+        //         const chat = await chatService.getHistory(routes)
+        //         console.log(chat)
+        //         io.to(routes.from._id).emit('got-history', chat)
+        //     }catch(err) {
+        //         console.log(err)
+        //     }
+        // })
     });
 }
 

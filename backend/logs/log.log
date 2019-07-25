@@ -1337,3 +1337,5 @@ Thu, 25 Jul 2019 05:38:33 GMT - Info - Server is running on port: 3000
 >>>>>>> 058b9fa82dc30646bc94529f44e8c7e342276306
 
 Thu, 25 Jul 2019 09:45:41 GMT - Info - Server is running on port: 3000
+Thu, 25 Jul 2019 09:49:06 GMT - Info - Server is running on port: 3000
+Thu, 25 Jul 2019 10:12:54 GMT - Debug - auth.service - login with nickName: ronavnery

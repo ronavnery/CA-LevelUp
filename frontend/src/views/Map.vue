@@ -5,7 +5,7 @@
         class="gMap-Map"
         ref="mapRef"
         :center="{lat:10, lng:10}"
-        :zoom="12"
+        :zoom="15"
         map-type-id="terrain"
         style="width: 100%; height: calc(100vh - 50px)"
       >
@@ -44,7 +44,7 @@
       <!-- <gmap-autocomplete @place_changed="setPlace" class="form-input"></gmap-autocomplete> -->
       <span>Showing only offers with location</span>
       <span v-if="filterBy === 'near-me'">within 20km</span>
-      <input type="number" @input="setDistance($event)" placeholder="Enter Distance" />
+      <input v-if="filterBy === 'near-me'" type="number" class="form-control" @input="setDistance($event)" placeholder="Enter Distance" />
       <OfferList
         class="offer-list"
         v-if="offersToShow"
@@ -109,7 +109,7 @@ export default {
         this.setMyLocation();
         setTimeout(() => {
           this.panToMyLocation();
-          this.setOffersNearMe(20);
+          this.setOffersNearMe(5);
         }, 100);
       }
     },

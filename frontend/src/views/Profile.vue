@@ -54,6 +54,7 @@ export default {
 
 <style scoped lang="scss">
 .profile-container {
+  height: calc(100vh - 50px);
   flex: 1;
 }
 </style>

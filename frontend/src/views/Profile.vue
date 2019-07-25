@@ -1,6 +1,6 @@
 <template>
   <div class="profile-container flex">
-    <profile-sidebar v-if="currProfile" :profile="currProfile" />
+    <profile-sidebar v-if="currProfile && showProfileSidebar" :profile="currProfile" />
     <profile-content />
   </div>
 </template>
@@ -14,10 +14,12 @@ export default {
   data() {
     return {
       currProfile: null,
+      showProfileSidebar: true
     };
     
   },
   async created() {
+    this.checkIfOfferDetails();
     try {
       const profile = await this.$store.dispatch({
         type: "getProfile",
@@ -31,8 +33,23 @@ export default {
   components: {
     ProfileSidebar,
     ProfileContent,
+  },
+  methods: {
+    checkIfOfferDetails() {
+      if (this.$route.params.nickName && this.$route.params.offerId) this.showProfileSidebar = false
+      else this.showProfileSidebar = true;
+    }
+  },
+  watch: {
+    '$route': {
+      handler() {
+        this.checkIfOfferDetails();
+      },
+      deep: true
+    }
   }
 };
+
 </script>
 
 <style scoped lang="scss">

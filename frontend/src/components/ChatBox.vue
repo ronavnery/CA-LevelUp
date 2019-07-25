@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <main v-if="chat">
     <div class="chat-header" @click="toggleChat()">
-      <img :src="chat.to.imgUrl" alt />
-      <p>{{ chat.to.nickName }}</p>
+      <img :src="to.imgUrl" alt />
+      <p>{{ to.name }}</p>
       <button @click.stop="closeChat()">X</button>
     </div>
     <div v-if="isOpen">
@@ -11,8 +11,8 @@
           v-for="(msg,idx) in chat.msgs"
           :key="idx"
           class="message"
-          :class="{ 'message-in': msg.author === chat.to.nickName, 'message-out': msg.author !== chat.to.nickName }"
-        >{{ msg }}</p>
+          :class="{ 'message-in': msg.msg.author === connectedUser.name, 'message-out': msg.msg.author !== connectedUser.name }"
+        >{{ msg.msg.txt }}</p>
       </section>
       <section>
         <form @submit.prevent="sendMsg" class="chat-input">
@@ -36,18 +36,35 @@ export default {
   data() {
     return {
       isOpen: false,
-      msg: ""
+      msg: "",
+      to: {},
+      from: {}
     };
   },
 
+  created() {
+    if (this.chat.members[0].name === this.connectedUser.name) {
+      this.to = this.chat.members[1];
+      this.from = this.chat.members[0];
+    } else {
+      this.to = this.chat.members[0];
+      this.from = this.chat.members[1];
+    }
+  },
+
+  computed: {
+    connectedUser() {
+      return this.$store.getters.connectedUser;
+    }
+  },
   methods: {
     sendMsg() {
       if (!this.msg) return;
       const data = {
-        to: this.chat.to,
-        from: this.chat.from,
-        msg: { txt: this.msg, author: this.chat.from.nickName }
-      }
+        to: this.to,
+        from: this.from,
+        msg: { txt: this.msg, author: this.from.name }
+      };
       this.$emit("sendMsg", data);
       this.msg = "";
     },

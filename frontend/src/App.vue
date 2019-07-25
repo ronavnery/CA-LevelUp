@@ -14,9 +14,6 @@ import MobileSidebar from './components/MobileSidebar';
 
 export default {
 computed: {
-  connectedUsers() {
-    return this.$store.getters.connectedUsers;
-  },
   connectedUser() {
     return this.$store.getters.connectedUser || undefined;
   }

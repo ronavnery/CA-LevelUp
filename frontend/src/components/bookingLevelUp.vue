@@ -85,10 +85,10 @@ export default {
       });
       this.startChat(booking);
       this.socket.emit("level-up-req", booking);
-
+      this.successStatus = 'Your booking has been sent'
       setTimeout(() => {
-        this.$emit("close-booking-request");
-      });
+this.toggleBooking()
+}, 1000);
     },
     startChat(booking) {
       const user1 = {

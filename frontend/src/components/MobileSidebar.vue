@@ -1,92 +1,92 @@
 <template>
-  <section>
-    <div class="side-bar-overlay" @click="emitToggleSidebar" v-if="showSidebar"></div>
-    <section class="side-bar-container" v-if="showSidebar">
-    
-    <div class="connected-user-details">
-      <div class="user-img" :style="userImg(connectedUser.imgUrl)"></div>
-      <div class="user-name-city">
-        <p>{{connectedUser.name}}</p>
-        <span>{{connectedUser.city}}</span>
-      </div>
-    </div>
-    <nav>
-      <ul class="clean-list navigation">
-        <li>
-          <router-link to="/" exact>
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/explore">
-            <i class="fas fa-users"></i>
-            <span>Explore</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/map">
-            <i class="fas fa-map-marked-alt"></i>
-            <span>Map</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="'/profile/' + connectedUser.nickName + '/inbox'">
-            <i class="fas fa-envelope"></i>
-            <span>Inbox</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/about">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-          </router-link>
-        </li>
-      </ul>
-    </nav>
-    <ul class="clean-list actions" v-if="connectedUser.name !== 'Visitor'">
-      <li>
-        <router-link :to="'/profile/' + connectedUser.nickName" exact>
-          <i class="fas fa-user-alt"></i>
-          <span>Go To My Profile</span>
-        </router-link>
-      </li>
-      <li>
-        <router-link :to="'/profile/' + connectedUser.nickName + '/edit'">
-          <i class="fas fa-user-edit"></i>
-          <span>Edit My Details</span>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/edit">
-          <i class="fas fa-plus-circle"></i>
-          <span>Share A Skill</span>
-        </router-link>
-      </li>
-      <li class="logout">
-        <button @click.stop="doLogout">
-          <i class="fas fa-power-off"></i>
-          <span>Logout</span>
-        </button>
-      </li>
-    </ul>
-    <ul class="clean-list actions" v-else>
-      <li>
-        <router-link to="/login" exact>
-          <i class="fas fa-sign-in-alt"></i>
-          <span>Login</span>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/sign-up" exact>
-          <i class="fas fa-user-plus"></i>
-          <span>Sign-Up</span>
-        </router-link>
-      </li>
-    </ul>
-  </section>
-  </section>
-  
+  <transition name="fade" mode="out-in">
+    <section>
+      <div class="side-bar-overlay" @click="emitToggleSidebar" v-if="showSidebar"></div>
+      <section class="side-bar-container" v-if="showSidebar">
+        <div class="connected-user-details">
+          <div class="user-img" :style="userImg(connectedUser.imgUrl)"></div>
+          <div class="user-name-city">
+            <p>{{connectedUser.name}}</p>
+            <span>{{connectedUser.city}}</span>
+          </div>
+        </div>
+        <nav>
+          <ul class="clean-list navigation">
+            <li>
+              <router-link to="/" exact>
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/explore">
+                <i class="fas fa-users"></i>
+                <span>Explore</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/map">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Map</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="'/profile/' + connectedUser.nickName + '/inbox'">
+                <i class="fas fa-envelope"></i>
+                <span>Inbox</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/about">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+              </router-link>
+            </li>
+          </ul>
+        </nav>
+        <ul class="clean-list actions" v-if="connectedUser.name !== 'Visitor'">
+          <li>
+            <router-link :to="'/profile/' + connectedUser.nickName" exact>
+              <i class="fas fa-user-alt"></i>
+              <span>Go To My Profile</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="'/profile/' + connectedUser.nickName + '/edit'">
+              <i class="fas fa-user-edit"></i>
+              <span>Edit My Details</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/edit">
+              <i class="fas fa-plus-circle"></i>
+              <span>Share A Skill</span>
+            </router-link>
+          </li>
+          <li class="logout">
+            <button @click.stop="doLogout">
+              <i class="fas fa-power-off"></i>
+              <span>Logout</span>
+            </button>
+          </li>
+        </ul>
+        <ul class="clean-list actions" v-else>
+          <li>
+            <router-link to="/login" exact>
+              <i class="fas fa-sign-in-alt"></i>
+              <span>Login</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/sign-up" exact>
+              <i class="fas fa-user-plus"></i>
+              <span>Sign-Up</span>
+            </router-link>
+          </li>
+        </ul>
+      </section>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -132,13 +132,13 @@ export default {
       this.$emit("toggle-me");
     },
     test(ev) {
-      console.log(ev.target)
+      console.log(ev.target);
     }
   },
   watch: {
     $route: {
       handler() {
-        if (!this.showSidebar) return 
+        if (!this.showSidebar) return;
         this.emitToggleSidebar();
       },
       deep: true
@@ -148,7 +148,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .side-bar-overlay {
   position: absolute;
   top: 50px;
@@ -262,6 +261,14 @@ ul:first-child::after {
     background: transparent;
     outline: none;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
 

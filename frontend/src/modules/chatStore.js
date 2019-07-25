@@ -28,18 +28,18 @@ export default {
 
         addMsg(state, { msg }) {
             const chat = state.chats.find(chat => (chat.members[0]._id === msg.to._id) || (chat.members[1]._id === msg.to._id))
+            chat.isShown = true
             chat.msgs.push(msg);
         },
 
-        closeChat(state, { idx }) {
-            state.chats.splice(idx, 1);
+        closeChat(state, { chat }) {
+            chat.isShown = false
         },
         addChat(state, { to, from }) {
             state.chats.push({ to, from, msgs: [] })
         },
         pushHistory(state, { history }) {
             state.chats.push(...history)
-            console.log(state.chats)
         }
     },
 

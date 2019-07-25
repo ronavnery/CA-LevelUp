@@ -1,7 +1,7 @@
 <template>
   <section class="chat-app" v-if="chats.length">
     <div class="chat-boxes" v-for="(chat,idx) in chats" :key="idx">
-      <ChatBox v-if="chat.isShown" :chat="chat" @sendMsg="sendMsg" @closeChat="closeChat(idx)" />
+      <ChatBox v-if="chat.isShown" :chat="chat" @sendMsg="sendMsg" @closeChat="closeChat(chat)" />
     </div>
   </section>
 </template>
@@ -22,7 +22,6 @@ export default {
     this.socket.emit("chat-join", this.connectedUser._id);
     this.socket.on("got-history", history => {
       this.$store.commit({ type: "pushHistory", history });
-      console.log(this.chats)
     });
 
     this.socket.on(`msg-received`, msg  => {
@@ -46,11 +45,10 @@ export default {
       this.socket.emit("msg-sent", msg);
     },
     getHistory(routes) {
-      console.log(routes);
       this.socket.emit("history", routes);
     },
-    closeChat(idx) {
-      this.$store.commit({ type: "closeChat", idx });
+    closeChat(chat) {
+      this.$store.commit({ type: "closeChat", chat });
     }
   },
   components: { ChatBox }

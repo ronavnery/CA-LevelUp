@@ -63,7 +63,6 @@ export default {
             });
             state.inboxSent = [...tempSent]
             state.inboxRecieved = [...tempRecieved]
-            console.log(inbox)
         }
     },
 
@@ -82,7 +81,6 @@ export default {
             try {
                 const {booking} = await bookingService.add(bookingReq)
                 context.commit({ type: 'addBooking',booking })
-                // console.log(booking)
                 return booking
                 // else throw new Error('Request failed to send')
             } catch (err) {

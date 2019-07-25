@@ -2,9 +2,10 @@
   <div class="offer-edit">
     <!-- <ProfileSidebar class="profile-sidebar" :profile="connectedUser" /> -->
     <section class="edit-container">
-      <span class="fs18 strong">Share a new skill</span>
-      <form @submit.prevent="prevent">
+      <span class="fs22 strong">Share a new skill</span>
+      <form v-on:submit.prevent>
         <section class="settings-first">
+          <span class="tags-title fs14">Choose a category</span>
           <!-- CATEGORY -->
           <select
             v-model="editedOffer.category"
@@ -12,19 +13,19 @@
             class="form-control category"
             required
           >
-            <option selected disabled>Choose a category</option>
             <option v-for="(category,idx) in optionalCategories" :key="idx">{{category}}</option>
           </select>
 
           <!-- SESSION TYPE -->
-          <select v-model="editedOffer.location.type" class="session-type form-control">
-            <option selected disabled>Choose session type</option>
+          <span class="tags-title fs14">Choose the session type</span>
+          <select v-model="editedOffer.type" class="session-type form-control">
             <option>In Person</option>
             <option>Voice/Video Chat</option>
           </select>
 
           <!-- SINGLE OR GROUP -->
-          <div class="single-group-container fs14" v-if="editedOffer.location.type === 'In Person'">
+          <div class="single-group-container fs14" v-if="editedOffer.type === 'In Person'">
+            <div class="tags-title fs14">Is it for 1 preson or more?</div>
             <div class="custom-control custom-radio custom-control-inline">
               <input
                 type="radio"
@@ -49,12 +50,17 @@
             </div>
           </div>
 
+          <!-- ADDRESS -->
+          <!-- v-if="editedOffer.type === 'In Person'" -->
+          <gmap-autocomplete @place_changed="setPlace" @keydown.enter.prevent class="form-control"></gmap-autocomplete>
+
           <!-- TITLE -->
           <input
             v-model="editedOffer.title"
             type="text"
             placeholder="Title"
             class="title-input form-control"
+            @keydown.enter.prevent
           />
 
           <!-- DESCRIPTION -->
@@ -145,13 +151,7 @@
             v-model.number="editedOffer.minPeople"
             placeholder="Min participants"
             type="number"
-          />
-          <!-- ADDRESS -->
-          <input
-            class="form-control"
-            type="text"
-            v-model="editedOffer.location.address"
-            placeholder="Address"
+            @keydown.enter.prevent
           />
 
           <!-- TAGS -->
@@ -169,6 +169,7 @@
             type="text"
             v-model="editedOffer.imgs[0]"
             placeholder="Image URL"
+            @keydown.enter.prevent
           />
           <!-- CAROUSEL -->
           <span
@@ -192,7 +193,6 @@
 import DynamicList from "../components/DynamicList";
 import VueTagsInput from "@johmun/vue-tags-input";
 import DynamicCarousel from "../components/DynamicCarousel";
-import ProfileSidebar from "../components/ProfileSidebar";
 
 export default {
   name: "offer-edit",
@@ -230,8 +230,9 @@ export default {
         tags: [],
         requirements: [],
         isGroup: true,
+        type: 'In Person',
         duration: "",
-        category: "Choose a category",
+        category: "Just For Fun",
         difficulty: 1,
         minPeople: "",
         whatsIncluded: [],
@@ -239,7 +240,6 @@ export default {
         leveledUp: [],
         createdBy: null,
         location: {
-          type: "Choose session type",
           address: ""
         },
         rating: {
@@ -267,10 +267,9 @@ export default {
       }
     }
   },
-
   methods: {
     prevent() {
-      return;
+      return false;
     },
     async save() {
       const newOffer = this.editedOffer;
@@ -317,6 +316,14 @@ export default {
       this.tags = newTags;
       this.editedOffer.tags = newTags.map(tag => tag.text);
       this.searchPhotos();
+    },
+    setPlace(payload) {
+      console.log(payload);
+      console.log(payload.geometry.location.lat())
+      this.editedOffer.location.address = payload.formatted_address
+      this.editedOffer.location.lat = payload.geometry.location.lat()
+      this.editedOffer.location.lng = payload.geometry.location.lng()
+      console.log('edited offer is now:', this.editedOffer)
     }
   },
   computed: {
@@ -328,7 +335,6 @@ export default {
     VueTagsInput,
     DynamicList,
     DynamicCarousel,
-    ProfileSidebar
   }
 };
 </script>
@@ -374,7 +380,7 @@ export default {
       border-radius: 4px;
       width: 360px;
       font-size: 14px;
-      margin: 10px;
+      margin: 10px 0;
     }
     .session-type {
       margin: 0;

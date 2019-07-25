@@ -58,7 +58,7 @@ export default {
 
   async created() {
     try {
-      const inbox = await this.$store.dispatch({
+      await this.$store.dispatch({
         type: "getInbox",
         connectedUserId: this.connectedUser._id
       });
@@ -81,7 +81,7 @@ export default {
   methods: {
     async sendConfirm(booking, confirmation) {
       booking.isConfirmed = confirmation;
-      const newBooking = await this.$store.dispatch({
+      await this.$store.dispatch({
         type: "sendConfirm",
         booking
       });

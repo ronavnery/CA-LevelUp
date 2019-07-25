@@ -17,7 +17,7 @@ $normal-breakpoint: 790px;
 }
 
 @mixin for-normal-layout {
-    @media (max-width: $narrow-breakpoint) {
+    @media (min-width: $narrow-breakpoint) {
         @content;
     }
 }

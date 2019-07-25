@@ -70,7 +70,7 @@
 import bookingLevelUp from "../components/bookingLevelUp";
 import ReviewList from "@/components/ReviewList";
 import ReviewEdit from "../components/ReviewEdit";
-import moment from "moment";
+
 export default {
   name: "OfferDetails",
   data() {
@@ -85,11 +85,11 @@ export default {
     const offerId = this.$route.params.offerId;
     if (offerId) {
       try {
-        const offerToShow = await this.$store.dispatch({
+        const offer = await this.$store.dispatch({
           type: "getOfferById",
           offerId
         });
-        this.getCurrOffer;
+        this.offer = offer;
       } catch (err) {
         console.log(err);
       }
@@ -97,9 +97,6 @@ export default {
     this.connectedUser = this.$store.getters.connectedUser;
   },
   computed: {
-    getCurrOffer() {
-      this.offer = this.$store.getters.getCurrOffer;
-    },
     difficulty() {
       if (this.offer.difficulty === 1) return "Beginner level";
       else if (this.offer.difficulty === 2) return "Intermediate level";

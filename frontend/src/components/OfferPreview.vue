@@ -1,5 +1,5 @@
 <template>
-  <section @click="goToDetails" class="offer-preview" v-if="offer">
+  <section @click="goToDetails" class="offer-preview" :class="{marked: isMarked}" v-if="offer">
     <header>
       <div class="header-category">
         <i :class="categoryIcon" class="fs14"></i>
@@ -43,7 +43,7 @@
       </div>
     </main>
     <hr />
-    <footer>
+    <footer v-if="!isOnMapView">
       <div class="wrapper">
         <button class="like" @click.stop>
           <i class="fs14 far fa-heart"></i>
@@ -59,16 +59,11 @@
         </button>
       </div>
     </footer>
+    <footer v-else>
+      <button class="btn-goToDetails" @click="goToDetails(event, 'forced')">Go to details</button>
+    </footer>
   </section>
 </template>
-
-
-
-
-
-
-
-
 
 <script>
 export default {
@@ -76,10 +71,16 @@ export default {
   props: {
     offer: {
       type: Object
+    },
+    currMarkedOfferId: {
+      type: String
     }
   },
   methods: {
-    goToDetails() {
+    goToDetails(ev, isForced) {
+      if (!isForced) {
+        if (this.isOnMapView) return this.$emit("offerClicked", this.offer)
+      }
       this.$router.push({
         name: "OfferDetails",
         params: {
@@ -104,6 +105,9 @@ export default {
     }
   },
   computed: {
+    isOnMapView() {
+      return this.$route.name === "MapView";
+    },
     connectedUser() {
       return this.$store.getters.connectedUser;
     },
@@ -121,26 +125,19 @@ export default {
     categoryIcon() {
       if (this.offer.category === "Development") return "fas fa-file-code";
       else if (this.offer.category === "Business") return "fas fa-briefcase";
-      else if (this.offer.category === "Just For Fun")
-        return "far fa-grin-tears";
+      else if (this.offer.category === "Just For Fun") return "far fa-grin-tears";
       else if (this.offer.category === "DIY") return "fas fa-tools";
-      else if (this.offer.category === "Finance & Accounting")
-        return "fas fa-balance-scale";
-      else if (this.offer.category === "Office Productivity")
-        return "fas fa-mail-bulk";
-      else if (this.offer.category === "Personal Development")
-        return "fas fa-user-plus";
+      else if (this.offer.category === "Finance & Accounting") return "fas fa-balance-scale";
+      else if (this.offer.category === "Office Productivity") return "fas fa-mail-bulk";
+      else if (this.offer.category === "Personal Development") return "fas fa-user-plus";
       else if (this.offer.category === "Design") return "fas fa-pencil-ruler";
       else if (this.offer.category === "IT & Software") return "fas fa-sitemap";
       else if (this.offer.category === "Marketing") return "fas fa-ad";
       else if (this.offer.category === "Lifestyle") return "fas fa-gamepad";
-      else if (this.offer.category === "Photography")
-        return "fas fa-camera-retro";
-      else if (this.offer.category === "Health & Fitness")
-        return "fas fa-running";
+      else if (this.offer.category === "Photography") return "fas fa-camera-retro";
+      else if (this.offer.category === "Health & Fitness") return "fas fa-running";
       else if (this.offer.category === "Music") return "fas fa-guitar";
-      else if (this.offer.category === "Teaching & Academics")
-        return "fas fa-user-graduate";
+      else if (this.offer.category === "Teaching & Academics") return "fas fa-user-graduate";
     },
     userOwnOffer() {
       const connectedUser = this.$store.getters.connectedUser;
@@ -151,6 +148,9 @@ export default {
         return false;
       else return true;
     },
+    isMarked() {
+      return this.currMarkedOfferId === this.offer._id;
+    }
   }
 };
 </script>
@@ -179,7 +179,7 @@ export default {
     height: 100%;
     opacity: 0;
     border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.3);
     transition: opacity 0.3s ease-in-out;
   }
 
@@ -347,6 +347,13 @@ footer {
       color: #5458f7;
     }
   }
+
+  .btn-goToDetails {
+    @include btnActionGrey;
+    font-size: rem(14px);
+    margin: 0 auto;
+    width: 80%;
+  }
 }
 
 button {
@@ -370,5 +377,9 @@ button {
   &:hover svg {
     fill: #5458f7;
   }
+}
+
+.marked {
+  box-shadow: 0 1px 15px black;
 }
 </style>

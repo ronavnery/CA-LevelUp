@@ -1,69 +1,90 @@
 <template>
-  <div class="about-container">
-    <ProfileSidebar :profile="ronsProfile" v-if="ronsProfile"/>
-    <ProfileSidebar :profile="stavsProfile" v-if="stavsProfile"/>
-    <ProfileSidebar :profile="orielsProfile" v-if="orielsProfile"/>
-  </div>
+  <section>
+    <div v-if="profiles.length" class="about-container">
+        <ProfileSidebar :profile="profile" v-for="(profile, idx) in profiles" :key="idx"/>
+    </div>
+    <breeding-rhombus-spinner class="loader" v-else
+  :animation-duration="2000"
+  :size="65"
+  :color="'#c654dd'"
+/>
+  </section>
 </template>
 
 <script>
 import ProfileSidebar from "../components/ProfileSidebar";
+import 'epic-spinners/dist/lib/epic-spinners.min.css';
+import {BreedingRhombusSpinner} from 'epic-spinners/dist/lib/epic-spinners.min.js';
 export default {
   data() {
     return {
-      ronsProfile: null,
-      stavsProfile: null,
-      orielsProfile: null
+      profiles: []
     };
   },
   async created() {
     try {
-      let profile = await this.$store.dispatch({
+      const orielsProfile = this.$store.dispatch({
         type: "getProfile",
-        nickName: 'ronavnery'
+        nickName: "orielshalem"
       });
-      this.ronsProfile = profile;
-      console.log('rons profile:', this.ronsProfile);
-      profile = await this.$store.dispatch({
+      const ronsProfile = this.$store.dispatch({
         type: "getProfile",
-        nickName: 'StavDorkam119'
+        nickName: "ronavnery"
       });
-      this.stavsProfile = profile;
-      console.log('stavs profile:', this.stavsProfile);
-
-      profile = await this.$store.dispatch({
+      const stavsProfile = this.$store.dispatch({
         type: "getProfile",
-        nickName: 'orielshalem'
+        nickName: "StavDorkam119"
       });
-      this.orielsProfile = profile;
-      console.log('oriels profile:', this.orielsProfile);
-
+      const profiles = await Promise.all([
+        orielsProfile,
+        ronsProfile,
+        stavsProfile
+      ]);
+      
+      this.profiles = profiles;
     } catch (err) {
       console.log("Error!", err);
     }
   },
   components: {
-    ProfileSidebar
+    ProfileSidebar,
+    BreedingRhombusSpinner
   }
 };
 </script>
 
 <style scoped lang="scss">
+section {
+  position: relative;
+  height: calc(100vh - 50px);
+  & > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 
 .about-container {
-  height: calc(100vh - 50px);
-  @include flexCenter(row)
-  & >* {
+  @include flexCustom(flex-start, center, row);
+  & * {
     flex: 1;
   }
-  & > *:first-child {
+  & *:first-child {
     background: $tpBlue1;
   }
-  & > *:nth-child(2) {
+  & *:nth-child(2) {
     background: $tpLightPink;
   }
-  & > *:nth-child(3) {
+  & *:nth-child(3) {
     background: $tpBlue2;
   }
 }
+
+.loader {
+position: absolute;
+top: 40%;
+left: 50%
+}
+
 </style>

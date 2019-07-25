@@ -5,10 +5,16 @@
 html {
     font-family: 'Lato';
     font-size: 14px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     @include for-normal-layout {
         font-size: 16px;
     }
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
 body {

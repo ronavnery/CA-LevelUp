@@ -4,11 +4,10 @@
     <div class="icon-container">
       <div class="inbox">
         <router-link :to="'/profile/' + currUser.nickName + '/inbox'">
-          <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div>
+          <!-- <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div> -->
           <i class="fas fa-envelope"></i>
         </router-link>
       </div>
-      <i class="fas fa-bell"></i>
       <!-- <i class="fas fa-user" @click="toggleNav"></i> -->
       <img class="user-small-img" :src="currUser.imgUrl" @click="toggleNav" />
     </div>
@@ -63,7 +62,7 @@ export default {
   methods: {
     async doLogout() {
       try {
-        const res = await this.$store.dispatch({ type: "doLogout" });
+        await this.$store.dispatch({ type: "doLogout" });
         this.$router.push("/");
       } catch (err) {
         console.log("Couldnt log out, got err:", err);
@@ -88,27 +87,19 @@ export default {
 
 .user-dashboard-header {
   @include flexCustom(space-between, center, row);
-  width: 230px;
+  width: 190px;
+  @include for-normal-layout {
+    width: 210px;
+  }
 }
 .inbox {
   position: relative;
+  font-size: 16px;
 }
 
-.notification {
-  position: absolute;
-  width: 1rem;
-  line-height: 1rem;
-  text-align: center;
-  top: 6px;
-
-  background-color: rgb(190, 2, 2);
-  color: white;
-  font-size: 0.75rem;
-  border-radius: 50%;
-}
 
 .icon-container {
-  width: 100.25px;
+  width: 70.25px;
   @include flexCustom(space-around, center, row);
 
   i {
@@ -161,9 +152,6 @@ nav {
 .btn-add-offer {
   @include btnActionWhiteSm;
   color: white;
-}
-
-.li-user {
-
+  font-size: rem(14px);
 }
 </style>

@@ -1,32 +1,59 @@
-// const dbService = require('../services/db.service')
-// const ObjectId = require('mongodb').ObjectId
+const dbService = require('./db.service')
+const ObjectId = require('mongodb').ObjectId
 
 module.exports = {
-    pushToInbox,
-    createInbox
+    getHistory,
+    addMsg,
+    checkConversationExists
 }
 
-const gInboxs = [{
-        _id: 'djks34324jk',
-        from: [{
-            _id: '5d2dec114cfb9f419072650d',
-            msgs: [
-                {
-                    txt: "hey how are you",
-                    createdAt: 1565044340240
-                }
-            ]
-        }],
-}]
-
-function createInbox(userId) {
-    gInboxs.push({_id: userId})
+async function getHistory(userId) {
+    const collection = await dbService.getCollection('chat')
+    try {
+        const chat = await collection.find({ "members._id": userId }).toArray()
+        return chat
+    } catch (err) {
+        // console.log(`ERROR: while finding chat ${userId}`)
+        console.log(err)
+        // throw err;
+    }
 }
 
-function pushToInbox(data) {
-    const senderInbox = gInboxs.find(inbox => inbox._id === data.senderId).from.find(user=>user._id === data.recipientId)
-    console.log(senderInbox)
-    // const recipientInbox = gInboxs.find(inbox => inbox._id === data.senderId)
+async function addMsg(msg) {
+    const collection = await dbService.getCollection('chat')
+    try {
+        const chat = await collection.updateOne({ 
+            $and: [
+                { "members._id": msg.to._id }, { "members._id": msg.from._id }] },
+                { $push: { "msgs": msg }
+            })
+    } catch (err) {
+        console.log(`ERROR: cannot update offer msg`)
+        throw err;
+    }
+}
 
-    // })
+async function checkConversationExists(user1 ,user2) {
+    const collection = await dbService.getCollection('chat')
+    const chat = await collection.find({ 
+        $and: [
+            { "members._id": user1._id },
+            { "members._id": user2._id }
+        ] }).toArray()
+        if (!chat.length) _createConversation(user1, user2)
+}
+
+async function _createConversation(user1, user2) {
+    const collection = await dbService.getCollection('chat')
+
+    const newChat = {
+        members: [user1, user2],
+        isShown: false,
+        msgs: []
+    }
+    try {
+        const chat = await collection.insertOne(newChat)
+    } catch (err) {
+        console.log(err)
+    }
 }

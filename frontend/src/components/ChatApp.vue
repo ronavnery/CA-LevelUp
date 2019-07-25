@@ -1,7 +1,7 @@
 <template>
   <section class="chat-app" v-if="chats.length">
     <div class="chat-boxes" v-for="(chat,idx) in chats" :key="idx">
-      <ChatBox :chat="chat" @sendMsg="sendMsg" @closeChat="closeChat(idx)" />
+      <ChatBox v-if="chat.isShown" :chat="chat" @sendMsg="sendMsg" @closeChat="closeChat(idx)" />
     </div>
   </section>
 </template>
@@ -11,23 +11,25 @@ import io from "socket.io-client";
 import ChatBox from "./ChatBox";
 
 export default {
-  name: 'chat-app',
+  name: "chat-app",
   data() {
     return {
-      socket: io("localhost:3000"),
+      socket: io("localhost:3000")
     };
   },
 
   mounted() {
-    this.socket.emit("JOIN_ROOM", this.connectedUser._id);
-    this.socket.on(`msg-received`, ( data ) => {
-      const idx = this.chats.findIndex(chat => chat.to.nickName === data.from.nickName);
-      if (idx !== -1) {
-        this.chats[idx].msgs.push(data.msg);
-      } else {
-        this.chats.push({ to: data.from, from: data.to, msgs: [data.msg] });
-      }
+    this.socket.emit("chat-join", this.connectedUser._id);
+    this.socket.on("got-history", history => {
+      this.$store.commit({ type: "pushHistory", history });
+      console.log(this.chats)
     });
+
+    this.socket.on(`msg-received`, msg  => {
+      this.$store.commit({ type: "addMsg", msg });
+    });
+
+
   },
 
   computed: {
@@ -35,25 +37,23 @@ export default {
       return this.$store.getters.connectedUser;
     },
     chats() {
-      return this.$store.getters.chats
+      return this.$store.getters.chats;
     }
   },
   methods: {
-    async sendMsg(msg){
-      try {
-        const newMsg = await this.$store.dispatch({type: 'sendMsg', msg})
-        console.log(newMsg)
-        this.socket.emit("msg-sent", newMsg);
-      }catch (err) {
-        console.log(err)
-      }
-
+    sendMsg(msg) {
+      this.$store.commit({ type: "addMsg", msg });
+      this.socket.emit("msg-sent", msg);
+    },
+    getHistory(routes) {
+      console.log(routes);
+      this.socket.emit("history", routes);
     },
     closeChat(idx) {
-      this.$store.commit({type: 'closeChat',idx})
+      this.$store.commit({ type: "closeChat", idx });
     }
   },
-  components: {ChatBox}
+  components: { ChatBox }
 };
 </script>
 

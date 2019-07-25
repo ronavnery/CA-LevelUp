@@ -19,11 +19,14 @@
       />
       <p class="success-status">{{successStatus}}</p>
     </form>
-    <div class="login-msg fs18" v-else>
+    <div class="login-msg fs18" v-else-if="!connectedUser">
       Level up requests are for registered users only.
       <br />Please
-      <router-link to="/sign-up">sign-up </router-link>or
-      <router-link to="/login">login </router-link>first.
+      <router-link to="/sign-up">sign-up</router-link>or
+      <router-link to="/login">login</router-link>first.
+    </div>
+    <div v-else>
+      Your request has been sent, we will notify you
     </div>
     <button class="btn-toggle-booking" @click="toggleBooking">Close</button>
   </section>
@@ -31,7 +34,7 @@
 
 <script>
 import io from "socket.io-client";
-import { setTimeout } from 'timers';
+import { setTimeout } from "timers";
 
 export default {
   data() {
@@ -41,9 +44,18 @@ export default {
         availability: "",
         extraInfo: ""
       },
+      alreadyBooked: false,
       successStatus: "",
       socket: io("localhost:3000")
     };
+  },
+  created() {
+  //   this.alreadyBooked = this.inboxSent.find(
+  //     booking => booking.bookingMaker.makerId === this.connectedUser._id
+  //   );
+    console.log(this.inboxSent)
+    // console.log(this.connectedUser._id)
+    // console.log(this.alreadyBooked)
   },
   methods: {
     async sendBookingReq() {
@@ -61,15 +73,36 @@ export default {
       this.bookingReq.bookingMaker = {
         makerId: this.connectedUser._id,
         makerName: this.connectedUser.name,
-        makerImg: this.connectedUser.imgUrl,
-      } 
-      const booking = await this.$store.dispatch({type: 'sendBookingReq', bookingReq: this.bookingReq})
-        this.socket.emit('level-up-req', booking)
-        
-        setTimeout(() =>{
-          this.$emit('close-booking-request');
-        })
+        makerImg: this.connectedUser.imgUrl
+      };
+      if (
+        this.bookingReq.offer.offerId === this.bookingReq.bookingMaker.makerId
+      )
+        return;
+      const booking = await this.$store.dispatch({
+        type: "sendBookingReq",
+        bookingReq: this.bookingReq
+      });
+      this.startChat(booking);
+      this.socket.emit("level-up-req", booking);
 
+      setTimeout(() => {
+        this.$emit("close-booking-request");
+      });
+    },
+    startChat(booking) {
+      const user1 = {
+        _id: this.connectedUser._id,
+        imgUrl: this.connectedUser.imgUrl,
+        name: this.connectedUser.name
+      };
+      const user2 = {
+        _id: booking.offerMaker.makerId,
+        imgUrl: booking.offerMaker.makerImg,
+        name: booking.offerMaker.makerName
+      };
+      this.socket.emit("start-chat", { user1, user2 });
+      this.$store.commit({ type: "startChat", user1, user2 });
     },
     toggleBooking() {
       this.$emit("close-booking-request");
@@ -78,6 +111,9 @@ export default {
   computed: {
     connectedUser() {
       return this.$store.getters.connectedUser;
+    },
+    inboxSent() {
+      return this.$store.getters.inboxSent;
     }
   }
 };

@@ -10,6 +10,7 @@
         :currMarkedOfferId="currMarkedOfferId"
       ></OfferPreview>
     </masonry>
+    <span v-else-if="(offers.length === 0)">No offers to show</span>
     <breeding-rhombus-spinner
       v-else
       :class="listOnProfile"

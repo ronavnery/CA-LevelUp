@@ -37,7 +37,7 @@
       </section>
     </header>
 
-    <main class="offer-content" v-if="offer">
+    <!-- <main class="offer-content" v-if="offer">
       <h4>Requirements:</h4>
       <ul>
         <li v-for="requirement in offer.requirements" :key="requirement">{{requirement}}</li>
@@ -58,11 +58,48 @@
     
     <ReviewEdit class="review-edit" v-if="connectedUser" @add-review="addReviewToOffer" :status="reviewStatus"/>
     </main>
+    -->
     <bookingLevelUp
       v-if="isBooking"
       @click="sendBookingReq"
       @close-booking-request="toggleBooking"
     />
+    <main class="content-wrapper">
+       <div class="grid-item" v-if="offer.requirements.length">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h4>Requirements</h4>
+        <ul>
+          <li v-for="(item, idx) in offer.requirements" :key="idx">{{item}}</li>
+        </ul>
+      </div>
+       <div class="grid-item not-included" v-else>
+        <i class="fas fa-exclamation-triangle"></i>
+        <h4>No Requirements Stated</h4>
+      </div>
+      <div class="grid-item">
+        <i class="fas fa-info-circle"></i>
+        <h4>Description</h4>
+        <p>{{offer.description}}</p>
+        
+      </div>
+     
+      <div class="grid-item" v-if="offer.whatsIncluded.length">
+        <i class="fas fa-box-open"></i>
+        <h4>Whats Included</h4>
+        <ul>
+          <li v-for="(item, idx) in offer.whatsIncluded" :key="idx">{{item}}</li>
+        </ul>
+      </div>
+      <div class="grid-item not-included" v-else>
+        <i class="fas fa-box-open"></i>
+        <h4>No Included Items Stated</h4>
+      </div>
+    </main>
+    <section class="review-container">
+      <ReviewList :reviews="offer.rating.reviews" v-if="offer.rating.reviews.length" />
+      <h4 v-else>No Reviews Submitted At This Time</h4>
+      <ReviewEdit class="review-edit" v-if="connectedUser" @add-review="addReviewToOffer" :status="reviewStatus"/>
+    </section>
   </div>
 </template>
 
@@ -311,13 +348,84 @@ img {
   }
 }
 
-main {
-  padding: rem(20px);
-  position: relative;
+// main {
+//   padding: rem(20px);
+//   position: relative;
+// }
+
+// .review-edit {
+//   margin-top: 50px;
+// }
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  padding: 10px 5px;
+  max-width: 1560px;
+  margin: 0 auto;
+  @media screen and (min-width: 560px) {
+    padding: 10px 15px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (min-width: 840px) {
+    padding: 10px 25px;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.review-edit {
-  margin-top: 50px;
+.grid-item {
+  padding: 10px 0;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  & > i {
+    display: block;
+    font-size: 2.3rem;
+    margin: 0 auto 5px auto;
+    text-align: center;
+    color: #220f41;
+    
+  }
+
+  h4 {
+    font-family: $HanGroBlack;
+    font-weight: 600;
+  }
+
+  p {
+    
+  }
+  ul {
+    align-self: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    text-align: start;
+  }
+  
 }
+
+.grid-item.not-included {
+  color: #808080ba;
+}
+
+.review-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 5px;
+  justify-content: space-between;
+  margin: 0 auto;
+  @media screen and (min-width: 560px) {
+    padding: 10px 15px;
+  }
+  @media screen and (min-width: 840px) {
+    padding: 10px 25px;
+  }
+}
+
 </style>
 

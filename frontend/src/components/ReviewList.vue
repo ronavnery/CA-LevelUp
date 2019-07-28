@@ -1,6 +1,6 @@
 <template>
   <section class="review-list-wrapper">
-    <h4 style="margin-top: 8px;">Reviews:</h4>
+    <h4 style="margin-top: 8px; font-weight: 600;">Reviews:</h4>
     <main>
       <div v-for="(review, idx) in reviews" :key="idx">
         <button class="accordion" @click="toggleReview(idx)">
@@ -67,6 +67,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.review-list-wrapper {
+  margin-bottom: 10px;
+}
+
 .accordion {
   max-width: 500px;
   background-color: $tpGray;
@@ -106,7 +111,7 @@ export default {
 }
 
 .panel {
-  width: 500px;
+  max-width: 500px;
   overflow: hidden;
   padding: 0 18px;
   background-color: white;

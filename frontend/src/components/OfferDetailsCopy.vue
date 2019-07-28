@@ -48,7 +48,7 @@
           <li>
             <router-link :to="'/profile/' + connectedUser.nickName" exact>
               <i class="fas fa-user-alt"></i>
-              <span>My Profile</span>
+              <span>Go To My Profile</span>
             </router-link>
           </li>
           <li>

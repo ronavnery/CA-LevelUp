@@ -1,6 +1,6 @@
 <template>
     <section class="review-wrapper">
-        <h4 style="margin-top: 8px;">Leave A Review!</h4>
+        <h4 style="margin-top: 8px; font-weight: 600;">Leave A Review!</h4>
         <label for="review-title">Title</label>
         <input type="text" id="review-title" class="form-control" v-model="review.title" required>
         <StarRating :increment="1" :star-size="30" text-class="pretty-text" v-model="review.score" />
@@ -17,7 +17,6 @@
      </div>
     </div>
         </div>
-
     </section>
 </template>
 

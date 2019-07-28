@@ -393,10 +393,6 @@ img {
     font-family: $HanGroBlack;
     font-weight: 600;
   }
-
-  p {
-    
-  }
   ul {
     align-self: center;
     padding: 0;

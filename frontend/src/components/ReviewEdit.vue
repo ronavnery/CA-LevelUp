@@ -114,8 +114,6 @@ textarea {
     @include btnActionGreySm;
 }
 
-.review-success-msg {
-}
 </style>
 
 

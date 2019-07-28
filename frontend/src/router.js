@@ -35,7 +35,7 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile,
-      children: [
+      children: [ 
         {
           path: '/edit/:_id?',
           name: 'OfferEdit',

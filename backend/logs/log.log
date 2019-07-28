@@ -1344,9 +1344,18 @@ Thu, 25 Jul 2019 10:12:54 GMT - Debug - auth.service - login with nickName: rona
 Thu, 25 Jul 2019 09:48:04 GMT - Debug - auth.service - login with nickName: ronavnery
 >>>>>>> 4889088fb40d3df1dff38251a22ea2d49cd5a133
 
+<<<<<<< HEAD
 Fri, 26 Jul 2019 16:03:07 GMT - Info - Server is running on port: 3000
 Fri, 26 Jul 2019 17:25:31 GMT - Debug - auth.service - login with nickName: StavDorkam119
 Sun, 28 Jul 2019 12:18:43 GMT - Info - Server is running on port: 3000
 Sun, 28 Jul 2019 12:21:30 GMT - Debug - auth.service - login with nickName: StavDorkam119
 Sun, 28 Jul 2019 13:32:15 GMT - Debug - auth.service - login with nickName: StavDorkam119
 Sun, 28 Jul 2019 13:36:16 GMT - Debug - auth.service - login with nickName: StavDorkam119
+=======
+Thu, 25 Jul 2019 10:24:12 GMT - Info - Server is running on port: 3000
+Thu, 25 Jul 2019 11:03:17 GMT - Debug - auth.service - login with nickName: ronavnery
+Thu, 25 Jul 2019 11:07:17 GMT - Debug - auth.service - login with nickName: ronavnery
+Fri, 26 Jul 2019 12:28:49 GMT - Info - Server is running on port: 3000
+>>>>>>> 48c8c2ee7417d97e3333319fbf8fc6af57fa6e46
+
+Sun, 28 Jul 2019 13:51:19 GMT - Info - Server is running on port: 3000

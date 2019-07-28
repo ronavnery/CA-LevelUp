@@ -42,9 +42,12 @@
         <div @click="setFilter('booked', $event)" data-value="booked" ref="type3">Booked</div>
       </div>
       <!-- <gmap-autocomplete @place_changed="setPlace" class="form-input"></gmap-autocomplete> -->
+      <div class="distance-container">
       <span>Showing only offers with location</span>
-      <span v-if="filterBy === 'near-me'">within 20km</span>
-      <input v-if="filterBy === 'near-me'" type="number" class="form-control" @input="setDistance($event)" placeholder="Enter Distance" />
+      <span v-if="filterBy === 'near-me'"> within {{customDistance}}km</span>
+      <input  type="range"  min="1" max="100" class="custom-range" id="customRange1" v-model="customDistance"   v-if="filterBy === 'near-me'" @input="setDistance()">
+      </div>
+      <!-- <range-slider v-if="filterBy === 'near-me'" class="slider" min="1" max="100" step="5" v-model="customDistance" @input="setDistance($event)"></range-slider> -->
       <OfferList
         class="offer-list"
         v-if="offersToShow"
@@ -60,6 +63,9 @@
 <script>
 import OfferList from "../components/OfferList";
 import _ from "lodash";
+import RangeSlider from "vue-range-slider";
+import "vue-range-slider/dist/vue-range-slider.css";
+import { mdbRangeInput } from "mdbvue";
 
 export default {
   async created() {
@@ -81,7 +87,8 @@ export default {
       map: null,
       currOfferId: "",
       filterBy: "",
-      currentLocation: null
+      currentLocation: null,
+      customDistance: 20
     };
   },
   methods: {
@@ -148,9 +155,8 @@ export default {
       }
       return getDistanceInKm(pointA, pointB).toFixed(2);
     },
-    setDistance(ev) {
-      const distance = +ev.target.value;
-      this.setOffersNearMe(distance);
+    setDistance() {
+      this.setOffersNearMe(+this.customDistance);
     }
   },
   computed: {
@@ -166,13 +172,17 @@ export default {
     }
   },
   components: {
-    OfferList
+    OfferList,
+    RangeSlider,
+    mdbRangeInput
   }
 };
 </script>
 
 
 <style scoped lang="scss">
+@import "~vue-range-slider/dist/vue-range-slider.scss";
+
 .main-container {
   display: flex;
 }
@@ -222,6 +232,13 @@ export default {
   div.selected {
     background-color: $tpPink2;
     color: white;
+  }
+}
+
+.distance-container {
+  align-self: flex-start;
+  .custom-range {
+    margin-top: 15px;
   }
 }
 </style>

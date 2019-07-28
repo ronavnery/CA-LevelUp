@@ -96,8 +96,8 @@ self.__precacheManifest = [
     "url": "/fonts/Roboto-Bold.dc81817d.woff"
   },
   {
-    "revision": "7a0537747c8ec8dba0f8",
-    "url": "/js/app.83bacf6c.js"
+    "revision": "5ba7eac9c51ae0a8bfda",
+    "url": "/js/app.cc144674.js"
   },
   {
     "revision": "1215498f09a0d61467ef",
@@ -168,12 +168,12 @@ self.__precacheManifest = [
     "url": "/img/fa-regular-400.8fdea4e8.svg"
   },
   {
-    "revision": "ef3df98419d143d9617fe163bf4edc0b",
-    "url": "/fonts/fa-solid-900.ef3df984.eot"
-  },
-  {
     "revision": "acf50f59802f20d8b45220eaae532a1c",
     "url": "/fonts/fa-solid-900.acf50f59.ttf"
+  },
+  {
+    "revision": "ef3df98419d143d9617fe163bf4edc0b",
+    "url": "/fonts/fa-solid-900.ef3df984.eot"
   },
   {
     "revision": "073c2f3ce60eaf69cc2767ef3d989078",
@@ -188,11 +188,11 @@ self.__precacheManifest = [
     "url": "/img/levelup-v5.4516eefb.png"
   },
   {
-    "revision": "bcd6e83c1391961f5d6ef48115f860c6",
+    "revision": "d3bfa6b4c1f9f277784f641d6b0e753e",
     "url": "/index.html"
   },
   {
-    "revision": "7a0537747c8ec8dba0f8",
-    "url": "/css/app.217fc159.css"
+    "revision": "5ba7eac9c51ae0a8bfda",
+    "url": "/css/app.cb494b89.css"
   }
 ];

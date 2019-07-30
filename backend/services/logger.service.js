@@ -14,8 +14,8 @@ function getTime() {
 function doLog(line, level='Debug') {
     line = `${getTime()} - ${level} - ${line}` 
     
-    const content = fs.readFileSync('./logs/log.log')
-    fs.writeFileSync('./logs/log.log', content + '\n' + line)
+    // const content = fs.readFileSync('../logs/log.log')
+    // fs.writeFileSync('../logs/log.log', content + '\n' + line)
     console.log(line);
 }
 

@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       showNav: false,
-      socket: io("localhost:3000")
+      socket: process.env.NODE_ENV ? io(''):io("localhost:3000")
     };
   },
 

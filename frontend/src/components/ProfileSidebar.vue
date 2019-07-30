@@ -64,6 +64,7 @@ export default {
 
 <style scoped lang="scss">
 .sidebar-container {
+  height: 100%;
   min-width: 300px;
   background: $tpPink;
   color: $tpGray;

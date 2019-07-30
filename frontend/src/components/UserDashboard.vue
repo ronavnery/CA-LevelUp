@@ -40,11 +40,7 @@ export default {
   data() {
     return {
       showNav: false,
-<<<<<<< HEAD
-      socket: (process.env.NODE_ENV === 'production') ? io(''):io("localhost:3000")
-=======
       socket: process.env.NODE_ENV === 'production' ? io(''):io("localhost:3000")
->>>>>>> 657a1221814af10e743bf62e6a6547f1d3b46ba8
     };
   },
 

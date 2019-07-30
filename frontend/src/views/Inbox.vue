@@ -36,7 +36,10 @@
             </div>
           </div>
           <div class="action-btns">
-            <button class="start-chat-btn" @click="startChat(booking.bookingMaker.makerId)">start chat</button>
+            <button
+              class="start-chat-btn"
+              @click="startChat(booking.bookingMaker.makerId)"
+            >start chat</button>
             <span class="fs12">{{booking.sentAt | formatDate}}</span>
           </div>
         </div>
@@ -52,7 +55,8 @@ import io from "socket.io-client";
 export default {
   data() {
     return {
-      socket: process.env.NODE_ENV ? io(''):io("localhost:3000")
+      socket:
+        process.env.NODE_ENV === "production" ? io("") : io("localhost:3000")
     };
   },
 
@@ -89,18 +93,7 @@ export default {
     },
 
     startChat(toId) {
-      // const user1 = {
-      //   _id: this.connectedUser._id,
-      //   imgUrl: this.connectedUser.imgUrl,
-      //   name: this.connectedUser.name
-      // };
-      // const user2 = {
-      //   _id: booking.offerMaker.makerId,
-      //   imgUrl: booking.offerMaker.makerImg,
-      //   name: booking.offerMaker.makerName
-      // };
-      console.log(toId)
-      this.$store.commit({type:'showChat', toId })
+      this.$store.commit({ type: "showChat", toId });
     }
   }
 };

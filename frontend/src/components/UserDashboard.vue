@@ -4,7 +4,7 @@
     <div class="icon-container">
       <div class="inbox">
         <router-link :to="'/profile/' + currUser.nickName + '/inbox'">
-          <!-- <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div> -->
+          <div class="notification" v-if="unreadMsgs">{{unreadMsgs}}</div>
           <i class="fas fa-envelope"></i>
         </router-link>
       </div>
@@ -40,7 +40,11 @@ export default {
   data() {
     return {
       showNav: false,
+<<<<<<< HEAD
       socket: (process.env.NODE_ENV === 'production') ? io(''):io("localhost:3000")
+=======
+      socket: process.env.NODE_ENV === 'production' ? io(''):io("localhost:3000")
+>>>>>>> 657a1221814af10e743bf62e6a6547f1d3b46ba8
     };
   },
 
@@ -95,6 +99,22 @@ export default {
 .inbox {
   position: relative;
   font-size: 16px;
+  div {
+    position: absolute;
+    color: white;
+    background: red;
+    height: 0.8rem;
+    width: 0.8rem;
+    font-size: 0.6rem;
+    top: 9px;
+        left: 10px;
+    @include flexCenter(row);
+    border-radius: 50%;
+
+    // top: 10px;
+    // left: 50%;
+    // transform: translateX(-50%);
+  }
 }
 
 

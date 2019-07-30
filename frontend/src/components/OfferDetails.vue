@@ -5,11 +5,10 @@
       <div class="show-all-overlay" @click="goToProfileOffers">
         <span class="show-all-text">Show all offers from this person</span>
       </div>
-      <button class="btn-toggle-booking" @click="toggleBooking">Book to level up!</button>
+      <button v-if="!connectedUser || offer.createdBy._id !== connectedUser._id" class="btn-toggle-booking"  @click="toggleBooking">Book to level up!</button>
       <section class="header-overlay">
         <h2>{{offer.title}}</h2>
         <h3 class="category">{{offer.category}}</h3>
-
         <ul>
           <li>
             <i class="header-icon fas fa-user-friends" v-if="offer.minPeople > 1 "></i>
@@ -36,29 +35,6 @@
         </ul>
       </section>
     </header>
-
-    <!-- <main class="offer-content" v-if="offer">
-      <h4>Requirements:</h4>
-      <ul>
-        <li v-for="requirement in offer.requirements" :key="requirement">{{requirement}}</li>
-      </ul>
-      <h4 v-if="offer.whatsIncluded.length">Whats included:</h4>
-      <ul>
-        <li v-for="included in offer.whatsIncluded" :key="included">{{included}}</li>
-      </ul>
-      <h4>Description:</h4>
-      <p>{{offer.description}}</p>
-      <h4>Tags:</h4>
-      <span v-for="(tag,idx) in offer.tags" :key="idx">
-        {{tag}}
-        <span v-if="idx !== offer.tags.length -1">,</span>
-      </span>
-      <ReviewList :reviews="offer.rating.reviews" v-if="offer.rating.reviews.length" />
-      <h4 style="margin-top: 8px;" v-else>This Offer Has No Reviews At This Time</h4>
-    
-    <ReviewEdit class="review-edit" v-if="connectedUser" @add-review="addReviewToOffer" :status="reviewStatus"/>
-    </main>
-    -->
     <bookingLevelUp
       v-if="isBooking"
       @click="sendBookingReq"
@@ -114,7 +90,6 @@ export default {
     return {
       isBooking: false,
       offer: null,
-      connectedUser: null,
       reviewStatus: ""
     };
   },
@@ -131,14 +106,16 @@ export default {
         console.log(err);
       }
     }
-    this.connectedUser = this.$store.getters.connectedUser;
   },
   computed: {
     difficulty() {
       if (this.offer.difficulty === 1) return "Beginner level";
       else if (this.offer.difficulty === 2) return "Intermediate level";
       else return "Advanced level";
-    }
+    },
+    connectedUser() {
+      return this.$store.getters.connectedUser;
+    },
   },
   methods: {
     goToProfileOffers() {

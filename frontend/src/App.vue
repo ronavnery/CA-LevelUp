@@ -23,6 +23,9 @@ data() {
     showSideBar: false
   }
 },
+mounted() {
+  console.log('PROCESS:',process.env.NODE_ENV)
+},
 methods: {
   toggleSidebar() {
     this.showSideBar = !this.showSideBar

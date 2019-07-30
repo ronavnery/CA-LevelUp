@@ -52,7 +52,7 @@ import io from "socket.io-client";
 export default {
   data() {
     return {
-      socket: process.env.NODE_ENV ? io(''):io("localhost:3000")
+      socket: (process.env.NODE_ENV === 'production') ? io(''):io("localhost:3000")
     };
   },
 

@@ -40,6 +40,7 @@ function setup(http) {
             chatService.checkConversationExists(user1, user2)
         })
         socket.on('msg-sent', (msg) => {
+            console.log('message to id:',msg.to._id)
             chatService.addMsg(msg);
             io.to(msg.to._id).emit('msg-received', msg);
         })

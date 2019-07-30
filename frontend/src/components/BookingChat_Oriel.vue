@@ -22,7 +22,7 @@ export default {
       msg: "",
       msgs: [],
       fromId: "",
-      socket: process.env.NODE_ENV ? io(''):io("localhost:3000")
+      socket: (process.env.NODE_ENV === 'production') ? io(''):io("localhost:3000")
     };
   },
 
